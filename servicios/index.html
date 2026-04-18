@@ -179,8 +179,8 @@
         &copy; <span id="yr"></span> TRX Concept. Todos los derechos reservados.
       </p>
       <p class="site-credit">
-        Sitio web desarrollado con ❤️ por
-        <a
+        Sitio web desarrollado con ❤️<br>por
+        <
           href="https://agenciachucao.cl/?utm_source=trxconcept.cl&utm_medium=referral&utm_campaign=credit_footer"
           target="_blank"
           rel="noopener noreferrer"
@@ -194,18 +194,25 @@
       (function() {
         var btn = document.querySelector('.nav-toggle-btn');
         var menu = document.getElementById('nav-main');
-        if (!btn || !menu) return;
-        btn.addEventListener('click', function() {
-          var open = btn.getAttribute('aria-expanded') === 'true';
-          btn.setAttribute('aria-expanded', String(!open));
-          menu.classList.toggle('nav-open');
-        });
-        document.addEventListener('click', function(e) {
-          if (!btn.contains(e.target) && !menu.contains(e.target)) {
-            btn.setAttribute('aria-expanded', 'false');
-            menu.classList.remove('nav-open');
-          }
-        });
+        if (btn && menu) {
+          btn.addEventListener('click', function() {
+            var open = btn.getAttribute('aria-expanded') === 'true';
+            btn.setAttribute('aria-expanded', String(!open));
+            menu.classList.toggle('nav-open');
+          });
+          document.addEventListener('click', function(e) {
+            if (!btn.contains(e.target) && !menu.contains(e.target)) {
+              btn.setAttribute('aria-expanded', 'false');
+              menu.classList.remove('nav-open');
+            }
+          });
+        }
+        var header = document.querySelector('.site-header');
+        if (header) {
+          window.addEventListener('scroll', function() {
+            header.classList.toggle('scrolled', window.scrollY > 60);
+          }, { passive: true });
+        }
       })();
     </script>
   </body>
