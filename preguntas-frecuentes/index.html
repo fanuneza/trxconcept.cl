@@ -199,8 +199,19 @@
         }
         var header = document.querySelector('.site-header');
         if (header) {
+          var rafPending = false;
           window.addEventListener('scroll', function() {
-            header.classList.toggle('scrolled', window.scrollY > 60);
+            if (rafPending) return;
+            rafPending = true;
+            requestAnimationFrame(function() {
+              rafPending = false;
+              var y = window.scrollY;
+              if (!header.classList.contains('scrolled') && y > 70) {
+                header.classList.add('scrolled');
+              } else if (header.classList.contains('scrolled') && y < 50) {
+                header.classList.remove('scrolled');
+              }
+            });
           }, { passive: true });
         }
       })();

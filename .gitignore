@@ -1,0 +1,22 @@
+# Dev logs
+/log
+
+# Dependencies (none currently, but just in case)
+/node_modules
+
+# Claude Code local settings (contains personal file paths and permissions)
+.claude/
+
+# Editor local settings
+.vscode/
+.cursor/
+
+# Environment / secrets
+.env
+.env.*
+
+# OS metadata
+.DS_Store
+Thumbs.db
+desktop.ini
+ehthumbs.db
