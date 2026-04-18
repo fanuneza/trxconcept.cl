@@ -22,6 +22,14 @@
     });
   }
 
+  // WhatsApp links — single source of truth for number and pre-filled message
+  var WA_NUMBER = '56984402664';
+  var WA_MESSAGE = 'Hola! Vi tu sitio web y me gustaría agendar una clase de TRX.';
+  var WA_HREF = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(WA_MESSAGE);
+  document.querySelectorAll('[data-wa]').forEach(function (el) {
+    el.href = WA_HREF;
+  });
+
   // Scrolled header — hysteresis (add at >70, remove at <50) + rAF gate
   // prevents oscillation when scroll deceleration keeps scrollY near the threshold
   var header = document.querySelector('.site-header');
