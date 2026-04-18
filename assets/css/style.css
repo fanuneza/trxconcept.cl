@@ -98,12 +98,18 @@ header nav img {
 .btn-trx {
   background: var(--color-primary);
   color: var(--color-black);
+  --bs-btn-active-bg: color-mix(in srgb, var(--color-primary), #000 10%);
+  --bs-btn-active-color: var(--color-black);
+  --bs-btn-active-border-color: transparent;
 }
 
 .btn-whatsapp,
 .btn-invert {
   background: var(--color-black);
   color: var(--color-white);
+  --bs-btn-active-bg: #111;
+  --bs-btn-active-color: var(--color-white);
+  --bs-btn-active-border-color: transparent;
 }
 
 .btn-whatsapp,
@@ -113,18 +119,18 @@ header nav img {
   gap: 0.5rem;
 }
 
-.btn-trx .wa-icon {
-  background-color: var(--color-black);
-}
 
-.btn-trx:hover {
+.btn-trx:hover,
+.btn-trx:active {
   background: color-mix(in srgb, var(--color-primary), #000 10%);
   transform: translateY(-1px);
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
 }
 
 .btn-invert:hover,
-.btn-whatsapp:hover {
+.btn-invert:active,
+.btn-whatsapp:hover,
+.btn-whatsapp:active {
   background: #111;
   transform: translateY(-1px);
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
@@ -142,12 +148,12 @@ header nav img {
 
 .btn.btn-whatsapp:hover,
 .btn.btn-invert:hover {
-  color: var(--color-white) !important;
+  color: var(--color-white);
 }
 
 .btn.btn-trx,
 .btn.btn-trx:hover {
-  color: var(--color-black) !important;
+  color: var(--color-black);
 }
 
 .hero * {
@@ -194,6 +200,10 @@ header nav img {
 .hero .btn-trx {
   color: var(--color-black);
   text-shadow: none;
+}
+
+.hero .btn-trx .wa-icon {
+  fill: var(--color-black);
 }
 
 .hero .btn-invert,
@@ -333,8 +343,14 @@ header nav img {
   text-align: center;
 }
 
-.comparison tbody tr td:first-child {
+.comparison tbody tr th:first-child {
   text-align: left;
+}
+
+.comparison th:last-child,
+.comparison td:last-child {
+  background: color-mix(in srgb, var(--color-primary), #fff 60%);
+  font-weight: 700;
 }
 
 .pricing {
@@ -427,19 +443,39 @@ header nav img {
   width: 20px;
   height: 20px;
   display: inline-block;
-  background-color: currentColor;
   vertical-align: middle;
-  -webkit-mask: url("../icons/wa.svg") no-repeat center / contain;
-  mask: url("../icons/wa.svg") no-repeat center / contain;
-  -webkit-mask-size: contain;
-  mask-size: contain;
-  -webkit-mask-position: center;
-  mask-position: center;
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
+  fill: currentColor;
+  flex-shrink: 0;
 }
 
 header .wa-icon {
   width: 16px;
   height: 16px;
+}
+
+.btn-float-wa {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  width: 3.5rem;
+  height: 3.5rem;
+  background: #25d366;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  z-index: 999;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.btn-float-wa:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.btn-float-wa .wa-icon {
+  width: 1.75rem;
+  height: 1.75rem;
+  fill: #fff;
 }
