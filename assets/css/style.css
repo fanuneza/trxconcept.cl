@@ -48,6 +48,14 @@ section {
   padding-block: var(--space-section);
 }
 
+.wa-sprite {
+  display: none;
+}
+
+.section-alt {
+  background-color: var(--color-gray-light);
+}
+
 /* ─── HEADER ─── */
 
 .site-header {
@@ -879,10 +887,45 @@ main {
   margin-bottom: 1rem;
 }
 
+.about-section p {
+  color: var(--color-gray-dark);
+}
+
+.about-section p + p {
+  margin-top: 0.75rem;
+}
+
+.about-section.text-center > p {
+  max-width: 620px;
+  margin-inline: auto;
+  margin-top: 0.75rem;
+}
+
+.about-section .trust-inner {
+  max-width: 100%;
+}
+
+.about-section .profile-pic {
+  width: 160px;
+  height: 160px;
+}
+
+.section-subtitle {
+  color: var(--color-gray-dark);
+  margin-bottom: 1.5rem;
+}
+
+.section-intro {
+  color: var(--color-gray-dark);
+  margin-bottom: 2.5rem;
+}
+
 .cert-list {
   list-style: none;
   padding: 0;
-  margin: 1rem 0 0;
+  margin: 0 auto;
+  text-align: left;
+  max-width: 480px;
 }
 
 .cert-list li {
@@ -926,6 +969,19 @@ main {
 
 .service-card p {
   color: var(--color-gray-dark);
+}
+
+.service-card .pricing-price {
+  font-size: 1.8rem;
+  margin: 0.5rem 0;
+}
+
+.service-card--featured {
+  border-color: var(--color-primary);
+}
+
+.service-card--featured h3 {
+  margin-top: 0.5rem;
 }
 
 .audience-grid {
