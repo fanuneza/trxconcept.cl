@@ -44,7 +44,7 @@
       <nav class="header-inner container px-5 px-md-0">
         <a href="/"><img src="../assets/img/logo.webp" alt="TRX Concept Logo" class="me-3" /></a>
         <a href="/" class="logo me-auto">TRX Concept</a>
-        <ul class="nav-list">
+        <ul class="nav-list" id="nav-main">
           <li><a href="/servicios" aria-current="page">Servicios</a></li>
           <li><a href="/sobre-mi">Sobre mí</a></li>
           <li><a href="/preguntas-frecuentes">FAQs</a></li>
@@ -56,6 +56,9 @@
           class="btn btn-whatsapp"
           aria-label="Escríbeme por WhatsApp"
           >Escríbeme <svg class="wa-icon" aria-hidden="true" focusable="false"><use href="#wa-symbol"/></svg></a>
+        <button class="nav-toggle-btn" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-main">
+          <span></span><span></span><span></span>
+        </button>
       </nav>
     </header>
 
@@ -72,8 +75,8 @@
           <p style="color:var(--color-gray-dark);margin-top:0.75rem;max-width:620px;margin-inline:auto">
             TRX (Total Resistance eXercise) es un sistema de suspensión que usa el peso de tu propio
             cuerpo para entrenar fuerza, estabilidad, flexibilidad y equilibrio al mismo tiempo. Se
-            instala en segundos en una puerta, árbol o barra, y se adapta a cualquier nivel — desde
-            principiantes hasta atletas avanzados — ajustando simplemente el ángulo del cuerpo.
+            instala en segundos en una puerta, árbol o barra, y se adapta a cualquier nivel, desde
+            principiantes hasta atletas avanzados, ajustando simplemente el ángulo del cuerpo.
           </p>
         </div>
       </section>
@@ -87,7 +90,7 @@
             <div class="service-card">
               <h3>Sesión Individual</h3>
               <p class="pricing-price" style="font-size:1.8rem;margin:0.5rem 0">$15.000</p>
-              <p>Una hora de entrenamiento 1 a 1, adaptado completamente a tu nivel y objetivos. Sin compromiso de continuidad — ideal para probar o complementar tu rutina.</p>
+              <p>Una hora de entrenamiento 1 a 1, adaptado completamente a tu nivel y objetivos. Sin compromiso de continuidad. Ideal para probar o complementar tu rutina.</p>
             </div>
             <div class="service-card" style="border-color:var(--color-primary)">
               <span class="pricing-badge">Más popular</span>
@@ -153,20 +156,6 @@
         </div>
       </section>
 
-      <!-- CTA -->
-      <section class="cta-band">
-        <div class="container text-center">
-          <p class="cta-band-text">La primera sesión es sin costo. Sin compromiso.</p>
-          <a
-            href="https://wa.me/56984402664"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="btn btn-trx"
-            aria-label="Escríbeme por WhatsApp"
-            >¡Reserva tu clase gratis!
-            <svg class="wa-icon" aria-hidden="true" focusable="false"><use href="#wa-symbol"/></svg></a>
-        </div>
-      </section>
     </main>
 
     <a
@@ -177,8 +166,8 @@
       aria-label="Escríbeme por WhatsApp"
       ><svg class="wa-icon" aria-hidden="true" focusable="false"><use href="#wa-symbol"/></svg></a>
 
-    <footer id="footer" class="footer pb-1">
-      <h2>Tu primera clase es gratis — sin compromiso.</h2>
+    <footer id="footer" class="footer">
+      <h2>Tu primera clase es gratis, sin compromiso.</h2>
       <a
         href="https://wa.me/56984402664"
         target="_blank"
@@ -201,5 +190,23 @@
     </footer>
 
     <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+    <script>
+      (function() {
+        var btn = document.querySelector('.nav-toggle-btn');
+        var menu = document.getElementById('nav-main');
+        if (!btn || !menu) return;
+        btn.addEventListener('click', function() {
+          var open = btn.getAttribute('aria-expanded') === 'true';
+          btn.setAttribute('aria-expanded', String(!open));
+          menu.classList.toggle('nav-open');
+        });
+        document.addEventListener('click', function(e) {
+          if (!btn.contains(e.target) && !menu.contains(e.target)) {
+            btn.setAttribute('aria-expanded', 'false');
+            menu.classList.remove('nav-open');
+          }
+        });
+      })();
+    </script>
   </body>
 </html>

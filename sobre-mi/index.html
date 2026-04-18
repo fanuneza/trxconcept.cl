@@ -44,7 +44,7 @@
       <nav class="header-inner container px-5 px-md-0">
         <a href="/"><img src="../assets/img/logo.webp" alt="TRX Concept Logo" class="me-3" /></a>
         <a href="/" class="logo me-auto">TRX Concept</a>
-        <ul class="nav-list">
+        <ul class="nav-list" id="nav-main">
           <li><a href="/servicios">Servicios</a></li>
           <li><a href="/sobre-mi" aria-current="page">Sobre mí</a></li>
           <li><a href="/preguntas-frecuentes">FAQs</a></li>
@@ -56,6 +56,9 @@
           class="btn btn-whatsapp"
           aria-label="Escríbeme por WhatsApp"
           >Escríbeme <svg class="wa-icon" aria-hidden="true" focusable="false"><use href="#wa-symbol"/></svg></a>
+        <button class="nav-toggle-btn" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-main">
+          <span></span><span></span><span></span>
+        </button>
       </nav>
     </header>
 
@@ -79,7 +82,7 @@
               <h2>Nicolás Echeverría</h2>
               <p>
                 Llevo más de 10 años trabajando como entrenador personal en Santiago,
-                especializándome en el método TRX — un sistema de entrenamiento en suspensión
+                especializándome en el método TRX, un sistema de entrenamiento en suspensión
                 que usa el peso del propio cuerpo para desarrollar fuerza, equilibrio y resistencia
                 de forma segura y progresiva.
               </p>
@@ -99,8 +102,8 @@
           <h2>Certificaciones</h2>
           <p style="color:var(--color-gray-dark);margin-bottom:1.5rem">Formación oficial avalada por TRX Training.</p>
           <ul class="cert-list" style="text-align:left;max-width:480px;margin:0 auto">
-            <li>TRX Suspension Trainer™ — Certificado Oficial</li>
-            <li>TRX Rip Trainer® — Certificado Oficial</li>
+            <li>TRX Suspension Trainer™: Certificado Oficial</li>
+            <li>TRX Rip Trainer®: Certificado Oficial</li>
             <li>Entrenamiento grupal e individual certificado</li>
             <li>Más de 10 años de práctica continua en Santiago</li>
           </ul>
@@ -113,7 +116,7 @@
           <h2>Mi filosofía de entrenamiento</h2>
           <p style="color:var(--color-gray-dark);margin-top:0.75rem">
             Creo que el ejercicio no debería ser una obligación intimidante, sino algo que genuinamente
-            mejore tu vida. Por eso trabajo con personas de todos los niveles — desde quienes nunca han
+            mejore tu vida. Por eso trabajo con personas de todos los niveles, desde quienes nunca han
             entrenado hasta deportistas que buscan complementar su actividad principal.
           </p>
           <p style="color:var(--color-gray-dark);margin-top:0.75rem">
@@ -128,20 +131,6 @@
         </div>
       </section>
 
-      <!-- CTA -->
-      <section class="cta-band">
-        <div class="container text-center">
-          <p class="cta-band-text">¿Quieres conocerme en persona? La primera clase es gratis.</p>
-          <a
-            href="https://wa.me/56984402664"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="btn btn-trx"
-            aria-label="Escríbeme por WhatsApp"
-            >¡Reserva tu clase gratis!
-            <svg class="wa-icon" aria-hidden="true" focusable="false"><use href="#wa-symbol"/></svg></a>
-        </div>
-      </section>
     </main>
 
     <a
@@ -152,8 +141,8 @@
       aria-label="Escríbeme por WhatsApp"
       ><svg class="wa-icon" aria-hidden="true" focusable="false"><use href="#wa-symbol"/></svg></a>
 
-    <footer id="footer" class="footer pb-1">
-      <h2>Tu primera clase es gratis — sin compromiso.</h2>
+    <footer id="footer" class="footer">
+      <h2>Tu primera clase es gratis, sin compromiso.</h2>
       <a
         href="https://wa.me/56984402664"
         target="_blank"
@@ -176,5 +165,23 @@
     </footer>
 
     <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+    <script>
+      (function() {
+        var btn = document.querySelector('.nav-toggle-btn');
+        var menu = document.getElementById('nav-main');
+        if (!btn || !menu) return;
+        btn.addEventListener('click', function() {
+          var open = btn.getAttribute('aria-expanded') === 'true';
+          btn.setAttribute('aria-expanded', String(!open));
+          menu.classList.toggle('nav-open');
+        });
+        document.addEventListener('click', function(e) {
+          if (!btn.contains(e.target) && !menu.contains(e.target)) {
+            btn.setAttribute('aria-expanded', 'false');
+            menu.classList.remove('nav-open');
+          }
+        });
+      })();
+    </script>
   </body>
 </html>

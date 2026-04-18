@@ -81,7 +81,7 @@
           ><img src="assets/img/logo.webp" alt="TRX Concept Logo" class="me-3"
         /></a>
         <a href="/" class="logo me-auto">TRX Concept</a>
-        <ul class="nav-list">
+        <ul class="nav-list" id="nav-main">
           <li><a href="/servicios">Servicios</a></li>
           <li><a href="/sobre-mi">Sobre mí</a></li>
           <li><a href="/preguntas-frecuentes">FAQs</a></li>
@@ -93,6 +93,9 @@
           class="btn btn-whatsapp"
           aria-label="Escríbeme por WhatsApp"
           >Escríbeme <svg class="wa-icon" aria-hidden="true" focusable="false"><use href="#wa-symbol"/></svg></a>
+        <button class="nav-toggle-btn" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-main">
+          <span></span><span></span><span></span>
+        </button>
       </nav>
     </header>
 
@@ -265,60 +268,34 @@
         </div>
       </section>
 
-      <!-- COMPARISON TABLE -->
-      <section id="comparison" class="comparison pb-2">
+      <!-- COMPARISON -->
+      <section id="comparison" class="comparison">
         <h2>¿Qué ofrece TRX Concept que los otros no?</h2>
-        <table>
-          <thead>
-            <tr>
-              <th scope="col"></th>
-              <th scope="col">Gimnasio</th>
-              <th scope="col">CrossFit</th>
-              <th scope="col">
-                TRX Concept
-                <span class="recommended-badge">Recomendado</span>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">Personalización 1 a 1</th>
-              <td><span aria-label="No" title="No">❌</span></td>
-              <td><span aria-label="No" title="No">❌</span></td>
-              <td><span aria-label="Sí" title="Sí">✅</span></td>
-            </tr>
-            <tr>
-              <th scope="row">Entrenamiento en casa/parque</th>
-              <td><span aria-label="No" title="No">❌</span></td>
-              <td><span aria-label="No" title="No">❌</span></td>
-              <td><span aria-label="Sí" title="Sí">✅</span></td>
-            </tr>
-            <tr>
-              <th scope="row">Adaptable a cualquier nivel</th>
-              <td><span aria-label="Depende" title="Depende">⚠️</span></td>
-              <td><span aria-label="Depende" title="Depende">⚠️</span></td>
-              <td><span aria-label="Sí" title="Sí">✅</span></td>
-            </tr>
-            <tr>
-              <th scope="row">Menos riesgo de lesiones</th>
-              <td><span aria-label="No" title="No">❌</span></td>
-              <td><span aria-label="No" title="No">❌</span></td>
-              <td><span aria-label="Sí" title="Sí">✅</span></td>
-            </tr>
-            <tr>
-              <th scope="row">Horario flexible</th>
-              <td><span aria-label="No" title="No">❌</span></td>
-              <td><span aria-label="Depende" title="Depende">⚠️</span></td>
-              <td><span aria-label="Sí" title="Sí">✅</span></td>
-            </tr>
-            <tr>
-              <th scope="row">Sin mensualidad fija</th>
-              <td><span aria-label="No" title="No">❌</span></td>
-              <td><span aria-label="No" title="No">❌</span></td>
-              <td><span aria-label="Sí" title="Sí">✅</span></td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="comparison-cards">
+          <div class="comp-card comp-card-others">
+            <h3>Gimnasio / CrossFit</h3>
+            <ul>
+              <li><span class="comp-x" aria-hidden="true">✗</span>Sin personalización 1 a 1</li>
+              <li><span class="comp-x" aria-hidden="true">✗</span>Solo en instalaciones fijas</li>
+              <li><span class="comp-x" aria-hidden="true">✗</span>No siempre adaptable a tu nivel</li>
+              <li><span class="comp-x" aria-hidden="true">✗</span>Mayor riesgo de lesiones</li>
+              <li><span class="comp-x" aria-hidden="true">✗</span>Horario rígido</li>
+              <li><span class="comp-x" aria-hidden="true">✗</span>Mensualidad fija obligatoria</li>
+            </ul>
+          </div>
+          <div class="comp-card comp-card-trx">
+            <span class="recommended-badge">Recomendado</span>
+            <h3>TRX Concept</h3>
+            <ul>
+              <li><span class="comp-check" aria-hidden="true">✓</span>Personalización 1 a 1</li>
+              <li><span class="comp-check" aria-hidden="true">✓</span>En casa o al aire libre</li>
+              <li><span class="comp-check" aria-hidden="true">✓</span>Adaptable a cualquier nivel</li>
+              <li><span class="comp-check" aria-hidden="true">✓</span>Bajo riesgo de lesiones</li>
+              <li><span class="comp-check" aria-hidden="true">✓</span>Horario flexible</li>
+              <li><span class="comp-check" aria-hidden="true">✓</span>Sin mensualidad fija</li>
+            </ul>
+          </div>
+        </div>
       </section>
 
       <!-- PACKAGES / PRICING -->
@@ -380,8 +357,8 @@
       aria-label="Escríbeme por WhatsApp"
       ><svg class="wa-icon" aria-hidden="true" focusable="false"><use href="#wa-symbol"/></svg></a>
 
-    <footer id="footer" class="footer pb-1">
-      <h2>Tu primera clase es gratis — sin compromiso.</h2>
+    <footer id="footer" class="footer">
+      <h2>Tu primera clase es gratis, sin compromiso.</h2>
       <a
         href="https://wa.me/56984402664"
         target="_blank"
@@ -406,5 +383,23 @@
     </footer>
 
     <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+    <script>
+      (function() {
+        var btn = document.querySelector('.nav-toggle-btn');
+        var menu = document.getElementById('nav-main');
+        if (!btn || !menu) return;
+        btn.addEventListener('click', function() {
+          var open = btn.getAttribute('aria-expanded') === 'true';
+          btn.setAttribute('aria-expanded', String(!open));
+          menu.classList.toggle('nav-open');
+        });
+        document.addEventListener('click', function(e) {
+          if (!btn.contains(e.target) && !menu.contains(e.target)) {
+            btn.setAttribute('aria-expanded', 'false');
+            menu.classList.remove('nav-open');
+          }
+        });
+      })();
+    </script>
   </body>
 </html>

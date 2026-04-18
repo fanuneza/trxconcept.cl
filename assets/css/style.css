@@ -26,21 +26,10 @@
   --space-section: clamp(2rem, 5vw, 4rem);
 }
 
-h1 {
-  font-size: var(--fs-h1);
-}
-
-h2 {
-  font-size: var(--fs-h2);
-}
-
-h3 {
-  font-size: var(--fs-h3);
-}
-
-p {
-  font-size: var(--fs-body);
-}
+h1 { font-size: var(--fs-h1); }
+h2 { font-size: var(--fs-h2); }
+h3 { font-size: var(--fs-h3); }
+p  { font-size: var(--fs-body); }
 
 small,
 .hero-note,
@@ -63,29 +52,34 @@ section {
 
 .site-header {
   background: var(--color-primary);
+  position: relative;
 }
 
 .header-inner {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: 1rem;
   padding: 1rem 0;
 }
 
 header nav img {
   height: 5rem;
+  flex-shrink: 0;
 }
 
 .logo {
   font-family: var(--font-logo);
   font-size: 3rem;
   letter-spacing: 0.1rem;
+  line-height: 1.1;
+  white-space: nowrap;
   font-weight: bold;
   text-decoration: none;
   text-transform: uppercase;
   color: var(--color-black);
 }
+
+/* ─── NAV LIST ─── */
 
 .nav-list {
   display: flex;
@@ -102,8 +96,47 @@ header nav img {
   transition: opacity 0.15s ease;
 }
 
-.nav-list a:hover {
+.nav-list a:hover,
+.nav-list a[aria-current="page"] {
   opacity: 0.65;
+}
+
+/* ─── HAMBURGER BUTTON ─── */
+
+.nav-toggle-btn {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.4rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  flex-shrink: 0;
+}
+
+.nav-toggle-btn span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--color-black);
+  border-radius: 2px;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.nav-toggle-btn[aria-expanded="true"] span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.nav-toggle-btn[aria-expanded="true"] span:nth-child(2) {
+  opacity: 0;
+}
+
+.nav-toggle-btn[aria-expanded="true"] span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
 }
 
 /* ─── BUTTONS ─── */
@@ -238,18 +271,16 @@ header nav img {
   margin-top: 0.25rem;
 }
 
+/* Looks like an informational label, not a button */
 .hero-badge {
   display: inline-block;
-  background: rgba(255, 255, 255, 0.15);
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  backdrop-filter: blur(4px);
-  color: #fff;
-  font-size: 0.85rem;
-  font-weight: 600;
+  background: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 0.8rem;
+  font-weight: 500;
   text-shadow: none;
-  padding: 0.3rem 0.9rem;
-  border-radius: 999px;
-  letter-spacing: 0.02em;
+  padding: 0.22rem 0.65rem;
+  border-radius: 0.2rem;
 }
 
 /* ─── TRUST ─── */
@@ -438,7 +469,7 @@ header nav img {
   font-style: normal;
 }
 
-/* ─── COMPARISON ─── */
+/* ─── COMPARISON CARDS ─── */
 
 .comparison {
   padding: 3rem 1.5rem;
@@ -447,43 +478,104 @@ header nav img {
 }
 
 .comparison h2 {
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
 }
 
-.comparison table {
-  width: 100%;
-  max-width: 900px;
-  margin: 2rem auto;
-  border-collapse: collapse;
-  table-layout: fixed;
+.comparison-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: center;
+  max-width: 680px;
+  margin: 2rem auto 0;
 }
 
-.comparison th,
-.comparison td {
-  padding: 0.75rem;
-}
-
-.comparison th {
-  background: var(--color-gray);
-  text-align: center;
-}
-
-.comparison td {
-  text-align: center;
-}
-
-.comparison tbody tr th:first-child {
+.comp-card {
+  flex: 1 1 260px;
+  max-width: 320px;
+  border-radius: 1rem;
+  padding: 1.75rem 1.5rem;
+  position: relative;
   text-align: left;
 }
 
-.comparison th:last-child,
-.comparison td:last-child {
-  background: color-mix(in srgb, var(--color-primary), #fff 55%);
+.comp-card h3 {
+  font-size: 1.1rem;
+  margin-bottom: 1.25rem;
+}
+
+.comp-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.comp-card ul li {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.45rem 0;
+  font-size: 0.95rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.comp-card ul li:last-child {
+  border-bottom: none;
+}
+
+.comp-card-others {
+  background: var(--color-gray-light);
+  border: 2px solid var(--color-gray);
+}
+
+.comp-card-others h3 {
+  color: var(--color-gray-dark);
+}
+
+.comp-card-others ul li {
+  color: var(--color-gray-dark);
+}
+
+.comp-card-trx {
+  background: var(--color-black);
+  border: 2px solid var(--color-primary);
+}
+
+.comp-card-trx h3 {
+  color: var(--color-primary);
+  margin-top: 0.75rem;
+}
+
+.comp-card-trx ul li {
+  color: var(--color-white);
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+.comp-x {
+  color: #d44;
   font-weight: 700;
+  flex-shrink: 0;
+  width: 1.2rem;
+  text-align: center;
+}
+
+.comp-check {
+  color: var(--color-primary);
+  font-weight: 700;
+  flex-shrink: 0;
+  width: 1.2rem;
+  text-align: center;
+}
+
+.comp-card .recommended-badge {
+  position: absolute;
+  top: -0.75rem;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .recommended-badge {
-  display: block;
+  display: inline-block;
   font-family: var(--font-base);
   font-size: 0.7rem;
   font-weight: 700;
@@ -493,8 +585,7 @@ header nav img {
   background: var(--color-primary);
   border-radius: 999px;
   padding: 0.15rem 0.6rem;
-  margin: 0.35rem auto 0;
-  width: fit-content;
+  white-space: nowrap;
 }
 
 /* ─── PRICING ─── */
@@ -539,7 +630,6 @@ header nav img {
 
 .pricing-card-featured {
   border-color: var(--color-primary);
-  border-width: 2px;
   box-shadow: 0 8px 32px rgba(255, 215, 0, 0.2);
 }
 
@@ -628,7 +718,7 @@ header nav img {
 
 .footer {
   background: var(--color-primary);
-  padding: 2rem 1.5rem;
+  padding: 2rem 1.5rem 5rem;
   text-align: center;
 }
 
@@ -691,7 +781,7 @@ header nav img {
   margin: 0 auto;
 }
 
-/* ─── FAQ ACCORDION ─── */
+/* ─── FAQ ─── */
 
 .faq-list {
   max-width: 720px;
@@ -738,7 +828,7 @@ header nav img {
   line-height: 1.7;
 }
 
-/* ─── SOBRE MÍ ─── */
+/* ─── SOBRE MI ─── */
 
 .about-section {
   max-width: 760px;
@@ -787,6 +877,7 @@ header nav img {
   border: 2px solid var(--color-gray);
   border-radius: 1rem;
   padding: 2rem 1.5rem;
+  position: relative;
 }
 
 .service-card h3 {
@@ -879,10 +970,12 @@ header .wa-icon {
   height: 16px;
 }
 
+/* ─── FLOATING WA BUTTON ─── */
+
 .btn-float-wa {
   position: fixed;
-  bottom: 1.5rem;
-  right: 1.5rem;
+  bottom: 1rem;
+  right: 1rem;
   width: 3.5rem;
   height: 3.5rem;
   background: #25d366;
@@ -906,7 +999,7 @@ header .wa-icon {
   fill: #fff;
 }
 
-/* ─── RESPONSIVE ─── */
+/* ─── RESPONSIVE: TABLET ─── */
 
 @media screen and (width < 768px) {
   .logo {
@@ -914,7 +1007,40 @@ header .wa-icon {
   }
 
   .nav-list {
-    gap: 1rem;
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background: var(--color-primary);
+    padding: 0.75rem 2rem 1rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    z-index: 200;
+    gap: 0;
+  }
+
+  .nav-list.nav-open {
+    display: flex;
+  }
+
+  .nav-list li {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .nav-list li:last-child {
+    border-bottom: none;
+  }
+
+  .nav-list a {
+    display: block;
+    padding: 0.65rem 0;
+    font-size: 1rem;
+  }
+
+  .nav-toggle-btn {
+    display: flex;
   }
 
   .trust-inner {
@@ -931,6 +1057,8 @@ header .wa-icon {
   }
 }
 
+/* ─── RESPONSIVE: MOBILE ─── */
+
 @media screen and (width < 576px) {
   header nav img {
     height: 6rem;
@@ -940,18 +1068,19 @@ header .wa-icon {
     display: none;
   }
 
-  .nav-list {
-    display: none;
+  .trust-stats {
+    flex-direction: column;
+    gap: 0.75rem;
   }
 
-  .comparison th,
-  .comparison td:first-child {
-    font-size: 0.8em;
+  .comparison-cards {
+    flex-direction: column;
+    align-items: center;
   }
 
-  .comparison th,
-  .comparison td {
-    padding: 0.3rem;
+  .comp-card {
+    max-width: 100%;
+    width: 100%;
   }
 
   .pricing-cards {
