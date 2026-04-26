@@ -23,3 +23,9 @@ claude*
 Thumbs.db
 desktop.ini
 ehthumbs.db
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+!.env.example
