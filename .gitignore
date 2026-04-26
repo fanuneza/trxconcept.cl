@@ -6,6 +6,9 @@
 
 # Claude Code local settings (contains personal file paths and permissions)
 .claude/
+docs/
+*.md
+claude*
 
 # Editor local settings
 .vscode/

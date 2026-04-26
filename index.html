@@ -1,10 +1,35 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-ga4-id="G-P1W5Z80ZJS" data-consent-cookie="trxconcept_consent">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#ffd700" />
+    <link rel="canonical" href="https://trxconcept.cl/" />
+    <link rel="me" href="https://www.instagram.com/trxconcept">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": ["LocalBusiness", "HealthAndBeautyBusiness"],
+      "name": "TRX Concept",
+      "description": "Entrenamiento personal con TRX en Santiago, Chile. Clases individuales y grupales en casa o al aire libre.",
+      "url": "https://trxconcept.cl/",
+      "telephone": "+56984402664",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Santiago",
+        "addressCountry": "CL"
+      },
+      "founder": {
+        "@type": "Person",
+        "name": "Nicolás Echeverría",
+        "jobTitle": "Entrenador Personal"
+      },
+      "sameAs": [
+        "https://www.instagram.com/trxconcept"
+      ]
+    }
+    </script>
 
     <meta
       property="og:title"
@@ -40,26 +65,19 @@
       content="Entrena con un entrenador certificado en TRX, en casa o al aire libre en Santiago. Clases 1 a 1, seguras y personalizadas."
     />
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.cdnfonts.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/impact">
     <link rel="stylesheet" href="assets/css/style.css" />
     <link
       rel="shortcut icon"
       href="assets/img/favicon.png"
       type="image/x-icon"
     />
-    <title>Entrenador Personal TRX en Santiago | TRX Concept</title>
+    <title>Entrenador Personal TRX en Santiago, Chile | TRX Concept</title>
 
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-P1W5Z80ZJS"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-      gtag("config", "G-P1W5Z80ZJS");
-    </script>
     <script defer src="/assets/js/main.js"></script>
   </head>
 
@@ -73,7 +91,7 @@
     <header class="site-header">
       <nav class="header-inner container">
         <a href="/" class="brand" aria-label="TRX Concept (Inicio)">
-          <img src="assets/img/logo.webp" alt="" aria-hidden="true" />
+          <img src="assets/logos/trx-concept-logo-.svg" alt="" aria-hidden="true" width="100" height="100" />
           <span class="logo">TRX Concept</span>
         </a>
         <ul class="nav-list" id="nav-main">
@@ -119,6 +137,8 @@
             src="assets/img/nico.webp"
             alt="Nicolás Echeverría, entrenador personal TRX"
             class="profile-pic"
+            width="512"
+            height="512"
           />
           <div class="trust-content">
             <h3>Nicolás Echeverría</h3>
@@ -206,6 +226,8 @@
                 alt="Valentina Rosenthal"
                 class="testimonial-img"
                 loading="lazy"
+                width="512"
+                height="512"
               />
               <div class="testimonial-stars" aria-label="5 estrellas">★★★★★</div>
               <blockquote class="testimonial-quote">
@@ -227,6 +249,8 @@
                 alt="Marisa Gracia"
                 class="testimonial-img"
                 loading="lazy"
+                width="512"
+                height="512"
               />
               <div class="testimonial-stars" aria-label="5 estrellas">★★★★★</div>
               <blockquote class="testimonial-quote">
@@ -248,6 +272,8 @@
                 alt="María Ignacia Williamson"
                 class="testimonial-img"
                 loading="lazy"
+                width="792"
+                height="792"
               />
               <div class="testimonial-stars" aria-label="5 estrellas">★★★★★</div>
               <blockquote class="testimonial-quote">
@@ -375,7 +401,32 @@
           Agencia Chucao</a
         >.
       </p>
+      <div class="footer-legal">
+        <a
+          href="https://www.instagram.com/trxconcept"
+          target="_blank"
+          rel="noopener noreferrer me"
+          aria-label="Seguir TRX Concept en Instagram"
+          class="footer-social-link"
+        >@trxconcept</a>
+        <a href="/politica-de-cookies/">Política de cookies</a>
+        <button class="cookie-manage-btn" id="cookie-manage-btn">Gestionar preferencias de cookies</button>
+      </div>
     </footer>
 
+    <div class="cookie-banner" id="cookie-banner" role="region" aria-live="polite" aria-label="Aviso de cookies">
+      <div class="cookie-inner">
+        <p class="cookie-text">
+          Usamos cookies de análisis (Google Analytics) para mejorar el sitio.
+          Puedes aceptar o rechazar su uso.
+          <a href="/politica-de-cookies/" class="cookie-policy-link">Política de cookies</a>
+        </p>
+        <div class="cookie-actions">
+          <button class="cookie-btn cookie-btn--accept" id="cookie-accept">Aceptar</button>
+          <button class="cookie-btn cookie-btn--reject" id="cookie-reject">Rechazar</button>
+        </div>
+      </div>
+    </div>
+    <script src="/assets/js/cookie-consent.js" defer></script>
   </body>
 </html>

@@ -1,10 +1,49 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-ga4-id="G-P1W5Z80ZJS" data-consent-cookie="trxconcept_consent">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#ffd700" />
+    <link rel="canonical" href="https://trxconcept.cl/servicios/" />
+    <link rel="me" href="https://www.instagram.com/trxconcept">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "name": "Entrenamiento Personal TRX",
+      "provider": {
+        "@type": "LocalBusiness",
+        "name": "TRX Concept",
+        "url": "https://trxconcept.cl/"
+      },
+      "areaServed": {
+        "@type": "City",
+        "name": "Santiago",
+        "addressCountry": "CL"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Planes de entrenamiento TRX",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "name": "Sesión Individual TRX",
+            "description": "1 hora de entrenamiento personalizado en casa o al aire libre.",
+            "price": "15000",
+            "priceCurrency": "CLP"
+          },
+          {
+            "@type": "Offer",
+            "name": "Paquete Mensual TRX",
+            "description": "3 sesiones por semana, aproximadamente 12 sesiones al mes.",
+            "price": "160000",
+            "priceCurrency": "CLP"
+          }
+        ]
+      }
+    }
+    </script>
 
     <meta property="og:title" content="Servicios de Entrenamiento TRX en Santiago | TRX Concept" />
     <meta property="og:description" content="Clases individuales y paquetes mensuales de TRX en casa o al aire libre en Santiago. Entrenamiento personalizado con Nicolás Echeverría." />
@@ -14,17 +53,15 @@
 
     <meta name="description" content="Clases individuales y paquetes mensuales de TRX en casa o al aire libre en Santiago. Entrenamiento personalizado con Nicolás Echeverría." />
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.cdnfonts.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.cdnfonts.com/css/impact">
     <link rel="stylesheet" href="../assets/css/style.css" />
     <link rel="shortcut icon" href="../assets/img/favicon.png" type="image/x-icon" />
     <title>Servicios de Entrenamiento TRX en Santiago | TRX Concept</title>
 
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-P1W5Z80ZJS"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() { dataLayer.push(arguments); }
-      gtag("js", new Date());
-      gtag("config", "G-P1W5Z80ZJS");
-    </script>
     <script defer src="/assets/js/main.js"></script>
   </head>
 
@@ -38,7 +75,7 @@
     <header class="site-header">
       <nav class="header-inner container">
         <a href="/" class="brand" aria-label="TRX Concept (Inicio)">
-          <img src="../assets/img/logo.webp" alt="" aria-hidden="true" />
+          <img src="../assets/logos/trx-concept-logo-.svg" alt="" aria-hidden="true" width="100" height="100" />
           <span class="logo">TRX Concept</span>
         </a>
         <ul class="nav-list" id="nav-main">
@@ -184,7 +221,32 @@
           aria-label="Abrir el sitio de Agencia Chucao en una pestaña nueva"
         >Agencia Chucao</a>.
       </p>
+      <div class="footer-legal">
+        <a
+          href="https://www.instagram.com/trxconcept"
+          target="_blank"
+          rel="noopener noreferrer me"
+          aria-label="Seguir TRX Concept en Instagram"
+          class="footer-social-link"
+        >@trxconcept</a>
+        <a href="/politica-de-cookies/">Política de cookies</a>
+        <button class="cookie-manage-btn" id="cookie-manage-btn">Gestionar preferencias de cookies</button>
+      </div>
     </footer>
 
+    <div class="cookie-banner" id="cookie-banner" role="region" aria-live="polite" aria-label="Aviso de cookies">
+      <div class="cookie-inner">
+        <p class="cookie-text">
+          Usamos cookies de análisis (Google Analytics) para mejorar el sitio.
+          Puedes aceptar o rechazar su uso.
+          <a href="/politica-de-cookies/" class="cookie-policy-link">Política de cookies</a>
+        </p>
+        <div class="cookie-actions">
+          <button class="cookie-btn cookie-btn--accept" id="cookie-accept">Aceptar</button>
+          <button class="cookie-btn cookie-btn--reject" id="cookie-reject">Rechazar</button>
+        </div>
+      </div>
+    </div>
+    <script src="/assets/js/cookie-consent.js" defer></script>
   </body>
 </html>

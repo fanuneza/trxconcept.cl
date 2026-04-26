@@ -1,0 +1,14 @@
+/* TEAM */
+Trainer: Nicolás Echeverría
+Role: Entrenador Personal TRX
+Location: Santiago, Chile
+
+/* THANKS */
+Developer: Fabián Núñez (agenciachucao.cl)
+Tooling: Claude Code (claude.ai/code)
+
+/* SITE */
+Language: Spanish
+Technology: HTML, CSS, JavaScript — no framework
+Hosted on: GitHub Pages
+Last update: 2026-04-25
