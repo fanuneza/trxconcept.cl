@@ -1,0 +1,29 @@
+---
+import type { SitePage } from '../data/pages';
+
+const { page } = Astro.props as { page: SitePage };
+const ogTitle = page.ogTitle ?? page.title;
+const ogDescription = page.ogDescription ?? page.description;
+const ogImage = page.ogImage ?? 'https://trxconcept.cl/assets/img/og-image.webp';
+const ogType = page.ogType ?? 'website';
+const twitterCard = page.twitterCard ?? 'summary_large_image';
+const legacyJsonLd = [...(page.headExtra ?? '').matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)]
+  .map((match) => match[1].trim());
+---
+
+<link rel="canonical" href={page.canonical} />
+{page.robots && <meta name="robots" content={page.robots} />}
+<meta name="description" content={page.description} />
+<meta property="og:title" content={ogTitle} />
+<meta property="og:description" content={ogDescription} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:url" content={page.canonical} />
+<meta property="og:type" content={ogType} />
+<meta name="twitter:card" content={twitterCard} />
+<meta name="twitter:title" content={ogTitle} />
+<meta name="twitter:description" content={ogDescription} />
+<meta name="twitter:image" content={ogImage} />
+{page.structuredData && (
+  <script type="application/ld+json" set:html={JSON.stringify(page.structuredData)} />
+)}
+{legacyJsonLd.map((json) => <script type="application/ld+json" set:html={json} />)}

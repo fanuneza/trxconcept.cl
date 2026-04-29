@@ -2,6 +2,7 @@
 import CookieBanner from '../components/CookieBanner.astro';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
+import SeoHead from '../components/SeoHead.astro';
 import WaSymbol from '../components/WaSymbol.astro';
 import { site } from '../data/site';
 import type { SitePage } from '../data/pages';
@@ -19,10 +20,9 @@ const siteCss = readFileSync(join(process.cwd(), 'public/assets/css/style.min.cs
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#ffd700" />
-    <link rel="canonical" href={page.canonical} />
     <link rel="me" href={site.instagram} />
-    <Fragment set:html={page.headExtra} />
-    <meta name="description" content={page.description} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <SeoHead page={page} />
     <link rel="preload" href="/assets/fonts/montserrat-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
     {page.isHome && (
       <link rel="preload" as="image" href="/assets/img/hero-768.avif" imagesrcset="/assets/img/hero-768.avif 768w, /assets/img/hero-960.avif 960w, /assets/img/hero-1080.avif 1080w, /assets/img/hero-1280.avif 1280w" imagesizes="100vw" fetchpriority="high" />

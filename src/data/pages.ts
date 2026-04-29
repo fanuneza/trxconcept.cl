@@ -2,7 +2,14 @@ export type SitePage = {
   title: string;
   description: string;
   canonical: string;
-  headExtra: string;
+  headExtra?: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  ogImage?: string;
+  ogType?: string;
+  twitterCard?: string;
+  robots?: string;
+  structuredData?: unknown;
   content: string;
   isHome?: boolean;
 };
@@ -12,6 +19,7 @@ export const pages = {
     title: `Entrenador Personal TRX en Santiago, Chile | TRX Concept`,
     description: `Entrena con un entrenador certificado en TRX, en casa o al aire libre en Santiago. Clases 1 a 1, seguras y personalizadas.`,
     canonical: `https://trxconcept.cl/`,
+    ogTitle: `Entrenador Personal TRX en Santiago | TRX Concept`,
     headExtra: `<script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -75,7 +83,7 @@ export const pages = {
           <h1 class="hero-title">Entrena donde estés,<br>sin máquinas, sin excusas.</h1>
           <p class="hero-lead">Clases de TRX personalizadas en casa o al aire libre,<br>sin el estrés del gimnasio.</p>
           <a
-            href="#" data-wa
+            href="https://wa.me/56984402664?text=Hola%21%20Vi%20tu%20sitio%20web%20y%20me%20gustar%C3%ADa%20agendar%20una%20clase%20de%20TRX." data-wa
             target="_blank"
             rel="noopener noreferrer"
             class="btn btn-trx"
@@ -161,7 +169,7 @@ export const pages = {
         <div class="container text-center">
           <p class="cta-band-text">¿Dudas? Tu primera clase es sin costo.</p>
           <a
-            href="#" data-wa
+            href="https://wa.me/56984402664?text=Hola%21%20Vi%20tu%20sitio%20web%20y%20me%20gustar%C3%ADa%20agendar%20una%20clase%20de%20TRX." data-wa
             target="_blank"
             rel="noopener noreferrer"
             class="btn btn-trx"
@@ -303,7 +311,7 @@ export const pages = {
               <li>Sin compromiso</li>
             </ul>
             <a
-              href="#" data-wa
+              href="https://wa.me/56984402664?text=Hola%21%20Vi%20tu%20sitio%20web%20y%20me%20gustar%C3%ADa%20agendar%20una%20clase%20de%20TRX." data-wa
               target="_blank"
               rel="noopener noreferrer"
               class="btn btn-whatsapp"
@@ -324,7 +332,7 @@ export const pages = {
               <li>Horario flexible desde las 6 AM</li>
             </ul>
             <a
-              href="#" data-wa
+              href="https://wa.me/56984402664?text=Hola%21%20Vi%20tu%20sitio%20web%20y%20me%20gustar%C3%ADa%20agendar%20una%20clase%20de%20TRX." data-wa
               target="_blank"
               rel="noopener noreferrer"
               class="btn btn-trx"
@@ -438,19 +446,19 @@ export const pages = {
           <p class="section-intro">TRX Concept funciona para personas muy distintas. Aquí algunas:</p>
           <div class="audience-grid">
             <div class="audience-item">
-              <h4>Principiantes absolutos</h4>
+              <h3>Principiantes absolutos</h3>
               <p>Nunca has hecho ejercicio o llevas mucho tiempo sin hacerlo. Empezamos desde cero, con calma.</p>
             </div>
             <div class="audience-item">
-              <h4>Personas con lesiones</h4>
+              <h3>Personas con lesiones</h3>
               <p>El TRX es de bajo impacto y totalmente ajustable. Ideal para recuperación y fortalecimiento preventivo.</p>
             </div>
             <div class="audience-item">
-              <h4>Profesionales ocupados</h4>
+              <h3>Profesionales ocupados</h3>
               <p>Sin traslado al gimnasio. Entrenas en casa o cerca, en el horario que te acomode, desde las 6 AM.</p>
             </div>
             <div class="audience-item">
-              <h4>Deportistas activos</h4>
+              <h3>Deportistas activos</h3>
               <p>Complementa tu deporte con trabajo de core, fuerza funcional y movilidad dirigida.</p>
             </div>
           </div>
@@ -744,6 +752,7 @@ export const pages = {
     title: `Política de Cookies y Consentimiento | TRX Concept`,
     description: `Información sobre las cookies que usa TRX Concept y cómo puedes gestionar tus preferencias.`,
     canonical: `https://trxconcept.cl/politica-de-cookies/`,
+    robots: `noindex`,
     headExtra: `<meta property="og:title" content="Política de cookies | TRX Concept" />
     <meta property="og:description" content="Información sobre las cookies que usa TRX Concept y cómo puedes gestionar tus preferencias." />
     <meta property="og:image" content="https://trxconcept.cl/assets/img/og-image.webp" />
@@ -780,7 +789,7 @@ export const pages = {
               </thead>
               <tbody>
                 <tr>
-                  <td><code>trxconcept_consent</code></td>
+                  <td><code>site_consent</code></td>
                   <td>Almacena tu preferencia de cookies (aceptar / rechazar)</td>
                   <td>12 meses</td>
                   <td>Necesaria / preferencias</td>
@@ -800,7 +809,7 @@ export const pages = {
             Al visitar TRX Concept por primera vez verás un aviso en la parte inferior de la pantalla.
             Puedes hacer clic en <strong>Aceptar</strong> para autorizar el uso de cookies de análisis,
             o en <strong>Rechazar</strong> para denegarlas. Tu elección se guarda en la cookie
-            <code>trxconcept_consent</code> y el aviso no volverá a aparecer durante 12 meses.
+            <code>site_consent</code> y el aviso no volverá a aparecer durante 12 meses.
           </p>
           <p>
             Si rechazas las cookies, Google Analytics no se carga en ningún momento de tu visita.
@@ -825,7 +834,7 @@ export const pages = {
             <strong>Ley N.° 19.628 sobre Protección de la Vida Privada</strong>. El uso de cookies
             de análisis está sujeto a tu consentimiento previo y explícito, el cual puedes retirar
             en cualquier momento tal como se describe más arriba. La cookie de preferencias
-            (<code>trxconcept_consent</code>) es necesaria para recordar tu decisión y no requiere
+            (<code>site_consent</code>) es necesaria para recordar tu decisión y no requiere
             consentimiento adicional.
           </p>
 
