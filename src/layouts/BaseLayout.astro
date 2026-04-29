@@ -5,8 +5,11 @@ import Header from '../components/Header.astro';
 import WaSymbol from '../components/WaSymbol.astro';
 import { site } from '../data/site';
 import type { SitePage } from '../data/pages';
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 
 const { page } = Astro.props as { page: SitePage };
+const siteCss = readFileSync(join(process.cwd(), 'public/assets/css/style.min.css'), 'utf-8');
 ---
 
 <!DOCTYPE html>
@@ -22,13 +25,9 @@ const { page } = Astro.props as { page: SitePage };
     <meta name="description" content={page.description} />
     <link rel="preload" href="/assets/fonts/montserrat-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
     {page.isHome && (
-      <link rel="preload" as="image" href="/assets/img/hero-768.avif" imagesrcset="/assets/img/hero-768.avif 768w, /assets/img/hero-960.avif 960w, /assets/img/hero-1080.avif 1080w, /assets/img/hero-1280.avif 1280w" imagesizes="100vw" />
+      <link rel="preload" as="image" href="/assets/img/hero-768.avif" imagesrcset="/assets/img/hero-768.avif 768w, /assets/img/hero-960.avif 960w, /assets/img/hero-1080.avif 1080w, /assets/img/hero-1280.avif 1280w" imagesizes="100vw" fetchpriority="high" />
     )}
-    <style is:inline>
-      @font-face{font-family:Montserrat;font-style:normal;font-weight:400;font-display:swap;src:url("/assets/fonts/montserrat-latin-400-normal.woff2") format("woff2")}
-      @font-face{font-family:Montserrat;font-style:normal;font-weight:700;font-display:swap;src:url("/assets/fonts/montserrat-latin-700-normal.woff2") format("woff2")}
-    </style>
-    <link rel="stylesheet" href="/assets/css/style.min.css" />
+    <style is:inline set:html={siteCss}></style>
     <link rel="shortcut icon" href="/assets/img/favicon.png" type="image/x-icon" />
     <title>{page.title}</title>
     <script is:inline defer src="/assets/js/main.js"></script>

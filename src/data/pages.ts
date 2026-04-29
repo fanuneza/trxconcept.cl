@@ -90,17 +90,17 @@ export const pages = {
       <section id="trust" class="trust">
         <div class="container trust-inner">
           <img
-            src="/assets/img/nico-384.webp"
-            srcset="/assets/img/nico-384.webp 384w, /assets/img/nico.webp 512w"
+            src="/assets/img/nico-140.webp"
+            srcset="/assets/img/nico-140.webp 140w, /assets/img/nico-384.webp 384w"
             sizes="(width < 768px) 140px, 140px"
             alt="Nicolás Echeverría, entrenador personal TRX"
             class="profile-pic"
-            width="512"
-            height="512"
+            width="140"
+            height="140"
             decoding="async"
           />
           <div class="trust-content">
-            <h3>Nicolás Echeverría</h3>
+            <h2 class="trust-name">Nicolás Echeverría</h2>
             <p>TRX Suspension Trainer™ y Rip Trainer® certificado para clases individuales y grupales.</p>
             <div class="trust-stats">
               <div class="trust-stat">

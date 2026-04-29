@@ -7,14 +7,6 @@
   src: url("../fonts/montserrat-latin-400-normal.woff2") format("woff2");
 }
 
-@font-face {
-  font-family: "Montserrat";
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url("../fonts/montserrat-latin-700-normal.woff2") format("woff2");
-}
-
 * {
   margin: 0;
   padding: 0;
@@ -32,7 +24,7 @@ img {
   --color-gray-light: #f5f5f5;
   --color-gray: #ededed;
   --color-gray-dark: #444;
-  --color-gray-note: #a3a3a3;
+  --color-gray-note: #555;
   --color-primary: #ffd700;
   --font-base: "Montserrat", "Helvetica Neue", Arial, sans-serif;
   --font-logo: "Impact", sans-serif;
@@ -401,7 +393,7 @@ main {
   margin: 0 auto;
 }
 
-.trust-content h3 {
+.trust-content .trust-name {
   font-size: 1.4rem;
   margin-bottom: 0.4rem;
 }
@@ -1446,7 +1438,7 @@ header .wa-icon {
 .footer-legal a,
 .cookie-manage-btn {
   font-size: 11px;
-  color: rgba(0, 0, 0, 0.45);
+  color: #4a4100;
   text-decoration: none;
   background: transparent;
   border: none;
