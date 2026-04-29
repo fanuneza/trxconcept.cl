@@ -1,0 +1,20 @@
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+/
+  Cache-Control: public, max-age=0, must-revalidate
+
+/servicios/
+  Cache-Control: public, max-age=0, must-revalidate
+
+/sobre-mi/
+  Cache-Control: public, max-age=0, must-revalidate
+
+/preguntas-frecuentes/
+  Cache-Control: public, max-age=0, must-revalidate
+
+/politica-de-cookies/
+  Cache-Control: public, max-age=0, must-revalidate

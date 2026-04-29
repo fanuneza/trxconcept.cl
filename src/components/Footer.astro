@@ -1,0 +1,49 @@
+---
+import { site } from '../data/site';
+---
+
+<a
+  href="#"
+  data-wa
+  target="_blank"
+  rel="noopener noreferrer"
+  class="floating-wa"
+  aria-label={site.whatsappLabel}
+><svg class="wa-icon" aria-hidden="true" focusable="false"><use href="#wa-symbol" /></svg></a>
+
+<footer id="footer" class="footer">
+  <h2>Tu primera clase es gratis, sin compromiso.</h2>
+  <a
+    href="#"
+    data-wa
+    target="_blank"
+    rel="noopener noreferrer"
+    class="btn btn-invert"
+    aria-label={site.whatsappLabel}
+  >Escríbeme por WhatsApp <svg class="wa-icon" aria-hidden="true" focusable="false"><use href="#wa-symbol" /></svg></a>
+  <p class="copyright">
+    &copy; <span id="yr"></span> TRX Concept. Todos los derechos reservados.
+  </p>
+  <p class="site-credit">
+    Sitio web desarrollado con ❤️<br />por
+    <a
+      href="https://agenciachucao.cl/?utm_source=trxconcept.cl&utm_medium=referral&utm_campaign=credit_footer"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Abrir el sitio de Agencia Chucao en una pestaña nueva"
+    >
+      Agencia Chucao</a
+    >.
+  </p>
+  <div class="footer-legal">
+    <a
+      href={site.instagram}
+      target="_blank"
+      rel="noopener noreferrer me"
+      aria-label="Seguir TRX Concept en Instagram"
+      class="footer-social-link"
+    >@trxconcept</a>
+    {site.legal.map((item) => <a href={item.href}>{item.label}</a>)}
+    <button class="cookie-manage-btn" id="cookie-manage-btn" type="button">Gestionar preferencias de cookies</button>
+  </div>
+</footer>

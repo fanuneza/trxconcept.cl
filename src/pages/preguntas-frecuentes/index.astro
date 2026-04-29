@@ -1,0 +1,9 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { pages } from '../../data/pages';
+const page = pages.faq;
+---
+
+<BaseLayout page={page}>
+  <Fragment set:html={page.content} />
+</BaseLayout>
