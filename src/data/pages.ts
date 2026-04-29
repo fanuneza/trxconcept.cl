@@ -48,7 +48,7 @@ export const pages = {
       property="og:image"
       content="https://trxconcept.cl/assets/img/og-image.webp"
     />
-    <meta property="og:url" content="https://trxconcept.cl" />
+    <meta property="og:url" content="https://trxconcept.cl/" />
     <meta property="og:type" content="website" />
 
     <meta name="twitter:card" content="summary_large_image" />
@@ -382,7 +382,7 @@ export const pages = {
     <meta property="og:title" content="Servicios de Entrenamiento TRX en Santiago | TRX Concept" />
     <meta property="og:description" content="Clases individuales y paquetes mensuales de TRX en casa o al aire libre en Santiago. Entrenamiento personalizado con Nicolás Echeverría." />
     <meta property="og:image" content="https://trxconcept.cl/assets/img/og-image.webp" />
-    <meta property="og:url" content="https://trxconcept.cl/servicios" />
+    <meta property="og:url" content="https://trxconcept.cl/servicios/" />
     <meta property="og:type" content="website" />`,
     content: `<div class="page-hero">
         <h1>Entrenamientos diseñados para ti</h1>
@@ -485,7 +485,7 @@ export const pages = {
     headExtra: `<meta property="og:title" content="Sobre Nicolás Echeverría | TRX Concept" />
     <meta property="og:description" content="Conoce al entrenador certificado detrás de TRX Concept. Más de 10 años formando personas en Santiago con método TRX." />
     <meta property="og:image" content="https://trxconcept.cl/assets/img/og-image.webp" />
-    <meta property="og:url" content="https://trxconcept.cl/sobre-mi" />
+    <meta property="og:url" content="https://trxconcept.cl/sobre-mi/" />
     <meta property="og:type" content="website" />`,
     content: `<div class="page-hero">
         <h1>Conoce a tu entrenador</h1>
@@ -656,7 +656,7 @@ export const pages = {
     <meta property="og:title" content="Preguntas Frecuentes | TRX Concept" />
     <meta property="og:description" content="Resolvemos tus dudas sobre el entrenamiento TRX en Santiago. ¿Necesito experiencia? ¿Qué necesito en casa? ¿Cómo son los horarios?" />
     <meta property="og:image" content="https://trxconcept.cl/assets/img/og-image.webp" />
-    <meta property="og:url" content="https://trxconcept.cl/preguntas-frecuentes" />
+    <meta property="og:url" content="https://trxconcept.cl/preguntas-frecuentes/" />
     <meta property="og:type" content="website" />`,
     content: `<div class="page-hero">
         <h1>Preguntas frecuentes</h1>
@@ -747,7 +747,7 @@ export const pages = {
     headExtra: `<meta property="og:title" content="Política de cookies | TRX Concept" />
     <meta property="og:description" content="Información sobre las cookies que usa TRX Concept y cómo puedes gestionar tus preferencias." />
     <meta property="og:image" content="https://trxconcept.cl/assets/img/og-image.webp" />
-    <meta property="og:url" content="https://trxconcept.cl/politica-de-cookies" />
+    <meta property="og:url" content="https://trxconcept.cl/politica-de-cookies/" />
     <meta property="og:type" content="website" />
     <meta name="robots" content="noindex" />`,
     content: `<div class="page-hero">

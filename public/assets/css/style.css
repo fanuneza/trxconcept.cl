@@ -356,9 +356,11 @@ main {
   text-shadow: none;
 }
 
-.hero .btn-trx .wa-icon {
+.hero .btn-trx .wa-icon,
+.hero .btn-trx .wa-icon * {
   color: var(--color-black);
-  fill: var(--color-black);
+  fill: currentColor;
+  text-shadow: none;
 }
 
 .hero .btn-invert,
@@ -1156,24 +1158,33 @@ header .wa-icon {
   width: 3.5rem;
   height: 3.5rem;
   background: #25d366;
+  color: var(--color-white);
+  text-decoration: none;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
+  opacity: 1;
+  visibility: visible;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
   z-index: 999;
   transition: transform 0.18s ease, box-shadow 0.18s ease;
 }
 
-.btn-float-wa:hover {
+.btn-float-wa:hover,
+.btn-float-wa:focus {
+  color: var(--color-white);
+  text-decoration: none;
   transform: translateY(-2px);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
 }
 
-.btn-float-wa .wa-icon {
+.btn-float-wa .wa-icon,
+.btn-float-wa .wa-icon * {
   width: 1.75rem;
   height: 1.75rem;
-  fill: #fff;
+  color: var(--color-white);
+  fill: currentColor;
 }
 
 /* ─── SCROLLED HEADER ─── */
@@ -1342,6 +1353,14 @@ header .wa-icon {
   .pricing-card {
     max-width: 100%;
     width: 100%;
+  }
+
+  .btn-float-wa {
+    bottom: calc(1rem + env(safe-area-inset-bottom));
+    right: 1rem;
+    display: flex;
+    width: 3.25rem;
+    height: 3.25rem;
   }
 }
 

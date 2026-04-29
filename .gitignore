@@ -33,6 +33,7 @@
 
 # Loose root-level documentation stays local
 /*.md
+!/README.md
 
 # OS metadata
 .DS_Store
