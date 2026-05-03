@@ -1,5 +1,4 @@
 import { defineConfig } from 'astro/config';
-import { fileURLToPath } from 'node:url';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
@@ -13,13 +12,4 @@ export default defineConfig({
         !page.endsWith('/politica-de-cookies/'),
     }),
   ],
-  vite: {
-    resolve: {
-      alias: {
-        'astro/entrypoints/prerender': fileURLToPath(
-          new URL('./node_modules/astro/dist/entrypoints/prerender.js', import.meta.url),
-        ),
-      },
-    },
-  },
 });

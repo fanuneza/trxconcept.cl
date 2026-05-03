@@ -17,18 +17,20 @@ const siteCss = readFileSync(join(process.cwd(), 'public/assets/css/style.min.cs
 <html lang="es" data-ga4-id={site.ga4Id} data-consent-cookie={site.consentCookie}>
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#ffd700" />
     <link rel="me" href={site.instagram} />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <SeoHead page={page} />
+    <link rel="preconnect" href="https://www.googletagmanager.com" />
     <link rel="preload" href="/assets/fonts/montserrat-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/assets/fonts/montserrat-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin />
     {page.isHome && (
       <link rel="preload" as="image" href="/assets/img/hero-768.avif" imagesrcset="/assets/img/hero-768.avif 768w, /assets/img/hero-960.avif 960w, /assets/img/hero-1080.avif 1080w, /assets/img/hero-1280.avif 1280w" imagesizes="100vw" fetchpriority="high" />
     )}
     <style is:inline set:html={siteCss}></style>
     <link rel="shortcut icon" href="/assets/img/favicon.png" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="/assets/logos/trx-concept-logo-big.png" />
     <title>{page.title}</title>
     <script is:inline defer src="/assets/js/main.js"></script>
   </head>

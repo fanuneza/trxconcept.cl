@@ -8,7 +8,7 @@ function getCookie(name) {
 }
 
 function setCookie(name, value) {
-  document.cookie = `${name}=${value}; max-age=31536000; path=/; SameSite=Lax`;
+  document.cookie = `${name}=${value}; max-age=31536000; path=/; SameSite=Lax; Secure`;
 }
 
 function loadGA4() {
@@ -43,6 +43,6 @@ document.getElementById('cookie-reject')?.addEventListener('click', () => {
 });
 
 document.getElementById('cookie-manage-btn')?.addEventListener('click', () => {
-  document.cookie = `${CONSENT_COOKIE}=; max-age=0; path=/`;
+  document.cookie = `${CONSENT_COOKIE}=; max-age=0; path=/; Secure`;
   window.location.reload();
 });

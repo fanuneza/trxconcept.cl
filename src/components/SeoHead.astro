@@ -7,8 +7,6 @@ const ogDescription = page.ogDescription ?? page.description;
 const ogImage = page.ogImage ?? 'https://trxconcept.cl/assets/img/og-image.webp';
 const ogType = page.ogType ?? 'website';
 const twitterCard = page.twitterCard ?? 'summary_large_image';
-const legacyJsonLd = [...(page.headExtra ?? '').matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)]
-  .map((match) => match[1].trim());
 ---
 
 <link rel="canonical" href={page.canonical} />
@@ -23,7 +21,23 @@ const legacyJsonLd = [...(page.headExtra ?? '').matchAll(/<script type="applicat
 <meta name="twitter:title" content={ogTitle} />
 <meta name="twitter:description" content={ogDescription} />
 <meta name="twitter:image" content={ogImage} />
+<meta name="twitter:image:alt" content="TRX Concept - Entrenamiento personal en Santiago" />
+<meta property="og:locale" content="es_CL" />
+<meta property="og:site_name" content="TRX Concept" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
 {page.structuredData && (
   <script type="application/ld+json" set:html={JSON.stringify(page.structuredData)} />
 )}
-{legacyJsonLd.map((json) => <script type="application/ld+json" set:html={json} />)}
+{page.breadcrumb && (
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": page.breadcrumb.map((crumb, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "name": crumb.name,
+      "item": crumb.item
+    }))
+  })} />
+)}

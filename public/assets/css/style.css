@@ -76,10 +76,6 @@ section {
 
 /* ─────────────────── */
 
-.wa-sprite {
-  display: none;
-}
-
 .section-alt {
   background-color: var(--color-gray-light);
 }
@@ -281,6 +277,30 @@ main {
 .btn.btn-trx,
 .btn.btn-trx:hover {
   color: var(--color-black);
+}
+
+/* ─── INLINE BODY LINKS ─── */
+
+.hero-lead a,
+.trust-content a,
+.cta-band-text a,
+.about-section p a,
+.page-hero p a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-thickness: 1px;
+  text-decoration-color: rgba(128, 128, 128, 0.4);
+  transition: text-decoration-color 0.15s ease, opacity 0.15s ease;
+}
+
+.hero-lead a:hover,
+.trust-content a:hover,
+.cta-band-text a:hover,
+.about-section p a:hover,
+.page-hero p a:hover {
+  text-decoration-color: rgba(128, 128, 128, 0.7);
+  opacity: 0.85;
 }
 
 /* ─── HERO ─── */
@@ -561,6 +581,8 @@ main {
   color: var(--color-gray-dark);
   padding-top: 1.5rem;
   flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .testimonial-quote::before {
@@ -577,7 +599,8 @@ main {
 }
 
 .testimonial-author {
-  margin-top: 0.75rem;
+  margin-top: auto;
+  padding-top: 0.75rem;
   font-weight: 600;
   color: var(--color-gray-dark);
   font-style: normal;
@@ -1195,7 +1218,7 @@ header .wa-icon {
 
 /* ─── RESPONSIVE: TABLET ─── */
 
-@media screen and (width < 992px) {
+@media screen and (max-width: 991px) {
   main {
     padding-top: 6rem;
     background: linear-gradient(var(--color-primary) 6rem, var(--color-white) 6rem);
@@ -1224,11 +1247,22 @@ header .wa-icon {
   }
 }
 
-@media screen and (width < 768px) {
-  .logo {
-    font-size: 2.2rem;
+@media screen and (max-width: 767px) {
+  .trust-inner {
+    flex-direction: column;
+    text-align: center;
   }
 
+  .trust-stats {
+    justify-content: center;
+  }
+
+  .trust-stat {
+    align-items: center;
+  }
+}
+
+@media screen and (max-width: 679px) {
   .nav-list {
     display: none;
     position: absolute;
@@ -1271,24 +1305,11 @@ header .wa-icon {
   .header-inner > .btn-whatsapp {
     margin-inline: auto;
   }
-
-  .trust-inner {
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .trust-stats {
-    justify-content: center;
-  }
-
-  .trust-stat {
-    align-items: center;
-  }
 }
 
 /* ─── RESPONSIVE: MOBILE ─── */
 
-@media screen and (width < 576px) {
+@media screen and (max-width: 575px) {
   .brand img {
     height: 3.5rem;
   }

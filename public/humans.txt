@@ -9,6 +9,6 @@ Tooling: Claude Code (claude.ai/code)
 
 /* SITE */
 Language: Spanish
-Technology: HTML, CSS, JavaScript — no framework
-Hosted on: GitHub Pages
-Last update: 2026-04-25
+Technology: HTML, CSS, JavaScript — Astro
+Hosted on: Cloudflare Pages
+Last update: 2026-05-02

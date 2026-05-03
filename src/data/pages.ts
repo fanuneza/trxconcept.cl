@@ -2,7 +2,6 @@ export type SitePage = {
   title: string;
   description: string;
   canonical: string;
-  headExtra?: string;
   ogTitle?: string;
   ogDescription?: string;
   ogImage?: string;
@@ -10,6 +9,7 @@ export type SitePage = {
   twitterCard?: string;
   robots?: string;
   structuredData?: unknown;
+  breadcrumb?: { name: string; item: string }[];
   content: string;
   isHome?: boolean;
 };
@@ -20,17 +20,24 @@ export const pages = {
     description: `Entrena con un entrenador certificado en TRX, en casa o al aire libre en Santiago. Clases 1 a 1, seguras y personalizadas.`,
     canonical: `https://trxconcept.cl/`,
     ogTitle: `Entrenador Personal TRX en Santiago | TRX Concept`,
-    headExtra: `<script type="application/ld+json">
-    {
+    structuredData: {
       "@context": "https://schema.org",
       "@type": ["LocalBusiness", "HealthAndBeautyBusiness"],
+      "@id": "https://trxconcept.cl/#business",
       "name": "TRX Concept",
       "description": "Entrenamiento personal con TRX en Santiago, Chile. Clases individuales y grupales en casa o al aire libre.",
       "url": "https://trxconcept.cl/",
       "telephone": "+56984402664",
+      "image": "https://trxconcept.cl/assets/img/og-image.webp",
+      "priceRange": "$$",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Santiago",
+        "addressCountry": "CL"
+      },
+      "areaServed": {
+        "@type": "City",
+        "name": "Santiago",
         "addressCountry": "CL"
       },
       "founder": {
@@ -40,48 +47,43 @@ export const pages = {
       },
       "sameAs": [
         "https://www.instagram.com/trxconcept"
+      ],
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5.0",
+        "reviewCount": "3"
+      },
+      "review": [
+        {
+          "@type": "Review",
+          "author": { "@type": "Person", "name": "Valentina Rosenthal" },
+          "reviewRating": { "@type": "Rating", "ratingValue": "5" },
+          "reviewBody": "Entreno con Nico desde 2021. Partimos dos veces a la semana y hoy entrenamos tres. Sin haber sido nunca buena para hacer deportes, Nico ha logrado que tenga una rutina y que lleve cuatro años entrenando, con todos los beneficios que esto trae."
+        },
+        {
+          "@type": "Review",
+          "author": { "@type": "Person", "name": "Marisa Gracia" },
+          "reviewRating": { "@type": "Rating", "ratingValue": "5" },
+          "reviewBody": "Entrenar con Nicolás fue una excelente experiencia. Gracias a su guía y el trabajo constante con TRX, mi cuerpo ganó fuerza, estabilidad y tono muscular. Noté mejoras en mi postura, control corporal y energía general."
+        },
+        {
+          "@type": "Review",
+          "author": { "@type": "Person", "name": "María Ignacia Williamson" },
+          "reviewRating": { "@type": "Rating", "ratingValue": "5" },
+          "reviewBody": "Entrenar con Nico fue una muy buena experiencia. Su enfoque personalizado y su profundo conocimiento del TRX hicieron que cada sesión fuera desafiante pero muy gratificante."
+        }
       ]
-    }
-    </script>
-
-    <meta
-      property="og:title"
-      content="Entrenador Personal TRX en Santiago | TRX Concept"
-    />
-    <meta
-      property="og:description"
-      content="Entrena con un entrenador certificado en TRX, en casa o al aire libre en Santiago. Clases 1 a 1, seguras y personalizadas."
-    />
-    <meta
-      property="og:image"
-      content="https://trxconcept.cl/assets/img/og-image.webp"
-    />
-    <meta property="og:url" content="https://trxconcept.cl/" />
-    <meta property="og:type" content="website" />
-
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta
-      name="twitter:title"
-      content="Entrenador Personal TRX en Santiago | TRX Concept"
-    />
-    <meta
-      name="twitter:description"
-      content="Entrena con un entrenador certificado en TRX, en casa o al aire libre en Santiago. Clases 1 a 1, seguras y personalizadas."
-    />
-    <meta
-      name="twitter:image"
-      content="https://trxconcept.cl/assets/img/og-image.webp"
-    />`,
+    },
     content: `<!-- HERO SECTION -->
       <section id="hero" class="hero">
         <picture class="hero-media" aria-hidden="true">
           <source type="image/avif" srcset="/assets/img/hero-768.avif 768w, /assets/img/hero-960.avif 960w, /assets/img/hero-1080.avif 1080w, /assets/img/hero-1280.avif 1280w" sizes="100vw" />
           <source type="image/webp" srcset="/assets/img/hero-768.webp 768w, /assets/img/hero-960.webp 960w, /assets/img/hero-1080.webp 1080w, /assets/img/hero-1280.webp 1280w" sizes="100vw" />
-          <img src="/assets/img/hero-960.webp" alt="" width="960" height="540" fetchpriority="high" decoding="async" />
+          <img src="/assets/img/hero-960.webp" alt="" width="960" height="540" fetchpriority="high" decoding="async" loading="eager" />
         </picture>
         <div class="container">
           <h1 class="hero-title">Entrena donde estés,<br>sin máquinas, sin excusas.</h1>
-          <p class="hero-lead">Clases de TRX personalizadas en casa o al aire libre,<br>sin el estrés del gimnasio.</p>
+          <p class="hero-lead"><a href="/servicios/">Clases de TRX personalizadas</a> en casa o al aire libre,<br>sin el estrés del gimnasio.</p>
           <a
             href="https://wa.me/56984402664?text=Hola%21%20Vi%20tu%20sitio%20web%20y%20me%20gustar%C3%ADa%20agendar%20una%20clase%20de%20TRX." data-wa
             target="_blank"
@@ -100,7 +102,7 @@ export const pages = {
           <img
             src="/assets/img/nico-140.webp"
             srcset="/assets/img/nico-140.webp 140w, /assets/img/nico-384.webp 384w"
-            sizes="(width < 768px) 140px, 140px"
+            sizes="(max-width: 767px) 140px, 140px"
             alt="Nicolás Echeverría, entrenador personal TRX"
             class="profile-pic"
             width="140"
@@ -108,7 +110,7 @@ export const pages = {
             decoding="async"
           />
           <div class="trust-content">
-            <h2 class="trust-name">Nicolás Echeverría</h2>
+            <h2 class="trust-name"><a href="/sobre-mi/">Nicolás Echeverría</a></h2>
             <p>TRX Suspension Trainer™ y Rip Trainer® certificado para clases individuales y grupales.</p>
             <div class="trust-stats">
               <div class="trust-stat">
@@ -167,7 +169,7 @@ export const pages = {
       <!-- MID-PAGE CTA BAND -->
       <section class="cta-band">
         <div class="container text-center">
-          <p class="cta-band-text">¿Dudas? Tu primera clase es sin costo.</p>
+          <p class="cta-band-text"><a href="/preguntas-frecuentes/">¿Dudas?</a> Tu primera clase es sin costo.</p>
           <a
             href="https://wa.me/56984402664?text=Hola%21%20Vi%20tu%20sitio%20web%20y%20me%20gustar%C3%ADa%20agendar%20una%20clase%20de%20TRX." data-wa
             target="_blank"
@@ -349,11 +351,16 @@ export const pages = {
     title: `Servicios de Entrenamiento TRX en Santiago | TRX Concept`,
     description: `Clases individuales y paquetes mensuales de TRX en casa o al aire libre en Santiago. Entrenamiento personalizado con Nicolás Echeverría.`,
     canonical: `https://trxconcept.cl/servicios/`,
-    headExtra: `<script type="application/ld+json">
-    {
+    breadcrumb: [
+      { name: 'Inicio', item: 'https://trxconcept.cl/' },
+      { name: 'Servicios', item: 'https://trxconcept.cl/servicios/' },
+    ],
+    structuredData: {
       "@context": "https://schema.org",
       "@type": "Service",
       "name": "Entrenamiento Personal TRX",
+      "url": "https://trxconcept.cl/servicios/",
+      "image": "https://trxconcept.cl/assets/img/og-image.webp",
       "provider": {
         "@type": "LocalBusiness",
         "name": "TRX Concept",
@@ -384,14 +391,7 @@ export const pages = {
           }
         ]
       }
-    }
-    </script>
-
-    <meta property="og:title" content="Servicios de Entrenamiento TRX en Santiago | TRX Concept" />
-    <meta property="og:description" content="Clases individuales y paquetes mensuales de TRX en casa o al aire libre en Santiago. Entrenamiento personalizado con Nicolás Echeverría." />
-    <meta property="og:image" content="https://trxconcept.cl/assets/img/og-image.webp" />
-    <meta property="og:url" content="https://trxconcept.cl/servicios/" />
-    <meta property="og:type" content="website" />`,
+    },
     content: `<div class="page-hero">
         <h1>Entrenamientos diseñados para ti</h1>
         <p>Sin máquinas, sin gimnasio, sin excusas. Solo TRX y trabajo real.</p>
@@ -407,6 +407,7 @@ export const pages = {
             instala en segundos en una puerta, árbol o barra, y se adapta a cualquier nivel, desde
             principiantes hasta atletas avanzados, ajustando simplemente el ángulo del cuerpo.
           </p>
+          <p>¿Tienes dudas? Revisa nuestras <a href="/preguntas-frecuentes/">preguntas frecuentes</a>.</p>
         </div>
       </section>
 
@@ -482,6 +483,7 @@ export const pages = {
           <p>
             El equipo lo llevo yo. Tú solo necesitas ropa cómoda y ganas de trabajar.
           </p>
+          <p>Conoce más <a href="/sobre-mi/">sobre Nicolás y su experiencia</a>.</p>
         </div>
       </section>`,
     isHome: false,
@@ -490,11 +492,10 @@ export const pages = {
     title: `Sobre Nicolás Echeverría, Entrenador TRX | TRX Concept`,
     description: `Conoce al entrenador certificado detrás de TRX Concept. Más de 10 años formando personas en Santiago con método TRX.`,
     canonical: `https://trxconcept.cl/sobre-mi/`,
-    headExtra: `<meta property="og:title" content="Sobre Nicolás Echeverría | TRX Concept" />
-    <meta property="og:description" content="Conoce al entrenador certificado detrás de TRX Concept. Más de 10 años formando personas en Santiago con método TRX." />
-    <meta property="og:image" content="https://trxconcept.cl/assets/img/og-image.webp" />
-    <meta property="og:url" content="https://trxconcept.cl/sobre-mi/" />
-    <meta property="og:type" content="website" />`,
+    breadcrumb: [
+      { name: 'Inicio', item: 'https://trxconcept.cl/' },
+      { name: 'Sobre mí', item: 'https://trxconcept.cl/sobre-mi/' },
+    ],
     content: `<div class="page-hero">
         <h1>Conoce a tu entrenador</h1>
         <p>La persona detrás de cada sesión, cada ajuste y cada logro.</p>
@@ -518,7 +519,7 @@ export const pages = {
               <h2>Nicolás Echeverría</h2>
               <p>
                 Llevo más de 10 años trabajando como entrenador personal en Santiago,
-                especializándome en el método TRX, un sistema de entrenamiento en suspensión
+                especializándome en el <a href="/servicios/">método TRX</a>, un sistema de entrenamiento en suspensión
                 que usa el peso del propio cuerpo para desarrollar fuerza, equilibrio y resistencia
                 de forma segura y progresiva.
               </p>
@@ -572,8 +573,11 @@ export const pages = {
     title: `Preguntas Frecuentes sobre TRX en Santiago | TRX Concept`,
     description: `Resolvemos tus dudas sobre el entrenamiento TRX en Santiago. ¿Necesito experiencia? ¿Qué necesito en casa? ¿Cómo son los horarios?`,
     canonical: `https://trxconcept.cl/preguntas-frecuentes/`,
-    headExtra: `<script type="application/ld+json">
-    {
+    breadcrumb: [
+      { name: 'Inicio', item: 'https://trxconcept.cl/' },
+      { name: 'Preguntas frecuentes', item: 'https://trxconcept.cl/preguntas-frecuentes/' },
+    ],
+    structuredData: {
       "@context": "https://schema.org",
       "@type": "FAQPage",
       "mainEntity": [
@@ -658,17 +662,10 @@ export const pages = {
           }
         }
       ]
-    }
-    </script>
-
-    <meta property="og:title" content="Preguntas Frecuentes | TRX Concept" />
-    <meta property="og:description" content="Resolvemos tus dudas sobre el entrenamiento TRX en Santiago. ¿Necesito experiencia? ¿Qué necesito en casa? ¿Cómo son los horarios?" />
-    <meta property="og:image" content="https://trxconcept.cl/assets/img/og-image.webp" />
-    <meta property="og:url" content="https://trxconcept.cl/preguntas-frecuentes/" />
-    <meta property="og:type" content="website" />`,
+    },
     content: `<div class="page-hero">
         <h1>Preguntas frecuentes</h1>
-        <p>Si tienes una duda, es probable que alguien más también la haya tenido.</p>
+        <p>Si tienes una duda, es probable que alguien más también la haya tenido. También puedes revisar nuestros <a href="/servicios/">servicios</a> o <a href="/sobre-mi/">conocer a tu entrenador</a>.</p>
       </div>
 
       <section>
@@ -753,12 +750,10 @@ export const pages = {
     description: `Información sobre las cookies que usa TRX Concept y cómo puedes gestionar tus preferencias.`,
     canonical: `https://trxconcept.cl/politica-de-cookies/`,
     robots: `noindex`,
-    headExtra: `<meta property="og:title" content="Política de cookies | TRX Concept" />
-    <meta property="og:description" content="Información sobre las cookies que usa TRX Concept y cómo puedes gestionar tus preferencias." />
-    <meta property="og:image" content="https://trxconcept.cl/assets/img/og-image.webp" />
-    <meta property="og:url" content="https://trxconcept.cl/politica-de-cookies/" />
-    <meta property="og:type" content="website" />
-    <meta name="robots" content="noindex" />`,
+    breadcrumb: [
+      { name: 'Inicio', item: 'https://trxconcept.cl/' },
+      { name: 'Política de cookies', item: 'https://trxconcept.cl/politica-de-cookies/' },
+    ],
     content: `<div class="page-hero">
         <h1>Política de cookies</h1>
         <p>Información sobre las cookies que usamos y cómo gestionarlas.</p>
