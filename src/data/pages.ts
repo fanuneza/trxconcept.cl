@@ -24,55 +24,57 @@ export const pages = {
       "@context": "https://schema.org",
       "@type": ["LocalBusiness", "HealthAndBeautyBusiness"],
       "@id": "https://trxconcept.cl/#business",
-      "name": "TRX Concept",
-      "description": "Entrenamiento personal con TRX en Santiago, Chile. Clases individuales y grupales en casa o al aire libre.",
-      "url": "https://trxconcept.cl/",
-      "telephone": "+56984402664",
-      "image": "https://trxconcept.cl/assets/img/og-image.webp",
-      "priceRange": "$$",
-      "address": {
+      name: "TRX Concept",
+      description:
+        "Entrenamiento personal con TRX en Santiago, Chile. Clases individuales y grupales en casa o al aire libre.",
+      url: "https://trxconcept.cl/",
+      telephone: "+56984402664",
+      image: "https://trxconcept.cl/assets/img/og-image.webp",
+      priceRange: "$$",
+      address: {
         "@type": "PostalAddress",
-        "addressLocality": "Santiago",
-        "addressCountry": "CL"
+        addressLocality: "Santiago",
+        addressCountry: "CL",
       },
-      "areaServed": {
+      areaServed: {
         "@type": "City",
-        "name": "Santiago",
-        "addressCountry": "CL"
+        name: "Santiago",
+        addressCountry: "CL",
       },
-      "founder": {
+      founder: {
         "@type": "Person",
-        "name": "Nicolás Echeverría",
-        "jobTitle": "Entrenador Personal"
+        name: "Nicolás Echeverría",
+        jobTitle: "Entrenador Personal",
       },
-      "sameAs": [
-        "https://www.instagram.com/trxconcept"
-      ],
-      "aggregateRating": {
+      sameAs: ["https://www.instagram.com/trxconcept"],
+      aggregateRating: {
         "@type": "AggregateRating",
-        "ratingValue": "5.0",
-        "reviewCount": "3"
+        ratingValue: "5.0",
+        reviewCount: "3",
       },
-      "review": [
+      review: [
         {
           "@type": "Review",
-          "author": { "@type": "Person", "name": "Valentina Rosenthal" },
-          "reviewRating": { "@type": "Rating", "ratingValue": "5" },
-          "reviewBody": "Entreno con Nico desde 2021. Partimos dos veces a la semana y hoy entrenamos tres. Sin haber sido nunca buena para hacer deportes, Nico ha logrado que tenga una rutina y que lleve cuatro años entrenando, con todos los beneficios que esto trae."
+          author: { "@type": "Person", name: "Valentina Rosenthal" },
+          reviewRating: { "@type": "Rating", ratingValue: "5" },
+          reviewBody:
+            "Entreno con Nico desde 2021. Partimos dos veces a la semana y hoy entrenamos tres. Sin haber sido nunca buena para hacer deportes, Nico ha logrado que tenga una rutina y que lleve cuatro años entrenando, con todos los beneficios que esto trae.",
         },
         {
           "@type": "Review",
-          "author": { "@type": "Person", "name": "Marisa Gracia" },
-          "reviewRating": { "@type": "Rating", "ratingValue": "5" },
-          "reviewBody": "Entrenar con Nicolás fue una excelente experiencia. Gracias a su guía y el trabajo constante con TRX, mi cuerpo ganó fuerza, estabilidad y tono muscular. Noté mejoras en mi postura, control corporal y energía general."
+          author: { "@type": "Person", name: "Marisa Gracia" },
+          reviewRating: { "@type": "Rating", ratingValue: "5" },
+          reviewBody:
+            "Entrenar con Nicolás fue una excelente experiencia. Gracias a su guía y el trabajo constante con TRX, mi cuerpo ganó fuerza, estabilidad y tono muscular. Noté mejoras en mi postura, control corporal y energía general.",
         },
         {
           "@type": "Review",
-          "author": { "@type": "Person", "name": "María Ignacia Williamson" },
-          "reviewRating": { "@type": "Rating", "ratingValue": "5" },
-          "reviewBody": "Entrenar con Nico fue una muy buena experiencia. Su enfoque personalizado y su profundo conocimiento del TRX hicieron que cada sesión fuera desafiante pero muy gratificante."
-        }
-      ]
+          author: { "@type": "Person", name: "María Ignacia Williamson" },
+          reviewRating: { "@type": "Rating", ratingValue: "5" },
+          reviewBody:
+            "Entrenar con Nico fue una muy buena experiencia. Su enfoque personalizado y su profundo conocimiento del TRX hicieron que cada sesión fuera desafiante pero muy gratificante.",
+        },
+      ],
     },
     content: `<!-- HERO SECTION -->
       <section id="hero" class="hero">
@@ -343,45 +345,45 @@ export const pages = {
     description: `Clases individuales y paquetes mensuales de TRX en casa o al aire libre en Santiago. Entrenamiento personalizado con Nicolás Echeverría.`,
     canonical: `https://trxconcept.cl/servicios/`,
     breadcrumb: [
-      { name: 'Inicio', item: 'https://trxconcept.cl/' },
-      { name: 'Servicios', item: 'https://trxconcept.cl/servicios/' },
+      { name: "Inicio", item: "https://trxconcept.cl/" },
+      { name: "Servicios", item: "https://trxconcept.cl/servicios/" },
     ],
     structuredData: {
       "@context": "https://schema.org",
       "@type": "Service",
-      "name": "Entrenamiento Personal TRX",
-      "url": "https://trxconcept.cl/servicios/",
-      "image": "https://trxconcept.cl/assets/img/og-image.webp",
-      "provider": {
+      name: "Entrenamiento Personal TRX",
+      url: "https://trxconcept.cl/servicios/",
+      image: "https://trxconcept.cl/assets/img/og-image.webp",
+      provider: {
         "@type": "LocalBusiness",
-        "name": "TRX Concept",
-        "url": "https://trxconcept.cl/"
+        name: "TRX Concept",
+        url: "https://trxconcept.cl/",
       },
-      "areaServed": {
+      areaServed: {
         "@type": "City",
-        "name": "Santiago",
-        "addressCountry": "CL"
+        name: "Santiago",
+        addressCountry: "CL",
       },
-      "hasOfferCatalog": {
+      hasOfferCatalog: {
         "@type": "OfferCatalog",
-        "name": "Planes de entrenamiento TRX",
-        "itemListElement": [
+        name: "Planes de entrenamiento TRX",
+        itemListElement: [
           {
             "@type": "Offer",
-            "name": "Sesión Individual TRX",
-            "description": "1 hora de entrenamiento personalizado en casa o al aire libre.",
-            "price": "15000",
-            "priceCurrency": "CLP"
+            name: "Sesión Individual TRX",
+            description: "1 hora de entrenamiento personalizado en casa o al aire libre.",
+            price: "15000",
+            priceCurrency: "CLP",
           },
           {
             "@type": "Offer",
-            "name": "Paquete Mensual TRX",
-            "description": "3 sesiones por semana, aproximadamente 12 sesiones al mes.",
-            "price": "160000",
-            "priceCurrency": "CLP"
-          }
-        ]
-      }
+            name: "Paquete Mensual TRX",
+            description: "3 sesiones por semana, aproximadamente 12 sesiones al mes.",
+            price: "160000",
+            priceCurrency: "CLP",
+          },
+        ],
+      },
     },
     content: `<div class="page-hero">
         <h1>Entrenamientos diseñados para ti</h1>
@@ -484,8 +486,8 @@ export const pages = {
     description: `Conoce al entrenador certificado detrás de TRX Concept. Más de 10 años formando personas en Santiago con método TRX.`,
     canonical: `https://trxconcept.cl/sobre-mi/`,
     breadcrumb: [
-      { name: 'Inicio', item: 'https://trxconcept.cl/' },
-      { name: 'Sobre mí', item: 'https://trxconcept.cl/sobre-mi/' },
+      { name: "Inicio", item: "https://trxconcept.cl/" },
+      { name: "Sobre mí", item: "https://trxconcept.cl/sobre-mi/" },
     ],
     content: `<div class="page-hero">
         <h1>Conoce a tu entrenador</h1>
@@ -565,94 +567,94 @@ export const pages = {
     description: `Resolvemos tus dudas sobre el entrenamiento TRX en Santiago. ¿Necesito experiencia? ¿Qué necesito en casa? ¿Cómo son los horarios?`,
     canonical: `https://trxconcept.cl/preguntas-frecuentes/`,
     breadcrumb: [
-      { name: 'Inicio', item: 'https://trxconcept.cl/' },
-      { name: 'Preguntas frecuentes', item: 'https://trxconcept.cl/preguntas-frecuentes/' },
+      { name: "Inicio", item: "https://trxconcept.cl/" },
+      { name: "Preguntas frecuentes", item: "https://trxconcept.cl/preguntas-frecuentes/" },
     ],
     structuredData: {
       "@context": "https://schema.org",
       "@type": "FAQPage",
-      "mainEntity": [
+      mainEntity: [
         {
           "@type": "Question",
-          "name": "¿Necesito experiencia previa para entrenar TRX?",
-          "acceptedAnswer": {
+          name: "¿Necesito experiencia previa para entrenar TRX?",
+          acceptedAnswer: {
             "@type": "Answer",
-            "text": "No. El TRX es completamente adaptable a tu nivel, sea cual sea. Si nunca has hecho ejercicio, empezamos desde lo más básico y avanzamos a tu propio ritmo. Si ya tienes experiencia, podemos llevar la intensidad mucho más lejos. La primera sesión siempre empieza con una evaluación para conocer tu punto de partida."
-          }
+            text: "No. El TRX es completamente adaptable a tu nivel, sea cual sea. Si nunca has hecho ejercicio, empezamos desde lo más básico y avanzamos a tu propio ritmo. Si ya tienes experiencia, podemos llevar la intensidad mucho más lejos. La primera sesión siempre empieza con una evaluación para conocer tu punto de partida.",
+          },
         },
         {
           "@type": "Question",
-          "name": "¿Qué necesito tener en casa para entrenar?",
-          "acceptedAnswer": {
+          name: "¿Qué necesito tener en casa para entrenar?",
+          acceptedAnswer: {
             "@type": "Answer",
-            "text": "Solo necesitas espacio para moverte y una puerta estándar o barra donde fijar el equipo. El TRX y todos los implementos los llevo yo. Tú solo necesitas ropa cómoda y zapatillas."
-          }
+            text: "Solo necesitas espacio para moverte y una puerta estándar o barra donde fijar el equipo. El TRX y todos los implementos los llevo yo. Tú solo necesitas ropa cómoda y zapatillas.",
+          },
         },
         {
           "@type": "Question",
-          "name": "¿Es seguro si tengo una lesión o dolor crónico?",
-          "acceptedAnswer": {
+          name: "¿Es seguro si tengo una lesión o dolor crónico?",
+          acceptedAnswer: {
             "@type": "Answer",
-            "text": "El TRX es uno de los métodos más seguros que existen, precisamente porque es de bajo impacto y sin cargas externas. He trabajado con personas en recuperación de lesiones de rodilla, hombro y espalda. Eso sí, antes de empezar siempre conversamos sobre tu situación médica y, si es necesario, coordino con tu médico o kinesiólogo."
-          }
+            text: "El TRX es uno de los métodos más seguros que existen, precisamente porque es de bajo impacto y sin cargas externas. He trabajado con personas en recuperación de lesiones de rodilla, hombro y espalda. Eso sí, antes de empezar siempre conversamos sobre tu situación médica y, si es necesario, coordino con tu médico o kinesiólogo.",
+          },
         },
         {
           "@type": "Question",
-          "name": "¿En qué sectores de Santiago entrenas?",
-          "acceptedAnswer": {
+          name: "¿En qué sectores de Santiago entrenas?",
+          acceptedAnswer: {
             "@type": "Answer",
-            "text": "Trabajo principalmente en sectores de Santiago oriente y centro. Escríbeme por WhatsApp con tu comuna y lo coordinamos; en la mayoría de los casos puedo llegar a ti."
-          }
+            text: "Trabajo principalmente en sectores de Santiago oriente y centro. Escríbeme por WhatsApp con tu comuna y lo coordinamos; en la mayoría de los casos puedo llegar a ti.",
+          },
         },
         {
           "@type": "Question",
-          "name": "¿Cuáles son los horarios disponibles?",
-          "acceptedAnswer": {
+          name: "¿Cuáles son los horarios disponibles?",
+          acceptedAnswer: {
             "@type": "Answer",
-            "text": "Tengo disponibilidad principalmente en las mañanas, desde las 6:00 AM. Los horarios exactos los coordinamos directamente según tu disponibilidad semanal. La flexibilidad es parte del servicio."
-          }
+            text: "Tengo disponibilidad principalmente en las mañanas, desde las 6:00 AM. Los horarios exactos los coordinamos directamente según tu disponibilidad semanal. La flexibilidad es parte del servicio.",
+          },
         },
         {
           "@type": "Question",
-          "name": "¿Cuántas veces a la semana debería entrenar?",
-          "acceptedAnswer": {
+          name: "¿Cuántas veces a la semana debería entrenar?",
+          acceptedAnswer: {
             "@type": "Answer",
-            "text": "Depende de tu objetivo y tu agenda. El mínimo recomendable para ver resultados es 2 veces por semana. El paquete mensual incluye 3 sesiones semanales, que es la frecuencia ideal para progreso constante sin sobrecargar el cuerpo."
-          }
+            text: "Depende de tu objetivo y tu agenda. El mínimo recomendable para ver resultados es 2 veces por semana. El paquete mensual incluye 3 sesiones semanales, que es la frecuencia ideal para progreso constante sin sobrecargar el cuerpo.",
+          },
         },
         {
           "@type": "Question",
-          "name": "¿Qué pasa si tengo que cancelar una sesión?",
-          "acceptedAnswer": {
+          name: "¿Qué pasa si tengo que cancelar una sesión?",
+          acceptedAnswer: {
             "@type": "Answer",
-            "text": "Las cancelaciones con más de 24 horas de anticipación no tienen costo. Lo coordinamos directamente por WhatsApp y buscamos una alternativa en la misma semana cuando sea posible."
-          }
+            text: "Las cancelaciones con más de 24 horas de anticipación no tienen costo. Lo coordinamos directamente por WhatsApp y buscamos una alternativa en la misma semana cuando sea posible.",
+          },
         },
         {
           "@type": "Question",
-          "name": "¿Cómo es la primera clase?",
-          "acceptedAnswer": {
+          name: "¿Cómo es la primera clase?",
+          acceptedAnswer: {
             "@type": "Answer",
-            "text": "La primera sesión es siempre gratuita y sirve para conocernos. Conversamos sobre tus objetivos, hago una evaluación básica de tu nivel y coordinamos cómo seguir. Sin presión ni compromiso. Si después de la sesión sientes que encajamos, coordinamos el plan; si no, ningún problema."
-          }
+            text: "La primera sesión es siempre gratuita y sirve para conocernos. Conversamos sobre tus objetivos, hago una evaluación básica de tu nivel y coordinamos cómo seguir. Sin presión ni compromiso. Si después de la sesión sientes que encajamos, coordinamos el plan; si no, ningún problema.",
+          },
         },
         {
           "@type": "Question",
-          "name": "¿Cuánto cuesta?",
-          "acceptedAnswer": {
+          name: "¿Cuánto cuesta?",
+          acceptedAnswer: {
             "@type": "Answer",
-            "text": "La sesión individual tiene un valor de $15.000. El paquete mensual de 3 veces por semana (~12 sesiones) tiene un valor de $160.000, lo que equivale a aproximadamente $13.300 por sesión. La primera clase es siempre gratis."
-          }
+            text: "La sesión individual tiene un valor de $15.000. El paquete mensual de 3 veces por semana (~12 sesiones) tiene un valor de $160.000, lo que equivale a aproximadamente $13.300 por sesión. La primera clase es siempre gratis.",
+          },
         },
         {
           "@type": "Question",
-          "name": "¿El TRX sirve para bajar de peso?",
-          "acceptedAnswer": {
+          name: "¿El TRX sirve para bajar de peso?",
+          acceptedAnswer: {
             "@type": "Answer",
-            "text": "El entrenamiento con TRX ayuda a desarrollar masa muscular y mejorar el metabolismo, lo que contribuye a la pérdida de grasa. Para resultados de composición corporal, lo ideal es combinar el entrenamiento con buenos hábitos de alimentación, algo sobre lo que también podemos conversar."
-          }
-        }
-      ]
+            text: "El entrenamiento con TRX ayuda a desarrollar masa muscular y mejorar el metabolismo, lo que contribuye a la pérdida de grasa. Para resultados de composición corporal, lo ideal es combinar el entrenamiento con buenos hábitos de alimentación, algo sobre lo que también podemos conversar.",
+          },
+        },
+      ],
     },
     content: `<div class="page-hero">
         <h1>Preguntas frecuentes</h1>
@@ -742,8 +744,8 @@ export const pages = {
     canonical: `https://trxconcept.cl/politica-de-cookies/`,
     robots: `noindex`,
     breadcrumb: [
-      { name: 'Inicio', item: 'https://trxconcept.cl/' },
-      { name: 'Política de cookies', item: 'https://trxconcept.cl/politica-de-cookies/' },
+      { name: "Inicio", item: "https://trxconcept.cl/" },
+      { name: "Política de cookies", item: "https://trxconcept.cl/politica-de-cookies/" },
     ],
     content: `<div class="page-hero">
         <h1>Política de cookies</h1>

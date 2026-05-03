@@ -1,108 +1,114 @@
-# trxconcept.cl
+# TRX Concept
 
-Static marketing site for TRX Concept, a personal TRX training business in Santiago, Chile.
+Sitio estático desarrollado con Astro para TRX Concept, entrenamiento personal con TRX en Santiago, Chile. Clases individuales y paquetes mensuales con Nicolás Echeverría, entrenador certificado.
 
-The site is now built with Astro and deployed as static HTML. It keeps the original lightweight approach: vanilla CSS, vanilla browser JavaScript, static assets, and no runtime server.
+## Stack
 
-## Tech Stack
+- `Astro 6` con output estático
+- `TypeScript`
+- `@astrojs/sitemap` para generación de sitemap
+- `Playwright` + `@axe-core/playwright` para testing de accesibilidad
+- `@lhci/cli` para Lighthouse CI
 
-- Astro 6
-- Node.js 24
-- TypeScript for shared site/page data
-- Vanilla CSS in `public/assets/css/style.css`
-- Minified production CSS in `public/assets/css/style.min.css`
-- Vanilla JavaScript in `public/assets/js/main.js` and `public/assets/js/cookie-consent.js`
-- Static deployment output in `dist/`
+## Requisitos
 
-## Project Structure
+- `Node.js` >= 24 < 25
+- `npm`
 
-```text
-src/components/              Shared Astro components
-src/data/pages.ts            Page metadata, SEO tags, and page HTML content
-src/data/site.ts             Site-wide settings, nav, legal links, GA4 id
-src/layouts/BaseLayout.astro Shared document layout
-src/pages/                   Astro routes
-public/assets/               CSS, JS, images, fonts, logos, icons
-public/_headers              Cloudflare Pages cache headers
-public/robots.txt            Robots policy
-public/sitemap.xml           Static sitemap
-dist/                        Generated build output
+## Comandos
+
+| Comando                     | Descripción                                          |
+| --------------------------- | ---------------------------------------------------- |
+| `npm install`               | Instala las dependencias del proyecto.               |
+| `npm run dev`               | Levanta el entorno local de desarrollo.              |
+| `npm run build`             | Genera la versión de producción en `dist/`.          |
+| `npm run preview`           | Sirve localmente la compilación de producción.       |
+| `npm run test:lighthouse`   | Ejecuta Lighthouse CI sobre `dist/`.                 |
+| `npm run capture:local`     | Ejecuta capturas visuales con Playwright.            |
+| `npm run capture:home`      | Ejecuta capturas visuales de la página de inicio.    |
+| `npm run capture:servicios` | Ejecuta capturas visuales de la página de servicios. |
+| `npm run capture:sobre-mi`  | Ejecuta capturas visuales de la página sobre mí.     |
+
+## Estructura del proyecto
+
+```
+src/
+  pages/                    # Rutas del sitio
+    servicios/index.astro   # Página de servicios
+    sobre-mi/index.astro    # Página sobre el entrenador
+    preguntas-frecuentes/index.astro # Página de FAQ
+    politica-de-cookies/index.astro  # Página de política de cookies
+    404.astro               # Página de error 404
+    index.astro             # Página de inicio
+  layouts/                  # Layouts compartidos
+    BaseLayout.astro        # Layout base del sitio
+  components/               # Componentes reutilizables de interfaz
+    CookieBanner.astro
+    Footer.astro
+    Header.astro
+    SeoHead.astro
+    WaSymbol.astro
+  data/                     # Datos compartidos del sitio
+    site.ts                 # Configuración del sitio
+    pages.ts                # Contenido y metadatos de páginas
+public/                     # Archivos estáticos publicados sin procesamiento
+  assets/                   # Imágenes, íconos y otros assets
 ```
 
-Routes are generated as static pages with trailing slashes:
+## Modelo de contenido
 
-```text
-/                         Home
-/servicios/               Services
-/sobre-mi/                About
-/preguntas-frecuentes/    FAQ
-/politica-de-cookies/     Cookie policy
-/404.html                 Not found page
-```
+El contenido de cada página se define en `src/data/pages.ts` como objetos TypeScript con metadatos SEO y contenido HTML. Desde ahí se generan las páginas estáticas con su estructura, schema.org y breadcrumb.
 
-## Local Development
+Campos del esquema:
 
-Use Node 24. The repo includes `.nvmrc` with `24`.
+- `title` — Título de la página
+- `description` — Descripción para meta tags
+- `canonical` — URL canónica
+- `ogTitle`, `ogDescription`, `ogImage`, `ogType` — Open Graph
+- `twitterCard` — Twitter card type
+- `robots` — Directivas de robots (opcional)
+- `structuredData` — Schema.org JSON-LD
+- `breadcrumb` — BreadcrumbList schema
+- `content` — Contenido HTML de la página
+- `isHome` — Indica si es la página de inicio
 
-```bash
-npm install
-npm run dev
-```
+## Testing
 
-Build and preview the static output:
+El proyecto incluye tres capas de testing automatizado:
 
-```bash
-npm run build
-npm run preview
-```
+1. **Accesibilidad** — `tests/visual/a11y.spec.ts` escanea todas las páginas con axe-core buscando violaciones WCAG 2.1 AA.
+2. **Capturas visuales** — `tests/visual/capture.spec.ts` genera screenshots full-page en 4 viewports (1440, 1200, 810, 390) para validación visual.
+3. **Lighthouse CI** — `.lighthouserc.cjs` audita performance, accesibilidad, best practices y SEO contra umbrales definidos.
 
-If Astro tries to write telemetry config outside the project in a restricted environment, disable telemetry for the command:
-
-```bash
-ASTRO_TELEMETRY_DISABLED=1 npm run build
-```
-
-PowerShell:
+### Requisitos para tests
 
 ```powershell
-$env:ASTRO_TELEMETRY_DISABLED='1'; npm run build
+npm install
+npx playwright install chromium
 ```
 
-## Deployment
+### Ejecutar tests
 
-Deploy with Cloudflare Pages.
+```powershell
+# Accesibilidad y capturas visuales (requiere build previo)
+npm run build
+npm run capture:local
 
-Recommended Cloudflare Pages settings:
-
-```text
-Framework preset: Astro
-Build command: npm run build
-Build output directory: dist
-Node version: 24
-Production branch: main
+# Lighthouse CI (requiere build previo)
+npm run build
+npm run test:lighthouse
 ```
 
-Set the Node version in Cloudflare with an environment variable if needed:
+## Flujo de trabajo recomendado
 
-```text
-NODE_VERSION=24
-```
+1. Instala dependencias con `npm install`.
+2. Trabaja localmente con `npm run dev`.
+3. Si cambias rutas, contenido o estilos, valida el resultado en navegador.
+4. Antes de cerrar tu cambio, ejecuta `npm run build`.
+5. Para cambios visibles, considera correr `npm run capture:local` y `npm run test:lighthouse`.
 
-The generated site is fully static. Cloudflare serves files from `dist/`, while `public/_headers` configures long-lived caching for assets and revalidation for HTML routes.
+## Notas
 
-## Content And SEO Notes
-
-- Canonical URLs use `https://trxconcept.cl` with trailing slashes for directory pages.
-- Navigation links also use trailing slashes.
-- Open Graph URLs should match canonical URLs.
-- Google Analytics 4 is consent-gated through `cookie-consent.js`.
-- WhatsApp links are populated by `main.js` from a single source of truth.
-- Header, footer, and shared symbols live in Astro components, so global UI changes should be made once in `src/components/`.
-
-## Common Commands
-
-```bash
-npm run dev      # Start Astro dev server
-npm run build    # Generate static output in dist/
-npm run preview  # Preview the built site locally
-```
+- `dist/`, caches, logs, resultados de pruebas y otros archivos generados no forman parte de la fuente de verdad del proyecto.
+- No subas secretos ni archivos `.env` reales al repositorio.
+- El sitio está configurado en español de Chile (`lang="es-CL"`).

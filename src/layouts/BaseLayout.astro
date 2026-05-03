@@ -1,19 +1,19 @@
 ---
-import CookieBanner from '../components/CookieBanner.astro';
-import Footer from '../components/Footer.astro';
-import Header from '../components/Header.astro';
-import SeoHead from '../components/SeoHead.astro';
-import WaSymbol from '../components/WaSymbol.astro';
-import { site } from '../data/site';
-import type { SitePage } from '../data/pages';
-import { readFileSync } from 'node:fs';
-import { join } from 'node:path';
+import CookieBanner from "../components/CookieBanner.astro";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import SeoHead from "../components/SeoHead.astro";
+import WaSymbol from "../components/WaSymbol.astro";
+import { site } from "../data/site";
+import type { SitePage } from "../data/pages";
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
 
 const { page } = Astro.props as { page: SitePage };
-const siteCss = readFileSync(join(process.cwd(), 'public/assets/css/style.min.css'), 'utf-8');
+const siteCss = readFileSync(join(process.cwd(), "public/assets/css/style.min.css"), "utf-8");
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es" data-ga4-id={site.ga4Id} data-consent-cookie={site.consentCookie}>
   <head>
     <meta charset="UTF-8" />
@@ -23,11 +23,32 @@ const siteCss = readFileSync(join(process.cwd(), 'public/assets/css/style.min.cs
     <link rel="sitemap" href="/sitemap-index.xml" />
     <SeoHead page={page} />
     <link rel="preconnect" href="https://www.googletagmanager.com" />
-    <link rel="preload" href="/assets/fonts/montserrat-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/assets/fonts/montserrat-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin />
-    {page.isHome && (
-      <link rel="preload" as="image" href="/assets/img/hero-768.avif" imagesrcset="/assets/img/hero-768.avif 768w, /assets/img/hero-960.avif 960w, /assets/img/hero-1080.avif 1080w, /assets/img/hero-1280.avif 1280w" imagesizes="100vw" fetchpriority="high" />
-    )}
+    <link
+      rel="preload"
+      href="/assets/fonts/montserrat-latin-400-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/assets/fonts/montserrat-latin-700-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    {
+      page.isHome && (
+        <link
+          rel="preload"
+          as="image"
+          href="/assets/img/hero-768.avif"
+          imagesrcset="/assets/img/hero-768.avif 768w, /assets/img/hero-960.avif 960w, /assets/img/hero-1080.avif 1080w, /assets/img/hero-1280.avif 1280w"
+          imagesizes="100vw"
+          fetchpriority="high"
+        />
+      )
+    }
     <style is:inline set:html={siteCss}></style>
     <link rel="shortcut icon" href="/assets/img/favicon.png" type="image/x-icon" />
     <link rel="apple-touch-icon" href="/assets/logos/trx-concept-logo-big.png" />

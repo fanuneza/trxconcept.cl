@@ -40,3 +40,18 @@
 Thumbs.db
 desktop.ini
 ehthumbs.db
+
+# Additional caches and local artifacts
+.cache/
+.lighthouseci/
+.npm/
+.pnpm-store/
+.eslintcache
+.stylelintcache
+*.tsbuildinfo
+.nyc_output
+*.tgz
+.node_repl_history
+.vite/
+vite.config.js.timestamp-*
+vite.config.ts.timestamp-*
