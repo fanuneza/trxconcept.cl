@@ -493,7 +493,7 @@ main {
 .benefit-icon-svg {
   width: 1.5rem;
   height: 1.5rem;
-  stroke: var(--color-black);
+  object-fit: contain;
 }
 
 .benefit h3 {
@@ -898,6 +898,13 @@ main {
   outline-offset: 2px;
 }
 
+.heart-icon {
+  width: 0.9em;
+  height: 0.9em;
+  display: inline-block;
+  vertical-align: middle;
+}
+
 /* ─── INNER PAGES ─── */
 
 .page-hero {
@@ -1151,8 +1158,8 @@ main {
 /* ─── WA ICON ─── */
 
 .wa-icon {
-  width: 20px;
-  height: 20px;
+  width: 30px;
+  height: 30px;
   display: inline-block;
   vertical-align: middle;
   fill: currentColor;
@@ -1160,8 +1167,8 @@ main {
 }
 
 header .wa-icon {
-  width: 16px;
-  height: 16px;
+  width: 24px;
+  height: 24px;
 }
 
 /* ─── FLOATING WA BUTTON ─── */
@@ -1196,8 +1203,8 @@ header .wa-icon {
 
 .btn-float-wa .wa-icon,
 .btn-float-wa .wa-icon * {
-  width: 1.75rem;
-  height: 1.75rem;
+  width: 2.625rem;
+  height: 2.625rem;
   color: var(--color-white);
   fill: currentColor;
 }
@@ -1330,8 +1337,8 @@ header .wa-icon {
   }
 
   .site-header .btn-whatsapp .wa-icon {
-    width: 16px;
-    height: 16px;
+    width: 24px;
+    height: 24px;
     flex-shrink: 0;
   }
 

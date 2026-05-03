@@ -135,30 +135,21 @@ export const pages = {
         <div class="benefits-grid container">
           <div class="benefit">
             <div class="benefit-icon-wrap">
-              <svg class="benefit-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <circle cx="12" cy="8" r="4"/>
-                <path d="M4 20v-1a8 8 0 0116 0v1"/>
-              </svg>
+              <img class="benefit-icon-svg" src="/assets/img/icon-solo-para-ti.svg" alt="" aria-hidden="true" width="24" height="24" loading="lazy" />
             </div>
             <h3>Solo para ti</h3>
             <p>Tu entrenamiento, a tu ritmo, con atención completa de principio a fin.</p>
           </div>
           <div class="benefit">
             <div class="benefit-icon-wrap">
-              <svg class="benefit-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M12 2C8.686 2 6 4.686 6 8c0 5.25 6 14 6 14s6-8.75 6-14c0-3.314-2.686-6-6-6z"/>
-                <circle cx="12" cy="8" r="2.5"/>
-              </svg>
+              <img class="benefit-icon-svg" src="/assets/img/icon-donde-estes.svg" alt="" aria-hidden="true" width="24" height="24" loading="lazy" />
             </div>
             <h3>Donde estés</h3>
             <p>En casa o al aire libre, sin máquinas, sin traslados.</p>
           </div>
           <div class="benefit">
             <div class="benefit-icon-wrap">
-              <svg class="benefit-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <path d="M12 2L4 6v6c0 5.5 3.5 10.7 8 12 4.5-1.3 8-6.5 8-12V6l-8-4z"/>
-                <path d="M9 12l2 2 4-4"/>
-              </svg>
+              <img class="benefit-icon-svg" src="/assets/img/icon-bajo-riesgo.svg" alt="" aria-hidden="true" width="24" height="24" loading="lazy" />
             </div>
             <h3>Bajo riesgo de lesiones</h3>
             <p>Método de bajo impacto, ideal para volver al ejercicio o empezar desde cero.</p>
