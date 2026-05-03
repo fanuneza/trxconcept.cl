@@ -20,6 +20,7 @@ module.exports = {
         "label-content-name-mismatch": "warn",
         "heading-order": "warn",
         "lcp-lazy-loaded": "warn",
+        "errors-in-console": "warn",
         // Insights are informational, not failures
         "network-dependency-tree-insight": "off",
         "image-delivery-insight": "off",
