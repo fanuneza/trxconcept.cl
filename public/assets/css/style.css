@@ -165,7 +165,7 @@ main {
 .logo {
   font-family: var(--font-logo);
   font-size: 3rem;
-  letter-spacing: 0.1rem;
+  letter-spacing: 0.14rem;
   line-height: 1.1;
   white-space: nowrap;
   font-weight: bold;
