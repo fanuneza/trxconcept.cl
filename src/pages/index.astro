@@ -1,9 +1,20 @@
 ---
+import { getImage } from "astro:assets";
+import heroImage from "../assets/images/hero.webp";
+import HomeContent from "../components/HomeContent.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { pages } from "../data/pages";
+
 const page = pages.home;
+const heroWidths = [768, 960, 1080, 1280, 1600, heroImage.width];
+const heroVariants = await Promise.all(heroWidths.map((width) => getImage({ src: heroImage, width, format: "avif" })));
+const preloadImage = {
+  href: heroVariants[0].src,
+  srcset: heroVariants.map((variant, index) => `${variant.src} ${heroWidths[index]}w`).join(", "),
+  sizes: "100vw",
+};
 ---
 
-<BaseLayout page={page}>
-  <Fragment set:html={page.content} />
+<BaseLayout page={page} preloadImage={preloadImage}>
+  <HomeContent />
 </BaseLayout>

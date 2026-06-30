@@ -1,9 +1,11 @@
 ---
+import AboutContent from "../../components/AboutContent.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { pages } from "../../data/pages";
+
 const page = pages.about;
 ---
 
 <BaseLayout page={page}>
-  <Fragment set:html={page.content} />
+  <AboutContent />
 </BaseLayout>

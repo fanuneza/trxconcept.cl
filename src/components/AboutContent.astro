@@ -1,0 +1,83 @@
+---
+import { Picture } from "astro:assets";
+import nicoImage from "../assets/images/nico.webp";
+---
+
+<div class="page-hero">
+  <div class="container page-hero-inner">
+    <nav class="page-breadcrumb" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="https://trxconcept.cl/">Inicio</a></li>
+        <li><span aria-current="page">Sobre mí</span></li>
+      </ol>
+    </nav>
+    <h1>Conoce a tu entrenador</h1>
+    <p>La persona detrás de cada sesión, cada ajuste y cada logro.</p>
+  </div>
+</div>
+
+<!-- BIO -->
+<section>
+  <div class="container about-section">
+    <div class="trust-inner">
+      <Picture
+        src={nicoImage}
+        alt="Nicolás Echeverría, entrenador personal TRX"
+        formats={["avif", "webp"]}
+        fallbackFormat="webp"
+        widths={[160, 320, 512]}
+        sizes="160px"
+        class="profile-pic"
+        loading="lazy"
+        decoding="async"
+      />
+      <div class="trust-content">
+        <h2>Nicolás Echeverría</h2>
+        <p>
+          Llevo más de 10 años trabajando como entrenador personal en Santiago, especializándome en el
+          <a href="/servicios/">método TRX</a>, un sistema de entrenamiento en suspensión que usa el peso del propio
+          cuerpo para desarrollar fuerza, equilibrio y resistencia de forma segura y progresiva.
+        </p>
+        <p>
+          Mi enfoque es simple: cada persona es diferente, y cada entrenamiento debe serlo también. No hay rutinas
+          genéricas, no hay grupos masivos. Solo tú y yo, trabajando al ritmo que corresponde.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section class="section-alt">
+  <div class="container about-section text-center">
+    <h2>Certificaciones</h2>
+    <p class="section-subtitle">Formación oficial avalada por TRX Training.</p>
+    <ul class="cert-list">
+      <li>TRX Suspension Trainer™: Certificado Oficial</li>
+      <li>TRX Rip Trainer®: Certificado Oficial</li>
+      <li>Entrenamiento grupal e individual certificado</li>
+      <li>Más de 10 años de práctica continua en Santiago</li>
+    </ul>
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section>
+  <div class="container about-section">
+    <h2>Mi filosofía de entrenamiento</h2>
+    <p>
+      Creo que el ejercicio no debería ser una obligación intimidante, sino algo que genuinamente mejore tu vida. Por
+      eso trabajo con personas de todos los niveles, desde quienes nunca han entrenado hasta deportistas que buscan
+      complementar su actividad principal.
+    </p>
+    <p>
+      El TRX es ideal para esto porque es infinitamente ajustable: el mismo ejercicio puede ser suave o extremadamente
+      desafiante dependiendo del ángulo del cuerpo. Sin impacto en articulaciones, sin riesgo de lesiones por máquinas
+      mal calibradas, sin filas de espera.
+    </p>
+    <p>
+      Entreno a domicilio o al aire libre en parques de Santiago porque el ambiente importa. El estrés del gimnasio no
+      ayuda a nadie a rendir mejor.
+    </p>
+  </div>
+</section>
