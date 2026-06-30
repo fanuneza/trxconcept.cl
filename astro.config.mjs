@@ -8,11 +8,6 @@ export default defineConfig({
   output: "static",
   trailingSlash: "always",
 
-  prefetch: {
-    prefetchAll: true,
-    defaultStrategy: "hover",
-  },
-
   build: {
     inlineStylesheets: "always",
   },

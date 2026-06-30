@@ -12,8 +12,21 @@ function setCookie(name, value) {
   document.cookie = `${name}=${value}; max-age=31536000; path=/; SameSite=Lax; Secure`;
 }
 
+function ensureGA4Preconnect() {
+  if (!GA4_ID) return;
+  if (document.querySelector('link[data-ga4-preconnect="true"]')) return;
+
+  const link = document.createElement("link");
+  link.rel = "preconnect";
+  link.href = "https://www.googletagmanager.com";
+  link.crossOrigin = "";
+  link.dataset.ga4Preconnect = "true";
+  document.head.appendChild(link);
+}
+
 function loadGA4() {
   if (!GA4_ID) return;
+  ensureGA4Preconnect();
   const s = document.createElement("script");
   s.async = true;
   s.src = `https://www.googletagmanager.com/gtag/js?id=${GA4_ID}`;

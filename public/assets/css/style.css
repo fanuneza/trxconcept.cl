@@ -1284,7 +1284,7 @@ header .wa-icon {
 
 .btn-float-wa {
   position: fixed;
-  bottom: 1rem;
+  bottom: calc(5rem + env(safe-area-inset-bottom));
   right: 1rem;
   width: 3.5rem;
   height: 3.5rem;
@@ -1302,10 +1302,6 @@ header .wa-icon {
   transition:
     transform 0.18s ease,
     box-shadow 0.18s ease;
-}
-
-body[data-cookie-banner-visible] .btn-float-wa {
-  bottom: calc(5rem + env(safe-area-inset-bottom));
 }
 
 .btn-float-wa:hover,

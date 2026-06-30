@@ -6,8 +6,11 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import { pages } from "../data/pages";
 
 const page = pages.home;
-const heroWidths = [768, 960, 1080, 1280, 1600, heroImage.width];
-const heroVariants = await Promise.all(heroWidths.map((width) => getImage({ src: heroImage, width, format: "avif" })));
+const heroWidths = [480, 640, 768, 960, 1200, 1440];
+const heroQuality = 25;
+const heroVariants = await Promise.all(
+  heroWidths.map((width) => getImage({ src: heroImage, width, format: "avif", quality: heroQuality }))
+);
 const preloadImage = {
   href: heroVariants[0].src,
   srcset: heroVariants.map((variant, index) => `${variant.src} ${heroWidths[index]}w`).join(", "),
