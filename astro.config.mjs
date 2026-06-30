@@ -21,9 +21,7 @@ export default defineConfig({
     sitemap({
       filter: (page) => !page.endsWith("/404.html") && !page.endsWith("/politica-de-cookies/"),
     }),
-    robotsTxt({
-      transform: (content) => content + "\nSchemamap: https://trxconcept.cl/schemamap.xml\n",
-    }),
+    robotsTxt(),
     seoGraph({
       validateH1: true,
       validateUniqueMetadata: true,

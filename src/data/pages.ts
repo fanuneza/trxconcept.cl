@@ -121,7 +121,6 @@ export const pages = {
             target="_blank"
             rel="noopener noreferrer"
             class="btn btn-trx"
-            aria-label="Escríbeme por WhatsApp"
             >Escríbeme para tu clase gratis
             <svg class="wa-icon" aria-hidden="true" focusable="false"><use href="#wa-symbol"/></svg></a>
           <p class="hero-note"><span class="hero-badge">⚡ Respondo en 4 horas o menos</span></p>
@@ -200,7 +199,6 @@ export const pages = {
             target="_blank"
             rel="noopener noreferrer"
             class="btn btn-trx"
-            aria-label="Escríbeme por WhatsApp"
             >Escríbeme para tu clase gratis
             <svg class="wa-icon" aria-hidden="true" focusable="false"><use href="#wa-symbol"/></svg></a>
         </div>
@@ -348,7 +346,6 @@ export const pages = {
               target="_blank"
               rel="noopener noreferrer"
               class="btn btn-whatsapp"
-              aria-label="Escríbeme por WhatsApp"
               >Probar gratis por WhatsApp
               <svg class="wa-icon" aria-hidden="true" focusable="false"><use href="#wa-symbol"/></svg></a>
           </div>
@@ -369,7 +366,6 @@ export const pages = {
               target="_blank"
               rel="noopener noreferrer"
               class="btn btn-trx"
-              aria-label="Escríbeme por WhatsApp"
               >Consultar por WhatsApp
               <svg class="wa-icon" aria-hidden="true" focusable="false"><use href="#wa-symbol"/></svg></a>
           </div>

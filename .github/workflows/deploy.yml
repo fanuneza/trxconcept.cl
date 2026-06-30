@@ -23,6 +23,6 @@ jobs:
         run: npx playwright install --with-deps chromium
 
       - name: Run Playwright tests against deployed URL
-        run: npx playwright test
+        run: npm run test:playwright:smoke
         env:
           PLAYWRIGHT_BASE_URL: ${{ github.event.deployment_status.environment_url }}

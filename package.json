@@ -14,10 +14,12 @@
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "test:lighthouse": "lhci autorun",
-    "capture:local": "playwright test --config playwright.config.ts",
-    "capture:home": "playwright test --config playwright.config.ts --grep @home",
-    "capture:servicios": "playwright test --config playwright.config.ts --grep @servicios",
-    "capture:sobre-mi": "playwright test --config playwright.config.ts --grep @sobre-mi"
+    "test:playwright:a11y": "playwright test --config playwright.config.ts tests/visual/a11y.spec.ts",
+    "test:playwright:smoke": "playwright test --config playwright.config.ts tests/visual/smoke.spec.ts",
+    "capture:local": "playwright test --config playwright.config.ts tests/visual/capture.spec.ts",
+    "capture:home": "playwright test --config playwright.config.ts tests/visual/capture.spec.ts --grep @home",
+    "capture:servicios": "playwright test --config playwright.config.ts tests/visual/capture.spec.ts --grep @servicios",
+    "capture:sobre-mi": "playwright test --config playwright.config.ts tests/visual/capture.spec.ts --grep @sobre-mi"
   },
   "engines": {
     "node": ">=24 <25"
