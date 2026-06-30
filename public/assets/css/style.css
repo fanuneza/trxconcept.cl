@@ -935,11 +935,15 @@ main {
 }
 
 .site-credit-line {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  flex-wrap: wrap;
 }
 
 .site-credit-line + .site-credit-line {
-  margin-top: 0.15rem;
+  margin-top: 0.2rem;
 }
 
 .footer .site-credit a {
