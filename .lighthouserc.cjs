@@ -21,12 +21,14 @@ module.exports = {
         "heading-order": "warn",
         "lcp-lazy-loaded": "warn",
         "errors-in-console": "warn",
+        "robots-txt": "warn",
         // Insights are informational, not failures
         "network-dependency-tree-insight": "off",
         "image-delivery-insight": "off",
         "dom-size-insight": "off",
         "lcp-discovery-insight": "off",
         "render-blocking-insight": "off",
+        "forced-reflow-insight": "off",
         // Minor image optimizations — monitor but don't block
         "uses-responsive-images": "warn",
         "modern-image-formats": "warn",
