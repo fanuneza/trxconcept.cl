@@ -14,6 +14,36 @@ export type SitePage = {
   isHome?: boolean;
 };
 
+const renderBreadcrumb = (breadcrumb?: { name: string; item: string }[]) => {
+  if (!breadcrumb?.length) return "";
+
+  const items = breadcrumb
+    .map((item, index) => {
+      const isLast = index === breadcrumb.length - 1;
+
+      return `<li>${isLast ? `<span aria-current="page">${item.name}</span>` : `<a href="${item.item}">${item.name}</a>`}</li>`;
+    })
+    .join("");
+
+  return `<nav class="page-breadcrumb" aria-label="Breadcrumb"><ol>${items}</ol></nav>`;
+};
+
+const renderPageHero = ({
+  title,
+  description,
+  breadcrumb,
+}: {
+  title: string;
+  description: string;
+  breadcrumb?: { name: string; item: string }[];
+}) => `<div class="page-hero">
+    <div class="container page-hero-inner">
+      ${renderBreadcrumb(breadcrumb)}
+      <h1>${title}</h1>
+      <p>${description}</p>
+    </div>
+  </div>`;
+
 export const pages = {
   home: {
     title: `Entrenador Personal TRX en Santiago, Chile`,
@@ -92,7 +122,7 @@ export const pages = {
             rel="noopener noreferrer"
             class="btn btn-trx"
             aria-label="Escríbeme por WhatsApp"
-            >¡Reserva tu clase gratis!
+            >Escríbeme para tu clase gratis
             <svg class="wa-icon" aria-hidden="true" focusable="false"><use href="#wa-symbol"/></svg></a>
           <p class="hero-note"><span class="hero-badge">⚡ Respondo en 4 horas o menos</span></p>
         </div>
@@ -101,16 +131,18 @@ export const pages = {
       <!-- TRUST ANCHOR -->
       <section id="trust" class="trust">
         <div class="container trust-inner">
-          <img
-            src="/assets/img/nico-140.webp"
-            srcset="/assets/img/nico-140.webp 140w, /assets/img/nico-384.webp 384w"
-            sizes="(max-width: 767px) 140px, 140px"
-            alt="Nicolás Echeverría, entrenador personal TRX"
-            class="profile-pic"
-            width="140"
-            height="140"
-            decoding="async"
-          />
+          <picture>
+            <source type="image/avif" srcset="/assets/img/nico-140.avif 140w, /assets/img/nico-320.avif 320w" sizes="(max-width: 767px) 140px, 140px" />
+            <source type="image/webp" srcset="/assets/img/nico-140.webp 140w, /assets/img/nico-384.webp 384w" sizes="(max-width: 767px) 140px, 140px" />
+            <img
+              src="/assets/img/nico-140.webp"
+              alt="Nicolás Echeverría, entrenador personal TRX"
+              class="profile-pic"
+              width="140"
+              height="140"
+              decoding="async"
+            />
+          </picture>
           <div class="trust-content">
             <h2 class="trust-name"><a href="/sobre-mi/">Nicolás Echeverría</a></h2>
             <p>TRX Suspension Trainer™ y Rip Trainer® certificado para clases individuales y grupales.</p>
@@ -169,7 +201,7 @@ export const pages = {
             rel="noopener noreferrer"
             class="btn btn-trx"
             aria-label="Escríbeme por WhatsApp"
-            >¡Reserva tu clase gratis!
+            >Escríbeme para tu clase gratis
             <svg class="wa-icon" aria-hidden="true" focusable="false"><use href="#wa-symbol"/></svg></a>
         </div>
       </section>
@@ -183,17 +215,19 @@ export const pages = {
         <div class="testimonial-grid">
           <div class="testimonial-col">
             <div class="testimonial-card">
-              <img
-                src="/assets/img/testimonio-valentinarosenthal-320.webp"
-                srcset="/assets/img/testimonio-valentinarosenthal-320.webp 320w, /assets/img/testimonio-valentinarosenthal.webp 512w"
-                sizes="100px"
-                alt="Valentina Rosenthal"
-                class="testimonial-img"
-                loading="lazy"
-                decoding="async"
-                width="512"
-                height="512"
-              />
+              <picture>
+                <source type="image/avif" srcset="/assets/img/testimonio-valentinarosenthal-320.avif 320w" sizes="100px" />
+                <source type="image/webp" srcset="/assets/img/testimonio-valentinarosenthal-320.webp 320w, /assets/img/testimonio-valentinarosenthal.webp 512w" sizes="100px" />
+                <img
+                  src="/assets/img/testimonio-valentinarosenthal-320.webp"
+                  alt="Valentina Rosenthal"
+                  class="testimonial-img"
+                  loading="lazy"
+                  decoding="async"
+                  width="512"
+                  height="512"
+                />
+              </picture>
               <div class="testimonial-stars" aria-label="5 estrellas">★★★★★</div>
               <blockquote class="testimonial-quote">
                 <p>
@@ -209,17 +243,19 @@ export const pages = {
 
           <div class="testimonial-col">
             <div class="testimonial-card">
-              <img
-                src="/assets/img/testimonio-marisagracia-320.webp"
-                srcset="/assets/img/testimonio-marisagracia-320.webp 320w, /assets/img/testimonio-marisagracia.webp 512w"
-                sizes="100px"
-                alt="Marisa Gracia"
-                class="testimonial-img"
-                loading="lazy"
-                decoding="async"
-                width="512"
-                height="512"
-              />
+              <picture>
+                <source type="image/avif" srcset="/assets/img/testimonio-marisagracia-320.avif 320w" sizes="100px" />
+                <source type="image/webp" srcset="/assets/img/testimonio-marisagracia-320.webp 320w, /assets/img/testimonio-marisagracia.webp 512w" sizes="100px" />
+                <img
+                  src="/assets/img/testimonio-marisagracia-320.webp"
+                  alt="Marisa Gracia"
+                  class="testimonial-img"
+                  loading="lazy"
+                  decoding="async"
+                  width="512"
+                  height="512"
+                />
+              </picture>
               <div class="testimonial-stars" aria-label="5 estrellas">★★★★★</div>
               <blockquote class="testimonial-quote">
                 <p>
@@ -235,17 +271,19 @@ export const pages = {
 
           <div class="testimonial-col">
             <div class="testimonial-card">
-              <img
-                src="/assets/img/testimonio-mariaignacia-320.webp"
-                srcset="/assets/img/testimonio-mariaignacia-320.webp 320w, /assets/img/testimonio-mariaignacia.webp 792w"
-                sizes="100px"
-                alt="María Ignacia Williamson"
-                class="testimonial-img"
-                loading="lazy"
-                decoding="async"
-                width="792"
-                height="792"
-              />
+              <picture>
+                <source type="image/avif" srcset="/assets/img/testimonio-mariaignacia-320.avif 320w" sizes="100px" />
+                <source type="image/webp" srcset="/assets/img/testimonio-mariaignacia-320.webp 320w, /assets/img/testimonio-mariaignacia.webp 792w" sizes="100px" />
+                <img
+                  src="/assets/img/testimonio-mariaignacia-320.webp"
+                  alt="María Ignacia Williamson"
+                  class="testimonial-img"
+                  loading="lazy"
+                  decoding="async"
+                  width="792"
+                  height="792"
+                />
+              </picture>
               <div class="testimonial-stars" aria-label="5 estrellas">★★★★★</div>
               <blockquote class="testimonial-quote">
                 <p>
@@ -262,7 +300,7 @@ export const pages = {
 
       <!-- COMPARISON -->
       <section id="comparison" class="comparison">
-        <h2>¿Qué ofrece TRX Concept que los otros no?</h2>
+        <h2>TRX Concept vs. el gimnasio tradicional</h2>
         <div class="comparison-cards">
           <div class="comp-card comp-card-others">
             <h3>Gimnasio / CrossFit</h3>
@@ -311,7 +349,7 @@ export const pages = {
               rel="noopener noreferrer"
               class="btn btn-whatsapp"
               aria-label="Escríbeme por WhatsApp"
-              >Reservar
+              >Probar gratis por WhatsApp
               <svg class="wa-icon" aria-hidden="true" focusable="false"><use href="#wa-symbol"/></svg></a>
           </div>
           <div class="pricing-card pricing-card-featured">
@@ -332,7 +370,7 @@ export const pages = {
               rel="noopener noreferrer"
               class="btn btn-trx"
               aria-label="Escríbeme por WhatsApp"
-              >¡Reserva tu clase gratis!
+              >Consultar por WhatsApp
               <svg class="wa-icon" aria-hidden="true" focusable="false"><use href="#wa-symbol"/></svg></a>
           </div>
         </div>
@@ -385,10 +423,14 @@ export const pages = {
         ],
       },
     },
-    content: `<div class="page-hero">
-        <h1>Entrenamientos diseñados para ti</h1>
-        <p>Sin máquinas, sin gimnasio, sin excusas. Solo TRX y trabajo real.</p>
-      </div>
+    content: `${renderPageHero({
+      title: "Entrenamientos diseñados para ti",
+      description: "Sin máquinas, sin gimnasio, sin excusas. Solo TRX y trabajo real.",
+      breadcrumb: [
+        { name: "Inicio", item: "https://trxconcept.cl/" },
+        { name: "Servicios", item: "https://trxconcept.cl/servicios/" },
+      ],
+    })}
 
       <!-- WHAT IS TRX -->
       <section>
@@ -489,25 +531,31 @@ export const pages = {
       { name: "Inicio", item: "https://trxconcept.cl/" },
       { name: "Sobre mí", item: "https://trxconcept.cl/sobre-mi/" },
     ],
-    content: `<div class="page-hero">
-        <h1>Conoce a tu entrenador</h1>
-        <p>La persona detrás de cada sesión, cada ajuste y cada logro.</p>
-      </div>
+    content: `${renderPageHero({
+      title: "Conoce a tu entrenador",
+      description: "La persona detrás de cada sesión, cada ajuste y cada logro.",
+      breadcrumb: [
+        { name: "Inicio", item: "https://trxconcept.cl/" },
+        { name: "Sobre mí", item: "https://trxconcept.cl/sobre-mi/" },
+      ],
+    })}
 
       <!-- BIO -->
       <section>
         <div class="container about-section">
           <div class="trust-inner">
-            <img
-              src="/assets/img/nico-384.webp"
-              srcset="/assets/img/nico-384.webp 384w, /assets/img/nico.webp 512w"
-              sizes="160px"
-              alt="Nicolás Echeverría, entrenador personal TRX"
-              class="profile-pic"
-              width="512"
-              height="512"
-              decoding="async"
-            />
+            <picture>
+              <source type="image/avif" srcset="/assets/img/nico-320.avif 320w" sizes="160px" />
+              <source type="image/webp" srcset="/assets/img/nico-384.webp 384w, /assets/img/nico.webp 512w" sizes="160px" />
+              <img
+                src="/assets/img/nico-384.webp"
+                alt="Nicolás Echeverría, entrenador personal TRX"
+                class="profile-pic"
+                width="512"
+                height="512"
+                decoding="async"
+              />
+            </picture>
             <div class="trust-content">
               <h2>Nicolás Echeverría</h2>
               <p>
@@ -656,78 +704,83 @@ export const pages = {
         },
       ],
     },
-    content: `<div class="page-hero">
-        <h1>Preguntas frecuentes</h1>
-        <p>Si tienes una duda, es probable que alguien más también la haya tenido. También puedes revisar nuestros <a href="/servicios/">servicios</a> o <a href="/sobre-mi/">conocer a tu entrenador</a>.</p>
-      </div>
+    content: `${renderPageHero({
+      title: "Preguntas frecuentes",
+      description:
+        'Si tienes una duda, es probable que alguien más también la haya tenido. También puedes revisar nuestros <a href="/servicios/">servicios</a> o <a href="/sobre-mi/">conocer a tu entrenador</a>.',
+      breadcrumb: [
+        { name: "Inicio", item: "https://trxconcept.cl/" },
+        { name: "Preguntas frecuentes", item: "https://trxconcept.cl/preguntas-frecuentes/" },
+      ],
+    })}
 
       <section>
         <div class="container faq-list">
 
-          <details class="faq-item">
+          <details class="faq-item" id="experiencia-previa">
             <summary>¿Necesito experiencia previa para entrenar TRX?</summary>
             <p class="faq-answer">
               No. El TRX es completamente adaptable a tu nivel, sea cual sea. Si nunca has hecho ejercicio, empezamos desde lo más básico y avanzamos a tu propio ritmo. Si ya tienes experiencia, podemos llevar la intensidad mucho más lejos. La primera sesión siempre empieza con una evaluación para conocer tu punto de partida.
             </p>
           </details>
 
-          <details class="faq-item">
+          <details class="faq-item" id="que-necesito-en-casa">
             <summary>¿Qué necesito tener en casa para entrenar?</summary>
             <p class="faq-answer">
               Solo necesitas espacio para moverte y una puerta estándar o barra donde fijar el equipo. El TRX y todos los implementos los llevo yo. Tú solo necesitas ropa cómoda y zapatillas.
             </p>
           </details>
 
-          <details class="faq-item">
+          <details class="faq-item" id="lesion-o-dolor-cronico">
             <summary>¿Es seguro si tengo una lesión o dolor crónico?</summary>
             <p class="faq-answer">
               El TRX es uno de los métodos más seguros que existen, precisamente porque es de bajo impacto y sin cargas externas. He trabajado con personas en recuperación de lesiones de rodilla, hombro y espalda. Eso sí, antes de empezar siempre conversamos sobre tu situación médica y, si es necesario, coordino con tu médico o kinesiólogo.
             </p>
           </details>
 
-          <details class="faq-item">
+          <details class="faq-item" id="sectores-de-santiago">
             <summary>¿En qué sectores de Santiago entrenas?</summary>
             <p class="faq-answer">
               Trabajo principalmente en sectores de Santiago oriente y centro. Escríbeme por WhatsApp con tu comuna y lo coordinamos; en la mayoría de los casos puedo llegar a ti.
             </p>
           </details>
 
-          <details class="faq-item">
+          <details class="faq-item" id="horarios-disponibles">
             <summary>¿Cuáles son los horarios disponibles?</summary>
             <p class="faq-answer">
               Tengo disponibilidad principalmente en las mañanas, desde las 6:00 AM. Los horarios exactos los coordinamos directamente según tu disponibilidad semanal. La flexibilidad es parte del servicio.
             </p>
           </details>
 
-          <details class="faq-item">
+          <details class="faq-item" id="frecuencia-semanal">
             <summary>¿Cuántas veces a la semana debería entrenar?</summary>
             <p class="faq-answer">
               Depende de tu objetivo y tu agenda. El mínimo recomendable para ver resultados es 2 veces por semana. El paquete mensual incluye 3 sesiones semanales, que es la frecuencia ideal para progreso constante sin sobrecargar el cuerpo.
             </p>
           </details>
 
-          <details class="faq-item">
+          <details class="faq-item" id="cancelacion-de-sesion">
             <summary>¿Qué pasa si tengo que cancelar una sesión?</summary>
             <p class="faq-answer">
               Las cancelaciones con más de 24 horas de anticipación no tienen costo. Lo coordinamos directamente por WhatsApp y buscamos una alternativa en la misma semana cuando sea posible.
             </p>
           </details>
 
-          <details class="faq-item">
+          <details class="faq-item" id="primera-clase">
             <summary>¿Cómo es la primera clase?</summary>
             <p class="faq-answer">
               La primera sesión es siempre gratuita y sirve para conocernos. Conversamos sobre tus objetivos, hago una evaluación básica de tu nivel y coordinamos cómo seguir. Sin presión ni compromiso. Si después de la sesión sientes que encajamos, coordinamos el plan; si no, ningún problema.
             </p>
           </details>
 
-          <details class="faq-item">
+          <details class="faq-item" id="precios">
             <summary>¿Cuánto cuesta?</summary>
             <p class="faq-answer">
               La sesión individual tiene un valor de $15.000. El paquete mensual de 3 veces por semana (~12 sesiones) tiene un valor de $160.000, lo que equivale a aproximadamente $13.300 por sesión. La primera clase es siempre gratis.
             </p>
           </details>
 
-          <details class="faq-item">
+          <details class="faq-item" id="bajar-de-peso">
             <summary>¿El TRX sirve para bajar de peso?</summary>
             <p class="faq-answer">
               El entrenamiento con TRX ayuda a desarrollar masa muscular y mejorar el metabolismo, lo que contribuye a la pérdida de grasa. Para resultados de composición corporal, lo ideal es combinar el entrenamiento con buenos hábitos de alimentación, algo sobre lo que también podemos conversar.
@@ -747,10 +800,14 @@ export const pages = {
       { name: "Inicio", item: "https://trxconcept.cl/" },
       { name: "Política de cookies", item: "https://trxconcept.cl/politica-de-cookies/" },
     ],
-    content: `<div class="page-hero">
-        <h1>Política de cookies</h1>
-        <p>Información sobre las cookies que usamos y cómo gestionarlas.</p>
-      </div>
+    content: `${renderPageHero({
+      title: "Política de cookies",
+      description: "Información sobre las cookies que usamos y cómo gestionarlas.",
+      breadcrumb: [
+        { name: "Inicio", item: "https://trxconcept.cl/" },
+        { name: "Política de cookies", item: "https://trxconcept.cl/politica-de-cookies/" },
+      ],
+    })}
 
       <section>
         <div class="container about-section">

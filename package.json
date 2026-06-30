@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro check && astro build",
+    "sync:css": "node scripts/sync-css.mjs",
+    "check": "npm run sync:css && astro check",
+    "build": "npm run sync:css && astro build",
     "preview": "astro preview",
     "lint": "eslint . && stylelint \"src/**/*.css\" --allow-empty-input",
     "lint:fix": "eslint . --fix && stylelint \"src/**/*.css\" --fix --allow-empty-input",
