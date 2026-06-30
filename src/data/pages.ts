@@ -16,7 +16,7 @@ export type SitePage = {
 
 export const pages = {
   home: {
-    title: `Entrenador Personal TRX en Santiago, Chile | TRX Concept`,
+    title: `Entrenador Personal TRX en Santiago, Chile`,
     description: `Entrena con un entrenador certificado en TRX, en casa o al aire libre en Santiago. Clases 1 a 1, seguras y personalizadas.`,
     canonical: `https://trxconcept.cl/`,
     ogTitle: `Entrenador Personal TRX en Santiago | TRX Concept`,
@@ -341,7 +341,7 @@ export const pages = {
     isHome: true,
   },
   services: {
-    title: `Servicios de Entrenamiento TRX en Santiago | TRX Concept`,
+    title: `Servicios de Entrenamiento TRX en Santiago`,
     description: `Clases individuales y paquetes mensuales de TRX en casa o al aire libre en Santiago. Entrenamiento personalizado con Nicolás Echeverría.`,
     canonical: `https://trxconcept.cl/servicios/`,
     breadcrumb: [
@@ -482,7 +482,7 @@ export const pages = {
     isHome: false,
   },
   about: {
-    title: `Sobre Nicolás Echeverría, Entrenador TRX | TRX Concept`,
+    title: `Sobre Nicolás Echeverría, Entrenador TRX`,
     description: `Conoce al entrenador certificado detrás de TRX Concept. Más de 10 años formando personas en Santiago con método TRX.`,
     canonical: `https://trxconcept.cl/sobre-mi/`,
     breadcrumb: [
@@ -563,7 +563,7 @@ export const pages = {
     isHome: false,
   },
   faq: {
-    title: `Preguntas Frecuentes sobre TRX en Santiago | TRX Concept`,
+    title: `Preguntas Frecuentes sobre TRX en Santiago`,
     description: `Resolvemos tus dudas sobre el entrenamiento TRX en Santiago. ¿Necesito experiencia? ¿Qué necesito en casa? ¿Cómo son los horarios?`,
     canonical: `https://trxconcept.cl/preguntas-frecuentes/`,
     breadcrumb: [
@@ -739,7 +739,7 @@ export const pages = {
     isHome: false,
   },
   cookies: {
-    title: `Política de Cookies y Consentimiento | TRX Concept`,
+    title: `Política de Cookies y Consentimiento`,
     description: `Información sobre las cookies que usa TRX Concept y cómo puedes gestionar tus preferencias.`,
     canonical: `https://trxconcept.cl/politica-de-cookies/`,
     robots: `noindex`,

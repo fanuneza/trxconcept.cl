@@ -2,15 +2,37 @@
 import CookieBanner from "../components/CookieBanner.astro";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
-import SeoHead from "../components/SeoHead.astro";
+import Seo from "@jdevalk/astro-seo-graph/Seo.astro";
 import WaSymbol from "../components/WaSymbol.astro";
 import { site } from "../data/site";
 import type { SitePage } from "../data/pages";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
+import { buildSchemaGraph } from "../utils/schema";
 
 const { page } = Astro.props as { page: SitePage };
 const siteCss = readFileSync(join(process.cwd(), "public/assets/css/style.min.css"), "utf-8");
+
+const canonicalUrl = page.canonical || new URL(Astro.url.pathname, site.url).toString();
+const noindex = page.robots === "noindex";
+
+const baseGraph = buildSchemaGraph({
+  pageType: page.isHome ? "website" : "webpage",
+  url: canonicalUrl,
+  title: page.title,
+  description: page.description,
+  breadcrumb: page.breadcrumb,
+});
+
+if (page.structuredData) {
+  const schema = page.structuredData as Record<string, unknown>;
+  if ("@graph" in schema && Array.isArray(schema["@graph"])) {
+    (baseGraph["@graph"] as Record<string, unknown>[]).push(...(schema["@graph"] as Record<string, unknown>[]));
+  } else {
+    const { "@context": _ctx, ...node } = schema;
+    (baseGraph["@graph"] as Record<string, unknown>[]).push(node);
+  }
+}
 ---
 
 <!doctype html>
@@ -19,9 +41,26 @@ const siteCss = readFileSync(join(process.cwd(), "public/assets/css/style.min.cs
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#ffd700" />
-    <link rel="me" href={site.instagram} />
-    <link rel="sitemap" href="/sitemap-index.xml" />
-    <SeoHead page={page} />
+    <Seo
+      title={page.title}
+      titleTemplate="%s | TRX Concept"
+      description={page.description}
+      canonical={canonicalUrl}
+      noindex={noindex}
+      ogType={page.ogType ?? "website"}
+      ogImage={page.ogImage ?? "https://trxconcept.cl/assets/img/og-image.webp"}
+      ogImageAlt={page.title}
+      ogImageWidth={1200}
+      ogImageHeight={630}
+      siteName="TRX Concept"
+      locale="es_CL"
+      graph={baseGraph}
+      twitter={{ card: page.twitterCard ?? "summary_large_image" }}
+      extraLinks={[
+        { rel: "me", href: site.instagram },
+        { rel: "sitemap", type: "application/xml", href: "/sitemap-index.xml" },
+      ]}
+    />
     <link rel="preconnect" href="https://www.googletagmanager.com" />
     <link
       rel="preload"
@@ -52,7 +91,6 @@ const siteCss = readFileSync(join(process.cwd(), "public/assets/css/style.min.cs
     <style is:inline set:html={siteCss}></style>
     <link rel="shortcut icon" href="/assets/img/favicon.png" type="image/x-icon" />
     <link rel="apple-touch-icon" href="/assets/logos/trx-concept-logo-big.png" />
-    <title>{page.title}</title>
     <script is:inline defer src="/assets/js/main.js"></script>
   </head>
   <body>

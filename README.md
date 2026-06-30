@@ -4,9 +4,10 @@ Sitio estático desarrollado con Astro para TRX Concept, entrenamiento personal 
 
 ## Stack
 
-- `Astro 6` con output estático
+- `Astro 7` con output estático
 - `TypeScript`
 - `@astrojs/sitemap` para generación de sitemap
+- `@jdevalk/astro-seo-graph` + `@jdevalk/seo-graph-core` para optimización SEO técnica y preparación para IA (AI-ready)
 - `Playwright` + `@axe-core/playwright` para testing de accesibilidad
 - `@lhci/cli` para Lighthouse CI
 

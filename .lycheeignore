@@ -1,0 +1,17 @@
+# Excluir URL del servidor de desarrollo local
+http://localhost:4321/.*
+
+# Excluir Instagram (arroja error 429 Too Many Requests en entornos de CI)
+https://(www\.)?instagram\.(com|cl)/.*
+
+# Excluir URLs con variables de plantilla de JS sin evaluar en bloques de código
+https://www\.googletagmanager\.com/ns\.html\?id=\$\{gtmContainerId\}
+
+# Excluir hosts usados sólo como preconnect/dns-prefetch, que suelen responder
+# con 404/52x al ser validados como si fueran páginas navegables.
+https://www\.googletagmanager\.com/
+https://static\.cloudflareinsights\.com/
+
+# Excluir enlaces problemáticos de documentación vendoreada o README de terceros.
+https://www\.npmjs\.com/package/@fortawesome/fontawesome-free
+https://docs\.fontawesome\.com/apis/javascript/get-started

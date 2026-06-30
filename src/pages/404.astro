@@ -1,8 +1,9 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import FuzzyRedirect from "@jdevalk/astro-seo-graph/FuzzyRedirect.astro";
 
 const page = {
-  title: "Página no encontrada | TRX Concept",
+  title: "Página no encontrada",
   description:
     "La página que buscas no existe o fue movida. Vuelve al inicio de TRX Concept o revisa los servicios disponibles.",
   canonical: "https://trxconcept.cl/404.html",
@@ -18,6 +19,9 @@ const page = {
       <p class="eyebrow">404</p>
       <h1>Página no encontrada</h1>
       <p>La página que buscas no existe o fue movida. Puedes volver al inicio o revisar los servicios disponibles.</p>
+      <div style="font-weight: bold; margin: 1.5rem 0;">
+        <FuzzyRedirect />
+      </div>
       <div class="hero-actions">
         <a class="btn btn-primary" href="/">Volver al inicio</a>
         <a class="btn btn-outline" href="/servicios/">Ver servicios</a>
