@@ -29,7 +29,8 @@ if (page.structuredData) {
   if ("@graph" in schema && Array.isArray(schema["@graph"])) {
     (baseGraph["@graph"] as Record<string, unknown>[]).push(...(schema["@graph"] as Record<string, unknown>[]));
   } else {
-    const { "@context": _ctx, ...node } = schema;
+    const { "@context": _unusedCtx, ...node } = schema;
+    void _unusedCtx;
     (baseGraph["@graph"] as Record<string, unknown>[]).push(node);
   }
 }

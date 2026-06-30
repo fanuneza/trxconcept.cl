@@ -18,6 +18,7 @@ export const GET = createSchemaEndpoint({
       if ("@graph" in schema && Array.isArray(schema["@graph"])) {
         (graph["@graph"] as Record<string, unknown>[]).push(...(schema["@graph"] as Record<string, unknown>[]));
       } else {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const { "@context": _ctx, ...node } = schema;
         (graph["@graph"] as Record<string, unknown>[]).push(node);
       }
