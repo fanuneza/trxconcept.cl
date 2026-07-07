@@ -46,17 +46,17 @@ const renderPageHero = ({
 
 export const pages = {
   home: {
-    title: `Entrenador Personal TRX en Santiago, Chile`,
-    description: `Entrena con un entrenador certificado en TRX, en casa o al aire libre en Santiago. Clases 1 a 1, seguras y personalizadas.`,
+    title: `Clases de TRX en Santiago | Entrenador | TRX Concept`,
+    description: `Clases de TRX personalizadas en Santiago, a domicilio o al aire libre. Sin gimnasio, sin máquinas. Primera clase gratis. Reserva por WhatsApp.`,
     canonical: `https://trxconcept.cl/`,
-    ogTitle: `Entrenador Personal TRX en Santiago | TRX Concept`,
+    ogTitle: `Clases de TRX en Santiago | TRX Concept`,
     structuredData: {
       "@context": "https://schema.org",
       "@type": ["LocalBusiness", "HealthAndBeautyBusiness"],
       "@id": "https://trxconcept.cl/#business",
       name: "TRX Concept",
       description:
-        "Entrenamiento personal con TRX en Santiago, Chile. Clases individuales y grupales en casa o al aire libre.",
+        "Clases de TRX personalizadas en Santiago, Chile. Entrenador a domicilio o al aire libre. Primera clase gratis.",
       url: "https://trxconcept.cl/",
       telephone: "+56984402664",
       image: "https://trxconcept.cl/assets/img/og-image.webp",
