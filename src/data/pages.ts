@@ -537,8 +537,8 @@ export const pages = {
     isHome: false,
   },
   about: {
-    title: `Sobre Nicolás Echeverría, Entrenador TRX`,
-    description: `Conoce al entrenador certificado detrás de TRX Concept. Más de 10 años formando personas en Santiago con método TRX.`,
+    title: `Nicolás Echeverría | Entrenador TRX | Santiago`,
+    description: `Entrenador TRX certificado en Santiago. Más de 10 años de experiencia, clases 1 a 1 y método de bajo impacto. Conoce a Nico.`,
     canonical: `https://trxconcept.cl/sobre-mi/`,
     breadcrumb: [
       { name: "Inicio", item: "https://trxconcept.cl/" },
