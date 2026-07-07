@@ -375,8 +375,8 @@ export const pages = {
     isHome: true,
   },
   services: {
-    title: `Servicios de Entrenamiento TRX en Santiago`,
-    description: `Clases individuales y paquetes mensuales de TRX en casa o al aire libre en Santiago. Entrenamiento personalizado con Nicolás Echeverría.`,
+    title: `Clases de TRX en Santiago: Precios y Paquetes`,
+    description: `Clases individuales y paquetes mensuales de TRX en Santiago. Desde $15.000 la sesión. Entrenamiento personalizado, a domicilio o al aire libre.`,
     canonical: `https://trxconcept.cl/servicios/`,
     breadcrumb: [
       { name: "Inicio", item: "https://trxconcept.cl/" },
@@ -385,7 +385,7 @@ export const pages = {
     structuredData: {
       "@context": "https://schema.org",
       "@type": "Service",
-      name: "Entrenamiento Personal TRX",
+      name: "Clases de TRX en Santiago",
       url: "https://trxconcept.cl/servicios/",
       image: "https://trxconcept.cl/assets/img/og-image.webp",
       provider: {
@@ -420,29 +420,15 @@ export const pages = {
       },
     },
     content: `${renderPageHero({
-      title: "Entrenamientos diseñados para ti",
-      description: "Sin máquinas, sin gimnasio, sin excusas. Solo TRX y trabajo real.",
+      title: "Clases de TRX personalizadas en Santiago",
+      description: "Sesiones 1 a 1 o paquete mensual. Sin mensualidad fija, sin traslados, sin equipos que compres tú.",
       breadcrumb: [
         { name: "Inicio", item: "https://trxconcept.cl/" },
         { name: "Servicios", item: "https://trxconcept.cl/servicios/" },
       ],
     })}
 
-      <!-- WHAT IS TRX -->
-      <section>
-        <div class="container about-section text-center">
-          <h2>¿Qué es el entrenamiento TRX?</h2>
-          <p>
-            TRX (Total Resistance eXercise) es un sistema de suspensión que usa el peso de tu propio
-            cuerpo para entrenar fuerza, estabilidad, flexibilidad y equilibrio al mismo tiempo. Se
-            instala en segundos en una puerta, árbol o barra, y se adapta a cualquier nivel, desde
-            principiantes hasta atletas avanzados, ajustando simplemente el ángulo del cuerpo.
-          </p>
-          <p>¿Tienes dudas? Revisa nuestras <a href="/preguntas-frecuentes/">preguntas frecuentes</a>.</p>
-        </div>
-      </section>
-
-      <!-- SERVICES -->
+      <!-- SERVICES / PRICING -->
       <section class="section-alt">
         <div class="container text-center">
           <h2>Nuestros servicios</h2>
@@ -471,6 +457,33 @@ export const pages = {
         </div>
       </section>
 
+      <!-- HOW TO BOOK -->
+      <section>
+        <div class="container text-center">
+          <h2>¿Cómo reservar una clase?</h2>
+          <ol class="steps-list">
+            <li><strong>Escríbeme por WhatsApp</strong> y cuéntame qué buscas.</li>
+            <li><strong>Coordinamos día y hora</strong> según tu disponibilidad.</li>
+            <li><strong>Tu primera clase es gratis.</strong> Sin compromiso.</li>
+          </ol>
+          <p>No vendemos equipos TRX: el equipo lo llevo yo a cada sesión.</p>
+        </div>
+      </section>
+
+      <!-- WHAT IS TRX -->
+      <section class="section-alt">
+        <div class="container about-section text-center">
+          <h2>¿Qué es el entrenamiento TRX?</h2>
+          <p>
+            TRX (Total Resistance eXercise) es un sistema de suspensión que usa el peso de tu propio
+            cuerpo para entrenar fuerza, estabilidad, flexibilidad y equilibrio al mismo tiempo. Se
+            instala en segundos en una puerta, árbol o barra, y se adapta a cualquier nivel, desde
+            principiantes hasta atletas avanzados, ajustando simplemente el ángulo del cuerpo.
+          </p>
+          <p>¿Tienes dudas? Revisa nuestras <a href="/preguntas-frecuentes/">preguntas frecuentes</a>.</p>
+        </div>
+      </section>
+
       <!-- FOR WHOM -->
       <section>
         <div class="container text-center">
@@ -492,6 +505,10 @@ export const pages = {
             <div class="audience-item">
               <h3>Deportistas activos</h3>
               <p>Complementa tu deporte con trabajo de core, fuerza funcional y movilidad dirigida.</p>
+            </div>
+            <div class="audience-item">
+              <h3>Quienes buscan un gimnasio TRX</h3>
+              <p>Si prefieres evitar el traslado y las clases grupales, las sesiones 1 a 1 son una alternativa personalizada y flexible.</p>
             </div>
           </div>
         </div>
