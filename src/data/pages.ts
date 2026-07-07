@@ -624,8 +624,8 @@ export const pages = {
     isHome: false,
   },
   faq: {
-    title: `Preguntas Frecuentes sobre TRX en Santiago`,
-    description: `Resolvemos tus dudas sobre el entrenamiento TRX en Santiago. ¿Necesito experiencia? ¿Qué necesito en casa? ¿Cómo son los horarios?`,
+    title: `Preguntas frecuentes sobre clases TRX en Santiago`,
+    description: `Resolvemos tus dudas sobre clases de TRX en Santiago: experiencia previa, equipos, horarios, precios y cómo reservar. Primera clase gratis.`,
     canonical: `https://trxconcept.cl/preguntas-frecuentes/`,
     breadcrumb: [
       { name: "Inicio", item: "https://trxconcept.cl/" },
@@ -701,10 +701,10 @@ export const pages = {
         },
         {
           "@type": "Question",
-          name: "¿Cuánto cuesta?",
+          name: "¿Cuánto cuestan las clases de TRX?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "La sesión individual tiene un valor de $15.000. El paquete mensual de 3 veces por semana (~12 sesiones) tiene un valor de $160.000, lo que equivale a aproximadamente $13.300 por sesión. La primera clase es siempre gratis.",
+            text: "Las clases de TRX tienen dos opciones: la sesión individual tiene un valor de $15.000, y el paquete mensual de 3 veces por semana (~12 sesiones) tiene un valor de $160.000, lo que equivale a aproximadamente $13.300 por sesión. La primera clase es siempre gratis.",
           },
         },
         {
@@ -715,12 +715,36 @@ export const pages = {
             text: "El entrenamiento con TRX ayuda a desarrollar masa muscular y mejorar el metabolismo, lo que contribuye a la pérdida de grasa. Para resultados de composición corporal, lo ideal es combinar el entrenamiento con buenos hábitos de alimentación, algo sobre lo que también podemos conversar.",
           },
         },
+        {
+          "@type": "Question",
+          name: "¿Dónde das las clases de TRX?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "A domicilio o al aire libre en Santiago, principalmente en sectores oriente y centro. Escríbeme con tu comuna y coordinamos el lugar que te acomode.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "¿Vendes equipos TRX?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "No vendemos equipos. El TRX y todos los implementos los llevo yo a cada sesión. Tú solo necesitas espacio para moverte, ropa cómoda y zapatillas.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "¿Cómo agendo una clase de TRX?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Escríbeme por WhatsApp, coordinamos día y hora según tu disponibilidad, y la primera clase es gratis. Sin compromiso ni pago por adelantado.",
+          },
+        },
       ],
     },
     content: `${renderPageHero({
-      title: "Preguntas frecuentes",
+      title: "Preguntas frecuentes sobre clases de TRX",
       description:
-        'Si tienes una duda, es probable que alguien más también la haya tenido. También puedes revisar nuestros <a href="/servicios/">servicios</a> o <a href="/sobre-mi/">conocer a tu entrenador</a>.',
+        'Desde si necesitas experiencia hasta cómo reservar tu primera clase gratis. También puedes revisar nuestros <a href="/servicios/">servicios</a> o <a href="/sobre-mi/">conocer a tu entrenador</a>.',
       breadcrumb: [
         { name: "Inicio", item: "https://trxconcept.cl/" },
         { name: "Preguntas frecuentes", item: "https://trxconcept.cl/preguntas-frecuentes/" },
@@ -787,9 +811,9 @@ export const pages = {
           </details>
 
           <details class="faq-item" id="precios">
-            <summary>¿Cuánto cuesta?</summary>
+            <summary>¿Cuánto cuestan las clases de TRX?</summary>
             <p class="faq-answer">
-              La sesión individual tiene un valor de $15.000. El paquete mensual de 3 veces por semana (~12 sesiones) tiene un valor de $160.000, lo que equivale a aproximadamente $13.300 por sesión. La primera clase es siempre gratis.
+              Las clases de TRX tienen dos opciones: la sesión individual tiene un valor de $15.000, y el paquete mensual de 3 veces por semana (~12 sesiones) tiene un valor de $160.000, lo que equivale a aproximadamente $13.300 por sesión. La primera clase es siempre gratis.
             </p>
           </details>
 
@@ -797,6 +821,30 @@ export const pages = {
             <summary>¿El TRX sirve para bajar de peso?</summary>
             <p class="faq-answer">
               El entrenamiento con TRX ayuda a desarrollar masa muscular y mejorar el metabolismo, lo que contribuye a la pérdida de grasa. Para resultados de composición corporal, lo ideal es combinar el entrenamiento con buenos hábitos de alimentación, algo sobre lo que también podemos conversar.
+            </p>
+          </details>
+
+          <details class="faq-item" id="donde-clases">
+            <summary>¿Dónde das las clases de TRX?</summary>
+            <p class="faq-answer">
+              A domicilio o al aire libre en Santiago, principalmente en sectores oriente y centro.
+              Escríbeme con tu comuna y coordinamos el lugar que te acomode.
+            </p>
+          </details>
+
+          <details class="faq-item" id="venden-equipos">
+            <summary>¿Vendes equipos TRX?</summary>
+            <p class="faq-answer">
+              No vendemos equipos. El TRX y todos los implementos los llevo yo a cada sesión.
+              Tú solo necesitas espacio para moverte, ropa cómoda y zapatillas.
+            </p>
+          </details>
+
+          <details class="faq-item" id="como-agendar">
+            <summary>¿Cómo agendo una clase de TRX?</summary>
+            <p class="faq-answer">
+              Escríbeme por WhatsApp, coordinamos día y hora según tu disponibilidad, y la primera clase es gratis.
+              Sin compromiso ni pago por adelantado.
             </p>
           </details>
 
