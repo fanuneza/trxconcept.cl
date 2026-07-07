@@ -46,7 +46,7 @@ const renderPageHero = ({
 
 export const pages = {
   home: {
-    title: `Clases de TRX en Santiago | Entrenador | TRX Concept`,
+    title: `Clases de TRX en Santiago | Entrenador`,
     description: `Clases de TRX personalizadas en Santiago, a domicilio o al aire libre. Sin gimnasio, sin máquinas. Primera clase gratis. Reserva por WhatsApp.`,
     canonical: `https://trxconcept.cl/`,
     ogTitle: `Clases de TRX en Santiago | TRX Concept`,
