@@ -29,11 +29,14 @@
     });
   }
 
-  // WhatsApp links — single source of truth for the number, per-link message.
-  // Each [data-wa] link may carry its own message via data-wa-msg; otherwise it
-  // falls back to the default. This lets every CTA say what happens next.
+  // WhatsApp links — single source of truth for the number and default message.
+  // The default message is injected from site.ts via <html data-wa-default-msg>;
+  // each [data-wa] link may still override it with data-wa-msg. This lets every
+  // CTA say what happens next.
   var WA_NUMBER = "56984402664";
-  var WA_DEFAULT = "Hola Nico, vi el sitio de TRX Concept. Me interesa agendar la evaluación gratis.";
+  var WA_DEFAULT =
+    document.documentElement.dataset.waDefaultMsg ||
+    "Hola Nico, vi el sitio de TRX Concept. Me gustaría agendar la evaluación gratis.";
   function waHref(msg) {
     return "https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(msg || WA_DEFAULT);
   }

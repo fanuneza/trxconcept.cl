@@ -1,5 +1,5 @@
 import { createSchemaEndpoint } from "@jdevalk/astro-seo-graph";
-import { buildSchemaGraph } from "../../utils/schema";
+import { buildSchemaGraph, mergeStructuredData } from "../../utils/schema";
 import { pages, type SitePage } from "../../data/pages";
 
 export const GET = createSchemaEndpoint({
@@ -14,14 +14,7 @@ export const GET = createSchemaEndpoint({
     });
 
     if (page.structuredData) {
-      const schema = page.structuredData as Record<string, unknown>;
-      if ("@graph" in schema && Array.isArray(schema["@graph"])) {
-        (graph["@graph"] as Record<string, unknown>[]).push(...(schema["@graph"] as Record<string, unknown>[]));
-      } else {
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        const { "@context": _ctx, ...node } = schema;
-        (graph["@graph"] as Record<string, unknown>[]).push(node);
-      }
+      mergeStructuredData(graph, page.structuredData);
     }
 
     return graph["@graph"];

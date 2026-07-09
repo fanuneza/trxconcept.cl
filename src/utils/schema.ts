@@ -11,6 +11,17 @@ import { site } from "../data/site";
 
 const SITE_URL = site.url.endsWith("/") ? site.url : `${site.url}/`;
 
+export function mergeStructuredData(graph: { "@graph": GraphEntity[] }, structuredData: unknown): void {
+  const schema = structuredData as Record<string, unknown>;
+  if ("@graph" in schema && Array.isArray(schema["@graph"])) {
+    graph["@graph"].push(...(schema["@graph"] as GraphEntity[]));
+  } else {
+    const { "@context": _unusedCtx, ...node } = schema;
+    void _unusedCtx;
+    graph["@graph"].push(node as GraphEntity);
+  }
+}
+
 export function buildSchemaGraph(options: {
   pageType: "website" | "webpage";
   url: string;

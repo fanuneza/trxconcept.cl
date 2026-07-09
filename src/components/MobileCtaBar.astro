@@ -1,21 +1,20 @@
 ---
+import { site } from "../data/site";
+import WhatsAppLink from "./WhatsAppLink.astro";
+
 // Sticky bottom bar for mobile: primary WhatsApp action + softer discovery-flow
 // entry. Hidden on desktop, where the floating WhatsApp button takes over.
-const waEval = "Hola Nico, vi el sitio de TRX Concept. Me gustaría agendar la evaluación gratis.";
 const { discoveryHref = "/#descubre" } = Astro.props as { discoveryHref?: string };
 ---
 
 <div class="mobile-cta-bar" role="group" aria-label="Acciones rápidas">
-  <a
+  <WhatsAppLink
     href="https://wa.me/56984402664"
-    data-wa
-    data-wa-msg={waEval}
-    target="_blank"
-    rel="noopener noreferrer"
+    message={site.whatsappDefaultMessage}
     class="mobile-cta-bar-primary"
+    iconFirst={true}
   >
-    <svg class="wa-icon" aria-hidden="true" focusable="false"><use href="#wa-symbol"></use></svg>
     Evaluación gratis
-  </a>
+  </WhatsAppLink>
   <a href={discoveryHref} class="mobile-cta-bar-secondary">¿Es para mí?</a>
 </div>

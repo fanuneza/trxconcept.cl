@@ -1,3 +1,11 @@
+import ogImage from "../assets/images/og-image.webp";
+import nicoImage from "../assets/images/nico.webp";
+import { site } from "./site";
+
+const assetUrl = (src: string) => new URL(src, site.url).toString();
+const pageUrl = (path = "") => `${site.url}${path}`;
+const phoneNumber = `+${site.whatsappNumber}`;
+
 export type SitePage = {
   title: string;
   description: string;
@@ -21,7 +29,7 @@ const renderBreadcrumb = (breadcrumb?: { name: string; item: string }[]) => {
     .map((item, index) => {
       const isLast = index === breadcrumb.length - 1;
 
-      const href = item.item.startsWith("https://trxconcept.cl") ? new URL(item.item).pathname : item.item;
+      const href = item.item.startsWith(site.url) ? new URL(item.item).pathname : item.item;
 
       return `<li>${isLast ? `<span aria-current="page">${item.name}</span>` : `<a href="${href}">${item.name}</a>`}</li>`;
     })
@@ -50,18 +58,18 @@ export const pages = {
   home: {
     title: `Clases de TRX en Santiago, a domicilio y 1 a 1`,
     description: `Entrenamiento personal 1 a 1 con TRX en Santiago, a domicilio o al aire libre. Para empezar de a poco o retomar seguro. Evaluación inicial gratis por WhatsApp.`,
-    canonical: `https://trxconcept.cl/`,
+    canonical: pageUrl("/"),
     ogTitle: `Clases de TRX en Santiago, 1 a 1 a domicilio | TRX Concept`,
     structuredData: {
       "@context": "https://schema.org",
       "@type": ["LocalBusiness", "HealthAndBeautyBusiness"],
-      "@id": "https://trxconcept.cl/#business",
+      "@id": `${pageUrl("/")}#business`,
       name: "TRX Concept",
       description:
         "Entrenamiento personal 1 a 1 con TRX en Santiago, Chile. A domicilio o al aire libre, para principiantes y para quienes retoman el ejercicio. Evaluación inicial gratis.",
-      url: "https://trxconcept.cl/",
-      telephone: "+56984402664",
-      image: "https://trxconcept.cl/assets/img/og-image.webp",
+      url: pageUrl("/"),
+      telephone: phoneNumber,
+      image: assetUrl(ogImage.src),
       priceRange: "$$",
       address: {
         "@type": "PostalAddress",
@@ -114,21 +122,21 @@ export const pages = {
   services: {
     title: `Clases de TRX a domicilio en Santiago: precios`,
     description: `Clases de TRX 1 a 1 a domicilio o al aire libre en Santiago. Evaluación gratis, sesión $15.000, plan mensual $160.000. Para principiantes y quienes retoman.`,
-    canonical: `https://trxconcept.cl/servicios/`,
+    canonical: pageUrl("/servicios/"),
     breadcrumb: [
-      { name: "Inicio", item: "https://trxconcept.cl/" },
-      { name: "Servicios", item: "https://trxconcept.cl/servicios/" },
+      { name: "Inicio", item: pageUrl("/") },
+      { name: "Servicios", item: pageUrl("/servicios/") },
     ],
     structuredData: {
       "@context": "https://schema.org",
       "@type": "Service",
       name: "Clases de TRX en Santiago",
-      url: "https://trxconcept.cl/servicios/",
-      image: "https://trxconcept.cl/assets/img/og-image.webp",
+      url: pageUrl("/servicios/"),
+      image: assetUrl(ogImage.src),
       provider: {
         "@type": "LocalBusiness",
         name: "TRX Concept",
-        url: "https://trxconcept.cl/",
+        url: pageUrl("/"),
       },
       areaServed: {
         "@type": "City",
@@ -168,8 +176,8 @@ export const pages = {
       description:
         "Sesiones 1 a 1 o plan mensual, en tu casa o al aire libre. Sin mensualidad fija, sin traslados, sin equipos que compres tú.",
       breadcrumb: [
-        { name: "Inicio", item: "https://trxconcept.cl/" },
-        { name: "Servicios", item: "https://trxconcept.cl/servicios/" },
+        { name: "Inicio", item: pageUrl("/") },
+        { name: "Servicios", item: pageUrl("/servicios/") },
       ],
     })}
 
@@ -285,24 +293,24 @@ export const pages = {
   about: {
     title: `Nico Echeverría, entrenador TRX en Santiago`,
     description: `Entrenador TRX certificado en Santiago. Más de 10 años de experiencia, clases 1 a 1 y método de bajo impacto. Conoce a Nico.`,
-    canonical: `https://trxconcept.cl/sobre-mi/`,
+    canonical: pageUrl("/sobre-mi/"),
     breadcrumb: [
-      { name: "Inicio", item: "https://trxconcept.cl/" },
-      { name: "Sobre mí", item: "https://trxconcept.cl/sobre-mi/" },
+      { name: "Inicio", item: pageUrl("/") },
+      { name: "Sobre mí", item: pageUrl("/sobre-mi/") },
     ],
     structuredData: {
       "@context": "https://schema.org",
       "@type": "Person",
-      "@id": "https://trxconcept.cl/sobre-mi/#person",
+      "@id": `${pageUrl("/sobre-mi/")}#person`,
       name: "Nicolás Echeverría",
       alternateName: "Nico Echeverría",
       jobTitle: "Entrenador Personal TRX",
-      url: "https://trxconcept.cl/sobre-mi/",
-      image: "https://trxconcept.cl/assets/img/nico.webp",
+      url: pageUrl("/sobre-mi/"),
+      image: assetUrl(nicoImage.src),
       worksFor: {
         "@type": "LocalBusiness",
         name: "TRX Concept",
-        url: "https://trxconcept.cl/",
+        url: pageUrl("/"),
       },
       knowsAbout: ["Entrenamiento TRX", "Entrenamiento en suspensión", "Entrenamiento personal 1 a 1"],
       hasCredential: [
@@ -330,10 +338,10 @@ export const pages = {
   faq: {
     title: `Preguntas frecuentes sobre clases de TRX`,
     description: `Resolvemos tus dudas sobre clases de TRX en Santiago: experiencia previa, equipos, horarios, precios y cómo reservar. Primera clase gratis.`,
-    canonical: `https://trxconcept.cl/preguntas-frecuentes/`,
+    canonical: pageUrl("/preguntas-frecuentes/"),
     breadcrumb: [
-      { name: "Inicio", item: "https://trxconcept.cl/" },
-      { name: "Preguntas frecuentes", item: "https://trxconcept.cl/preguntas-frecuentes/" },
+      { name: "Inicio", item: pageUrl("/") },
+      { name: "Preguntas frecuentes", item: pageUrl("/preguntas-frecuentes/") },
     ],
     structuredData: {
       "@context": "https://schema.org",
@@ -458,8 +466,8 @@ export const pages = {
       description:
         'Desde si necesitas experiencia hasta cómo reservar tu primera clase gratis. También puedes revisar nuestros <a href="/servicios/">servicios</a> o <a href="/sobre-mi/">conocer a tu entrenador</a>.',
       breadcrumb: [
-        { name: "Inicio", item: "https://trxconcept.cl/" },
-        { name: "Preguntas frecuentes", item: "https://trxconcept.cl/preguntas-frecuentes/" },
+        { name: "Inicio", item: pageUrl("/") },
+        { name: "Preguntas frecuentes", item: pageUrl("/preguntas-frecuentes/") },
       ],
     })}
 
@@ -574,18 +582,18 @@ export const pages = {
   cookies: {
     title: `Política de Cookies y Consentimiento`,
     description: `Información sobre las cookies que usa TRX Concept y cómo puedes gestionar tus preferencias.`,
-    canonical: `https://trxconcept.cl/politica-de-cookies/`,
+    canonical: pageUrl("/politica-de-cookies/"),
     robots: `noindex`,
     breadcrumb: [
-      { name: "Inicio", item: "https://trxconcept.cl/" },
-      { name: "Política de cookies", item: "https://trxconcept.cl/politica-de-cookies/" },
+      { name: "Inicio", item: pageUrl("/") },
+      { name: "Política de cookies", item: pageUrl("/politica-de-cookies/") },
     ],
     content: `${renderPageHero({
       title: "Política de cookies",
       description: "Información sobre las cookies que usamos y cómo gestionarlas.",
       breadcrumb: [
-        { name: "Inicio", item: "https://trxconcept.cl/" },
-        { name: "Política de cookies", item: "https://trxconcept.cl/politica-de-cookies/" },
+        { name: "Inicio", item: pageUrl("/") },
+        { name: "Política de cookies", item: pageUrl("/politica-de-cookies/") },
       ],
     })}
 

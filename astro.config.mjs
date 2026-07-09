@@ -12,6 +12,10 @@ export default defineConfig({
     inlineStylesheets: "always",
   },
 
+  prefetch: {
+    prefetchAll: true,
+  },
+
   integrations: [
     sitemap({
       filter: (page) => !page.endsWith("/404.html") && !page.endsWith("/politica-de-cookies/"),

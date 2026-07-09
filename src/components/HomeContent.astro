@@ -7,6 +7,9 @@ import testimonialMarisaImage from "../assets/images/testimonio-marisagracia.web
 import testimonialMariaIgnaciaImage from "../assets/images/testimonio-mariaignacia.webp";
 import DiscoveryFlow from "./DiscoveryFlow.astro";
 import { site } from "../data/site";
+import WhatsAppLink from "./WhatsAppLink.astro";
+import TestimonialCard from "./TestimonialCard.astro";
+import PricingCard from "./PricingCard.astro";
 
 const waEval =
   "Hola Nico, vi el sitio de TRX Concept. Me gustaría agendar la evaluación gratis para ver si esto es para mí.";
@@ -41,17 +44,9 @@ const waSingle = "Hola Nico, vi el sitio de TRX Concept. Me interesa una sesión
       <li>Santiago oriente y centro</li>
     </ul>
     <div class="hero-cta">
-      <a
-        href="https://wa.me/56984402664"
-        data-wa
-        data-wa-msg={waEval}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="btn btn-trx"
-      >
+      <WhatsAppLink href="https://wa.me/56984402664" message={waEval} class="btn btn-trx">
         Agendar evaluación gratis
-        <svg class="wa-icon" aria-hidden="true" focusable="false"><use href="#wa-symbol"></use></svg>
-      </a>
+      </WhatsAppLink>
       <a href="#descubre" class="btn btn-outline-light">Ver si esto es para mí</a>
     </div>
   </div>
@@ -174,73 +169,48 @@ const waSingle = "Hola Nico, vi el sitio de TRX Concept. Me interesa una sesión
   <h2>Planes y precios</h2>
   <p class="pricing-subtitle">Precios claros y a la vista. Empiezas con una evaluación gratis.</p>
   <div class="pricing-cards pricing-cards--three">
-    <div class="pricing-card">
-      <h3>Evaluación inicial</h3>
-      <p class="pricing-price">Gratis</p>
-      <p class="pricing-desc">Una sesión para conocernos y ver tu punto de partida.</p>
-      <ul class="pricing-list">
-        <li>Conversamos tu objetivo y tus molestias</li>
-        <li>Chequeo básico de movimiento</li>
-        <li>Sin compromiso ni pago por adelantado</li>
-      </ul>
-      <a
-        href="https://wa.me/56984402664"
-        data-wa
-        data-wa-msg={waEval}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="btn btn-whatsapp"
-      >
-        Agendar evaluación gratis
-        <svg class="wa-icon" aria-hidden="true" focusable="false"><use href="#wa-symbol"></use></svg>
-      </a>
-    </div>
-    <div class="pricing-card pricing-card-featured">
-      <span class="pricing-badge">Más elegido</span>
-      <h3>Plan mensual</h3>
-      <p class="pricing-price">$160.000</p>
-      <p class="pricing-per">3 veces por semana · ~12 sesiones al mes</p>
-      <p class="pricing-per-session">≈ $13.300 por sesión</p>
-      <ul class="pricing-list">
-        <li>La forma más efectiva de avanzar</li>
-        <li>Seguimiento personalizado continuo</li>
-        <li>Mejor precio por sesión</li>
-        <li>Horario flexible desde las 6 AM</li>
-      </ul>
-      <a
-        href="https://wa.me/56984402664"
-        data-wa
-        data-wa-msg={waPlan}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="btn btn-trx"
-      >
-        Consultar el plan
-        <svg class="wa-icon" aria-hidden="true" focusable="false"><use href="#wa-symbol"></use></svg>
-      </a>
-    </div>
-    <div class="pricing-card">
-      <h3>Sesión individual</h3>
-      <p class="pricing-price">$15.000</p>
-      <p class="pricing-desc">Para probar o entrenar a tu propio ritmo.</p>
-      <ul class="pricing-list">
-        <li>1 hora de entrenamiento personalizado</li>
-        <li>En casa o al aire libre</li>
-        <li>Adaptado a tu nivel</li>
-        <li>Sin compromiso de continuidad</li>
-      </ul>
-      <a
-        href="https://wa.me/56984402664"
-        data-wa
-        data-wa-msg={waSingle}
-        target="_blank"
-        rel="noopener noreferrer"
-        class="btn btn-whatsapp"
-      >
-        Consultar por WhatsApp
-        <svg class="wa-icon" aria-hidden="true" focusable="false"><use href="#wa-symbol"></use></svg>
-      </a>
-    </div>
+    <PricingCard
+      title="Evaluación inicial"
+      price="Gratis"
+      description="Una sesión para conocernos y ver tu punto de partida."
+      features={[
+        "Conversamos tu objetivo y tus molestias",
+        "Chequeo básico de movimiento",
+        "Sin compromiso ni pago por adelantado",
+      ]}
+      cta="Agendar evaluación gratis"
+      ctaMessage={waEval}
+    />
+    <PricingCard
+      title="Plan mensual"
+      price="$160.000"
+      per="3 veces por semana · ~12 sesiones al mes"
+      perSession="≈ $13.300 por sesión"
+      features={[
+        "La forma más efectiva de avanzar",
+        "Seguimiento personalizado continuo",
+        "Mejor precio por sesión",
+        "Horario flexible desde las 6 AM",
+      ]}
+      cta="Consultar el plan"
+      ctaClass="btn btn-trx"
+      ctaMessage={waPlan}
+      featured={true}
+      badge="Más elegido"
+    />
+    <PricingCard
+      title="Sesión individual"
+      price="$15.000"
+      description="Para probar o entrenar a tu propio ritmo."
+      features={[
+        "1 hora de entrenamiento personalizado",
+        "En casa o al aire libre",
+        "Adaptado a tu nivel",
+        "Sin compromiso de continuidad",
+      ]}
+      cta="Consultar por WhatsApp"
+      ctaMessage={waSingle}
+    />
   </div>
   <p class="pricing-note">Cancelaciones sin costo avisando con más de 24 horas.</p>
 </section>
@@ -251,80 +221,27 @@ const waSingle = "Hola Nico, vi el sitio de TRX Concept. Me interesa una sesión
   <p class="section-intro">Personas reales, avances reales: constancia, postura, energía y confianza para moverse.</p>
   <div class="testimonial-grid">
     <div class="testimonial-col">
-      <div class="testimonial-card">
-        <Picture
-          src={testimonialValentinaImage}
-          alt="Valentina Rosenthal"
-          formats={["avif", "webp"]}
-          fallbackFormat="webp"
-          quality={60}
-          widths={[100, 200]}
-          sizes="100px"
-          class="testimonial-img"
-          loading="lazy"
-          decoding="async"
-        />
-        <div class="testimonial-stars" aria-label="5 estrellas">★★★★★</div>
-        <blockquote class="testimonial-quote">
-          <p>
-            Entreno con Nico desde 2021. Partimos dos veces a la semana y hoy entrenamos tres. Sin haber sido nunca
-            buena para hacer deportes, Nico ha logrado que tenga una rutina y que lleve cuatro años entrenando, con
-            todos los beneficios que esto trae.
-          </p>
-          <footer class="testimonial-author">– Valentina</footer>
-        </blockquote>
-      </div>
+      <TestimonialCard
+        image={testimonialValentinaImage}
+        name="Valentina Rosenthal"
+        quote="Entreno con Nico desde 2021. Partimos dos veces a la semana y hoy entrenamos tres. Sin haber sido nunca buena para hacer deportes, Nico ha logrado que tenga una rutina y que lleve cuatro años entrenando, con todos los beneficios que esto trae."
+      />
     </div>
 
     <div class="testimonial-col">
-      <div class="testimonial-card">
-        <Picture
-          src={testimonialMarisaImage}
-          alt="Marisa Gracia"
-          formats={["avif", "webp"]}
-          fallbackFormat="webp"
-          quality={60}
-          widths={[100, 200]}
-          sizes="100px"
-          class="testimonial-img"
-          loading="lazy"
-          decoding="async"
-        />
-        <div class="testimonial-stars" aria-label="5 estrellas">★★★★★</div>
-        <blockquote class="testimonial-quote">
-          <p>
-            Entrenar con Nicolás fue una excelente experiencia. Gracias a su guía y el trabajo constante con TRX, mi
-            cuerpo ganó fuerza, estabilidad y tono muscular. Noté mejoras en mi postura, control corporal y energía
-            general.
-          </p>
-          <footer class="testimonial-author">– Marisa Gracia</footer>
-        </blockquote>
-      </div>
+      <TestimonialCard
+        image={testimonialMarisaImage}
+        name="Marisa Gracia"
+        quote="Entrenar con Nicolás fue una excelente experiencia. Gracias a su guía y el trabajo constante con TRX, mi cuerpo ganó fuerza, estabilidad y tono muscular. Noté mejoras en mi postura, control corporal y energía general."
+      />
     </div>
 
     <div class="testimonial-col">
-      <div class="testimonial-card">
-        <Picture
-          src={testimonialMariaIgnaciaImage}
-          alt="María Ignacia Williamson"
-          formats={["avif", "webp"]}
-          fallbackFormat="webp"
-          quality={60}
-          widths={[100, 200]}
-          sizes="100px"
-          class="testimonial-img"
-          loading="lazy"
-          decoding="async"
-        />
-        <div class="testimonial-stars" aria-label="5 estrellas">★★★★★</div>
-        <blockquote class="testimonial-quote">
-          <p>
-            Entrenar con Nico fue una muy buena experiencia. Su enfoque personalizado y su profundo conocimiento del TRX
-            hicieron que cada sesión fuera desafiante pero muy gratificante.
-          </p>
-          <footer class="testimonial-author">– María Ignacia</footer>
-        </blockquote>
-      </div>
+      <TestimonialCard
+        image={testimonialMariaIgnaciaImage}
+        name="María Ignacia Williamson"
+        quote="Entrenar con Nico fue una muy buena experiencia. Su enfoque personalizado y su profundo conocimiento del TRX hicieron que cada sesión fuera desafiante pero muy gratificante."
+      />
     </div>
   </div>
   <p class="testimonial-more">

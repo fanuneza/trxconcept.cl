@@ -94,7 +94,7 @@ There is no `src/content/` and no content-collection schema. All page copy and m
 ## Images and Asset Handling
 
 - Prefer imported images under `src/assets/images/` processed through `astro:assets` (`<Picture>`/`getImage`) for anything that needs responsive variants.
-- `public/assets/img/` holds already-optimized static variants used by legacy inline-HTML content in `pages.ts` (services/FAQ/cookies pages) — pre-generated AVIF/WebP at fixed widths, not processed by Astro at build time.
+- `public/assets/img/` holds legacy static variants kept for backward compatibility; current pages import images from `src/assets/images/` and process them through `astro:assets`. Do not add new hand-rolled variants here unless an external system requires a stable URL.
 - Do not add remote image dependencies or CDNs.
 
 ## SEO, Accessibility, and Performance
