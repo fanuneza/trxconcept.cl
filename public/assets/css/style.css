@@ -42,6 +42,26 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+  /* The header is fixed: anchor jumps and programmatic focus scrolls must
+     land below it, not underneath. Sized to the unscrolled header. */
+  scroll-padding-top: 7.5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 img {
   max-width: 100%;
   height: auto;
@@ -65,6 +85,10 @@ img {
   --fs-body: 1rem;
   --fs-small: 0.9rem;
   --space-section: clamp(2rem, 5vw, 4rem);
+  --radius-card: 1rem;
+  --radius-control: 0.6rem;
+  --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.06);
+  --shadow-raise: 0 6px 18px rgba(0, 0, 0, 0.18);
 }
 
 h1 {
@@ -208,6 +232,18 @@ main {
   font-weight: 700;
 }
 
+.nav-list a:focus-visible,
+.faq-item summary:focus-visible,
+.trainer-link:focus-visible,
+.faq-home-more a:focus-visible,
+.testimonial-more a:focus-visible,
+.discovery-fallback a:focus-visible,
+.discovery-restart:focus-visible {
+  outline: 2px solid var(--color-black);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
 /* ─── HAMBURGER BUTTON ─── */
 
 .nav-toggle-btn {
@@ -220,8 +256,8 @@ main {
   border: none;
   cursor: pointer;
   padding: 0.4rem;
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 2.75rem;
+  height: 2.75rem;
   flex-shrink: 0;
 }
 
@@ -287,14 +323,14 @@ main {
 .btn-trx:active {
   background: color-mix(in srgb, var(--color-primary), #000 10%);
   transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+  box-shadow: var(--shadow-raise);
 }
 
 .btn-whatsapp:hover,
 .btn-whatsapp:active {
   background: #111;
   transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+  box-shadow: var(--shadow-raise);
 }
 
 .btn:focus-visible {
@@ -319,7 +355,6 @@ main {
 
 .hero-lead a,
 .trust-content a,
-.cta-band-text a,
 .about-section p a,
 .page-hero p a {
   color: inherit;
@@ -334,7 +369,6 @@ main {
 
 .hero-lead a:hover,
 .trust-content a:hover,
-.cta-band-text a:hover,
 .about-section p a:hover,
 .page-hero p a:hover {
   text-decoration-color: rgba(128, 128, 128, 0.7);
@@ -343,10 +377,16 @@ main {
 
 /* ─── HERO ─── */
 
-.hero * {
+/* Only the content wrapper needs to stack above the overlay; shadowed white
+   text is limited to the actual text elements instead of every descendant. */
+.hero .container {
   position: relative;
   z-index: 2;
   color: #fff;
+}
+
+.hero-title,
+.hero-lead {
   text-shadow:
     0 2px 4px rgba(0, 0, 0, 0.6),
     0 1px 1px rgba(0, 0, 0, 0.3);
@@ -396,11 +436,6 @@ main {
   max-width: 560px;
   margin: 0 auto 1.5rem;
   opacity: 0.92;
-}
-
-.hero .btn {
-  margin-top: 0.5rem;
-  margin-bottom: 1rem;
 }
 
 .hero .btn-trx {
@@ -454,28 +489,11 @@ main {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-/* ─── MID CTA BAND ─── */
-
-.cta-band {
-  background: var(--color-black);
-  padding: 3rem 1.5rem;
-  text-align: center;
-}
-
-.cta-band-text {
-  color: var(--color-white);
-  font-size: 1.2rem;
-  font-weight: 500;
-  margin-bottom: 1.25rem;
-}
-
 /* ─── TESTIMONIALS ─── */
 
 .testimonial {
   max-width: 960px;
   margin: 0 auto;
-  padding-top: 3rem;
-  padding-bottom: 0.5rem;
   text-align: center;
 }
 
@@ -498,7 +516,7 @@ main {
 
 .testimonial-card {
   background: var(--color-gray-light);
-  border-radius: 1rem;
+  border-radius: var(--radius-card);
   padding: 2rem 1.5rem;
   display: flex;
   flex-direction: column;
@@ -519,7 +537,8 @@ main {
 }
 
 .testimonial-stars {
-  color: var(--color-primary);
+  /* Darker gold: brand yellow on the light card is nearly invisible */
+  color: #c9a100;
   font-size: 1.1rem;
   letter-spacing: 0.1em;
   margin-bottom: 0.75rem;
@@ -560,7 +579,7 @@ main {
 /* ─── PRICING ─── */
 
 .pricing {
-  padding: 3rem 1.5rem;
+  padding: var(--space-section) 1.5rem;
   background: var(--color-gray-light);
   text-align: center;
 }
@@ -588,7 +607,7 @@ main {
   max-width: 340px;
   background: var(--color-white);
   border: 2px solid var(--color-gray);
-  border-radius: 1rem;
+  border-radius: var(--radius-card);
   padding: 2rem 1.5rem;
   display: flex;
   flex-direction: column;
@@ -775,7 +794,7 @@ main {
 .page-breadcrumb li {
   display: inline-flex;
   align-items: center;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.55);
   font-size: 0.85rem;
 }
 
@@ -789,6 +808,10 @@ main {
 .page-breadcrumb span {
   color: inherit;
   text-decoration: none;
+}
+
+.page-breadcrumb a {
+  color: rgba(255, 255, 255, 0.75);
 }
 
 .page-breadcrumb a:hover,
@@ -830,7 +853,6 @@ main {
 
 .faq-item {
   border-bottom: 1px solid var(--color-gray);
-  scroll-margin-top: 8rem;
 }
 
 .faq-item summary {
@@ -910,13 +932,13 @@ main {
 
 .section-subtitle {
   color: var(--color-gray-dark);
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 .section-intro {
   color: var(--color-gray-dark);
   margin-top: 0.5rem;
-  margin-bottom: 2.5rem;
+  margin-bottom: 2rem;
 }
 
 .cert-list {
@@ -957,9 +979,10 @@ main {
   max-width: 380px;
   background: var(--color-white);
   border: 2px solid var(--color-gray);
-  border-radius: 1rem;
+  border-radius: var(--radius-card);
   padding: 2rem 1.5rem;
   position: relative;
+  text-align: left;
 }
 
 .service-card h3 {
@@ -983,6 +1006,48 @@ main {
   margin-top: 0.5rem;
 }
 
+/* Numbered booking steps on /servicios. Without this, the global padding
+   reset leaves the default ol markers hanging outside the container. */
+.steps-list {
+  list-style: none;
+  counter-reset: step;
+  max-width: 520px;
+  margin: 0 auto 1.5rem;
+  display: grid;
+  gap: 0.9rem;
+  text-align: left;
+}
+
+.steps-list li {
+  counter-increment: step;
+  position: relative;
+  padding-left: 3.1rem;
+  padding-block: 0.35rem;
+  color: var(--color-gray-dark);
+  min-height: 2.25rem;
+}
+
+.steps-list li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 0.2rem;
+  width: 2.25rem;
+  height: 2.25rem;
+  background: var(--color-primary);
+  color: var(--color-black);
+  font-family: var(--font-logo);
+  font-size: 1.15rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.steps-list strong {
+  color: var(--color-black);
+}
+
 .audience-grid {
   display: flex;
   flex-wrap: wrap;
@@ -995,10 +1060,10 @@ main {
 .audience-item {
   flex: 1 1 200px;
   max-width: 260px;
-  text-align: center;
-  padding: 1.5rem 1rem;
+  text-align: left;
+  padding: 1.5rem 1.25rem;
   background: var(--color-gray-light);
-  border-radius: 1rem;
+  border-radius: var(--radius-card);
 }
 
 .audience-item h3 {
@@ -1031,8 +1096,8 @@ header .wa-icon {
 
 .btn-float-wa {
   position: fixed;
-  bottom: calc(5rem + env(safe-area-inset-bottom));
-  right: 1rem;
+  bottom: calc(1.25rem + env(safe-area-inset-bottom));
+  right: 1.25rem;
   width: 3.5rem;
   height: 3.5rem;
   background: #25d366;
@@ -1067,6 +1132,12 @@ header .wa-icon {
   fill: currentColor;
 }
 
+/* While the cookie banner is on screen, lift the floating button above it
+   so it can't cover the Aceptar/Rechazar actions. */
+body:has(.cookie-banner.is-visible) .btn-float-wa {
+  bottom: calc(7rem + env(safe-area-inset-bottom));
+}
+
 /* ─── SCROLLED HEADER ─── */
 
 .site-header.scrolled {
@@ -1084,6 +1155,10 @@ header .wa-icon {
 /* ─── RESPONSIVE: TABLET ─── */
 
 @media screen and (max-width: 991px) {
+  html {
+    scroll-padding-top: 6.5rem;
+  }
+
   main {
     padding-top: 6rem;
     background: linear-gradient(var(--color-primary) 6rem, var(--color-white) 6rem);
@@ -1221,7 +1296,10 @@ header .wa-icon {
 
 /* ── Cookie banner ─────────────────────────────────────── */
 
+/* Hidden by default so it never flashes before cookie-consent.js decides;
+   the script adds .is-visible only when there is no stored consent. */
 .cookie-banner {
+  display: none;
   position: fixed;
   bottom: 0;
   left: 0;
@@ -1230,6 +1308,10 @@ header .wa-icon {
   background: var(--color-black);
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   padding: 1.25rem 1rem;
+}
+
+.cookie-banner.is-visible {
+  display: block;
 }
 
 .cookie-inner {
@@ -1268,6 +1350,7 @@ header .wa-icon {
 
 .cookie-btn {
   font-size: 13px;
+  min-height: 44px;
   padding: 0.625rem 1.25rem;
   border-radius: 999px;
   font-weight: 600;
@@ -1312,7 +1395,7 @@ header .wa-icon {
   background: transparent;
   border: none;
   cursor: pointer;
-  padding: 0.35rem 0;
+  padding: 0.6rem 0.25rem;
   font-family: var(--font-base);
   transition: color 0.15s;
 }
@@ -1422,12 +1505,11 @@ header .wa-icon {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1.25rem;
-  counter-reset: none;
 }
 
 .process-step {
   background: var(--color-gray-light);
-  border-radius: 1rem;
+  border-radius: var(--radius-card);
   padding: 1.75rem 1.25rem;
   text-align: left;
 }
@@ -1472,10 +1554,10 @@ header .wa-icon {
 .discovery-card {
   background: var(--color-white);
   border: 2px solid var(--color-gray);
-  border-radius: 1rem;
+  border-radius: var(--radius-card);
   padding: 1.75rem 1.5rem;
   text-align: left;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+  box-shadow: var(--shadow-card);
 }
 
 .discovery-progress {
@@ -1501,12 +1583,13 @@ header .wa-icon {
   margin: 0;
 }
 
-/* Enhanced: only the active step is shown. Without JS every step is visible. */
-.discovery.is-enhanced .discovery-step {
+/* Enhanced: only the active step is shown. Without JS every step is visible.
+   Note: main.js puts .is-enhanced on the [data-discovery] card, not the section. */
+.discovery-card.is-enhanced .discovery-step {
   display: none;
 }
 
-.discovery.is-enhanced .discovery-step.is-active {
+.discovery-card.is-enhanced .discovery-step.is-active {
   display: block;
 }
 
@@ -1549,7 +1632,7 @@ header .wa-icon {
   gap: 0.65rem;
   padding: 0.75rem 0.9rem;
   border: 2px solid var(--color-gray);
-  border-radius: 0.6rem;
+  border-radius: var(--radius-control);
   cursor: pointer;
   font-size: 0.95rem;
   transition:
@@ -1590,14 +1673,29 @@ header .wa-icon {
   margin-bottom: 0.4rem;
 }
 
+.discovery-label small {
+  font-weight: 400;
+  color: var(--color-gray-note);
+}
+
 .discovery-field select {
   width: 100%;
-  padding: 0.7rem 0.8rem;
+  padding: 0.7rem 2.4rem 0.7rem 0.8rem;
   border: 2px solid var(--color-gray);
-  border-radius: 0.6rem;
+  border-radius: var(--radius-control);
   font-family: var(--font-base);
   font-size: 0.95rem;
-  background: var(--color-white);
+  appearance: none;
+  background:
+    var(--color-white)
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23444' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E")
+    no-repeat right 0.9rem center;
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+}
+
+.discovery-field select:hover {
+  border-color: var(--color-primary);
 }
 
 .discovery-field select:focus-visible {
@@ -1692,7 +1790,7 @@ header .wa-icon {
 
 .fit-item {
   background: var(--color-gray-light);
-  border-radius: 1rem;
+  border-radius: var(--radius-card);
   padding: 1.5rem 1.25rem;
   text-align: left;
 }
@@ -1713,7 +1811,7 @@ header .wa-icon {
   padding: 1.1rem 1.25rem;
   background: var(--color-gray-light);
   border-left: 3px solid var(--color-primary);
-  border-radius: 0.5rem;
+  border-radius: var(--radius-control);
   text-align: left;
   font-size: 0.92rem;
   color: var(--color-gray-dark);
@@ -1736,7 +1834,7 @@ header .wa-icon {
 
 .method-list li {
   background: var(--color-white);
-  border-radius: 0.75rem;
+  border-radius: var(--radius-control);
   padding: 1rem 1.25rem 1rem 3rem;
   position: relative;
   color: var(--color-gray-dark);
@@ -1778,7 +1876,7 @@ header .wa-icon {
 
 .model-grid li {
   background: var(--color-gray-light);
-  border-radius: 0.6rem;
+  border-radius: var(--radius-control);
   padding: 0.85rem 1rem 0.85rem 2.4rem;
   position: relative;
   text-align: left;
@@ -1961,6 +2059,12 @@ header .wa-icon {
   /* On mobile the sticky bar replaces the floating button */
   .btn-float-wa {
     display: none;
+  }
+
+  /* Stack the cookie banner above the sticky CTA bar instead of covering it:
+     the primary WhatsApp action stays reachable on first visit. */
+  .cookie-banner {
+    bottom: calc(4.4rem + env(safe-area-inset-bottom));
   }
 }
 

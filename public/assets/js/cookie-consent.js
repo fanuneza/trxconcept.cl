@@ -49,6 +49,10 @@ if (consent === "accepted") {
   hideBanner();
 } else if (consent === "rejected") {
   hideBanner();
+} else {
+  // The banner is display:none by default so it can't flash before this
+  // script runs; it only appears when no consent has been stored yet.
+  document.getElementById("cookie-banner")?.classList.add("is-visible");
 }
 
 document.getElementById("cookie-accept")?.addEventListener("click", () => {

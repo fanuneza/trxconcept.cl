@@ -176,27 +176,27 @@ export const pages = {
       <!-- SERVICES / PRICING -->
       <section class="section-alt">
         <div class="container text-center">
-          <h2>Nuestros servicios</h2>
-          <p class="section-intro">Flexibles, a tu ritmo y en tu lugar.</p>
+          <h2>Servicios y precios</h2>
+          <p class="section-intro">Sesiones 1 a 1 en tu casa o en un parque cercano. Tú eliges cómo partir.</p>
           <div class="services-grid">
             <div class="service-card">
               <h3>Sesión individual</h3>
               <p class="pricing-price">$15.000</p>
-              <p>Una hora de entrenamiento 1 a 1, adaptado completamente a tu nivel y objetivos. Sin compromiso de continuidad. Ideal para probar o complementar tu rutina.</p>
+              <p>Una hora de entrenamiento 1 a 1, adaptada a tu nivel y a lo que buscas. Sin compromiso de continuidad: sirve para probar o para complementar tu rutina.</p>
             </div>
             <div class="service-card service-card--featured">
               <span class="pricing-badge">Más elegido</span>
               <h3>Plan mensual</h3>
               <p class="pricing-price">$160.000</p>
-              <p>3 sesiones por semana (~12 al mes). La opción de mayor impacto para quienes buscan resultados consistentes. Incluye seguimiento personalizado y ajustes de programa.</p>
+              <p>3 sesiones por semana, unas 12 al mes: queda en cerca de $13.300 por sesión. Voy siguiendo tu avance y ajusto el programa mes a mes.</p>
             </div>
             <div class="service-card">
               <h3>TRX Suspension Trainer™</h3>
-              <p>El sistema clásico. Desarrolla fuerza funcional, core, movilidad y resistencia usando únicamente el peso de tu cuerpo. Efectivo para todos los niveles.</p>
+              <p>El sistema clásico de entrenamiento en suspensión: fuerza, core y movilidad usando solo el peso de tu cuerpo. El mismo ejercicio se ajusta a cualquier nivel cambiando el ángulo.</p>
             </div>
             <div class="service-card">
               <h3>TRX Rip Trainer®</h3>
-              <p>Trabaja potencia, rotación y estabilidad del core con una barra elástica de resistencia asimétrica. Ideal para deportistas y quienes buscan trabajo explosivo.</p>
+              <p>Una barra con resistencia elástica asimétrica para trabajar potencia, rotación y estabilidad del core. Pensado para deportistas y para quienes ya quieren un trabajo más explosivo.</p>
             </div>
           </div>
         </div>
@@ -207,25 +207,26 @@ export const pages = {
         <div class="container text-center">
           <h2>¿Cómo reservar una clase?</h2>
           <ol class="steps-list">
-            <li><strong>Escríbeme por WhatsApp</strong> y cuéntame qué buscas.</li>
-            <li><strong>Coordinamos día y hora</strong> según tu disponibilidad.</li>
-            <li><strong>Tu primera clase es gratis.</strong> Sin compromiso.</li>
+            <li><strong>Escríbeme por WhatsApp</strong> y cuéntame qué te gustaría lograr.</li>
+            <li><strong>Coordinamos día, hora y lugar</strong> según lo que te acomode.</li>
+            <li><strong>Tu primera clase es gratis.</strong> Sin compromiso: sirve para conocernos y ver tu punto de partida.</li>
           </ol>
-          <p>No vendemos equipos TRX: el equipo lo llevo yo a cada sesión.</p>
+          <p>No vendo equipos TRX ni necesitas comprar nada: el equipo lo llevo yo a cada sesión.</p>
         </div>
       </section>
 
       <!-- WHAT IS TRX -->
       <section class="section-alt">
-        <div class="container about-section text-center">
+        <div class="container about-section">
           <h2>¿Qué es el entrenamiento TRX?</h2>
           <p>
-            TRX (Total Resistance eXercise) es un sistema de suspensión que usa el peso de tu propio
-            cuerpo para entrenar fuerza, estabilidad, flexibilidad y equilibrio al mismo tiempo. Se
-            instala en segundos en una puerta, árbol o barra, y se adapta a cualquier nivel, desde
-            principiantes hasta atletas avanzados, ajustando simplemente el ángulo del cuerpo.
+            TRX (Total Resistance eXercise) es un sistema de entrenamiento en suspensión: usas el
+            peso de tu propio cuerpo para trabajar fuerza, estabilidad y equilibrio al mismo tiempo.
+            Se instala en minutos en una puerta, un árbol o una barra, y el mismo ejercicio se hace
+            más suave o más exigente con solo cambiar el ángulo del cuerpo. Por eso funciona igual
+            de bien si recién partes o si llevas años entrenando.
           </p>
-          <p>¿Tienes dudas? Revisa nuestras <a href="/preguntas-frecuentes/">preguntas frecuentes</a>.</p>
+          <p>¿Tienes dudas? Revisa las <a href="/preguntas-frecuentes/">preguntas frecuentes</a>.</p>
         </div>
       </section>
 
@@ -233,27 +234,27 @@ export const pages = {
       <section>
         <div class="container text-center">
           <h2>¿Para quién es?</h2>
-          <p class="section-intro">TRX Concept funciona para personas muy distintas. Aquí algunas:</p>
+          <p class="section-intro">Entreno a personas muy distintas. Quizás te reconoces en alguna de estas:</p>
           <div class="audience-grid">
             <div class="audience-item">
               <h3>Principiantes absolutos</h3>
-              <p>Nunca has hecho ejercicio o llevas mucho tiempo sin hacerlo. Empezamos desde cero, con calma.</p>
+              <p>Nunca has entrenado o llevas años sin hacerlo. Partimos desde donde estás, con calma y sin juicio.</p>
             </div>
             <div class="audience-item">
               <h3>Personas con lesiones</h3>
-              <p>El TRX es de bajo impacto y totalmente ajustable. Ideal para recuperación y fortalecimiento preventivo.</p>
+              <p>Si tienes una molestia de rodilla, espalda u hombro, adaptamos cada ejercicio con criterio. Esto es entrenamiento, no tratamiento médico.</p>
             </div>
             <div class="audience-item">
               <h3>Profesionales ocupados</h3>
-              <p>Sin traslado al gimnasio. Entrenas en casa o cerca, en el horario que te acomode, desde las 6 AM.</p>
+              <p>Sin traslados ni horarios de gimnasio. Entrenas en tu casa o en un parque cercano, con mañanas desde las 6:00.</p>
             </div>
             <div class="audience-item">
               <h3>Deportistas activos</h3>
-              <p>Complementa tu deporte con trabajo de core, fuerza funcional y movilidad dirigida.</p>
+              <p>Ya entrenas y quieres sumar core, fuerza funcional y movilidad que complementen tu deporte.</p>
             </div>
             <div class="audience-item">
               <h3>Quienes buscan un gimnasio TRX</h3>
-              <p>Si prefieres evitar el traslado y las clases grupales, las sesiones 1 a 1 son una alternativa personalizada y flexible.</p>
+              <p>Buscabas clases de TRX cerca de ti, pero sin traslados ni grupos. Las sesiones 1 a 1 van a donde tú estás.</p>
             </div>
           </div>
         </div>
@@ -264,35 +265,19 @@ export const pages = {
         <div class="container about-section">
           <h2>¿Cómo es una sesión?</h2>
           <p>
-            Cada sesión dura aproximadamente una hora. Comenzamos con un calentamiento adaptado a tu
-            condición del día, seguido del bloque principal de trabajo con TRX, y terminamos con
-            estiramiento y movilidad.
+            Cada sesión dura cerca de una hora. Partimos con un calentamiento según cómo llegas ese
+            día, seguimos con el bloque principal de trabajo con TRX y cerramos con estiramiento y
+            movilidad.
           </p>
           <p>
-            Antes de la primera sesión conversamos sobre tus objetivos, historial de lesiones y
-            disponibilidad. Eso me permite diseñar un programa que realmente tenga sentido para ti,
-            no una rutina genérica.
+            Antes de la primera sesión conversamos sobre tu objetivo, tu experiencia y cualquier
+            molestia relevante. Con eso armo un programa que tenga sentido para ti, no una rutina
+            genérica.
           </p>
           <p>
-            El equipo lo llevo yo. Tú solo necesitas ropa cómoda y ganas de trabajar.
+            El equipo lo llevo yo a cada sesión. Tú solo necesitas ropa cómoda.
           </p>
           <p>Conoce más <a href="/sobre-mi/">sobre Nicolás y su experiencia</a>.</p>
-        </div>
-      </section>
-
-      <!-- CTA BAND -->
-      <section class="cta-band">
-        <div class="container text-center">
-          <p class="cta-band-text">La evaluación inicial es gratis y sin compromiso.</p>
-          <a
-            href="https://wa.me/56984402664"
-            data-wa
-            data-wa-msg="Hola Nico, vi el sitio de TRX Concept. Me interesa una clase de TRX y quiero agendar la evaluación gratis."
-            target="_blank"
-            rel="noopener noreferrer"
-            class="btn btn-trx"
-            >Agendar evaluación gratis
-            <svg class="wa-icon" aria-hidden="true" focusable="false"><use href="#wa-symbol"/></svg></a>
         </div>
       </section>`,
     isHome: false,

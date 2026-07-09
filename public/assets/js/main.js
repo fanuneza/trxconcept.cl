@@ -104,6 +104,19 @@
       return el ? el.value : "";
     }
 
+    // Horario is a checkbox group: "mañanas", "mañanas o tardes",
+    // "mañanas, mediodía o tardes".
+    function checkedList(name) {
+      var els = form.querySelectorAll('input[name="' + name + '"]:checked');
+      var vals = Array.prototype.map.call(els, function (el) {
+        return el.value;
+      });
+      if (vals.length > 1) {
+        return vals.slice(0, -1).join(", ") + " o " + vals[vals.length - 1];
+      }
+      return vals[0] || "";
+    }
+
     // Every named control group in the step must have a value (e.g. step 3
     // has both a comuna <select> and a horario radio group).
     function unansweredName(index) {
@@ -116,6 +129,17 @@
         if (!value(name)) return name;
       }
       return null;
+    }
+
+    // Focusing with the browser's default scroll pins the focused element to
+    // the very top of the viewport, underneath the fixed header, hiding the
+    // new question. So focus never scrolls; instead the card is scrolled just
+    // below the header (html scroll-padding-top), and only when needed.
+    var reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    function scrollCardIntoView() {
+      if (discovery.getBoundingClientRect().top < 100) {
+        discovery.scrollIntoView({ block: "start", behavior: reducedMotion.matches ? "auto" : "smooth" });
+      }
     }
 
     // moveFocus is false on the initial render: focusing there would scroll
@@ -131,13 +155,14 @@
       if (nextBtn) nextBtn.textContent = index === steps.length - 1 ? "Ver mi resultado" : "Siguiente";
       if (moveFocus) {
         var focusTarget = steps[index].querySelector("legend");
-        if (focusTarget) focusTarget.focus();
+        if (focusTarget) focusTarget.focus({ preventScroll: true });
+        scrollCardIntoView();
       }
     }
 
     function buildMessage() {
       var comuna = value("comuna") || "Santiago";
-      var horario = value("horario") || "cuando se pueda";
+      var horario = checkedList("horario") || "cuando se pueda";
       var objetivo = OBJETIVO[value("objetivo")] || "quiero empezar a entrenar";
       objetivo = objetivo.charAt(0).toUpperCase() + objetivo.slice(1);
       var msg =
@@ -166,7 +191,8 @@
       if (result) {
         result.hidden = false;
         var heading = result.querySelector(".discovery-result-title");
-        if (heading) heading.focus();
+        if (heading) heading.focus({ preventScroll: true });
+        scrollCardIntoView();
       }
       if (barFill) barFill.style.width = "100%";
     }
@@ -201,9 +227,9 @@
         showStep(0, true);
       });
     }
-    // Auto-advance when a radio is chosen (still allows Back / manual Next).
+    // Answering clears the step's validation error right away.
     form.addEventListener("change", function (e) {
-      if (e.target && e.target.type === "radio") {
+      if (e.target && (e.target.type === "radio" || e.target.type === "checkbox")) {
         steps[current].classList.remove("has-error");
       }
     });
