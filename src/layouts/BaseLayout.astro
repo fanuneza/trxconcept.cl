@@ -2,6 +2,7 @@
 import CookieBanner from "../components/CookieBanner.astro";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
+import MobileCtaBar from "../components/MobileCtaBar.astro";
 import Seo from "@jdevalk/astro-seo-graph/Seo.astro";
 import WaSymbol from "../components/WaSymbol.astro";
 import { site } from "../data/site";
@@ -124,6 +125,7 @@ if (page.structuredData) {
       <slot />
     </main>
     <Footer />
+    <MobileCtaBar />
     <CookieBanner />
     <script is:inline src="/assets/js/cookie-consent.js" defer></script>
   </body>

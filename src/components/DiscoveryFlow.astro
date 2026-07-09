@@ -1,0 +1,130 @@
+---
+// 3-step discovery flow. Reduces anxiety before contact and ends by building a
+// prefilled WhatsApp message from the answers (logic lives in main.js).
+// Progressive enhancement: without JS the steps show stacked and the fallback
+// WhatsApp link below still converts.
+---
+
+<section id="descubre" class="discovery section-alt">
+  <div class="container discovery-inner">
+    <h2>¿Es para ti? Averigüémoslo en 30 segundos</h2>
+    <p class="discovery-sub">
+      Tres preguntas y te dejo un mensaje de WhatsApp listo para enviar. Sin formularios largos, sin correo.
+    </p>
+
+    <div class="discovery-card" data-discovery>
+      <div class="discovery-progress" aria-hidden="true">
+        <span class="discovery-progress-bar" data-discovery-bar></span>
+      </div>
+
+      <form class="discovery-form" data-discovery-form novalidate>
+        <fieldset class="discovery-step" data-step="1">
+          <legend class="discovery-q" tabindex="-1">1. ¿Qué te gustaría lograr?</legend>
+          <div class="discovery-options">
+            <label class="discovery-opt">
+              <input type="radio" name="objetivo" value="empezar" /><span>Empezar desde cero</span>
+            </label>
+            <label class="discovery-opt">
+              <input type="radio" name="objetivo" value="retomar" /><span>Retomar el ejercicio</span>
+            </label>
+            <label class="discovery-opt">
+              <input type="radio" name="objetivo" value="molestia" /><span>Entrenar cuidando una molestia</span>
+            </label>
+            <label class="discovery-opt">
+              <input type="radio" name="objetivo" value="fuerza" /><span>Ganar fuerza y mejorar la postura</span>
+            </label>
+          </div>
+          <p class="discovery-error">Elige una opción para seguir.</p>
+        </fieldset>
+
+        <fieldset class="discovery-step" data-step="2">
+          <legend class="discovery-q" tabindex="-1">2. ¿Tienes alguna molestia o eres principiante?</legend>
+          <p class="discovery-hint">
+            Me ayuda a adaptar la sesión. Esto es entrenamiento con criterio, no tratamiento médico.
+          </p>
+          <div class="discovery-options">
+            <label class="discovery-opt">
+              <input type="radio" name="molestia" value="ninguna" /><span>Ninguna en particular</span>
+            </label>
+            <label class="discovery-opt">
+              <input type="radio" name="molestia" value="rodilla" /><span>Molestia de rodilla</span>
+            </label>
+            <label class="discovery-opt">
+              <input type="radio" name="molestia" value="espalda" /><span>Molestia de espalda</span>
+            </label>
+            <label class="discovery-opt">
+              <input type="radio" name="molestia" value="principiante" /><span>Soy principiante</span>
+            </label>
+            <label class="discovery-opt">
+              <input type="radio" name="molestia" value="otra" /><span>Otra, te la cuento</span>
+            </label>
+          </div>
+          <p class="discovery-error">Elige una opción para seguir.</p>
+        </fieldset>
+
+        <fieldset class="discovery-step" data-step="3">
+          <legend class="discovery-q" tabindex="-1">3. ¿Dónde y cuándo te acomoda?</legend>
+          <label class="discovery-field">
+            <span class="discovery-label">Tu comuna</span>
+            <select name="comuna">
+              <option value="Providencia">Providencia</option>
+              <option value="Las Condes">Las Condes</option>
+              <option value="Vitacura">Vitacura</option>
+              <option value="Ñuñoa">Ñuñoa</option>
+              <option value="La Reina">La Reina</option>
+              <option value="Lo Barnechea">Lo Barnechea</option>
+              <option value="Santiago Centro">Santiago Centro</option>
+              <option value="Macul">Macul</option>
+              <option value="Peñalolén">Peñalolén</option>
+              <option value="otra comuna">Otra comuna</option>
+            </select>
+          </label>
+          <fieldset class="discovery-inline">
+            <legend class="discovery-label">Horario que prefieres</legend>
+            <div class="discovery-options discovery-options--row">
+              <label class="discovery-opt">
+                <input type="radio" name="horario" value="mañanas" /><span>Mañanas</span>
+              </label>
+              <label class="discovery-opt">
+                <input type="radio" name="horario" value="mediodía" /><span>Mediodía</span>
+              </label>
+              <label class="discovery-opt">
+                <input type="radio" name="horario" value="tardes" /><span>Tardes</span>
+              </label>
+            </div>
+          </fieldset>
+          <p class="discovery-error">Elige un horario para seguir.</p>
+        </fieldset>
+
+        <div class="discovery-result" data-discovery-result hidden>
+          <h3 class="discovery-result-title" tabindex="-1">Listo. Un buen primer paso para ti</h3>
+          <p>
+            Un comienzo privado y de bajo impacto encaja contigo. Te preparé un mensaje con tus respuestas; solo
+            revísalo y envíalo.
+          </p>
+          <a
+            class="btn btn-trx discovery-send"
+            data-discovery-link
+            href="https://wa.me/56984402664"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Enviar y agendar evaluación gratis
+            <svg class="wa-icon" aria-hidden="true" focusable="false"><use href="#wa-symbol"></use></svg>
+          </a>
+          <button type="button" class="discovery-restart" data-discovery-restart>Volver a empezar</button>
+        </div>
+      </form>
+
+      <div class="discovery-nav" hidden>
+        <button type="button" class="btn btn-ghost" data-discovery-back hidden>Atrás</button>
+        <button type="button" class="btn btn-trx" data-discovery-next>Siguiente</button>
+      </div>
+    </div>
+
+    <p class="discovery-fallback">
+      ¿Prefieres escribir directo?
+      <a href="https://wa.me/56984402664" data-wa target="_blank" rel="noopener noreferrer">Preguntar por WhatsApp</a>
+    </p>
+  </div>
+</section>

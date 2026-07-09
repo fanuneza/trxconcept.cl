@@ -5,8 +5,8 @@ export const site = {
   consentCookie: "site_consent",
   instagram: "https://www.instagram.com/trxconcept",
   whatsappHref:
-    "https://wa.me/56984402664?text=Hola%21%20Vi%20tu%20sitio%20web%20y%20me%20gustar%C3%ADa%20agendar%20una%20clase%20de%20TRX.",
-  whatsappLabel: "Escríbeme por WhatsApp",
+    "https://wa.me/56984402664?text=Hola%20Nico%2C%20vi%20el%20sitio%20de%20TRX%20Concept.%20Me%20interesa%20agendar%20la%20evaluaci%C3%B3n%20gratis.",
+  whatsappLabel: "Agendar evaluación gratis por WhatsApp",
   nav: [
     { href: "/servicios/", label: "Servicios" },
     { href: "/sobre-mi/", label: "Sobre mí" },

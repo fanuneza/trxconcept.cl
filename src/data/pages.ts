@@ -46,17 +46,17 @@ const renderPageHero = ({
 
 export const pages = {
   home: {
-    title: `Clases de TRX en Santiago | Entrenador`,
-    description: `Clases de TRX personalizadas en Santiago, a domicilio o al aire libre. Sin gimnasio, sin máquinas. Primera clase gratis. Reserva por WhatsApp.`,
+    title: `Clases de TRX en Santiago, a domicilio y 1 a 1`,
+    description: `Entrenamiento personal 1 a 1 con TRX en Santiago, a domicilio o al aire libre. Para empezar de a poco o retomar seguro, aunque tengas una molestia. Evaluación inicial gratis por WhatsApp.`,
     canonical: `https://trxconcept.cl/`,
-    ogTitle: `Clases de TRX en Santiago | TRX Concept`,
+    ogTitle: `Clases de TRX en Santiago, 1 a 1 a domicilio | TRX Concept`,
     structuredData: {
       "@context": "https://schema.org",
       "@type": ["LocalBusiness", "HealthAndBeautyBusiness"],
       "@id": "https://trxconcept.cl/#business",
       name: "TRX Concept",
       description:
-        "Clases de TRX personalizadas en Santiago, Chile. Entrenador a domicilio o al aire libre. Primera clase gratis.",
+        "Entrenamiento personal 1 a 1 con TRX en Santiago, Chile. A domicilio o al aire libre, para principiantes y para quienes retoman el ejercicio. Evaluación inicial gratis.",
       url: "https://trxconcept.cl/",
       telephone: "+56984402664",
       image: "https://trxconcept.cl/assets/img/og-image.webp",
@@ -106,277 +106,12 @@ export const pages = {
         },
       ],
     },
-    content: `<!-- HERO SECTION -->
-      <section id="hero" class="hero">
-        <picture class="hero-media" aria-hidden="true">
-          <source type="image/avif" srcset="/assets/img/hero-768.avif 768w, /assets/img/hero-960.avif 960w, /assets/img/hero-1080.avif 1080w, /assets/img/hero-1280.avif 1280w" sizes="100vw" />
-          <source type="image/webp" srcset="/assets/img/hero-768.webp 768w, /assets/img/hero-960.webp 960w, /assets/img/hero-1080.webp 1080w, /assets/img/hero-1280.webp 1280w" sizes="100vw" />
-          <img src="/assets/img/hero-960.webp" alt="" width="960" height="540" fetchpriority="high" decoding="async" loading="eager" />
-        </picture>
-        <div class="container">
-          <h1 class="hero-title">Entrena donde estés,<br>sin máquinas, sin excusas.</h1>
-          <p class="hero-lead"><a href="/servicios/">Clases de TRX personalizadas</a> en casa o al aire libre,<br>sin el estrés del gimnasio.</p>
-          <a
-            href="https://wa.me/56984402664?text=Hola%21%20Vi%20tu%20sitio%20web%20y%20me%20gustar%C3%ADa%20agendar%20una%20clase%20de%20TRX." data-wa
-            target="_blank"
-            rel="noopener noreferrer"
-            class="btn btn-trx"
-            >Escríbeme para tu clase gratis
-            <svg class="wa-icon" aria-hidden="true" focusable="false"><use href="#wa-symbol"/></svg></a>
-          <p class="hero-note"><span class="hero-badge">⚡ Respondo en 4 horas o menos</span></p>
-        </div>
-      </section>
-
-      <!-- TRUST ANCHOR -->
-      <section id="trust" class="trust">
-        <div class="container trust-inner">
-          <picture>
-            <source type="image/avif" srcset="/assets/img/nico-140.avif 140w, /assets/img/nico-320.avif 320w" sizes="(max-width: 767px) 140px, 140px" />
-            <source type="image/webp" srcset="/assets/img/nico-140.webp 140w, /assets/img/nico-384.webp 384w" sizes="(max-width: 767px) 140px, 140px" />
-            <img
-              src="/assets/img/nico-140.webp"
-              alt="Nicolás Echeverría, entrenador personal TRX"
-              class="profile-pic"
-              width="140"
-              height="140"
-              decoding="async"
-            />
-          </picture>
-          <div class="trust-content">
-            <h2 class="trust-name"><a href="/sobre-mi/">Nicolás Echeverría</a></h2>
-            <p>TRX Suspension Trainer™ y Rip Trainer® certificado para clases individuales y grupales.</p>
-            <div class="trust-stats">
-              <div class="trust-stat">
-                <span class="trust-stat-number">10+</span>
-                <span class="trust-stat-label">años de experiencia</span>
-              </div>
-              <div class="trust-stat">
-                <span class="trust-stat-number">1 a 1</span>
-                <span class="trust-stat-label">atención personalizada</span>
-              </div>
-              <div class="trust-stat">
-                <span class="trust-stat-number">Santiago</span>
-                <span class="trust-stat-label">Chile</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- BENEFITS SECTION -->
-      <section id="benefits" class="benefits">
-        <div class="benefits-grid container">
-          <div class="benefit">
-            <div class="benefit-icon-wrap">
-              <img class="benefit-icon-svg" src="/assets/img/icon-solo-para-ti.svg" alt="" aria-hidden="true" width="24" height="24" loading="lazy" />
-            </div>
-            <h3>Solo para ti</h3>
-            <p>Tu entrenamiento, a tu ritmo, con atención completa de principio a fin.</p>
-          </div>
-          <div class="benefit">
-            <div class="benefit-icon-wrap">
-              <img class="benefit-icon-svg" src="/assets/img/icon-donde-estes.svg" alt="" aria-hidden="true" width="24" height="24" loading="lazy" />
-            </div>
-            <h3>Donde estés</h3>
-            <p>En casa o al aire libre, sin máquinas, sin traslados.</p>
-          </div>
-          <div class="benefit">
-            <div class="benefit-icon-wrap">
-              <img class="benefit-icon-svg" src="/assets/img/icon-bajo-riesgo.svg" alt="" aria-hidden="true" width="24" height="24" loading="lazy" />
-            </div>
-            <h3>Bajo riesgo de lesiones</h3>
-            <p>Método de bajo impacto, ideal para volver al ejercicio o empezar desde cero.</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- MID-PAGE CTA BAND -->
-      <section class="cta-band">
-        <div class="container text-center">
-          <p class="cta-band-text"><a href="/preguntas-frecuentes/">¿Dudas?</a> Tu primera clase es sin costo.</p>
-          <a
-            href="https://wa.me/56984402664?text=Hola%21%20Vi%20tu%20sitio%20web%20y%20me%20gustar%C3%ADa%20agendar%20una%20clase%20de%20TRX." data-wa
-            target="_blank"
-            rel="noopener noreferrer"
-            class="btn btn-trx"
-            >Escríbeme para tu clase gratis
-            <svg class="wa-icon" aria-hidden="true" focusable="false"><use href="#wa-symbol"/></svg></a>
-        </div>
-      </section>
-
-      <!-- TESTIMONIAL SECTION -->
-      <section
-        id="testimonios"
-        class="testimonial container"
-      >
-        <h2>Lo que dicen quienes entrenan con Nico</h2>
-        <div class="testimonial-grid">
-          <div class="testimonial-col">
-            <div class="testimonial-card">
-              <picture>
-                <source type="image/avif" srcset="/assets/img/testimonio-valentinarosenthal-320.avif 320w" sizes="100px" />
-                <source type="image/webp" srcset="/assets/img/testimonio-valentinarosenthal-320.webp 320w, /assets/img/testimonio-valentinarosenthal.webp 512w" sizes="100px" />
-                <img
-                  src="/assets/img/testimonio-valentinarosenthal-320.webp"
-                  alt="Valentina Rosenthal"
-                  class="testimonial-img"
-                  loading="lazy"
-                  decoding="async"
-                  width="512"
-                  height="512"
-                />
-              </picture>
-              <div class="testimonial-stars" aria-label="5 estrellas">★★★★★</div>
-              <blockquote class="testimonial-quote">
-                <p>
-                  Entreno con Nico desde 2021. Partimos dos veces a la semana y
-                  hoy entrenamos tres. Sin haber sido nunca buena para hacer
-                  deportes, Nico ha logrado que tenga una rutina y que lleve
-                  cuatro años entrenando, con todos los beneficios que esto trae.
-                </p>
-                <footer class="testimonial-author">– Valentina</footer>
-              </blockquote>
-            </div>
-          </div>
-
-          <div class="testimonial-col">
-            <div class="testimonial-card">
-              <picture>
-                <source type="image/avif" srcset="/assets/img/testimonio-marisagracia-320.avif 320w" sizes="100px" />
-                <source type="image/webp" srcset="/assets/img/testimonio-marisagracia-320.webp 320w, /assets/img/testimonio-marisagracia.webp 512w" sizes="100px" />
-                <img
-                  src="/assets/img/testimonio-marisagracia-320.webp"
-                  alt="Marisa Gracia"
-                  class="testimonial-img"
-                  loading="lazy"
-                  decoding="async"
-                  width="512"
-                  height="512"
-                />
-              </picture>
-              <div class="testimonial-stars" aria-label="5 estrellas">★★★★★</div>
-              <blockquote class="testimonial-quote">
-                <p>
-                  Entrenar con Nicolás fue una excelente experiencia. Gracias a su
-                  guía y el trabajo constante con TRX, mi cuerpo ganó fuerza,
-                  estabilidad y tono muscular. Noté mejoras en mi postura, control
-                  corporal y energía general.
-                </p>
-                <footer class="testimonial-author">– Marisa Gracia</footer>
-              </blockquote>
-            </div>
-          </div>
-
-          <div class="testimonial-col">
-            <div class="testimonial-card">
-              <picture>
-                <source type="image/avif" srcset="/assets/img/testimonio-mariaignacia-320.avif 320w" sizes="100px" />
-                <source type="image/webp" srcset="/assets/img/testimonio-mariaignacia-320.webp 320w, /assets/img/testimonio-mariaignacia.webp 792w" sizes="100px" />
-                <img
-                  src="/assets/img/testimonio-mariaignacia-320.webp"
-                  alt="María Ignacia Williamson"
-                  class="testimonial-img"
-                  loading="lazy"
-                  decoding="async"
-                  width="792"
-                  height="792"
-                />
-              </picture>
-              <div class="testimonial-stars" aria-label="5 estrellas">★★★★★</div>
-              <blockquote class="testimonial-quote">
-                <p>
-                  Entrenar con Nico fue una muy buena experiencia. Su enfoque
-                  personalizado y su profundo conocimiento del TRX hicieron que
-                  cada sesión fuera desafiante pero muy gratificante.
-                </p>
-                <footer class="testimonial-author">– María Ignacia</footer>
-              </blockquote>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- COMPARISON -->
-      <section id="comparison" class="comparison">
-        <h2>TRX Concept vs. el gimnasio tradicional</h2>
-        <div class="comparison-cards">
-          <div class="comp-card comp-card-others">
-            <h3>Gimnasio / CrossFit</h3>
-            <ul>
-              <li><span class="comp-x" aria-hidden="true">✗</span>Sin personalización 1 a 1</li>
-              <li><span class="comp-x" aria-hidden="true">✗</span>Solo en instalaciones fijas</li>
-              <li><span class="comp-x" aria-hidden="true">✗</span>No siempre adaptable a tu nivel</li>
-              <li><span class="comp-x" aria-hidden="true">✗</span>Mayor riesgo de lesiones</li>
-              <li><span class="comp-x" aria-hidden="true">✗</span>Horario rígido</li>
-              <li><span class="comp-x" aria-hidden="true">✗</span>Mensualidad fija obligatoria</li>
-            </ul>
-          </div>
-          <div class="comp-card comp-card-trx">
-            <span class="recommended-badge">Recomendado</span>
-            <h3>TRX Concept</h3>
-            <ul>
-              <li><span class="comp-check" aria-hidden="true">✓</span>Personalización 1 a 1</li>
-              <li><span class="comp-check" aria-hidden="true">✓</span>En casa o al aire libre</li>
-              <li><span class="comp-check" aria-hidden="true">✓</span>Adaptable a cualquier nivel</li>
-              <li><span class="comp-check" aria-hidden="true">✓</span>Bajo riesgo de lesiones</li>
-              <li><span class="comp-check" aria-hidden="true">✓</span>Horario flexible</li>
-              <li><span class="comp-check" aria-hidden="true">✓</span>Sin mensualidad fija</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <!-- PACKAGES / PRICING -->
-      <section id="pricing" class="pricing">
-        <h2>Planes y precios</h2>
-        <p class="pricing-subtitle">Sin mensualidad fija. Entrena cuando puedas.</p>
-        <div class="pricing-cards">
-          <div class="pricing-card">
-            <h3>Sesión Individual</h3>
-            <p class="pricing-price">$15.000</p>
-            <p class="pricing-desc">Ideal para probar o entrenar a tu propio ritmo.</p>
-            <ul class="pricing-list">
-              <li>1 hora de entrenamiento personalizado</li>
-              <li>En casa o al aire libre</li>
-              <li>Adaptado a tu nivel</li>
-              <li>Sin compromiso</li>
-            </ul>
-            <a
-              href="https://wa.me/56984402664?text=Hola%21%20Vi%20tu%20sitio%20web%20y%20me%20gustar%C3%ADa%20agendar%20una%20clase%20de%20TRX." data-wa
-              target="_blank"
-              rel="noopener noreferrer"
-              class="btn btn-whatsapp"
-              >Probar gratis por WhatsApp
-              <svg class="wa-icon" aria-hidden="true" focusable="false"><use href="#wa-symbol"/></svg></a>
-          </div>
-          <div class="pricing-card pricing-card-featured">
-            <span class="pricing-badge">Más popular</span>
-            <h3>Paquete Mensual</h3>
-            <p class="pricing-price">$160.000</p>
-            <p class="pricing-per">3 veces por semana · ~12 sesiones</p>
-            <p class="pricing-per-session">≈ $13.300 por sesión</p>
-            <ul class="pricing-list">
-              <li>Resultados constantes y medibles</li>
-              <li>Seguimiento personalizado continuo</li>
-              <li>Mejor precio por sesión</li>
-              <li>Horario flexible desde las 6 AM</li>
-            </ul>
-            <a
-              href="https://wa.me/56984402664?text=Hola%21%20Vi%20tu%20sitio%20web%20y%20me%20gustar%C3%ADa%20agendar%20una%20clase%20de%20TRX." data-wa
-              target="_blank"
-              rel="noopener noreferrer"
-              class="btn btn-trx"
-              >Consultar por WhatsApp
-              <svg class="wa-icon" aria-hidden="true" focusable="false"><use href="#wa-symbol"/></svg></a>
-          </div>
-        </div>
-        <p class="pricing-note">Disponible: Mañanas desde las 6:00 AM.</p>
-      </section>`,
+    content: "",
     isHome: true,
   },
   services: {
-    title: `Clases de TRX en Santiago: Precios y Paquetes`,
-    description: `Clases individuales y paquetes mensuales de TRX en Santiago. Desde $15.000 la sesión. Entrenamiento personalizado, a domicilio o al aire libre.`,
+    title: `Clases de TRX en Santiago: precios y a domicilio`,
+    description: `Clases de TRX 1 a 1 en Santiago, a domicilio o al aire libre. Evaluación inicial gratis, sesión individual $15.000 y plan mensual $160.000. Para principiantes y quienes retoman.`,
     canonical: `https://trxconcept.cl/servicios/`,
     breadcrumb: [
       { name: "Inicio", item: "https://trxconcept.cl/" },
@@ -402,6 +137,13 @@ export const pages = {
         "@type": "OfferCatalog",
         name: "Planes de entrenamiento TRX",
         itemListElement: [
+          {
+            "@type": "Offer",
+            name: "Evaluación inicial TRX",
+            description: "Primera sesión para conocernos y ver tu punto de partida. Sin costo ni compromiso.",
+            price: "0",
+            priceCurrency: "CLP",
+          },
           {
             "@type": "Offer",
             name: "Sesión Individual TRX",
@@ -533,6 +275,22 @@ export const pages = {
           </p>
           <p>Conoce más <a href="/sobre-mi/">sobre Nicolás y su experiencia</a>.</p>
         </div>
+      </section>
+
+      <!-- CTA BAND -->
+      <section class="cta-band">
+        <div class="container text-center">
+          <p class="cta-band-text">La evaluación inicial es gratis y sin compromiso.</p>
+          <a
+            href="https://wa.me/56984402664"
+            data-wa
+            data-wa-msg="Hola Nico, vi el sitio de TRX Concept. Me interesa una clase de TRX y quiero agendar la evaluación gratis."
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn btn-trx"
+            >Agendar evaluación gratis
+            <svg class="wa-icon" aria-hidden="true" focusable="false"><use href="#wa-symbol"/></svg></a>
+        </div>
       </section>`,
     isHome: false,
   },
@@ -661,6 +419,14 @@ export const pages = {
         },
         {
           "@type": "Question",
+          name: "¿Esto es rehabilitación o tratamiento médico?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "No. Esto es entrenamiento personal con criterio, adaptado a tu historial, pero no reemplaza a un tratamiento médico ni a la kinesiología. Si estás en rehabilitación o tienes un diagnóstico que requiere supervisión, entreno dentro del alcance que indique tu profesional de salud y en coordinación con él.",
+          },
+        },
+        {
+          "@type": "Question",
           name: "¿En qué sectores de Santiago entrenas?",
           acceptedAnswer: {
             "@type": "Answer",
@@ -772,6 +538,13 @@ export const pages = {
             <summary>¿Es seguro si tengo una lesión o dolor crónico?</summary>
             <p class="faq-answer">
               El TRX es uno de los métodos más seguros que existen, precisamente porque es de bajo impacto y sin cargas externas. He trabajado con personas en recuperación de lesiones de rodilla, hombro y espalda. Eso sí, antes de empezar siempre conversamos sobre tu situación médica y, si es necesario, coordino con tu médico o kinesiólogo.
+            </p>
+          </details>
+
+          <details class="faq-item" id="es-rehabilitacion">
+            <summary>¿Esto es rehabilitación o tratamiento médico?</summary>
+            <p class="faq-answer">
+              No. Esto es entrenamiento personal con criterio, adaptado a tu historial, pero no reemplaza a un tratamiento médico ni a la kinesiología. Si estás en rehabilitación o tienes un diagnóstico que requiere supervisión, entreno dentro del alcance que indique tu profesional de salud y en coordinación con él.
             </p>
           </details>
 

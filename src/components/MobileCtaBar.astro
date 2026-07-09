@@ -1,0 +1,14 @@
+---
+// Sticky bottom bar for mobile: primary WhatsApp action + softer discovery-flow
+// entry. Hidden on desktop, where the floating WhatsApp button takes over.
+const waEval = "Hola Nico, vi el sitio de TRX Concept. Me gustaría agendar la evaluación gratis.";
+const { discoveryHref = "/#descubre" } = Astro.props as { discoveryHref?: string };
+---
+
+<div class="mobile-cta-bar" role="group" aria-label="Acciones rápidas">
+  <a href="#" data-wa data-wa-msg={waEval} target="_blank" rel="noopener noreferrer" class="mobile-cta-bar-primary">
+    <svg class="wa-icon" aria-hidden="true" focusable="false"><use href="#wa-symbol"></use></svg>
+    Evaluación gratis
+  </a>
+  <a href={discoveryHref} class="mobile-cta-bar-secondary">¿Es para mí?</a>
+</div>

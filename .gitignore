@@ -7,7 +7,6 @@
 
 # Local logs, audits, and generated QA artifacts
 /log/
-/docs/
 /coverage/
 /playwright-report/
 /test-results/
@@ -32,8 +31,6 @@
 *.pfx
 
 # Loose root-level documentation stays local
-/*.md
-!/README.md
 !/Astro.md
 !/CI.md
 !/Cloudflare.md
