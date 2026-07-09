@@ -63,19 +63,19 @@ A literal inventory of every route, section, component, client-side behavior, an
 
 ## 6. Non-page capabilities / endpoints
 
-| Capability                              | File                                                   | Notes                                                                                               |
-| --------------------------------------- | ------------------------------------------------------ | --------------------------------------------------------------------------------------------------- |
-| XML sitemap                             | `@astrojs/sitemap` integration (`astro.config.mjs`)    | Excludes `404.html` and `/politica-de-cookies/`                                                     |
-| `robots.txt`                            | `astro-robots-txt` integration                         | Default config                                                                                      |
-| JSON-LD schema graph (per-page, inline) | `src/utils/schema.ts` + `BaseLayout.astro`             | WebSite + Organization + WebPage + BreadcrumbList, merged with page `structuredData`                |
-| Standalone schema endpoint              | `src/pages/schema/pages.json.ts`                       | Serves the same merged graph for every page in `pages.ts`, as JSON, via `createSchemaEndpoint`      |
-| Schema map (AI/agent discovery)         | `src/pages/schemamap.xml.ts`                           | `createSchemaMap`, points at `/schema/pages.json`                                                   |
-| API catalog (`.well-known`)             | `src/pages/.well-known/api-catalog.ts`                 | `createApiCatalog`, references `/schema/pages.json` and `/schemamap.xml`, service doc `/servicios/` |
-| IndexNow key route                      | `src/pages/591c2b87f0b68c44f260215f5d8e9da3.txt.ts`    | `createIndexNowKeyRoute`; always enabled, filename is the key                                       |
-| Cookie policy page                      | `/politica-de-cookies/`                                | Documents `site_consent` and `_ga`/`_ga_*` cookies, consent mechanics, Ley 19.628 basis             |
-| Security/cache headers                  | `public/_headers`                                      | Cloudflare Pages HSTS/CSP/frame/referrer/permissions policies + per-route cache-control             |
-| CSS inlining                            | `BaseLayout.astro` (`readFileSync` of `style.min.css`) | No external stylesheet request at runtime                                                           |
-| Analytics                               | GA4 via `gtag.js`, ID `site.ga4Id`                     | Loaded only post-consent; no GTM container                                                          |
+| Capability                              | File                                                   | Notes                                                                                                                              |
+| --------------------------------------- | ------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------- |
+| XML sitemap                             | `@astrojs/sitemap` integration (`astro.config.mjs`)    | Excludes `404.html` and `/politica-de-cookies/`                                                                                    |
+| `robots.txt`                            | `astro-robots-txt` integration                         | Default config                                                                                                                     |
+| JSON-LD schema graph (per-page, inline) | `src/utils/schema.ts` + `BaseLayout.astro`             | Organization + WebPage + BreadcrumbList, merged with page `structuredData`; `WebSite` is homepage-only via `index.astro` head slot |
+| Standalone schema endpoint              | `src/pages/schema/pages.json.ts`                       | Serves the same merged graph for every page in `pages.ts`, as JSON, via `createSchemaEndpoint`                                     |
+| Schema map (AI/agent discovery)         | `src/pages/schemamap.xml.ts`                           | `createSchemaMap`, points at `/schema/pages.json`                                                                                  |
+| API catalog (`.well-known`)             | `src/pages/.well-known/api-catalog.ts`                 | `createApiCatalog`, references `/schema/pages.json` and `/schemamap.xml`, service doc `/servicios/`                                |
+| IndexNow key route                      | `src/pages/591c2b87f0b68c44f260215f5d8e9da3.txt.ts`    | `createIndexNowKeyRoute`; always enabled, filename is the key                                                                      |
+| Cookie policy page                      | `/politica-de-cookies/`                                | Documents `site_consent` and `_ga`/`_ga_*` cookies, consent mechanics, Ley 19.628 basis                                            |
+| Security/cache headers                  | `public/_headers`                                      | Cloudflare Pages HSTS/CSP/frame/referrer/permissions policies + per-route cache-control                                            |
+| CSS inlining                            | `BaseLayout.astro` (`readFileSync` of `style.min.css`) | No external stylesheet request at runtime                                                                                          |
+| Analytics                               | GA4 via `gtag.js`, ID `site.ga4Id`                     | Loaded only post-consent; no GTM container                                                                                         |
 
 ## 7. Testing capabilities
 

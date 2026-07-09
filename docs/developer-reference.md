@@ -75,7 +75,7 @@ If you add a new radio value in the markup without adding a matching key in the 
 
 ## Schema/SEO graph notes
 
-- `src/utils/schema.ts`'s `buildSchemaGraph()` always emits, in order: `WebSite` (with a `SearchAction`), `Organization`, `WebPage`, and (if a `breadcrumb` was provided) `BreadcrumbList`. `BaseLayout.astro` then merges each page's own `structuredData` (e.g. `LocalBusiness`, `Service`, `FAQPage`) into that graph's `@graph` array — either by spreading an existing `@graph` array or appending the single node with its own `@context` stripped.
+- `src/utils/schema.ts`'s `buildSchemaGraph()` always emits, in order: `Organization`, `WebPage`, and (if a `breadcrumb` was provided) `BreadcrumbList`. `BaseLayout.astro` then merges each page's own `structuredData` (e.g. `LocalBusiness`, `Service`, `FAQPage`) into that graph's `@graph` array — either by spreading an existing `@graph` array or appending the single node with its own `@context` stripped. The `WebSite` entity is injected only on the homepage (`src/pages/index.astro`) through the `head` slot, so Google receives the site-name signal exclusively on the root domain page.
 - `src/pages/schema/pages.json.ts` reconstructs the same graph server-side for every entry in `pages` (via `@jdevalk/astro-seo-graph`'s `createSchemaEndpoint`) — if you add a new page to `src/data/pages.ts`, it's automatically picked up here with no extra wiring, as long as it's exported from the `pages` object.
 
 ## Local verification tips

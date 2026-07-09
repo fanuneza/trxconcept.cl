@@ -74,6 +74,7 @@ if (page.structuredData) {
         { rel: "sitemap", type: "application/xml", href: "/sitemap-index.xml" },
       ]}
     />
+    <slot name="head" />
     {
       /* anton-latin-ext is intentionally not preloaded: Chilean-Spanish copy only
         uses the latin subset, and the extra font fetch delays the hero LCP. */

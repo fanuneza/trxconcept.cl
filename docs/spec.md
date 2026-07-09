@@ -46,11 +46,11 @@ How TRX Concept (trxconcept.cl) is built and why. This is the architecture-level
 - `astro.config.mjs` enables `validateH1`, `validateUniqueMetadata`, `validateImageAlt`, `validateMetadataLength`, and `validateInternalLinks` (with a `skip` allowlist for `/api/`, `/feed.xml`, `/sitemap*.xml`, `/schemamap.xml`, `/schema/`) — these run as build-time warnings during `astro build`, not hard failures.
 - `markdownAlternate: true` is enabled; the plugin strips `.md` alternate `<link>` tags for routes where no Markdown output exists, producing benign "stripped link" warnings for existing pages.
 - IndexNow is always on (not gated by env var), keyed via a dedicated route file at `src/pages/591c2b87f0b68c44f260215f5d8e9da3.txt.ts` (`createIndexNowKeyRoute`) whose filename **is** the IndexNow key.
-- JSON-LD: `src/utils/schema.ts` exports `buildSchemaGraph()`, which uses `@jdevalk/seo-graph-core` helpers (`buildWebSite`, `buildWebPage`, `buildPiece`, `makeIds`) to construct a shared `@graph` containing:
-  1. `WebSite` (with a `SearchAction` targeting `{SITE_URL}?q={search_term_string}`)
-  2. `Organization` (id `trx-concept`, with logo)
-  3. `WebPage` for the current URL/title/description
-  4. `BreadcrumbList`, only if the page supplies a `breadcrumb`
+- JSON-LD: `src/utils/schema.ts` exports `buildSchemaGraph()`, which uses `@jdevalk/seo-graph-core` helpers (`buildWebPage`, `buildPiece`, `makeIds`) to construct a shared `@graph` containing:
+  1. `Organization` (id `trx-concept`, with logo)
+  2. `WebPage` for the current URL/title/description
+  3. `BreadcrumbList`, only if the page supplies a `breadcrumb`
+- The `WebSite` entity (used by Google to determine the search-result site name) is declared explicitly on the homepage only, via a `<script type="application/ld+json">` injected through the `head` slot of `BaseLayout.astro` in `src/pages/index.astro`. It is intentionally absent from the global layout so it does not repeat on subpages.
 - `BaseLayout.astro` calls `buildSchemaGraph()` per request, then merges in that page's own `structuredData` from `pages.ts` (either splicing an existing `@graph` array, or pushing the object itself, stripped of `@context`). This merged graph is passed into `<Seo graph={baseGraph} />`.
 - The exact same merge logic (independently re-implemented, not shared as a function) lives in `src/pages/schema/pages.json.ts`, which exposes the graph for **every** page as a standalone JSON endpoint via `createSchemaEndpoint({ entries, mapper })`, iterating `Object.values(pages)`.
 - `src/pages/schemamap.xml.ts` (`createSchemaMap`) and `src/pages/.well-known/api-catalog.ts` (`createApiCatalog`) are companion AI/agent-discovery endpoints from the same `@jdevalk/astro-seo-graph` package, both pointing back at `/schema/pages.json` as the one schema endpoint and `/servicios/` as the service doc.

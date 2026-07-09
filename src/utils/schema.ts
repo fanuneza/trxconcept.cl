@@ -1,12 +1,4 @@
-import {
-  makeIds,
-  buildWebSite,
-  buildWebPage,
-  buildPiece,
-  type WebPageInput,
-  type GraphEntity,
-  type WebSiteInput,
-} from "@jdevalk/seo-graph-core";
+import { makeIds, buildWebPage, buildPiece, type WebPageInput, type GraphEntity } from "@jdevalk/seo-graph-core";
 import { site } from "../data/site";
 
 const SITE_URL = site.url.endsWith("/") ? site.url : `${site.url}/`;
@@ -32,31 +24,7 @@ export function buildSchemaGraph(options: {
   const ids = makeIds({ siteUrl: SITE_URL });
   const pieces: GraphEntity[] = [];
 
-  // 1. WebSite (con SearchAction de búsqueda interna)
-  pieces.push(
-    buildWebSite(
-      {
-        url: SITE_URL,
-        name: site.name,
-        alternateName: [site.name, "trxconcept.cl"],
-        description: options.description,
-        publisher: { "@id": ids.organization("trx-concept") },
-        potentialAction: [
-          {
-            "@type": "SearchAction",
-            target: {
-              "@type": "EntryPoint",
-              urlTemplate: `${SITE_URL}?q={search_term_string}`,
-            },
-            "query-input": "required name=search_term_string",
-          } as unknown as Record<string, unknown>,
-        ],
-      } as unknown as WebSiteInput,
-      ids
-    ) as GraphEntity
-  );
-
-  // 2. Organización
+  // 1. Organización
   pieces.push(
     buildPiece({
       "@type": "Organization",
@@ -70,7 +38,7 @@ export function buildSchemaGraph(options: {
     }) as GraphEntity
   );
 
-  // 3. WebPage
+  // 2. WebPage
   const webPageInput: WebPageInput = {
     url: options.url,
     name: options.title,
@@ -82,7 +50,7 @@ export function buildSchemaGraph(options: {
   }
   pieces.push(buildWebPage(webPageInput, ids) as GraphEntity);
 
-  // 4. BreadcrumbList
+  // 3. BreadcrumbList
   if (options.breadcrumb) {
     pieces.push({
       "@type": "BreadcrumbList",
