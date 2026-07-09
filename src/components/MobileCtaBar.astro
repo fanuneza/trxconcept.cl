@@ -6,7 +6,14 @@ const { discoveryHref = "/#descubre" } = Astro.props as { discoveryHref?: string
 ---
 
 <div class="mobile-cta-bar" role="group" aria-label="Acciones rápidas">
-  <a href="#" data-wa data-wa-msg={waEval} target="_blank" rel="noopener noreferrer" class="mobile-cta-bar-primary">
+  <a
+    href="https://wa.me/56984402664"
+    data-wa
+    data-wa-msg={waEval}
+    target="_blank"
+    rel="noopener noreferrer"
+    class="mobile-cta-bar-primary"
+  >
     <svg class="wa-icon" aria-hidden="true" focusable="false"><use href="#wa-symbol"></use></svg>
     Evaluación gratis
   </a>

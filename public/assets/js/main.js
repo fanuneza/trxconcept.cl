@@ -20,6 +20,13 @@
         menu.classList.remove("nav-open");
       }
     });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && menu.classList.contains("nav-open")) {
+        btn.setAttribute("aria-expanded", "false");
+        menu.classList.remove("nav-open");
+        btn.focus();
+      }
+    });
   }
 
   // WhatsApp links — single source of truth for the number, per-link message.
@@ -97,14 +104,23 @@
       return el ? el.value : "";
     }
 
-    function stepAnswered(index) {
-      var group = steps[index].querySelector("input, select");
-      if (!group) return true;
-      var name = group.getAttribute("name");
-      return !!value(name);
+    // Every named control group in the step must have a value (e.g. step 3
+    // has both a comuna <select> and a horario radio group).
+    function unansweredName(index) {
+      var controls = steps[index].querySelectorAll("input, select");
+      var seen = {};
+      for (var i = 0; i < controls.length; i++) {
+        var name = controls[i].getAttribute("name");
+        if (!name || seen[name]) continue;
+        seen[name] = true;
+        if (!value(name)) return name;
+      }
+      return null;
     }
 
-    function showStep(index) {
+    // moveFocus is false on the initial render: focusing there would scroll
+    // the page away from the hero as soon as the script loads.
+    function showStep(index, moveFocus) {
       steps.forEach(function (step, i) {
         step.classList.toggle("is-active", i === index);
       });
@@ -113,8 +129,10 @@
       if (barFill) barFill.style.width = pct + "%";
       if (backBtn) backBtn.hidden = index === 0;
       if (nextBtn) nextBtn.textContent = index === steps.length - 1 ? "Ver mi resultado" : "Siguiente";
-      var focusTarget = steps[index].querySelector("legend");
-      if (focusTarget) focusTarget.focus();
+      if (moveFocus) {
+        var focusTarget = steps[index].querySelector("legend");
+        if (focusTarget) focusTarget.focus();
+      }
     }
 
     function buildMessage() {
@@ -155,9 +173,10 @@
 
     if (nextBtn) {
       nextBtn.addEventListener("click", function () {
-        if (!stepAnswered(current)) {
+        var missing = unansweredName(current);
+        if (missing) {
           steps[current].classList.add("has-error");
-          var invalid = steps[current].querySelector("input, select");
+          var invalid = steps[current].querySelector('[name="' + missing + '"]');
           if (invalid) invalid.focus();
           return;
         }
@@ -165,13 +184,13 @@
         if (current === steps.length - 1) {
           finish();
         } else {
-          showStep(current + 1);
+          showStep(current + 1, true);
         }
       });
     }
     if (backBtn) {
       backBtn.addEventListener("click", function () {
-        if (current > 0) showStep(current - 1);
+        if (current > 0) showStep(current - 1, true);
       });
     }
     if (restartBtn) {
@@ -179,7 +198,7 @@
         form.reset();
         if (result) result.hidden = true;
         if (nav) nav.hidden = false;
-        showStep(0);
+        showStep(0, true);
       });
     }
     // Auto-advance when a radio is chosen (still allows Back / manual Next).
@@ -192,6 +211,6 @@
       e.preventDefault();
     });
 
-    showStep(0);
+    showStep(0, false);
   }
 })();

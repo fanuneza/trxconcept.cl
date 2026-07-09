@@ -53,22 +53,22 @@ To change page copy or metadata: edit `pages.ts` first. Only touch a component d
 
 This is a static/no-framework site: `main.js` and `cookie-consent.js` are dependency-free scripts that bind to the DOM purely through `data-*` attributes and element IDs, never through component props or a client framework's reactivity. If you rename one of these attributes in a component, you must update the matching selector in the JS file, and vice versa.
 
-| Attribute / ID | Set in (markup) | Read in (JS) | Purpose |
-|---|---|---|---|
-| `data-wa` | any WhatsApp anchor (`Header`, `Footer`, `HomeContent`, `MobileCtaBar`, `pages.services.content`, `DiscoveryFlow`) | `main.js` | Marks an element for href rewriting |
-| `data-wa-msg` | same anchors, per-CTA custom text | `main.js` | Message text source; absent → `WA_DEFAULT` |
-| `data-discovery` | `DiscoveryFlow.astro` root card | `main.js` | Entry point for the discovery state machine; presence gates all discovery JS |
-| `data-discovery-form` | `<form>` in `DiscoveryFlow.astro` | `main.js` | Form element reference for `reset()`/`querySelector` |
-| `data-step` | each `<fieldset class="discovery-step">` | `main.js` | Step ordering/indexing (not read by value, order via DOM query) |
-| `data-discovery-bar` | progress bar `<span>` | `main.js` | Width set as `%` per step |
-| `data-discovery-next` / `data-discovery-back` | nav buttons | `main.js` | Click handlers, label/hidden toggling |
-| `data-discovery-result` | result `<div>` | `main.js` | Shown/hidden at flow completion |
-| `data-discovery-link` | result CTA `<a>` | `main.js` | `href`/`data-wa-msg` set to the built message |
-| `data-discovery-restart` | restart `<button>` | `main.js` | Resets form and step index |
-| `id="yr"` | `Footer.astro` | `main.js` | Copyright year fill |
-| `id="nav-main"`, `.nav-toggle-btn` | `Header.astro` | `main.js` | Mobile nav toggle |
-| `id="cookie-banner"`, `#cookie-accept`, `#cookie-reject`, `#cookie-manage-btn` | `CookieBanner.astro` / `Footer.astro` | `cookie-consent.js` | Consent flow |
-| `data-ga4-id`, `data-consent-cookie` | `<html>` in `BaseLayout.astro` | `cookie-consent.js` | Passes `site.ts` config into plain JS without a build-time import |
+| Attribute / ID                                                                 | Set in (markup)                                                                                                    | Read in (JS)        | Purpose                                                                      |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ | ------------------- | ---------------------------------------------------------------------------- |
+| `data-wa`                                                                      | any WhatsApp anchor (`Header`, `Footer`, `HomeContent`, `MobileCtaBar`, `pages.services.content`, `DiscoveryFlow`) | `main.js`           | Marks an element for href rewriting                                          |
+| `data-wa-msg`                                                                  | same anchors, per-CTA custom text                                                                                  | `main.js`           | Message text source; absent → `WA_DEFAULT`                                   |
+| `data-discovery`                                                               | `DiscoveryFlow.astro` root card                                                                                    | `main.js`           | Entry point for the discovery state machine; presence gates all discovery JS |
+| `data-discovery-form`                                                          | `<form>` in `DiscoveryFlow.astro`                                                                                  | `main.js`           | Form element reference for `reset()`/`querySelector`                         |
+| `data-step`                                                                    | each `<fieldset class="discovery-step">`                                                                           | `main.js`           | Step ordering/indexing (not read by value, order via DOM query)              |
+| `data-discovery-bar`                                                           | progress bar `<span>`                                                                                              | `main.js`           | Width set as `%` per step                                                    |
+| `data-discovery-next` / `data-discovery-back`                                  | nav buttons                                                                                                        | `main.js`           | Click handlers, label/hidden toggling                                        |
+| `data-discovery-result`                                                        | result `<div>`                                                                                                     | `main.js`           | Shown/hidden at flow completion                                              |
+| `data-discovery-link`                                                          | result CTA `<a>`                                                                                                   | `main.js`           | `href`/`data-wa-msg` set to the built message                                |
+| `data-discovery-restart`                                                       | restart `<button>`                                                                                                 | `main.js`           | Resets form and step index                                                   |
+| `id="yr"`                                                                      | `Footer.astro`                                                                                                     | `main.js`           | Copyright year fill                                                          |
+| `id="nav-main"`, `.nav-toggle-btn`                                             | `Header.astro`                                                                                                     | `main.js`           | Mobile nav toggle                                                            |
+| `id="cookie-banner"`, `#cookie-accept`, `#cookie-reject`, `#cookie-manage-btn` | `CookieBanner.astro` / `Footer.astro`                                                                              | `cookie-consent.js` | Consent flow                                                                 |
+| `data-ga4-id`, `data-consent-cookie`                                           | `<html>` in `BaseLayout.astro`                                                                                     | `cookie-consent.js` | Passes `site.ts` config into plain JS without a build-time import            |
 
 ## 4. SEO/schema graph flow
 
@@ -94,29 +94,29 @@ Important: the merge logic (splice `@graph` vs. push a single node minus `@conte
 
 ## 5. "If I need to change X, which files touch it" quick index
 
-| Change | Files |
-|---|---|
-| Page copy (services/FAQ/cookies/404) | `src/data/pages.ts` (`content` string for services/FAQ/cookies); `src/pages/404.astro` for 404 |
-| Home page copy/sections | `src/components/HomeContent.astro` |
-| Sobre mí copy | `src/components/AboutContent.astro` |
-| Page `<title>`/meta description/OG/canonical | `src/data/pages.ts` |
-| JSON-LD for a specific page | `pages.ts` → that page's `structuredData` |
-| Shared JSON-LD graph shape (WebSite/Organization/WebPage/Breadcrumb) | `src/utils/schema.ts` |
-| Nav links | `src/data/site.ts` (`nav`) → consumed by `Header.astro` |
-| Footer legal links | `src/data/site.ts` (`legal`) → consumed by `Footer.astro` |
-| WhatsApp number | `public/assets/js/main.js` (`WA_NUMBER`) + literal fallback hrefs in `site.ts`/components |
-| Default WhatsApp message | `public/assets/js/main.js` (`WA_DEFAULT`) |
-| A specific CTA's WhatsApp message | that CTA's `data-wa-msg` attribute, in its component or `pages.ts` HTML string |
-| Discovery flow questions/options | `src/components/DiscoveryFlow.astro` (markup) |
-| Discovery flow message-building logic | `public/assets/js/main.js` (`OBJETIVO`, `MOLESTIA`, `buildMessage()`) |
-| Mobile sticky bar content | `src/components/MobileCtaBar.astro` |
-| Floating WA button (desktop/tablet) | `src/components/Footer.astro` |
-| Any visual styling | `public/assets/css/style.css` only (never `.min.css`) |
-| GA4 ID / consent cookie name | `src/data/site.ts` (`ga4Id`, `consentCookie`) → read via `<html data-*>` in `BaseLayout.astro` → `cookie-consent.js` |
-| Consent behavior / GA4 loading | `public/assets/js/cookie-consent.js` |
-| Cookie policy copy | `pages.ts` → `pages.cookies.content` |
-| Security headers / cache rules | `public/_headers` |
-| Sitemap exclusions | `astro.config.mjs` (`sitemap({ filter })`) |
-| SEO validation flags (H1, alt, metadata length, internal links) | `astro.config.mjs` (`seoGraph({...})`) |
-| IndexNow key | `src/pages/591c2b87f0b68c44f260215f5d8e9da3.txt.ts` filename + `astro.config.mjs` `indexNow` config (must match) |
-| Adding/removing a route | new file under `src/pages/`; update `site.nav` if it should appear in the header; update `public/_headers` per-route cache rule if it needs one; consider a `_redirects` entry if replacing an existing route |
+| Change                                                               | Files                                                                                                                                                                                                         |
+| -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Page copy (services/FAQ/cookies/404)                                 | `src/data/pages.ts` (`content` string for services/FAQ/cookies); `src/pages/404.astro` for 404                                                                                                                |
+| Home page copy/sections                                              | `src/components/HomeContent.astro`                                                                                                                                                                            |
+| Sobre mí copy                                                        | `src/components/AboutContent.astro`                                                                                                                                                                           |
+| Page `<title>`/meta description/OG/canonical                         | `src/data/pages.ts`                                                                                                                                                                                           |
+| JSON-LD for a specific page                                          | `pages.ts` → that page's `structuredData`                                                                                                                                                                     |
+| Shared JSON-LD graph shape (WebSite/Organization/WebPage/Breadcrumb) | `src/utils/schema.ts`                                                                                                                                                                                         |
+| Nav links                                                            | `src/data/site.ts` (`nav`) → consumed by `Header.astro`                                                                                                                                                       |
+| Footer legal links                                                   | `src/data/site.ts` (`legal`) → consumed by `Footer.astro`                                                                                                                                                     |
+| WhatsApp number                                                      | `public/assets/js/main.js` (`WA_NUMBER`) + literal fallback hrefs in `site.ts`/components                                                                                                                     |
+| Default WhatsApp message                                             | `public/assets/js/main.js` (`WA_DEFAULT`)                                                                                                                                                                     |
+| A specific CTA's WhatsApp message                                    | that CTA's `data-wa-msg` attribute, in its component or `pages.ts` HTML string                                                                                                                                |
+| Discovery flow questions/options                                     | `src/components/DiscoveryFlow.astro` (markup)                                                                                                                                                                 |
+| Discovery flow message-building logic                                | `public/assets/js/main.js` (`OBJETIVO`, `MOLESTIA`, `buildMessage()`)                                                                                                                                         |
+| Mobile sticky bar content                                            | `src/components/MobileCtaBar.astro`                                                                                                                                                                           |
+| Floating WA button (desktop/tablet)                                  | `src/components/Footer.astro`                                                                                                                                                                                 |
+| Any visual styling                                                   | `public/assets/css/style.css` only (never `.min.css`)                                                                                                                                                         |
+| GA4 ID / consent cookie name                                         | `src/data/site.ts` (`ga4Id`, `consentCookie`) → read via `<html data-*>` in `BaseLayout.astro` → `cookie-consent.js`                                                                                          |
+| Consent behavior / GA4 loading                                       | `public/assets/js/cookie-consent.js`                                                                                                                                                                          |
+| Cookie policy copy                                                   | `pages.ts` → `pages.cookies.content`                                                                                                                                                                          |
+| Security headers / cache rules                                       | `public/_headers`                                                                                                                                                                                             |
+| Sitemap exclusions                                                   | `astro.config.mjs` (`sitemap({ filter })`)                                                                                                                                                                    |
+| SEO validation flags (H1, alt, metadata length, internal links)      | `astro.config.mjs` (`seoGraph({...})`)                                                                                                                                                                        |
+| IndexNow key                                                         | `src/pages/591c2b87f0b68c44f260215f5d8e9da3.txt.ts` filename + `astro.config.mjs` `indexNow` config (must match)                                                                                              |
+| Adding/removing a route                                              | new file under `src/pages/`; update `site.nav` if it should appear in the header; update `public/_headers` per-route cache rule if it needs one; consider a `_redirects` entry if replacing an existing route |

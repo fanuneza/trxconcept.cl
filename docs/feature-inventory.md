@@ -4,14 +4,14 @@ A literal inventory of every route, section, component, client-side behavior, an
 
 ## 1. Routes
 
-| Route | Source file | Renders via | Notes |
-|---|---|---|---|
-| `/` | `src/pages/index.astro` | `HomeContent.astro` | `pages.home`; preloads hero image variants; `isHome: true` |
-| `/servicios/` | `src/pages/servicios/index.astro` | `pages.services.content` (`set:html`) | Pricing + service info; has `structuredData` (Service + OfferCatalog) |
-| `/sobre-mi/` | `src/pages/sobre-mi/index.astro` | `AboutContent.astro` | Trainer bio/certifications |
-| `/preguntas-frecuentes/` | `src/pages/preguntas-frecuentes/index.astro` | `pages.faq.content` (`set:html`) | Full FAQ list; has FAQPage `structuredData` |
-| `/politica-de-cookies/` | `src/pages/politica-de-cookies/index.astro` | `pages.cookies.content` (`set:html`) | `robots: "noindex"`; excluded from sitemap |
-| `/404` | `src/pages/404.astro` | inline JSX in the route file (own `page` object, not from `pages.ts`) | `robots: "noindex"`; includes `<FuzzyRedirect />` from the SEO-graph package; excluded from sitemap |
+| Route                    | Source file                                  | Renders via                                                           | Notes                                                                                               |
+| ------------------------ | -------------------------------------------- | --------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `/`                      | `src/pages/index.astro`                      | `HomeContent.astro`                                                   | `pages.home`; preloads hero image variants; `isHome: true`                                          |
+| `/servicios/`            | `src/pages/servicios/index.astro`            | `pages.services.content` (`set:html`)                                 | Pricing + service info; has `structuredData` (Service + OfferCatalog)                               |
+| `/sobre-mi/`             | `src/pages/sobre-mi/index.astro`             | `AboutContent.astro`                                                  | Trainer bio/certifications                                                                          |
+| `/preguntas-frecuentes/` | `src/pages/preguntas-frecuentes/index.astro` | `pages.faq.content` (`set:html`)                                      | Full FAQ list; has FAQPage `structuredData`                                                         |
+| `/politica-de-cookies/`  | `src/pages/politica-de-cookies/index.astro`  | `pages.cookies.content` (`set:html`)                                  | `robots: "noindex"`; excluded from sitemap                                                          |
+| `/404`                   | `src/pages/404.astro`                        | inline JSX in the route file (own `page` object, not from `pages.ts`) | `robots: "noindex"`; includes `<FuzzyRedirect />` from the SEO-graph package; excluded from sitemap |
 
 ## 2. Homepage sections (in DOM order, all in `HomeContent.astro` unless noted)
 
@@ -28,16 +28,16 @@ A literal inventory of every route, section, component, client-side behavior, an
 
 ## 3. Reusable components (`src/components/`)
 
-| Component | Responsibility |
-|---|---|
-| `Header.astro` | Site nav from `site.nav`, logo, primary WhatsApp CTA, mobile nav toggle button (behavior in `main.js`); marks current nav item via `aria-current` |
-| `Footer.astro` | Floating round WhatsApp button (`.btn-float-wa`, hidden <680px), CTA band, copyright with JS-filled year, site-credit line, legal links (`site.legal`), Instagram link, "Gestionar preferencias de cookies" button |
-| `HomeContent.astro` | All homepage sections (see §2); only place `DiscoveryFlow` is mounted |
-| `AboutContent.astro` | Sobre mí page body (bio, certifications list, "why a certified coach" section, philosophy) |
-| `DiscoveryFlow.astro` | 3-step qualifier form markup (see §4) |
-| `MobileCtaBar.astro` | Fixed bottom bar, visible only <680px: primary WhatsApp button + link to `#descubre` |
-| `CookieBanner.astro` | Consent banner markup (Accept/Reject buttons, link to cookie policy); visibility driven by `cookie-consent.js` |
-| `WaSymbol.astro` | Inline SVG `<symbol>` sprite definition for the WhatsApp icon, referenced via `<use href="#wa-symbol">` throughout |
+| Component             | Responsibility                                                                                                                                                                                                     |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `Header.astro`        | Site nav from `site.nav`, logo, primary WhatsApp CTA, mobile nav toggle button (behavior in `main.js`); marks current nav item via `aria-current`                                                                  |
+| `Footer.astro`        | Floating round WhatsApp button (`.btn-float-wa`, hidden <680px), CTA band, copyright with JS-filled year, site-credit line, legal links (`site.legal`), Instagram link, "Gestionar preferencias de cookies" button |
+| `HomeContent.astro`   | All homepage sections (see §2); only place `DiscoveryFlow` is mounted                                                                                                                                              |
+| `AboutContent.astro`  | Sobre mí page body (bio, certifications list, "why a certified coach" section, philosophy)                                                                                                                         |
+| `DiscoveryFlow.astro` | 3-step qualifier form markup (see §4)                                                                                                                                                                              |
+| `MobileCtaBar.astro`  | Fixed bottom bar, visible only <680px: primary WhatsApp button + link to `#descubre`                                                                                                                               |
+| `CookieBanner.astro`  | Consent banner markup (Accept/Reject buttons, link to cookie policy); visibility driven by `cookie-consent.js`                                                                                                     |
+| `WaSymbol.astro`      | Inline SVG `<symbol>` sprite definition for the WhatsApp icon, referenced via `<use href="#wa-symbol">` throughout                                                                                                 |
 
 ## 4. Discovery flow — literal structure
 
@@ -52,36 +52,36 @@ A literal inventory of every route, section, component, client-side behavior, an
 
 ## 5. Client-side JS behaviors (`public/assets/js/`)
 
-| Behavior | File | Trigger / mechanism |
-|---|---|---|
-| Copyright year fill | `main.js` | Sets `#yr` textContent to current year on load |
-| Mobile nav toggle | `main.js` | Click on `.nav-toggle-btn` toggles `aria-expanded` + `.nav-open` on `#nav-main`; outside-click closes it |
-| WhatsApp href rewriting | `main.js` | Rewrites every `[data-wa]` element's `href` using `data-wa-msg` (or `WA_DEFAULT`) + hardcoded number `56984402664` |
-| Scrolled header state | `main.js` | Scroll listener with rAF gate + hysteresis (add `.scrolled` at scrollY > 70, remove at < 50) on `.site-header` |
-| Discovery flow state machine | `main.js` | Step show/hide, progress bar fill, per-step validation (`.has-error`), auto-clear on radio change, final message build + result reveal, restart handler (see `docs/spec.md` §4) |
-| Cookie consent + GA4 loader | `cookie-consent.js` | Reads `site_consent` cookie; shows/hides banner; on Accept, injects `gtag.js` + preconnect and initializes `dataLayer`/`gtag`; on Reject, hides banner only; "Gestionar preferencias" clears cookie + reloads |
+| Behavior                     | File                | Trigger / mechanism                                                                                                                                                                                           |
+| ---------------------------- | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Copyright year fill          | `main.js`           | Sets `#yr` textContent to current year on load                                                                                                                                                                |
+| Mobile nav toggle            | `main.js`           | Click on `.nav-toggle-btn` toggles `aria-expanded` + `.nav-open` on `#nav-main`; outside-click closes it; Escape closes it and returns focus to the toggle button                                             |
+| WhatsApp href rewriting      | `main.js`           | Rewrites every `[data-wa]` element's `href` using `data-wa-msg` (or `WA_DEFAULT`) + hardcoded number `56984402664`                                                                                            |
+| Scrolled header state        | `main.js`           | Scroll listener with rAF gate + hysteresis (add `.scrolled` at scrollY > 70, remove at < 50) on `.site-header`                                                                                                |
+| Discovery flow state machine | `main.js`           | Step show/hide, progress bar fill, per-step validation (`.has-error`), auto-clear on radio change, final message build + result reveal, restart handler (see `docs/spec.md` §4)                               |
+| Cookie consent + GA4 loader  | `cookie-consent.js` | Reads `site_consent` cookie; shows/hides banner; on Accept, injects `gtag.js` + preconnect and initializes `dataLayer`/`gtag`; on Reject, hides banner only; "Gestionar preferencias" clears cookie + reloads |
 
 ## 6. Non-page capabilities / endpoints
 
-| Capability | File | Notes |
-|---|---|---|
-| XML sitemap | `@astrojs/sitemap` integration (`astro.config.mjs`) | Excludes `404.html` and `/politica-de-cookies/` |
-| `robots.txt` | `astro-robots-txt` integration | Default config |
-| JSON-LD schema graph (per-page, inline) | `src/utils/schema.ts` + `BaseLayout.astro` | WebSite + Organization + WebPage + BreadcrumbList, merged with page `structuredData` |
-| Standalone schema endpoint | `src/pages/schema/pages.json.ts` | Serves the same merged graph for every page in `pages.ts`, as JSON, via `createSchemaEndpoint` |
-| Schema map (AI/agent discovery) | `src/pages/schemamap.xml.ts` | `createSchemaMap`, points at `/schema/pages.json` |
-| API catalog (`.well-known`) | `src/pages/.well-known/api-catalog.ts` | `createApiCatalog`, references `/schema/pages.json` and `/schemamap.xml`, service doc `/servicios/` |
-| IndexNow key route | `src/pages/591c2b87f0b68c44f260215f5d8e9da3.txt.ts` | `createIndexNowKeyRoute`; always enabled, filename is the key |
-| Cookie policy page | `/politica-de-cookies/` | Documents `site_consent` and `_ga`/`_ga_*` cookies, consent mechanics, Ley 19.628 basis |
-| Security/cache headers | `public/_headers` | Cloudflare Pages HSTS/CSP/frame/referrer/permissions policies + per-route cache-control |
-| CSS inlining | `BaseLayout.astro` (`readFileSync` of `style.min.css`) | No external stylesheet request at runtime |
-| Analytics | GA4 via `gtag.js`, ID `site.ga4Id` | Loaded only post-consent; no GTM container |
+| Capability                              | File                                                   | Notes                                                                                               |
+| --------------------------------------- | ------------------------------------------------------ | --------------------------------------------------------------------------------------------------- |
+| XML sitemap                             | `@astrojs/sitemap` integration (`astro.config.mjs`)    | Excludes `404.html` and `/politica-de-cookies/`                                                     |
+| `robots.txt`                            | `astro-robots-txt` integration                         | Default config                                                                                      |
+| JSON-LD schema graph (per-page, inline) | `src/utils/schema.ts` + `BaseLayout.astro`             | WebSite + Organization + WebPage + BreadcrumbList, merged with page `structuredData`                |
+| Standalone schema endpoint              | `src/pages/schema/pages.json.ts`                       | Serves the same merged graph for every page in `pages.ts`, as JSON, via `createSchemaEndpoint`      |
+| Schema map (AI/agent discovery)         | `src/pages/schemamap.xml.ts`                           | `createSchemaMap`, points at `/schema/pages.json`                                                   |
+| API catalog (`.well-known`)             | `src/pages/.well-known/api-catalog.ts`                 | `createApiCatalog`, references `/schema/pages.json` and `/schemamap.xml`, service doc `/servicios/` |
+| IndexNow key route                      | `src/pages/591c2b87f0b68c44f260215f5d8e9da3.txt.ts`    | `createIndexNowKeyRoute`; always enabled, filename is the key                                       |
+| Cookie policy page                      | `/politica-de-cookies/`                                | Documents `site_consent` and `_ga`/`_ga_*` cookies, consent mechanics, Ley 19.628 basis             |
+| Security/cache headers                  | `public/_headers`                                      | Cloudflare Pages HSTS/CSP/frame/referrer/permissions policies + per-route cache-control             |
+| CSS inlining                            | `BaseLayout.astro` (`readFileSync` of `style.min.css`) | No external stylesheet request at runtime                                                           |
+| Analytics                               | GA4 via `gtag.js`, ID `site.ga4Id`                     | Loaded only post-consent; no GTM container                                                          |
 
 ## 7. Testing capabilities
 
-| Layer | File | Scope |
-|---|---|---|
-| Accessibility | `tests/visual/a11y.spec.ts` | axe-core scan, 6 pages, WCAG 2.1 AA (3 rules disabled) |
-| Visual capture (manual) | `tests/visual/capture.spec.ts` | Screenshots, 5 pages × 4 viewports, not a CI gate |
-| Smoke | `tests/visual/smoke.spec.ts` | HTTP 200 + body/main visibility, 5 pages; runs post-deploy, not in `ci.yml` |
-| Lighthouse | `.lighthouserc.cjs` via `@lhci/cli` | Performance/a11y/best-practices/SEO, warn-only thresholds |
+| Layer                   | File                                | Scope                                                                       |
+| ----------------------- | ----------------------------------- | --------------------------------------------------------------------------- |
+| Accessibility           | `tests/visual/a11y.spec.ts`         | axe-core scan, 6 pages, WCAG 2.1 AA (3 rules disabled)                      |
+| Visual capture (manual) | `tests/visual/capture.spec.ts`      | Screenshots, 5 pages × 4 viewports, not a CI gate                           |
+| Smoke                   | `tests/visual/smoke.spec.ts`        | HTTP 200 + body/main visibility, 5 pages; runs post-deploy, not in `ci.yml` |
+| Lighthouse              | `.lighthouserc.cjs` via `@lhci/cli` | Performance/a11y/best-practices/SEO, warn-only thresholds                   |

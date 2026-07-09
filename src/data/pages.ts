@@ -21,7 +21,9 @@ const renderBreadcrumb = (breadcrumb?: { name: string; item: string }[]) => {
     .map((item, index) => {
       const isLast = index === breadcrumb.length - 1;
 
-      return `<li>${isLast ? `<span aria-current="page">${item.name}</span>` : `<a href="${item.item}">${item.name}</a>`}</li>`;
+      const href = item.item.startsWith("https://trxconcept.cl") ? new URL(item.item).pathname : item.item;
+
+      return `<li>${isLast ? `<span aria-current="page">${item.name}</span>` : `<a href="${href}">${item.name}</a>`}</li>`;
     })
     .join("");
 
@@ -47,7 +49,7 @@ const renderPageHero = ({
 export const pages = {
   home: {
     title: `Clases de TRX en Santiago, a domicilio y 1 a 1`,
-    description: `Entrenamiento personal 1 a 1 con TRX en Santiago, a domicilio o al aire libre. Para empezar de a poco o retomar seguro, aunque tengas una molestia. Evaluación inicial gratis por WhatsApp.`,
+    description: `Entrenamiento personal 1 a 1 con TRX en Santiago, a domicilio o al aire libre. Para empezar de a poco o retomar seguro. Evaluación inicial gratis por WhatsApp.`,
     canonical: `https://trxconcept.cl/`,
     ogTitle: `Clases de TRX en Santiago, 1 a 1 a domicilio | TRX Concept`,
     structuredData: {
@@ -110,8 +112,8 @@ export const pages = {
     isHome: true,
   },
   services: {
-    title: `Clases de TRX en Santiago: precios y a domicilio`,
-    description: `Clases de TRX 1 a 1 en Santiago, a domicilio o al aire libre. Evaluación inicial gratis, sesión individual $15.000 y plan mensual $160.000. Para principiantes y quienes retoman.`,
+    title: `Clases de TRX a domicilio en Santiago: precios`,
+    description: `Clases de TRX 1 a 1 a domicilio o al aire libre en Santiago. Evaluación gratis, sesión $15.000, plan mensual $160.000. Para principiantes y quienes retoman.`,
     canonical: `https://trxconcept.cl/servicios/`,
     breadcrumb: [
       { name: "Inicio", item: "https://trxconcept.cl/" },
@@ -146,14 +148,14 @@ export const pages = {
           },
           {
             "@type": "Offer",
-            name: "Sesión Individual TRX",
+            name: "Sesión individual TRX",
             description: "1 hora de entrenamiento personalizado en casa o al aire libre.",
             price: "15000",
             priceCurrency: "CLP",
           },
           {
             "@type": "Offer",
-            name: "Paquete Mensual TRX",
+            name: "Plan mensual TRX",
             description: "3 sesiones por semana, aproximadamente 12 sesiones al mes.",
             price: "160000",
             priceCurrency: "CLP",
@@ -162,8 +164,9 @@ export const pages = {
       },
     },
     content: `${renderPageHero({
-      title: "Clases de TRX personalizadas en Santiago",
-      description: "Sesiones 1 a 1 o paquete mensual. Sin mensualidad fija, sin traslados, sin equipos que compres tú.",
+      title: "Clases de TRX a domicilio en Santiago",
+      description:
+        "Sesiones 1 a 1 o plan mensual, en tu casa o al aire libre. Sin mensualidad fija, sin traslados, sin equipos que compres tú.",
       breadcrumb: [
         { name: "Inicio", item: "https://trxconcept.cl/" },
         { name: "Servicios", item: "https://trxconcept.cl/servicios/" },
@@ -177,13 +180,13 @@ export const pages = {
           <p class="section-intro">Flexibles, a tu ritmo y en tu lugar.</p>
           <div class="services-grid">
             <div class="service-card">
-              <h3>Sesión Individual</h3>
+              <h3>Sesión individual</h3>
               <p class="pricing-price">$15.000</p>
               <p>Una hora de entrenamiento 1 a 1, adaptado completamente a tu nivel y objetivos. Sin compromiso de continuidad. Ideal para probar o complementar tu rutina.</p>
             </div>
             <div class="service-card service-card--featured">
-              <span class="pricing-badge">Más popular</span>
-              <h3>Paquete Mensual</h3>
+              <span class="pricing-badge">Más elegido</span>
+              <h3>Plan mensual</h3>
               <p class="pricing-price">$160.000</p>
               <p>3 sesiones por semana (~12 al mes). La opción de mayor impacto para quienes buscan resultados consistentes. Incluye seguimiento personalizado y ajustes de programa.</p>
             </div>
@@ -295,94 +298,52 @@ export const pages = {
     isHome: false,
   },
   about: {
-    title: `Nicolás Echeverría | Entrenador TRX | Santiago`,
+    title: `Nico Echeverría, entrenador TRX en Santiago`,
     description: `Entrenador TRX certificado en Santiago. Más de 10 años de experiencia, clases 1 a 1 y método de bajo impacto. Conoce a Nico.`,
     canonical: `https://trxconcept.cl/sobre-mi/`,
     breadcrumb: [
       { name: "Inicio", item: "https://trxconcept.cl/" },
       { name: "Sobre mí", item: "https://trxconcept.cl/sobre-mi/" },
     ],
-    content: `${renderPageHero({
-      title: "Conoce a tu entrenador",
-      description: "La persona detrás de cada sesión, cada ajuste y cada logro.",
-      breadcrumb: [
-        { name: "Inicio", item: "https://trxconcept.cl/" },
-        { name: "Sobre mí", item: "https://trxconcept.cl/sobre-mi/" },
+    structuredData: {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "@id": "https://trxconcept.cl/sobre-mi/#person",
+      name: "Nicolás Echeverría",
+      alternateName: "Nico Echeverría",
+      jobTitle: "Entrenador Personal TRX",
+      url: "https://trxconcept.cl/sobre-mi/",
+      image: "https://trxconcept.cl/assets/img/nico.webp",
+      worksFor: {
+        "@type": "LocalBusiness",
+        name: "TRX Concept",
+        url: "https://trxconcept.cl/",
+      },
+      knowsAbout: ["Entrenamiento TRX", "Entrenamiento en suspensión", "Entrenamiento personal 1 a 1"],
+      hasCredential: [
+        {
+          "@type": "EducationalOccupationalCredential",
+          name: "TRX Suspension Trainer™ — Certificado Oficial",
+        },
+        {
+          "@type": "EducationalOccupationalCredential",
+          name: "TRX Rip Trainer® — Certificado Oficial",
+        },
       ],
-    })}
-
-      <!-- BIO -->
-      <section>
-        <div class="container about-section">
-          <div class="trust-inner">
-            <picture>
-              <source type="image/avif" srcset="/assets/img/nico-320.avif 320w" sizes="160px" />
-              <source type="image/webp" srcset="/assets/img/nico-384.webp 384w, /assets/img/nico.webp 512w" sizes="160px" />
-              <img
-                src="/assets/img/nico-384.webp"
-                alt="Nicolás Echeverría, entrenador personal TRX"
-                class="profile-pic"
-                width="512"
-                height="512"
-                decoding="async"
-              />
-            </picture>
-            <div class="trust-content">
-              <h2>Nicolás Echeverría</h2>
-              <p>
-                Llevo más de 10 años trabajando como entrenador personal en Santiago,
-                especializándome en el <a href="/servicios/">método TRX</a>, un sistema de entrenamiento en suspensión
-                que usa el peso del propio cuerpo para desarrollar fuerza, equilibrio y resistencia
-                de forma segura y progresiva.
-              </p>
-              <p>
-                Mi enfoque es simple: cada persona es diferente, y cada entrenamiento debe
-                serlo también. No hay rutinas genéricas, no hay grupos masivos. Solo tú y yo,
-                trabajando al ritmo que corresponde.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- CERTIFICATIONS -->
-      <section class="section-alt">
-        <div class="container about-section text-center">
-          <h2>Certificaciones</h2>
-          <p class="section-subtitle">Formación oficial avalada por TRX Training.</p>
-          <ul class="cert-list">
-            <li>TRX Suspension Trainer™: Certificado Oficial</li>
-            <li>TRX Rip Trainer®: Certificado Oficial</li>
-            <li>Entrenamiento grupal e individual certificado</li>
-            <li>Más de 10 años de práctica continua en Santiago</li>
-          </ul>
-        </div>
-      </section>
-
-      <!-- PHILOSOPHY -->
-      <section>
-        <div class="container about-section">
-          <h2>Mi filosofía de entrenamiento</h2>
-          <p>
-            Creo que el ejercicio no debería ser una obligación intimidante, sino algo que genuinamente
-            mejore tu vida. Por eso trabajo con personas de todos los niveles, desde quienes nunca han
-            entrenado hasta deportistas que buscan complementar su actividad principal.
-          </p>
-          <p>
-            El TRX es ideal para esto porque es infinitamente ajustable: el mismo ejercicio puede ser
-            suave o extremadamente desafiante dependiendo del ángulo del cuerpo. Sin impacto en
-            articulaciones, sin riesgo de lesiones por máquinas mal calibradas, sin filas de espera.
-          </p>
-          <p>
-            Entreno a domicilio o al aire libre en parques de Santiago porque el ambiente importa.
-            El estrés del gimnasio no ayuda a nadie a rendir mejor.
-          </p>
-        </div>
-      </section>`,
+      sameAs: ["https://www.instagram.com/trxconcept"],
+      areaServed: {
+        "@type": "City",
+        name: "Santiago",
+        addressCountry: "CL",
+      },
+    },
+    // Sobre mí renders through AboutContent.astro; content is intentionally empty
+    // (same pattern as home/HomeContent.astro).
+    content: "",
     isHome: false,
   },
   faq: {
-    title: `Preguntas frecuentes sobre clases TRX en Santiago`,
+    title: `Preguntas frecuentes sobre clases de TRX`,
     description: `Resolvemos tus dudas sobre clases de TRX en Santiago: experiencia previa, equipos, horarios, precios y cómo reservar. Primera clase gratis.`,
     canonical: `https://trxconcept.cl/preguntas-frecuentes/`,
     breadcrumb: [
@@ -446,7 +407,7 @@ export const pages = {
           name: "¿Cuántas veces a la semana debería entrenar?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Depende de tu objetivo y tu agenda. El mínimo recomendable para ver resultados es 2 veces por semana. El paquete mensual incluye 3 sesiones semanales, que es la frecuencia ideal para progreso constante sin sobrecargar el cuerpo.",
+            text: "Depende de tu objetivo y tu agenda. El mínimo recomendable para ver resultados es 2 veces por semana. El plan mensual incluye 3 sesiones semanales, que es la frecuencia ideal para progreso constante sin sobrecargar el cuerpo.",
           },
         },
         {
@@ -462,7 +423,7 @@ export const pages = {
           name: "¿Cómo es la primera clase?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "La primera sesión es siempre gratuita y sirve para conocernos. Conversamos sobre tus objetivos, hago una evaluación básica de tu nivel y coordinamos cómo seguir. Sin presión ni compromiso. Si después de la sesión sientes que encajamos, coordinamos el plan; si no, ningún problema.",
+            text: "La primera clase es siempre gratis y sirve para conocernos. Conversamos sobre tus objetivos, hago una evaluación básica de tu nivel y coordinamos cómo seguir. Sin presión ni compromiso. Si después de la sesión sientes que encajamos, coordinamos el plan; si no, ningún problema.",
           },
         },
         {
@@ -470,7 +431,7 @@ export const pages = {
           name: "¿Cuánto cuestan las clases de TRX?",
           acceptedAnswer: {
             "@type": "Answer",
-            text: "Las clases de TRX tienen dos opciones: la sesión individual tiene un valor de $15.000, y el paquete mensual de 3 veces por semana (~12 sesiones) tiene un valor de $160.000, lo que equivale a aproximadamente $13.300 por sesión. La primera clase es siempre gratis.",
+            text: "Las clases de TRX tienen dos opciones: la sesión individual tiene un valor de $15.000, y el plan mensual de 3 veces por semana (~12 sesiones) tiene un valor de $160.000, lo que equivale a aproximadamente $13.300 por sesión. La primera clase es siempre gratis.",
           },
         },
         {
@@ -565,7 +526,7 @@ export const pages = {
           <details class="faq-item" id="frecuencia-semanal">
             <summary>¿Cuántas veces a la semana debería entrenar?</summary>
             <p class="faq-answer">
-              Depende de tu objetivo y tu agenda. El mínimo recomendable para ver resultados es 2 veces por semana. El paquete mensual incluye 3 sesiones semanales, que es la frecuencia ideal para progreso constante sin sobrecargar el cuerpo.
+              Depende de tu objetivo y tu agenda. El mínimo recomendable para ver resultados es 2 veces por semana. El plan mensual incluye 3 sesiones semanales, que es la frecuencia ideal para progreso constante sin sobrecargar el cuerpo.
             </p>
           </details>
 
@@ -579,14 +540,14 @@ export const pages = {
           <details class="faq-item" id="primera-clase">
             <summary>¿Cómo es la primera clase?</summary>
             <p class="faq-answer">
-              La primera sesión es siempre gratuita y sirve para conocernos. Conversamos sobre tus objetivos, hago una evaluación básica de tu nivel y coordinamos cómo seguir. Sin presión ni compromiso. Si después de la sesión sientes que encajamos, coordinamos el plan; si no, ningún problema.
+              La primera clase es siempre gratis y sirve para conocernos. Conversamos sobre tus objetivos, hago una evaluación básica de tu nivel y coordinamos cómo seguir. Sin presión ni compromiso. Si después de la sesión sientes que encajamos, coordinamos el plan; si no, ningún problema.
             </p>
           </details>
 
           <details class="faq-item" id="precios">
             <summary>¿Cuánto cuestan las clases de TRX?</summary>
             <p class="faq-answer">
-              Las clases de TRX tienen dos opciones: la sesión individual tiene un valor de $15.000, y el paquete mensual de 3 veces por semana (~12 sesiones) tiene un valor de $160.000, lo que equivale a aproximadamente $13.300 por sesión. La primera clase es siempre gratis.
+              Las clases de TRX tienen dos opciones: la sesión individual tiene un valor de $15.000, y el plan mensual de 3 veces por semana (~12 sesiones) tiene un valor de $160.000, lo que equivale a aproximadamente $13.300 por sesión. La primera clase es siempre gratis.
             </p>
           </details>
 

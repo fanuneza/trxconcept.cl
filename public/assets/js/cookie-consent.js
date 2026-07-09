@@ -39,17 +39,7 @@ function loadGA4() {
   gtag("config", GA4_ID);
 }
 
-function setBannerVisible(isVisible) {
-  if (isVisible) {
-    document.body.setAttribute("data-cookie-banner-visible", "true");
-    return;
-  }
-
-  document.body.removeAttribute("data-cookie-banner-visible");
-}
-
 function hideBanner() {
-  setBannerVisible(false);
   document.getElementById("cookie-banner")?.remove();
 }
 
@@ -59,8 +49,6 @@ if (consent === "accepted") {
   hideBanner();
 } else if (consent === "rejected") {
   hideBanner();
-} else if (document.getElementById("cookie-banner")) {
-  setBannerVisible(true);
 }
 
 document.getElementById("cookie-accept")?.addEventListener("click", () => {

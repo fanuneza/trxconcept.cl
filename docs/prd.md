@@ -2,7 +2,7 @@
 
 Current functional requirements, page by page, reflecting the **July 2026 redesign
 baseline** (hybrid conversion model: WhatsApp as primary CTA everywhere, 3-step discovery
-flow as secondary path). This document describes what the site *does today*, grounded in
+flow as secondary path). This document describes what the site _does today_, grounded in
 `src/data/pages.ts`, `src/data/site.ts`, `src/components/HomeContent.astro`, and
 `src/components/DiscoveryFlow.astro` — not aspirational features. For business framing see
 `docs/site-brief.md`; for copy rules see `docs/voice-and-tone.md`; for CTA rationale see
@@ -82,10 +82,10 @@ rendered via `set:html`.
 
 **Required sections:**
 
-1. Page hero (via `renderPageHero`): H1 "Clases de TRX personalizadas en Santiago", intro
+1. Page hero (via `renderPageHero`): H1 "Clases de TRX a domicilio en Santiago", intro
    line, breadcrumb (Inicio → Servicios).
-2. "Nuestros servicios" — pricing/service cards: Sesión Individual ($15.000), Paquete Mensual
-   ($160.000, featured "Más popular"), TRX Suspension Trainer™ description, TRX Rip Trainer®
+2. "Nuestros servicios" — pricing/service cards: Sesión individual ($15.000), Plan mensual
+   ($160.000, featured "Más elegido"), TRX Suspension Trainer™ description, TRX Rip Trainer®
    description.
 3. "¿Cómo reservar una clase?" — 3-step ordered list (WhatsApp → coordinate day/time → first
    class free) plus a note that equipment is not sold, Nico brings it.
@@ -99,14 +99,14 @@ rendered via `set:html`.
 
 **SEO requirements:**
 
-- Title: `Clases de TRX en Santiago: precios y a domicilio` (unique).
+- Title: `Clases de TRX a domicilio en Santiago: precios` (unique).
 - Meta description: unique, mentions free evaluation, $15.000 single session, $160.000
   monthly plan, beginners/returning audience.
-- Exactly one H1 ("Clases de TRX personalizadas en Santiago").
+- Exactly one H1 ("Clases de TRX a domicilio en Santiago").
 - Breadcrumb schema (Inicio → Servicios) plus page-level `Service` structured data: name
   "Clases de TRX en Santiago", provider (`LocalBusiness` reference), `areaServed` (Santiago,
   CL), `hasOfferCatalog` with 3 real `Offer` entries (evaluación $0, sesión individual
-  $15.000, paquete mensual $160.000, all `priceCurrency: CLP`).
+  $15.000, plan mensual $160.000, all `priceCurrency: CLP`).
 
 **CTA requirements:** WhatsApp CTA band at the end of the page with message referencing "una
 clase de TRX" and the free evaluation; internal links to FAQ and Sobre mí double as secondary
@@ -140,14 +140,14 @@ canonical source when editing this page's body copy).
 
 **SEO requirements:**
 
-- Title: `Nicolás Echeverría | Entrenador TRX | Santiago` (unique).
+- Title: `Nico Echeverría, entrenador TRX en Santiago` (unique).
 - Meta description: unique, mentions certified TRX trainer, 10+ years, 1-on-1, low-impact
   method.
 - Exactly one H1.
-- No page-level `structuredData` block is currently defined in `pages.ts` for this route
-  (unlike Home/Servicios/FAQ) — the `seo-content-plan.md` recommends a `Person` schema
-  (`knowsAbout`, certifications) for this page, but as of this baseline it is **not yet
-  implemented**. Treat this as a known gap, not an existing feature.
+- Page-level `Person` structured data in `pages.ts` (`@id: .../sobre-mi/#person`): Nicolás
+  Echeverría, `jobTitle`, `knowsAbout`, `hasCredential` (TRX Suspension Trainer™ / Rip
+  Trainer® certificates), `worksFor` TRX Concept, `sameAs` Instagram, `areaServed` Santiago —
+  implementing the `seo-content-plan.md` recommendation.
 
 **CTA requirements:** No explicit standalone WhatsApp CTA band is present in
 `AboutContent.astro` itself; the page relies on global CTAs (header/mobile sticky bar/footer
@@ -180,7 +180,7 @@ pair in the page's `structuredData`.
 
 **SEO requirements:**
 
-- Title: `Preguntas frecuentes sobre clases TRX en Santiago` (unique).
+- Title: `Preguntas frecuentes sobre clases de TRX` (unique).
 - Meta description: unique, mentions experience, equipment, schedules, pricing, booking,
   first class free.
 - Exactly one H1.
@@ -230,7 +230,7 @@ rather than losing them.
 **Content source:** `src/pages/404.astro` (page object defined inline in the route file, not
 in `pages.ts`).
 
-**Required sections:** "404" eyebrow, H1 "Página no encontrada", explanatory line, a
+**Required sections:** "404" label, H1 "Página no encontrada", explanatory line, a
 `FuzzyRedirect` component (from `@jdevalk/astro-seo-graph`) suggesting a likely intended
 page, and two actions: "Volver al inicio" (`/`) and "Ver servicios" (`/servicios/`).
 

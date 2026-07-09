@@ -32,14 +32,14 @@ Field meanings:
 - `robots` — only set to `"noindex"` on `cookies` and the 404 page.
 - `structuredData` — raw JSON-LD (an object, or an object with its own `@graph` array) merged into the shared schema graph by `buildSchemaGraph()` (see `docs/spec.md` §5). Only `home`, `services`, and `faq` set this.
 - `breadcrumb` — array of `{ name, item }` used both for the `<BreadcrumbList>` JSON-LD and for the visible breadcrumb nav rendered by the `renderPageHero()` helper inside `pages.ts`.
-- `content` — an HTML string rendered with `set:html`/`<Fragment set:html>` in the corresponding route file. Home's is intentionally empty (home renders through `HomeContent.astro` instead); `about` also has a full `content` string but the `sobre-mi` route actually renders `AboutContent.astro`, not `pages.about.content` — the string in `pages.ts` for `about` is present but unused by the route (a near-duplicate of `AboutContent.astro`'s markup).
+- `content` — an HTML string rendered with `set:html`/`<Fragment set:html>` in the corresponding route file. Home's and About's are intentionally empty: home renders through `HomeContent.astro` and sobre-mi through `AboutContent.astro` (the old duplicated `pages.about.content` HTML string was removed as dead code).
 - `isHome` — only `true` for `home`; used to choose `pageType: "website"` vs `"webpage"` when building the schema graph.
 
 ## 2. `pages.ts` entries
 
 - `pages.home` — SEO metadata + full LocalBusiness/HealthAndBeautyBusiness `structuredData` (including the 3 reviews, see §4) + `aggregateRating` (`ratingValue: "5.0"`, `reviewCount: "3"`). `content: ""`.
 - `pages.services` — SEO metadata + `Service` structuredData with an `OfferCatalog` of 3 offers (free assessment $0, single session $15.000, monthly package $160.000, all `priceCurrency: "CLP"`). `content` is a full HTML string: page hero, services/pricing grid, "how to book" steps, "what is TRX" blurb, "for whom" grid, "what to expect" section, CTA band.
-- `pages.about` — SEO metadata only, no `structuredData`. `content` is a full bio/certifications/philosophy HTML string, but the actual route uses `AboutContent.astro` instead (see above).
+- `pages.about` — SEO metadata plus `Person` structured data (Nicolás Echeverría: `jobTitle`, `knowsAbout`, `hasCredential` TRX certificates, `worksFor` TRX Concept, `sameAs` Instagram). `content` is empty; the route renders `AboutContent.astro` (see above).
 - `pages.faq` — SEO metadata + `FAQPage` structuredData with 13 `Question`/`acceptedAnswer` pairs (see §5 for the full list). `content` renders the same 13 questions as `<details class="faq-item" id="...">` elements — the visible page content and the JSON-LD `mainEntity` array are two independently hand-written copies of the same 13 Q&A pairs (not generated from one source), so any FAQ edit must be applied in both places to stay in sync.
 - `pages.cookies` — SEO metadata (`robots: "noindex"`), no `structuredData`. `content` covers what cookies are, the 2-row cookie table (`site_consent`; `_ga`/`_ga_*`), consent management, withdrawal, and Ley 19.628 legal basis.
 
@@ -106,12 +106,14 @@ The homepage's condensed FAQ (`#faq-home` in `HomeContent.astro`) is a **separat
 ## 6. Discovery-flow answer option sets (`DiscoveryFlow.astro` markup + `OBJETIVO`/`MOLESTIA` lookup tables in `main.js`)
 
 **`objetivo` (radio, step 1)** — value → label → message fragment (from `OBJETIVO` in `main.js`):
+
 - `empezar` — "Empezar desde cero" → "quiero empezar desde cero"
 - `retomar` — "Retomar el ejercicio" → "quiero retomar el ejercicio"
 - `molestia` — "Entrenar cuidando una molestia" → "quiero entrenar cuidando una molestia"
 - `fuerza` — "Ganar fuerza y mejorar la postura" → "quiero ganar fuerza y mejorar mi postura"
 
 **`molestia` (radio, step 2)** — value → label → message fragment (from `MOLESTIA` in `main.js`):
+
 - `ninguna` — "Ninguna en particular" → "sin lesiones"
 - `rodilla` — "Molestia de rodilla" → "con una molestia de rodilla"
 - `espalda` — "Molestia de espalda" → "con una molestia de espalda"
@@ -123,16 +125,18 @@ The homepage's condensed FAQ (`#faq-home` in `HomeContent.astro`) is a **separat
 **`horario` (radio, step 3)** — values: `mañanas` ("Mañanas"), `mediodía` ("Mediodía"), `tardes` ("Tardes").
 
 **Message template** (built by `buildMessage()` in `main.js`):
+
 ```
 Hola Nico, vi el sitio de TRX Concept. {Objetivo (capitalized)}, {molestia fragment} y entreno en {comuna} ({horario}). Me interesa la evaluación gratis.
 ```
+
 Falls back to "Santiago" if no comuna selected, "cuando se pueda" if no horario selected, "quiero empezar a entrenar" if no objetivo selected, and "sin lesiones" if no molestia selected — though in practice all fields are required to reach the result step (see per-step validation in `docs/spec.md` §4).
 
 ## 7. Pricing figures (source of truth — do not alter without a real business decision)
 
 - **Evaluación inicial**: free ("Gratis"), no commitment.
-- **Sesión Individual**: $15.000 CLP, ~1 hour, no continuity commitment.
-- **Paquete Mensual / Plan de constancia**: $160.000 CLP/month, 3 sessions/week (~12 sessions/month), ≈ $13.300 CLP per session (stated explicitly in both the homepage pricing card and FAQ answer `precios`).
+- **Sesión individual**: $15.000 CLP, ~1 hour, no continuity commitment.
+- **Plan mensual**: $160.000 CLP/month, 3 sessions/week (~12 sessions/month), ≈ $13.300 CLP per session (stated explicitly in both the homepage pricing card and FAQ answer `precios`). "Plan mensual" is the single canonical name — do not reintroduce "Paquete Mensual" or "Plan de constancia"; the featured badge on both pricing views is "Más elegido".
 - Cancellations with more than 24 hours' notice are free of charge (stated in `pages.services.content` pricing note and FAQ `cancelacion-de-sesion`).
 - These three figures (free / $15.000 / $160.000, and the derived ≈$13.300/session) appear consistently across: homepage pricing cards, `/servicios/` page content, `/servicios/` `structuredData.hasOfferCatalog`, and the FAQ. Any future price change must be applied in all of these locations.
 

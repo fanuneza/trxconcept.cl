@@ -33,6 +33,7 @@ Encuadre transversal: seguridad, principiante, 1 a 1. No hacer keyword stuffing.
 
 > Página con **50 impresiones y 0 clics** en posición media ~49: mayor oportunidad de mejora.
 > Título y H1 deben ser explícitos, locales y con "TRX" al frente.
+> **Estado (2026-07): implementado** — title `Clases de TRX a domicilio en Santiago: precios` y H1 `Clases de TRX a domicilio en Santiago` ya están en `pages.ts`.
 
 - **Title:** `Clases de TRX a domicilio en Santiago | Precios y planes | TRX Concept`
 - **Meta description:** `Sesiones de TRX 1 a 1 en tu casa o en parques de Santiago. Sin máquinas ni membresía. Sesión suelta $15.000, plan mensual $160.000. Primera evaluación gratis.`
@@ -79,7 +80,7 @@ Encuadre transversal: seguridad, principiante, 1 a 1. No hacer keyword stuffing.
 - **LocalBusiness** (o `HealthAndBeautyBusiness`/`SportsActivityLocation`) en Home: nombre TRX Concept, área servida (Santiago, sectores oriente y centro), teléfono WhatsApp, rango de precios, horario (desde 6:00).
 - **Service** en Servicios: servicio "Clases de TRX a domicilio", proveedor, área, ofertas (precios reales $15.000 / $160.000).
 - **FAQPage** en la sección/página de preguntas frecuentes.
-- **Person** en Sobre mí: Nico Echeverría, con `knowsAbout` (TRX, entrenamiento personal) y credenciales de certificación.
+- **Person** en Sobre mí: Nico Echeverría, con `knowsAbout` (TRX, entrenamiento personal) y credenciales de certificación. **Estado (2026-07): implementado** en `pages.about.structuredData`.
 - **AggregateRating solo si es honesto:** existen únicamente 3 reseñas reales de 5 estrellas. No inventar conteos ni inflar. Si se muestra rating, reflejar exactamente esas 3.
 
 ## Contenido de apoyo (solo donde hay demanda real)

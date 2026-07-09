@@ -81,7 +81,6 @@ p {
 }
 
 small,
-.hero-note,
 .pricing-note {
   font-size: var(--fs-small);
 }
@@ -272,8 +271,7 @@ main {
   color: var(--color-black);
 }
 
-.btn-whatsapp,
-.btn-invert {
+.btn-whatsapp {
   background: var(--color-black);
   color: var(--color-white);
 }
@@ -292,8 +290,6 @@ main {
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
 }
 
-.btn-invert:hover,
-.btn-invert:active,
 .btn-whatsapp:hover,
 .btn-whatsapp:active {
   background: #111;
@@ -306,13 +302,11 @@ main {
   outline-offset: 2px;
 }
 
-.btn.btn-whatsapp,
-.btn.btn-invert {
+.btn.btn-whatsapp {
   color: var(--color-white);
 }
 
-.btn.btn-whatsapp:hover,
-.btn.btn-invert:hover {
+.btn.btn-whatsapp:hover {
   color: var(--color-white);
 }
 
@@ -421,35 +415,12 @@ main {
   text-shadow: none;
 }
 
-.hero .btn-invert,
 .hero .btn-whatsapp {
   color: var(--color-white);
   text-shadow: none;
 }
 
-.hero-note {
-  margin-top: 0.25rem;
-}
-
-/* Looks like an informational label, not a button */
-.hero-badge {
-  display: inline-block;
-  background: rgba(255, 255, 255, 0.12);
-  color: rgba(255, 255, 255, 0.88);
-  font-size: 0.8rem;
-  font-weight: 500;
-  text-shadow: none;
-  padding: 0.22rem 0.65rem;
-  border-radius: 0.2rem;
-}
-
 /* ─── TRUST ─── */
-
-.trust {
-  padding: 2.5rem 1.5rem;
-  background: var(--color-gray-light);
-  border-top: 3px solid var(--color-primary);
-}
 
 .trust-inner {
   display: flex;
@@ -469,33 +440,6 @@ main {
   margin-bottom: 0;
 }
 
-.trust-stats {
-  display: flex;
-  gap: 1.5rem;
-  margin-top: 1.25rem;
-  flex-wrap: wrap;
-}
-
-.trust-stat {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.trust-stat-number {
-  font-family: var(--font-logo);
-  font-size: 1.5rem;
-  line-height: 1;
-  color: var(--color-black);
-}
-
-.trust-stat-label {
-  font-size: 0.75rem;
-  color: var(--color-gray-dark);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-}
-
 .profile-pic {
   display: block;
   width: 140px;
@@ -508,51 +452,6 @@ main {
   object-fit: cover;
   object-position: center;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-}
-
-/* ─── BENEFITS ─── */
-
-.benefits {
-  background: var(--color-white);
-}
-
-.benefits-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
-  justify-content: center;
-  margin: 0 auto;
-}
-
-.benefit {
-  flex: 1 1 220px;
-  max-width: 280px;
-  text-align: center;
-}
-
-.benefit-icon-wrap {
-  width: 3.5rem;
-  height: 3.5rem;
-  background: var(--color-primary);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 1rem;
-}
-
-.benefit-icon-svg {
-  width: 1.5rem;
-  height: 1.5rem;
-  object-fit: contain;
-}
-
-.benefit h3 {
-  margin-bottom: 0.5rem;
-}
-
-.benefit p {
-  color: var(--color-gray-dark);
 }
 
 /* ─── MID CTA BAND ─── */
@@ -656,125 +555,6 @@ main {
   font-weight: 600;
   color: var(--color-gray-dark);
   font-style: normal;
-}
-
-/* ─── COMPARISON CARDS ─── */
-
-.comparison {
-  padding: 3rem 1.5rem;
-  text-align: center;
-  background: var(--color-white);
-}
-
-.comparison h2 {
-  margin-bottom: 0.5rem;
-}
-
-.comparison-cards {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  justify-content: center;
-  max-width: 680px;
-  margin: 2rem auto 0;
-}
-
-.comp-card {
-  flex: 1 1 260px;
-  max-width: 320px;
-  border-radius: 1rem;
-  padding: 1.75rem 1.5rem;
-  position: relative;
-  text-align: left;
-}
-
-.comp-card h3 {
-  font-size: 1.1rem;
-  margin-bottom: 1.25rem;
-}
-
-.comp-card ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.comp-card ul li {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  padding: 0.45rem 0;
-  font-size: 0.95rem;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-}
-
-.comp-card ul li:last-child {
-  border-bottom: none;
-}
-
-.comp-card-others {
-  background: var(--color-gray-light);
-  border: 2px solid var(--color-gray);
-}
-
-.comp-card-others h3 {
-  color: var(--color-gray-dark);
-}
-
-.comp-card-others ul li {
-  color: var(--color-gray-dark);
-}
-
-.comp-card-trx {
-  background: var(--color-black);
-  border: 2px solid var(--color-primary);
-}
-
-.comp-card-trx h3 {
-  color: var(--color-primary);
-  margin-top: 0.75rem;
-}
-
-.comp-card-trx ul li {
-  color: var(--color-white);
-  border-bottom-color: rgba(255, 255, 255, 0.08);
-}
-
-.comp-x {
-  color: #d44;
-  font-weight: 700;
-  flex-shrink: 0;
-  width: 1.2rem;
-  text-align: center;
-}
-
-.comp-check {
-  color: var(--color-primary);
-  font-weight: 700;
-  flex-shrink: 0;
-  width: 1.2rem;
-  text-align: center;
-}
-
-.comp-card .recommended-badge {
-  position: absolute;
-  top: -0.75rem;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.recommended-badge {
-  display: inline-block;
-  font-family: var(--font-base);
-  font-size: 0.7rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--color-black);
-  background: var(--color-primary);
-  border-radius: 999px;
-  padding: 0.15rem 0.6rem;
-  white-space: nowrap;
 }
 
 /* ─── PRICING ─── */
@@ -923,10 +703,6 @@ main {
 .copyright {
   padding-top: 1em;
   color: rgba(255, 255, 255, 0.82);
-}
-
-.more-info {
-  border-bottom: 1px dotted;
 }
 
 .footer .site-credit {
@@ -1235,44 +1011,6 @@ main {
   color: var(--color-gray-dark);
 }
 
-/* ─── GRACIAS ─── */
-
-.gracias-section {
-  min-height: 60vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 4rem 1.5rem;
-}
-
-.gracias-check {
-  width: 4.5rem;
-  height: 4.5rem;
-  background: var(--color-primary);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 1.5rem;
-  font-size: 2rem;
-}
-
-.gracias-title {
-  font-family: var(--font-logo);
-  font-size: clamp(2rem, 4vw, 2.75rem);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  margin-bottom: 0.75rem;
-}
-
-.gracias-lead {
-  max-width: 480px;
-  color: var(--color-gray-dark);
-  margin: 0 auto 2rem;
-}
-
 /* ─── WA ICON ─── */
 
 .wa-icon {
@@ -1379,14 +1117,6 @@ header .wa-icon {
     flex-direction: column;
     text-align: center;
   }
-
-  .trust-stats {
-    justify-content: center;
-  }
-
-  .trust-stat {
-    align-items: center;
-  }
 }
 
 @media screen and (max-width: 679px) {
@@ -1468,21 +1198,6 @@ header .wa-icon {
 
   .logo {
     display: none;
-  }
-
-  .trust-stats {
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-
-  .comparison-cards {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .comp-card {
-    max-width: 100%;
-    width: 100%;
   }
 
   .pricing-cards {
@@ -1591,13 +1306,13 @@ header .wa-icon {
 
 .footer-legal a,
 .cookie-manage-btn {
-  font-size: 11px;
+  font-size: 13px;
   color: rgba(255, 255, 255, 0.68);
   text-decoration: none;
   background: transparent;
   border: none;
   cursor: pointer;
-  padding: 0;
+  padding: 0.35rem 0;
   font-family: var(--font-base);
   transition: color 0.15s;
 }

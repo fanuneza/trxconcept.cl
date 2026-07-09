@@ -22,7 +22,7 @@ How TRX Concept (trxconcept.cl) is built and why. This is the architecture-level
 ## 3. WhatsApp CTA mechanism
 
 - WhatsApp is the primary conversion channel everywhere on the site. There is no contact form, no booking backend, no email capture.
-- Every WhatsApp anchor in markup carries a bare `data-wa` attribute and an `href` placeholder (often `"#"` or a full `https://wa.me/...` fallback for no-JS visitors).
+- Every WhatsApp anchor in markup carries a bare `data-wa` attribute and a real `href="https://wa.me/56984402664"` base value (never `"#"`), so every CTA still opens WhatsApp for no-JS visitors; JS only adds the prefilled message.
 - On page load, `public/assets/js/main.js` selects all `[data-wa]` elements and rewrites each `href` to `https://wa.me/56984402664?text=<encoded message>`.
 - The message text is read from that specific element's own `data-wa-msg` attribute. If absent, it falls back to a generic constant, `WA_DEFAULT`, defined once in `main.js`.
 - This is the entire mechanism that lets dozens of different CTAs across the site ("Agendar evaluación gratis", "Consultar el plan", "Consultar por WhatsApp", etc.) each open WhatsApp with a message specific to that CTA's context, without any server or JS framework — it's a single querySelectorAll + attribute rewrite.
@@ -34,8 +34,8 @@ How TRX Concept (trxconcept.cl) is built and why. This is the architecture-level
 - Progressive enhancement, implemented entirely in `main.js`:
   - Without JS: all three `<fieldset>` steps render stacked and are all usable/visible; the fallback link below still converts. No `is-enhanced` class is added, so no CSS hides any step.
   - With JS: `main.js` finds `[data-discovery]`, adds `discovery.classList.add("is-enhanced")` (this class switch is what CSS keys off of to show only the `.is-active` step and hide the rest), reveals the Next/Back nav (`.discovery-nav`, initially `hidden`), and drives a small state machine:
-    - `showStep(index)` toggles `.is-active` on the current fieldset, updates the progress bar width via `data-discovery-bar`, shows/hides the Back button, relabels Next → "Ver mi resultado" on the last step, and moves focus to the step's `<legend>`.
-    - Per-step validation: clicking Next without an answer adds `.has-error` to the current step (drives the `.discovery-error` message shown by CSS) and focuses the invalid input; answering a radio clears `.has-error` via a `change` listener.
+    - `showStep(index, moveFocus)` toggles `.is-active` on the current fieldset, updates the progress bar width via `data-discovery-bar`, shows/hides the Back button, and relabels Next → "Ver mi resultado" on the last step. Focus moves to the step's `<legend>` only when `moveFocus` is true (user-initiated Next/Back/Restart) — the initial `showStep(0, false)` render must never focus, or the page scroll-jumps past the hero on load.
+    - Per-step validation: clicking Next checks **every named control group** in the step (`unansweredName()`), so step 3 requires the horario radios even though its comuna `<select>` always has an implicit value. A missing answer adds `.has-error` to the step (drives the `.discovery-error` message shown by CSS) and focuses the first control of the unanswered group; answering a radio clears `.has-error` via a `change` listener.
     - On the final step's Next click, `finish()` builds the WhatsApp message client-side from two lookup objects, `OBJETIVO` (keyed by the `objetivo` radio value) and `MOLESTIA` (keyed by the `molestia` radio value), plus the raw `comuna`/`horario` values, concatenated into one Spanish sentence. It sets this string on the result CTA both as `href` (via the same `waHref()` helper used by the generic WhatsApp rewriter) and as `data-wa-msg` (for consistency with the rest of the rewriting mechanism), then hides the stepper nav and reveals `.discovery-result`, moving focus to its heading.
     - A "Volver a empezar" button resets the native `<form>` and restarts at step 0.
 - Exact answer-value sets and the message template are documented in `docs/content-model.md` (source of truth: `DiscoveryFlow.astro` markup + `main.js` lookup tables) and rationale for the flow is in `docs/conversion-strategy.md`.
@@ -63,7 +63,7 @@ How TRX Concept (trxconcept.cl) is built and why. This is the architecture-level
 - `public/assets/js/cookie-consent.js` reads `document.documentElement.dataset.ga4Id` / `dataset.consentCookie`, checks the `site_consent` cookie (`"accepted"` / `"rejected"` / unset), and:
   - `"accepted"` → calls `loadGA4()` (injects `gtag.js` script tag, initializes `dataLayer`/`gtag`, preconnects to `googletagmanager.com`) and removes the banner.
   - `"rejected"` → removes the banner, does nothing else.
-  - unset → shows the banner (`data-cookie-banner-visible` attribute on `<body>`, which CSS keys off of).
+  - unset → leaves the banner in place (the banner is visible by default in the markup; the script only removes it once consent is recorded).
 - Accept/Reject buttons (`#cookie-accept`, `#cookie-reject`) set the `site_consent` cookie with `max-age=31536000` (12 months), `SameSite=Lax`, `Secure`.
 - The footer's "Gestionar preferencias de cookies" button (`#cookie-manage-btn`) clears the cookie (`max-age=0`) and calls `window.location.reload()`, which re-shows the banner on the next paint.
 - Consent copy and cookie durations are documented user-facing in `pages.cookies.content` (the `/politica-de-cookies/` page), grounded in Chilean Ley 19.628.

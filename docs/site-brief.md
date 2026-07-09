@@ -101,7 +101,7 @@ against the 3-step discovery flow are in `docs/conversion-strategy.md` §4.
 ## 8. Non-goals
 
 - **No blog or content-marketing plan currently.** `docs/seo-content-plan.md` identifies
-  *where demand exists* for future content, but there is no editorial calendar, blog
+  _where demand exists_ for future content, but there is no editorial calendar, blog
   section, or content-collection infrastructure in this repo today.
 - **No multi-trainer scaling.** The site, its schema, and its voice assume a single named
   trainer indefinitely; do not add trainer-selection or team-profile patterns speculatively.

@@ -39,7 +39,7 @@ The site is a small, conversion-focused marketing site: 5 routes, all copy and s
 - `src/layouts/BaseLayout.astro`: document shell — `<Seo>`, font preloads, inlined CSS, `Header`, `MobileCtaBar`, `Footer`, `CookieBanner`.
 - `src/components/`: `Header.astro`, `Footer.astro`, `HomeContent.astro`, `AboutContent.astro`, `DiscoveryFlow.astro`, `MobileCtaBar.astro`, `CookieBanner.astro`, `WaSymbol.astro` (inline SVG sprite def).
 - `src/data/site.ts`: site-wide config — name, nav, WhatsApp number/default message, Instagram.
-- `src/data/pages.ts`: per-page metadata (`title`, `description`, `structuredData`, `breadcrumb`) **and**, for `servicios`, `preguntas-frecuentes`, `politica-de-cookies`, `404`, the page body as an HTML string rendered via `set:html`. `pages.home.content` is intentionally an empty string — Home renders through `HomeContent.astro` instead. `sobre-mi` renders through `AboutContent.astro`.
+- `src/data/pages.ts`: per-page metadata (`title`, `description`, `structuredData`, `breadcrumb`) **and**, for `servicios`, `preguntas-frecuentes`, `politica-de-cookies`, the page body as an HTML string rendered via `set:html` (`404.astro` defines its own page object inline). `pages.home.content` and `pages.about.content` are intentionally empty strings — Home renders through `HomeContent.astro` and `sobre-mi` through `AboutContent.astro`.
 - `src/utils/schema.ts`: builds the shared JSON-LD `@graph` (WebSite, Organization, WebPage, BreadcrumbList) merged with each page's `structuredData`.
 - `public/assets/css/style.css`: **the single source of truth for all styling.**
 - `public/assets/js/main.js`: nav toggle, footer year, scrolled-header state, the WhatsApp href-rewriting mechanism, and the discovery-flow state machine.
@@ -61,7 +61,7 @@ There is no `src/content/` and no content-collection schema. All page copy and m
 
 ### WhatsApp CTA mechanism
 
-- Every WhatsApp anchor carries `data-wa`. On load, `main.js` rewrites its `href` to `https://wa.me/56984402664?text=<encoded message>`.
+- Every WhatsApp anchor carries `data-wa` **and a real base `href="https://wa.me/56984402664"` (never `href="#"`)** so the CTA still works without JS. On load, `main.js` rewrites the `href` to `https://wa.me/56984402664?text=<encoded message>`.
 - The message comes from that link's own `data-wa-msg` attribute; if absent, a generic default is used.
 - This lets every CTA on the site say something specific ("what happens next") instead of sharing one generic message. When adding a new WhatsApp CTA, always set `data-wa-msg` to a message appropriate to that CTA's context.
 
@@ -165,7 +165,7 @@ Notes:
 ## Known Gotchas
 
 - Editing `public/assets/css/style.min.css` directly is a no-op the next time anyone runs `sync:css`, `check`, or `build` — always edit `style.css`.
-- `pages.home.content` is an empty string on purpose; don't be surprised it's unused — Home content lives in `HomeContent.astro`.
+- `pages.home.content` and `pages.about.content` are empty strings on purpose; Home content lives in `HomeContent.astro` and Sobre mí content in `AboutContent.astro`.
 - Adding a WhatsApp link without `data-wa-msg` silently falls back to the generic default message — fine for minor/utility links, but primary CTAs should always set a specific message.
 - `astro preview` processes can linger between test runs (Playwright's `reuseExistingServer` will happily reuse a stale one) and produce misleading smoke-test failures; if `smoke.spec.ts` fails with a bad HTTP status, check for a leftover preview process before assuming a real regression.
 - Node in some local/sandbox environments may be older than the `.nvmrc`-pinned `24.x` — builds have worked on 22.x in practice, but don't rely on that; CI uses `.nvmrc`.
@@ -192,7 +192,7 @@ If `plan_turn` confidence is:
 ## Editing Behavior
 
 - Respect existing user changes; do not revert unrelated work.
-- Keep comments sparse and useful — explain non-obvious *why*, not *what*.
+- Keep comments sparse and useful — explain non-obvious _why_, not _what_.
 - Keep changes small and defensible.
 - If PostToolUse hooks are unavailable and cache invalidation matters, register edited paths with jCodeMunch.
 
