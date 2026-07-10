@@ -10,7 +10,7 @@ interface Props extends astroHTML.JSX.AnchorHTMLAttributes {
   showIcon?: boolean;
 }
 
-const { message, iconFirst = false, showIcon = true, href = site.whatsappHref, ...attrs } = Astro.props;
+const { message, iconFirst = false, showIcon = true, href = site.getWhatsAppHref(message), ...attrs } = Astro.props;
 ---
 
 <a {...attrs} href={href} data-wa data-wa-msg={message} target="_blank" rel="noopener noreferrer">

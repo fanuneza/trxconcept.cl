@@ -3,11 +3,11 @@ import { site } from "../data/site";
 import WhatsAppLink from "./WhatsAppLink.astro";
 ---
 
-<WhatsAppLink href={site.whatsappHref} class="btn-float-wa" aria-label={site.whatsappLabel} />
+<WhatsAppLink href={site.getWhatsAppHref()} class="btn-float-wa" aria-label={site.whatsappLabel} />
 
 <footer id="footer" class="footer">
   <h2>La evaluación inicial es gratis y sin compromiso.</h2>
-  <WhatsAppLink href={site.whatsappHref} message={site.whatsappDefaultMessage} class="btn btn-trx">
+  <WhatsAppLink href={site.getWhatsAppHref(site.whatsappDefaultMessage)} class="btn btn--trx">
     Agendar evaluación gratis
   </WhatsAppLink>
   <p class="copyright">

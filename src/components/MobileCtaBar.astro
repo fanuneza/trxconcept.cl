@@ -9,8 +9,7 @@ const { discoveryHref = "/#descubre" } = Astro.props as { discoveryHref?: string
 
 <div class="mobile-cta-bar" role="group" aria-label="Acciones rápidas">
   <WhatsAppLink
-    href="https://wa.me/56984402664"
-    message={site.whatsappDefaultMessage}
+    href={site.getWhatsAppHref(site.whatsappDefaultMessage)}
     class="mobile-cta-bar-primary"
     iconFirst={true}
   >

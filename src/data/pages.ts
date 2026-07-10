@@ -54,6 +54,235 @@ const renderPageHero = ({
     </div>
   </div>`;
 
+// ─────────────────────────────────────────────────────────────────────────────
+// FAQ: single source of truth for both JSON-LD and rendered <details>.
+// ─────────────────────────────────────────────────────────────────────────────
+
+type FaqItem = {
+  id: string;
+  question: string;
+  answer: string;
+};
+
+const faqItems: FaqItem[] = [
+  {
+    id: "experiencia-previa",
+    question: "¿Necesito experiencia previa para entrenar TRX?",
+    answer:
+      "No. El TRX es completamente adaptable a tu nivel, sea cual sea. Si nunca has hecho ejercicio, empezamos desde lo más básico y avanzamos a tu propio ritmo. Si ya tienes experiencia, podemos llevar la intensidad mucho más lejos. La primera sesión siempre empieza con una evaluación para conocer tu punto de partida.",
+  },
+  {
+    id: "que-necesito-en-casa",
+    question: "¿Qué necesito tener en casa para entrenar?",
+    answer:
+      "Solo necesitas espacio para moverte y una puerta estándar o barra donde fijar el equipo. El TRX y todos los implementos los llevo yo. Tú solo necesitas ropa cómoda y zapatillas.",
+  },
+  {
+    id: "lesion-o-dolor-cronico",
+    question: "¿Es seguro si tengo una lesión o dolor crónico?",
+    answer:
+      "El TRX es uno de los métodos más seguros que existen, precisamente porque es de bajo impacto y sin cargas externas. He trabajado con personas en recuperación de lesiones de rodilla, hombro y espalda. Eso sí, antes de empezar siempre conversamos sobre tu situación médica y, si es necesario, coordino con tu médico o kinesiólogo.",
+  },
+  {
+    id: "es-rehabilitacion",
+    question: "¿Esto es rehabilitación o tratamiento médico?",
+    answer:
+      "No. Esto es entrenamiento personal con criterio, adaptado a tu historial, pero no reemplaza a un tratamiento médico ni a la kinesiología. Si estás en rehabilitación o tienes un diagnóstico que requiere supervisión, entreno dentro del alcance que indique tu profesional de salud y en coordinación con él.",
+  },
+  {
+    id: "sectores-de-santiago",
+    question: "¿En qué sectores de Santiago entrenas?",
+    answer:
+      "Trabajo principalmente en sectores de Santiago oriente y centro. Escríbeme por WhatsApp con tu comuna y lo coordinamos; en la mayoría de los casos puedo llegar a ti.",
+  },
+  {
+    id: "horarios-disponibles",
+    question: "¿Cuáles son los horarios disponibles?",
+    answer:
+      "Tengo disponibilidad principalmente en las mañanas, desde las 6:00 AM. Los horarios exactos los coordinamos directamente según tu disponibilidad semanal. La flexibilidad es parte del servicio.",
+  },
+  {
+    id: "frecuencia-semanal",
+    question: "¿Cuántas veces a la semana debería entrenar?",
+    answer:
+      "Depende de tu objetivo y tu agenda. El mínimo recomendable para ver resultados es 2 veces por semana. El plan mensual incluye 3 sesiones semanales, que es la frecuencia ideal para progreso constante sin sobrecargar el cuerpo.",
+  },
+  {
+    id: "cancelacion-de-sesion",
+    question: "¿Qué pasa si tengo que cancelar una sesión?",
+    answer:
+      "Las cancelaciones con más de 24 horas de anticipación no tienen costo. Lo coordinamos directamente por WhatsApp y buscamos una alternativa en la misma semana cuando sea posible.",
+  },
+  {
+    id: "primera-clase",
+    question: "¿Cómo es la primera clase?",
+    answer:
+      "La primera clase es siempre gratis y sirve para conocernos. Conversamos sobre tus objetivos, hago una evaluación básica de tu nivel y coordinamos cómo seguir. Sin presión ni compromiso. Si después de la sesión sientes que encajamos, coordinamos el plan; si no, ningún problema.",
+  },
+  {
+    id: "precios",
+    question: "¿Cuánto cuestan las clases de TRX?",
+    answer:
+      "Las clases de TRX tienen dos opciones: la sesión individual tiene un valor de $15.000, y el plan mensual de 3 veces por semana (~12 sesiones) tiene un valor de $160.000, lo que equivale a aproximadamente $13.300 por sesión. La primera clase es siempre gratis.",
+  },
+  {
+    id: "bajar-de-peso",
+    question: "¿El TRX sirve para bajar de peso?",
+    answer:
+      "El entrenamiento con TRX ayuda a desarrollar masa muscular y mejorar el metabolismo, lo que contribuye a la pérdida de grasa. Para resultados de composición corporal, lo ideal es combinar el entrenamiento con buenos hábitos de alimentación, algo sobre lo que también podemos conversar.",
+  },
+  {
+    id: "donde-clases",
+    question: "¿Dónde das las clases de TRX?",
+    answer:
+      "A domicilio o al aire libre en Santiago, principalmente en sectores oriente y centro. Escríbeme con tu comuna y coordinamos el lugar que te acomode.",
+  },
+  {
+    id: "venden-equipos",
+    question: "¿Vendes equipos TRX?",
+    answer:
+      "No vendemos equipos. El TRX y todos los implementos los llevo yo a cada sesión. Tú solo necesitas espacio para moverte, ropa cómoda y zapatillas.",
+  },
+  {
+    id: "como-agendar",
+    question: "¿Cómo agendo una clase de TRX?",
+    answer:
+      "Escríbeme por WhatsApp, coordinamos día y hora según tu disponibilidad, y la primera clase es gratis. Sin compromiso ni pago por adelantado.",
+  },
+];
+
+const buildFaqStructuredData = () => ({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqItems.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.answer,
+    },
+  })),
+});
+
+const renderFaqDetails = (items: FaqItem[]) =>
+  items
+    .map(
+      (item) =>
+        `<details class="faq-item" id="${item.id}">
+            <summary>${item.question}</summary>
+            <p class="faq-answer">${item.answer}</p>
+          </details>`
+    )
+    .join("");
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Services: single source of truth for JSON-LD OfferCatalog and service cards.
+// ─────────────────────────────────────────────────────────────────────────────
+
+type ServicePlan = {
+  name: string;
+  description: string;
+  price: string;
+  priceCurrency: "CLP";
+  featured?: boolean;
+  badge?: string;
+  cardPrice?: string;
+};
+
+const servicePlans: ServicePlan[] = [
+  {
+    name: "Evaluación inicial TRX",
+    description: "Primera sesión para conocernos y ver tu punto de partida. Sin costo ni compromiso.",
+    price: "0",
+    priceCurrency: "CLP",
+  },
+  {
+    name: "Sesión individual TRX",
+    description: "1 hora de entrenamiento personalizado en casa o al aire libre.",
+    price: "15000",
+    priceCurrency: "CLP",
+    cardPrice: "$15.000",
+  },
+  {
+    name: "Plan mensual TRX",
+    description: "3 sesiones por semana, aproximadamente 12 sesiones al mes.",
+    price: "160000",
+    priceCurrency: "CLP",
+    featured: true,
+    badge: "Más elegido",
+    cardPrice: "$160.000",
+  },
+];
+
+const serviceCards = [
+  {
+    title: "Sesión individual",
+    price: "$15.000",
+    body: "Una hora de entrenamiento 1 a 1, adaptada a tu nivel y a lo que buscas. Sin compromiso de continuidad: sirve para probar o para complementar tu rutina.",
+  },
+  {
+    title: "Plan mensual",
+    price: "$160.000",
+    featured: true,
+    badge: "Más elegido",
+    body: "3 sesiones por semana, unas 12 al mes: queda en cerca de $13.300 por sesión. Voy siguiendo tu avance y ajusto el programa mes a mes.",
+  },
+  {
+    title: "TRX Suspension Trainer™",
+    body: "El sistema clásico de entrenamiento en suspensión: fuerza, core y movilidad usando solo el peso de tu cuerpo. El mismo ejercicio se ajusta a cualquier nivel cambiando el ángulo.",
+  },
+  {
+    title: "TRX Rip Trainer®",
+    body: "Una barra con resistencia elástica asimétrica para trabajar potencia, rotación y estabilidad del core. Pensado para deportistas y para quienes ya quieren un trabajo más explosivo.",
+  },
+];
+
+const buildServicesStructuredData = () => ({
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Clases de TRX en Santiago",
+  url: pageUrl("/servicios/"),
+  image: assetUrl(ogImage.src),
+  provider: {
+    "@type": "LocalBusiness",
+    name: "TRX Concept",
+    url: pageUrl("/"),
+  },
+  areaServed: {
+    "@type": "City",
+    name: "Santiago",
+    addressCountry: "CL",
+  },
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Planes de entrenamiento TRX",
+    itemListElement: servicePlans.map((plan) => ({
+      "@type": "Offer",
+      name: plan.name,
+      description: plan.description,
+      price: plan.price,
+      priceCurrency: plan.priceCurrency,
+    })),
+  },
+});
+
+const renderServiceCards = () =>
+  serviceCards
+    .map(
+      (card) =>
+        `<div class="service-card${card.featured ? " service-card--featured" : ""}">
+          ${card.badge ? `<span class="pricing-badge">${card.badge}</span>` : ""}
+          <h3>${card.title}</h3>
+          ${card.price ? `<p class="pricing-price">${card.price}</p>` : ""}
+          <p>${card.body}</p>
+        </div>`
+    )
+    .join("");
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Pages
+// ─────────────────────────────────────────────────────────────────────────────
+
 export const pages = {
   home: {
     title: `Clases de TRX en Santiago, a domicilio y 1 a 1`,
@@ -127,50 +356,7 @@ export const pages = {
       { name: "Inicio", item: pageUrl("/") },
       { name: "Servicios", item: pageUrl("/servicios/") },
     ],
-    structuredData: {
-      "@context": "https://schema.org",
-      "@type": "Service",
-      name: "Clases de TRX en Santiago",
-      url: pageUrl("/servicios/"),
-      image: assetUrl(ogImage.src),
-      provider: {
-        "@type": "LocalBusiness",
-        name: "TRX Concept",
-        url: pageUrl("/"),
-      },
-      areaServed: {
-        "@type": "City",
-        name: "Santiago",
-        addressCountry: "CL",
-      },
-      hasOfferCatalog: {
-        "@type": "OfferCatalog",
-        name: "Planes de entrenamiento TRX",
-        itemListElement: [
-          {
-            "@type": "Offer",
-            name: "Evaluación inicial TRX",
-            description: "Primera sesión para conocernos y ver tu punto de partida. Sin costo ni compromiso.",
-            price: "0",
-            priceCurrency: "CLP",
-          },
-          {
-            "@type": "Offer",
-            name: "Sesión individual TRX",
-            description: "1 hora de entrenamiento personalizado en casa o al aire libre.",
-            price: "15000",
-            priceCurrency: "CLP",
-          },
-          {
-            "@type": "Offer",
-            name: "Plan mensual TRX",
-            description: "3 sesiones por semana, aproximadamente 12 sesiones al mes.",
-            price: "160000",
-            priceCurrency: "CLP",
-          },
-        ],
-      },
-    },
+    structuredData: buildServicesStructuredData(),
     content: `${renderPageHero({
       title: "Clases de TRX a domicilio en Santiago",
       description:
@@ -187,25 +373,7 @@ export const pages = {
           <h2>Servicios y precios</h2>
           <p class="section-intro">Sesiones 1 a 1 en tu casa o en un parque cercano. Tú eliges cómo partir.</p>
           <div class="services-grid">
-            <div class="service-card">
-              <h3>Sesión individual</h3>
-              <p class="pricing-price">$15.000</p>
-              <p>Una hora de entrenamiento 1 a 1, adaptada a tu nivel y a lo que buscas. Sin compromiso de continuidad: sirve para probar o para complementar tu rutina.</p>
-            </div>
-            <div class="service-card service-card--featured">
-              <span class="pricing-badge">Más elegido</span>
-              <h3>Plan mensual</h3>
-              <p class="pricing-price">$160.000</p>
-              <p>3 sesiones por semana, unas 12 al mes: queda en cerca de $13.300 por sesión. Voy siguiendo tu avance y ajusto el programa mes a mes.</p>
-            </div>
-            <div class="service-card">
-              <h3>TRX Suspension Trainer™</h3>
-              <p>El sistema clásico de entrenamiento en suspensión: fuerza, core y movilidad usando solo el peso de tu cuerpo. El mismo ejercicio se ajusta a cualquier nivel cambiando el ángulo.</p>
-            </div>
-            <div class="service-card">
-              <h3>TRX Rip Trainer®</h3>
-              <p>Una barra con resistencia elástica asimétrica para trabajar potencia, rotación y estabilidad del core. Pensado para deportistas y para quienes ya quieren un trabajo más explosivo.</p>
-            </div>
+            ${renderServiceCards()}
           </div>
         </div>
       </section>
@@ -343,124 +511,7 @@ export const pages = {
       { name: "Inicio", item: pageUrl("/") },
       { name: "Preguntas frecuentes", item: pageUrl("/preguntas-frecuentes/") },
     ],
-    structuredData: {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      mainEntity: [
-        {
-          "@type": "Question",
-          name: "¿Necesito experiencia previa para entrenar TRX?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "No. El TRX es completamente adaptable a tu nivel, sea cual sea. Si nunca has hecho ejercicio, empezamos desde lo más básico y avanzamos a tu propio ritmo. Si ya tienes experiencia, podemos llevar la intensidad mucho más lejos. La primera sesión siempre empieza con una evaluación para conocer tu punto de partida.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "¿Qué necesito tener en casa para entrenar?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Solo necesitas espacio para moverte y una puerta estándar o barra donde fijar el equipo. El TRX y todos los implementos los llevo yo. Tú solo necesitas ropa cómoda y zapatillas.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "¿Es seguro si tengo una lesión o dolor crónico?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "El TRX es uno de los métodos más seguros que existen, precisamente porque es de bajo impacto y sin cargas externas. He trabajado con personas en recuperación de lesiones de rodilla, hombro y espalda. Eso sí, antes de empezar siempre conversamos sobre tu situación médica y, si es necesario, coordino con tu médico o kinesiólogo.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "¿Esto es rehabilitación o tratamiento médico?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "No. Esto es entrenamiento personal con criterio, adaptado a tu historial, pero no reemplaza a un tratamiento médico ni a la kinesiología. Si estás en rehabilitación o tienes un diagnóstico que requiere supervisión, entreno dentro del alcance que indique tu profesional de salud y en coordinación con él.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "¿En qué sectores de Santiago entrenas?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Trabajo principalmente en sectores de Santiago oriente y centro. Escríbeme por WhatsApp con tu comuna y lo coordinamos; en la mayoría de los casos puedo llegar a ti.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "¿Cuáles son los horarios disponibles?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Tengo disponibilidad principalmente en las mañanas, desde las 6:00 AM. Los horarios exactos los coordinamos directamente según tu disponibilidad semanal. La flexibilidad es parte del servicio.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "¿Cuántas veces a la semana debería entrenar?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Depende de tu objetivo y tu agenda. El mínimo recomendable para ver resultados es 2 veces por semana. El plan mensual incluye 3 sesiones semanales, que es la frecuencia ideal para progreso constante sin sobrecargar el cuerpo.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "¿Qué pasa si tengo que cancelar una sesión?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Las cancelaciones con más de 24 horas de anticipación no tienen costo. Lo coordinamos directamente por WhatsApp y buscamos una alternativa en la misma semana cuando sea posible.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "¿Cómo es la primera clase?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "La primera clase es siempre gratis y sirve para conocernos. Conversamos sobre tus objetivos, hago una evaluación básica de tu nivel y coordinamos cómo seguir. Sin presión ni compromiso. Si después de la sesión sientes que encajamos, coordinamos el plan; si no, ningún problema.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "¿Cuánto cuestan las clases de TRX?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Las clases de TRX tienen dos opciones: la sesión individual tiene un valor de $15.000, y el plan mensual de 3 veces por semana (~12 sesiones) tiene un valor de $160.000, lo que equivale a aproximadamente $13.300 por sesión. La primera clase es siempre gratis.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "¿El TRX sirve para bajar de peso?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "El entrenamiento con TRX ayuda a desarrollar masa muscular y mejorar el metabolismo, lo que contribuye a la pérdida de grasa. Para resultados de composición corporal, lo ideal es combinar el entrenamiento con buenos hábitos de alimentación, algo sobre lo que también podemos conversar.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "¿Dónde das las clases de TRX?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "A domicilio o al aire libre en Santiago, principalmente en sectores oriente y centro. Escríbeme con tu comuna y coordinamos el lugar que te acomode.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "¿Vendes equipos TRX?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "No vendemos equipos. El TRX y todos los implementos los llevo yo a cada sesión. Tú solo necesitas espacio para moverte, ropa cómoda y zapatillas.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "¿Cómo agendo una clase de TRX?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Escríbeme por WhatsApp, coordinamos día y hora según tu disponibilidad, y la primera clase es gratis. Sin compromiso ni pago por adelantado.",
-          },
-        },
-      ],
-    },
+    structuredData: buildFaqStructuredData(),
     content: `${renderPageHero({
       title: "Preguntas frecuentes sobre clases de TRX",
       description:
@@ -473,108 +524,7 @@ export const pages = {
 
       <section>
         <div class="container faq-list">
-
-          <details class="faq-item" id="experiencia-previa">
-            <summary>¿Necesito experiencia previa para entrenar TRX?</summary>
-            <p class="faq-answer">
-              No. El TRX es completamente adaptable a tu nivel, sea cual sea. Si nunca has hecho ejercicio, empezamos desde lo más básico y avanzamos a tu propio ritmo. Si ya tienes experiencia, podemos llevar la intensidad mucho más lejos. La primera sesión siempre empieza con una evaluación para conocer tu punto de partida.
-            </p>
-          </details>
-
-          <details class="faq-item" id="que-necesito-en-casa">
-            <summary>¿Qué necesito tener en casa para entrenar?</summary>
-            <p class="faq-answer">
-              Solo necesitas espacio para moverte y una puerta estándar o barra donde fijar el equipo. El TRX y todos los implementos los llevo yo. Tú solo necesitas ropa cómoda y zapatillas.
-            </p>
-          </details>
-
-          <details class="faq-item" id="lesion-o-dolor-cronico">
-            <summary>¿Es seguro si tengo una lesión o dolor crónico?</summary>
-            <p class="faq-answer">
-              El TRX es uno de los métodos más seguros que existen, precisamente porque es de bajo impacto y sin cargas externas. He trabajado con personas en recuperación de lesiones de rodilla, hombro y espalda. Eso sí, antes de empezar siempre conversamos sobre tu situación médica y, si es necesario, coordino con tu médico o kinesiólogo.
-            </p>
-          </details>
-
-          <details class="faq-item" id="es-rehabilitacion">
-            <summary>¿Esto es rehabilitación o tratamiento médico?</summary>
-            <p class="faq-answer">
-              No. Esto es entrenamiento personal con criterio, adaptado a tu historial, pero no reemplaza a un tratamiento médico ni a la kinesiología. Si estás en rehabilitación o tienes un diagnóstico que requiere supervisión, entreno dentro del alcance que indique tu profesional de salud y en coordinación con él.
-            </p>
-          </details>
-
-          <details class="faq-item" id="sectores-de-santiago">
-            <summary>¿En qué sectores de Santiago entrenas?</summary>
-            <p class="faq-answer">
-              Trabajo principalmente en sectores de Santiago oriente y centro. Escríbeme por WhatsApp con tu comuna y lo coordinamos; en la mayoría de los casos puedo llegar a ti.
-            </p>
-          </details>
-
-          <details class="faq-item" id="horarios-disponibles">
-            <summary>¿Cuáles son los horarios disponibles?</summary>
-            <p class="faq-answer">
-              Tengo disponibilidad principalmente en las mañanas, desde las 6:00 AM. Los horarios exactos los coordinamos directamente según tu disponibilidad semanal. La flexibilidad es parte del servicio.
-            </p>
-          </details>
-
-          <details class="faq-item" id="frecuencia-semanal">
-            <summary>¿Cuántas veces a la semana debería entrenar?</summary>
-            <p class="faq-answer">
-              Depende de tu objetivo y tu agenda. El mínimo recomendable para ver resultados es 2 veces por semana. El plan mensual incluye 3 sesiones semanales, que es la frecuencia ideal para progreso constante sin sobrecargar el cuerpo.
-            </p>
-          </details>
-
-          <details class="faq-item" id="cancelacion-de-sesion">
-            <summary>¿Qué pasa si tengo que cancelar una sesión?</summary>
-            <p class="faq-answer">
-              Las cancelaciones con más de 24 horas de anticipación no tienen costo. Lo coordinamos directamente por WhatsApp y buscamos una alternativa en la misma semana cuando sea posible.
-            </p>
-          </details>
-
-          <details class="faq-item" id="primera-clase">
-            <summary>¿Cómo es la primera clase?</summary>
-            <p class="faq-answer">
-              La primera clase es siempre gratis y sirve para conocernos. Conversamos sobre tus objetivos, hago una evaluación básica de tu nivel y coordinamos cómo seguir. Sin presión ni compromiso. Si después de la sesión sientes que encajamos, coordinamos el plan; si no, ningún problema.
-            </p>
-          </details>
-
-          <details class="faq-item" id="precios">
-            <summary>¿Cuánto cuestan las clases de TRX?</summary>
-            <p class="faq-answer">
-              Las clases de TRX tienen dos opciones: la sesión individual tiene un valor de $15.000, y el plan mensual de 3 veces por semana (~12 sesiones) tiene un valor de $160.000, lo que equivale a aproximadamente $13.300 por sesión. La primera clase es siempre gratis.
-            </p>
-          </details>
-
-          <details class="faq-item" id="bajar-de-peso">
-            <summary>¿El TRX sirve para bajar de peso?</summary>
-            <p class="faq-answer">
-              El entrenamiento con TRX ayuda a desarrollar masa muscular y mejorar el metabolismo, lo que contribuye a la pérdida de grasa. Para resultados de composición corporal, lo ideal es combinar el entrenamiento con buenos hábitos de alimentación, algo sobre lo que también podemos conversar.
-            </p>
-          </details>
-
-          <details class="faq-item" id="donde-clases">
-            <summary>¿Dónde das las clases de TRX?</summary>
-            <p class="faq-answer">
-              A domicilio o al aire libre en Santiago, principalmente en sectores oriente y centro.
-              Escríbeme con tu comuna y coordinamos el lugar que te acomode.
-            </p>
-          </details>
-
-          <details class="faq-item" id="venden-equipos">
-            <summary>¿Vendes equipos TRX?</summary>
-            <p class="faq-answer">
-              No vendemos equipos. El TRX y todos los implementos los llevo yo a cada sesión.
-              Tú solo necesitas espacio para moverte, ropa cómoda y zapatillas.
-            </p>
-          </details>
-
-          <details class="faq-item" id="como-agendar">
-            <summary>¿Cómo agendo una clase de TRX?</summary>
-            <p class="faq-answer">
-              Escríbeme por WhatsApp, coordinamos día y hora según tu disponibilidad, y la primera clase es gratis.
-              Sin compromiso ni pago por adelantado.
-            </p>
-          </details>
-
+          ${renderFaqDetails(faqItems)}
         </div>
       </section>`,
     isHome: false,

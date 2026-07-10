@@ -6,15 +6,14 @@ import testimonialValentinaImage from "../assets/images/testimonio-valentinarose
 import testimonialMarisaImage from "../assets/images/testimonio-marisagracia.webp";
 import testimonialMariaIgnaciaImage from "../assets/images/testimonio-mariaignacia.webp";
 import DiscoveryFlow from "./DiscoveryFlow.astro";
-import { site } from "../data/site";
+import { site, WHATSAPP_MESSAGE_EVALUATION, WHATSAPP_MESSAGE_PLAN, WHATSAPP_MESSAGE_SINGLE } from "../data/site";
 import WhatsAppLink from "./WhatsAppLink.astro";
 import TestimonialCard from "./TestimonialCard.astro";
 import PricingCard from "./PricingCard.astro";
 
-const waEval =
-  "Hola Nico, vi el sitio de TRX Concept. Me gustaría agendar la evaluación gratis para ver si esto es para mí.";
-const waPlan = "Hola Nico, vi el sitio de TRX Concept. Quiero saber más sobre el plan mensual.";
-const waSingle = "Hola Nico, vi el sitio de TRX Concept. Me interesa una sesión individual para probar.";
+const waEval = WHATSAPP_MESSAGE_EVALUATION;
+const waPlan = WHATSAPP_MESSAGE_PLAN;
+const waSingle = WHATSAPP_MESSAGE_SINGLE;
 ---
 
 <!-- HERO -->
@@ -44,10 +43,8 @@ const waSingle = "Hola Nico, vi el sitio de TRX Concept. Me interesa una sesión
       <li>Santiago oriente y centro</li>
     </ul>
     <div class="hero-cta">
-      <WhatsAppLink href="https://wa.me/56984402664" message={waEval} class="btn btn-trx">
-        Agendar evaluación gratis
-      </WhatsAppLink>
-      <a href="#descubre" class="btn btn-outline-light">Ver si esto es para mí</a>
+      <WhatsAppLink message={waEval} class="btn btn--trx"> Agendar evaluación gratis </WhatsAppLink>
+      <a href="#descubre" class="btn btn--outline-light">Ver si esto es para mí</a>
     </div>
   </div>
 </section>
@@ -193,7 +190,7 @@ const waSingle = "Hola Nico, vi el sitio de TRX Concept. Me interesa una sesión
         "Horario flexible desde las 6 AM",
       ]}
       cta="Consultar el plan"
-      ctaClass="btn btn-trx"
+      ctaClass="btn btn--trx"
       ctaMessage={waPlan}
       featured={true}
       badge="Más elegido"

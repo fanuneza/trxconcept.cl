@@ -261,7 +261,7 @@ main {
   flex-shrink: 0;
 }
 
-.header-inner > .btn-whatsapp {
+.header-inner > .btn--whatsapp {
   flex-shrink: 0;
 }
 
@@ -302,32 +302,32 @@ main {
     box-shadow 0.18s ease;
 }
 
-.btn-trx {
+.btn--trx {
   background: var(--color-primary);
   color: var(--color-black);
 }
 
-.btn-whatsapp {
+.btn--whatsapp {
   background: var(--color-black);
   color: var(--color-white);
 }
 
-.btn-whatsapp,
-.btn-trx {
+.btn--whatsapp,
+.btn--trx {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
 }
 
-.btn-trx:hover,
-.btn-trx:active {
+.btn--trx:hover,
+.btn--trx:active {
   background: color-mix(in srgb, var(--color-primary), #000 10%);
   transform: translateY(-1px);
   box-shadow: var(--shadow-raise);
 }
 
-.btn-whatsapp:hover,
-.btn-whatsapp:active {
+.btn--whatsapp:hover,
+.btn--whatsapp:active {
   background: #111;
   transform: translateY(-1px);
   box-shadow: var(--shadow-raise);
@@ -338,16 +338,16 @@ main {
   outline-offset: 2px;
 }
 
-.btn.btn-whatsapp {
+.btn.btn--whatsapp {
   color: var(--color-white);
 }
 
-.btn.btn-whatsapp:hover {
+.btn.btn--whatsapp:hover {
   color: var(--color-white);
 }
 
-.btn.btn-trx,
-.btn.btn-trx:hover {
+.btn.btn--trx,
+.btn.btn--trx:hover {
   color: var(--color-black);
 }
 
@@ -438,19 +438,19 @@ main {
   opacity: 0.92;
 }
 
-.hero .btn-trx {
+.hero .btn--trx {
   color: var(--color-black);
   text-shadow: none;
 }
 
-.hero .btn-trx .wa-icon,
-.hero .btn-trx .wa-icon * {
+.hero .btn--trx .wa-icon,
+.hero .btn--trx .wa-icon * {
   color: var(--color-black);
   fill: currentColor;
   text-shadow: none;
 }
 
-.hero .btn-whatsapp {
+.hero .btn--whatsapp {
   color: var(--color-white);
   text-shadow: none;
 }
@@ -602,21 +602,26 @@ main {
   margin: 0 auto 1.5rem;
 }
 
-.pricing-card {
-  flex: 1 1 280px;
-  max-width: 340px;
+.pricing-card,
+.service-card {
+  flex: 1 1 250px;
   background: var(--color-white);
   border: 2px solid var(--color-gray);
   border-radius: var(--radius-card);
   padding: 2rem 1.5rem;
+  position: relative;
+}
+
+.pricing-card {
+  flex: 1 1 280px;
+  max-width: 340px;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  position: relative;
 }
 
-.pricing-card-featured {
+.pricing-card--featured {
   border-color: var(--color-primary);
   box-shadow: 0 8px 32px rgba(255, 215, 0, 0.2);
 }
@@ -975,13 +980,7 @@ main {
 }
 
 .service-card {
-  flex: 1 1 250px;
   max-width: 380px;
-  background: var(--color-white);
-  border: 2px solid var(--color-gray);
-  border-radius: var(--radius-card);
-  padding: 2rem 1.5rem;
-  position: relative;
   text-align: left;
 }
 
@@ -1140,15 +1139,15 @@ body:has(.cookie-banner.is-visible) .btn-float-wa {
 
 /* ─── SCROLLED HEADER ─── */
 
-.site-header.scrolled {
+.site-header.is-scrolled {
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
 }
 
-.site-header.scrolled .header-inner {
+.site-header.is-scrolled .header-inner {
   padding-block: 0.4rem;
 }
 
-.site-header.scrolled .brand img {
+.site-header.is-scrolled .brand img {
   height: 3rem;
 }
 
@@ -1181,7 +1180,7 @@ body:has(.cookie-banner.is-visible) .btn-float-wa {
     font-size: 0.98rem;
   }
 
-  .site-header .btn-whatsapp {
+  .site-header .btn--whatsapp {
     padding: 0.65rem 1.1rem;
     font-size: 0.9rem;
   }
@@ -1212,7 +1211,7 @@ body:has(.cookie-banner.is-visible) .btn-float-wa {
     flex-wrap: nowrap;
   }
 
-  .nav-list.nav-open {
+  .nav-list.is-open {
     display: flex;
   }
 
@@ -1234,7 +1233,7 @@ body:has(.cookie-banner.is-visible) .btn-float-wa {
     display: flex;
   }
 
-  .header-inner > .btn-whatsapp {
+  .header-inner > .btn--whatsapp {
     margin-inline: auto;
   }
 }
@@ -1251,7 +1250,7 @@ body:has(.cookie-banner.is-visible) .btn-float-wa {
     gap: 0.5rem;
   }
 
-  .site-header .btn-whatsapp {
+  .site-header .btn--whatsapp {
     margin-inline: auto;
     font-size: 1rem;
     gap: 0.5rem;
@@ -1261,13 +1260,13 @@ body:has(.cookie-banner.is-visible) .btn-float-wa {
     border-radius: 999px;
   }
 
-  .site-header .btn-whatsapp .wa-icon {
+  .site-header .btn--whatsapp .wa-icon {
     width: 24px;
     height: 24px;
     flex-shrink: 0;
   }
 
-  .site-header.scrolled .brand img {
+  .site-header.is-scrolled .brand img {
     height: 2.5rem;
   }
 
@@ -1463,31 +1462,31 @@ body:has(.cookie-banner.is-visible) .btn-float-wa {
   gap: 0.75rem;
 }
 
-.btn-outline-light {
+.btn--outline-light {
   background: transparent;
   color: #fff;
   border: 2px solid rgba(255, 255, 255, 0.85);
   text-shadow: none;
 }
 
-.hero .btn-outline-light {
+.hero .btn--outline-light {
   color: #fff;
   text-shadow: none;
 }
 
-.btn-outline-light:hover,
-.btn-outline-light:active {
+.btn--outline-light:hover,
+.btn--outline-light:active {
   background: rgba(255, 255, 255, 0.14);
   transform: translateY(-1px);
 }
 
-.btn-ghost {
+.btn--ghost {
   background: transparent;
   color: var(--color-black);
   border: 2px solid var(--color-gray);
 }
 
-.btn-ghost:hover {
+.btn--ghost:hover {
   background: var(--color-gray-light);
 }
 
