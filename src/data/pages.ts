@@ -369,9 +369,11 @@ export const pages = {
 
       <!-- SERVICES / PRICING -->
       <section class="section-alt">
-        <div class="container text-center">
-          <h2>Servicios y precios</h2>
-          <p class="section-intro">Sesiones 1 a 1 en tu casa o en un parque cercano. Tú eliges cómo partir.</p>
+        <div class="container">
+          <div class="section-head text-center">
+            <h2>Servicios y precios</h2>
+            <p class="section-intro">Sesiones 1 a 1 en tu casa o en un parque cercano. Tú eliges cómo partir.</p>
+          </div>
           <div class="services-grid">
             ${renderServiceCards()}
           </div>
@@ -380,14 +382,16 @@ export const pages = {
 
       <!-- HOW TO BOOK -->
       <section>
-        <div class="container text-center">
-          <h2>¿Cómo reservar una clase?</h2>
+        <div class="container">
+          <div class="section-head text-center">
+            <h2>¿Cómo reservar una clase?</h2>
+          </div>
           <ol class="steps-list">
             <li><strong>Escríbeme por WhatsApp</strong> y cuéntame qué te gustaría lograr.</li>
             <li><strong>Coordinamos día, hora y lugar</strong> según lo que te acomode.</li>
             <li><strong>Tu primera clase es gratis.</strong> Sin compromiso: sirve para conocernos y ver tu punto de partida.</li>
           </ol>
-          <p>No vendo equipos TRX ni necesitas comprar nada: el equipo lo llevo yo a cada sesión.</p>
+          <p class="text-center">No vendo equipos TRX ni necesitas comprar nada: el equipo lo llevo yo a cada sesión.</p>
         </div>
       </section>
 
@@ -408,9 +412,11 @@ export const pages = {
 
       <!-- FOR WHOM -->
       <section>
-        <div class="container text-center">
-          <h2>¿Para quién es?</h2>
-          <p class="section-intro">Entreno a personas muy distintas. Quizás te reconoces en alguna de estas:</p>
+        <div class="container">
+          <div class="section-head text-center">
+            <h2>¿Para quién es?</h2>
+            <p class="section-intro">Entreno a personas muy distintas. Quizás te reconoces en alguna de estas:</p>
+          </div>
           <div class="audience-grid">
             <div class="audience-item">
               <h3>Principiantes absolutos</h3>

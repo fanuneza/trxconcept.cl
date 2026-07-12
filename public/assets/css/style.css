@@ -612,17 +612,30 @@ p {
 
 /* ─── SECTION SYSTEM ─── */
 
+/* Every section title is centered — one consistent rule site-wide. */
 .section-head {
   max-width: 720px;
+  margin-inline: auto;
   margin-bottom: var(--space-xl);
+  text-align: center;
 }
 
 .section-head h2 {
   margin-bottom: var(--space-sm);
 }
 
-.section-head.text-center {
+/* Centered heading boxes (intros, notes) center their own max-width, not just
+   their text — otherwise a 65ch paragraph sits left inside a centered block. */
+.text-center p,
+.section-head p {
   margin-inline: auto;
+}
+
+/* Prose-section headings (servicios, sobre-mí, legal) stay title-centered even
+   though their body copy is left-aligned for readability. The 2-col bio name
+   heading is nested deeper, so it is untouched. */
+.about-section > h2 {
+  text-align: center;
 }
 
 .section-intro {
@@ -915,6 +928,43 @@ p {
   margin: 0 auto var(--space-md);
 }
 
+/* On-screen preview of the exact WhatsApp message that will be sent, so the
+   send button is an explicit "yes, send this" rather than a leap of faith. */
+.discovery-message {
+  max-width: 520px;
+  margin: 0 auto var(--space-lg);
+  padding: var(--space-md);
+  text-align: left;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+}
+
+.discovery-message-label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: var(--space-2xs);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+}
+
+.discovery-message-label .wa-icon {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+.discovery-message-text {
+  max-width: none;
+  margin: 0;
+  color: var(--text);
+  font-size: 1.05rem;
+  line-height: 1.55;
+}
+
 .discovery-send {
   margin-bottom: var(--space-sm);
 }
@@ -952,23 +1002,56 @@ p {
 
 /* ─── FIT ─── */
 
+.icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  display: block;
+  flex-shrink: 0;
+}
+
 .fit-list {
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1px;
-  background: var(--border);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-card);
-  overflow: hidden;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--space-md);
 }
 
 .fit-item {
   background: var(--surface);
-  padding: var(--space-lg) var(--space-md);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  padding: var(--space-lg);
   display: flex;
   flex-direction: column;
-  gap: var(--space-2xs);
+  gap: var(--space-sm);
+  transition:
+    border-color var(--transition-base),
+    transform var(--transition-base);
+}
+
+.fit-item:hover {
+  border-color: var(--accent);
+  transform: translateY(-4px);
+}
+
+.fit-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: var(--accent-alpha-8);
+  border: 1px solid var(--accent-alpha-25);
+  color: var(--accent);
+  transition:
+    background-color var(--transition-base),
+    color var(--transition-base);
+}
+
+.fit-item:hover .fit-icon {
+  background: var(--accent);
+  color: var(--bg);
 }
 
 .fit-item h3 {
@@ -1011,27 +1094,33 @@ p {
   gap: var(--space-sm);
 }
 
+/* Two columns: the bold claim on the left, the supporting detail on the right,
+   so every row reads as an even statement → explanation pair. */
 .method-list li {
-  display: flex;
-  gap: var(--space-sm);
-  align-items: flex-start;
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: var(--space-2xs) var(--space-md);
+  align-items: start;
   padding: var(--space-md);
   background: var(--surface-raised);
   border-radius: var(--radius-card);
-  color: var(--text-muted);
   font-size: 1.05rem;
-  line-height: 1.55;
-}
-
-.method-list li::before {
-  content: "→";
-  color: var(--accent);
-  font-weight: 700;
-  flex-shrink: 0;
+  line-height: 1.5;
 }
 
 .method-list strong {
   color: var(--text);
+}
+
+.method-list span {
+  color: var(--text-muted);
+}
+
+@media screen and (max-width: 560px) {
+  .method-list li {
+    grid-template-columns: 1fr;
+    gap: var(--space-3xs);
+  }
 }
 
 .method-visual {
@@ -1052,11 +1141,15 @@ p {
 .model-list {
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-md);
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-sm);
 }
 
+/* Icon + statement rows: quicker to scan than a stacked check-on-top card. */
 .model-list li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
   padding: var(--space-md);
   background: var(--surface);
   border-radius: var(--radius-card);
@@ -1064,14 +1157,28 @@ p {
   font-weight: 700;
   font-size: 1.05rem;
   color: var(--text);
+  transition: border-color var(--transition-base);
 }
 
-.model-list li::before {
-  content: "✓";
-  display: block;
+.model-list li:hover {
+  border-color: var(--border-strong);
+}
+
+.model-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  flex-shrink: 0;
+  border-radius: var(--radius-control);
+  background: var(--accent-alpha-8);
   color: var(--accent);
-  font-weight: 700;
-  margin-bottom: var(--space-2xs);
+}
+
+.model-icon .icon {
+  width: 1.5rem;
+  height: 1.5rem;
 }
 
 /* ─── PRICING ─── */
@@ -1204,7 +1311,7 @@ p {
 .pricing-note {
   text-align: center;
   color: var(--text-muted);
-  margin-top: var(--space-md);
+  margin: var(--space-md) auto 0;
   font-size: 0.95rem;
 }
 
@@ -1471,20 +1578,20 @@ p {
 .copyright {
   color: var(--text-muted);
   font-size: 0.95rem;
-  margin-bottom: 0.5rem;
+  margin: 0 auto 0.5rem;
+  text-align: center;
 }
 
 .site-credit {
-  color: var(--text-subtle);
-  font-size: 0.9rem;
-  margin-bottom: var(--space-md);
-}
-
-.site-credit-line {
-  display: inline-flex;
+  display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.35rem;
   flex-wrap: wrap;
+  max-width: none;
+  color: var(--text-subtle);
+  font-size: 0.9rem;
+  margin: 0 auto var(--space-md);
 }
 
 .heart-icon {
@@ -2015,10 +2122,6 @@ code {
     margin-inline: auto;
   }
 
-  .model-list {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
   .pricing-cards {
     grid-template-columns: 1fr;
   }
@@ -2045,10 +2148,6 @@ code {
 
   .trainer-list li {
     text-align: left;
-  }
-
-  .fit-list {
-    grid-template-columns: 1fr;
   }
 }
 
@@ -2139,12 +2238,6 @@ code {
     gap: var(--space-xl);
   }
 
-  .model-list {
-    grid-template-columns: 1fr;
-  }
-
-  .fit-list,
-  .model-list,
   .services-grid {
     grid-template-columns: 1fr;
   }

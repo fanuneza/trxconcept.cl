@@ -97,11 +97,19 @@
         </fieldset>
 
         <div class="discovery-result" data-discovery-result hidden>
-          <h3 class="discovery-result-title" tabindex="-1">Listo. Un buen primer paso para ti</h3>
-          <p>
-            Un comienzo privado y de bajo impacto encaja contigo. Te preparé un mensaje con tus respuestas; solo
-            revísalo y envíalo.
+          <h3 class="discovery-result-title" tabindex="-1" data-discovery-title>Listo. Un buen primer paso para ti</h3>
+          <p class="discovery-result-lead" data-discovery-lead>
+            Preparé tu mensaje con tus respuestas; revísalo y envíalo cuando quieras.
           </p>
+
+          <figure class="discovery-message">
+            <figcaption class="discovery-message-label">
+              <svg class="wa-icon" aria-hidden="true" focusable="false"><use href="#wa-symbol"></use></svg>
+              Tu mensaje para Nico
+            </figcaption>
+            <p class="discovery-message-text" data-discovery-message></p>
+          </figure>
+
           <a
             class="btn btn--primary discovery-send"
             data-discovery-link
@@ -109,7 +117,7 @@
             target="_blank"
             rel="noopener noreferrer"
           >
-            Enviar y agendar evaluación gratis
+            Enviar este mensaje
             <svg class="wa-icon" aria-hidden="true" focusable="false"><use href="#wa-symbol"></use></svg>
           </a>
           <button type="button" class="discovery-restart" data-discovery-restart>Volver a empezar</button>

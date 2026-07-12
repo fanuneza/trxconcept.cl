@@ -103,7 +103,7 @@
   const OBJETIVO = {
     empezar: "quiero empezar desde cero",
     retomar: "quiero retomar el ejercicio",
-    molestia: "quiero entrenar cuidando una molestia",
+    molestia: "quiero entrenar con cuidado",
     fuerza: "quiero ganar fuerza y mejorar mi postura",
   };
   const MOLESTIA = {
@@ -179,11 +179,50 @@
     const horario = checkedList("horario") || "cuando se pueda";
     let objetivo = OBJETIVO[value("objetivo")] || "quiero empezar a entrenar";
     objetivo = objetivo.charAt(0).toUpperCase() + objetivo.slice(1);
-    return `${objetivo}, ${MOLESTIA[value("molestia")] || "sin lesiones"} y entreno en ${comuna} (${horario}). Me interesa la evaluación gratis.`;
+    return `Hola Nico, vi el sitio de TRX Concept. ${objetivo}, ${MOLESTIA[value("molestia")] || "sin lesiones"} y entreno en ${comuna} (${horario}). Me interesa la evaluación gratis.`;
   };
+
+  // Personalized closing screen: the headline + lead adapt to the visitor's
+  // goal (and a nuance for their molestia), so the result speaks to their case
+  // rather than showing one generic line.
+  const RESULT = {
+    empezar: {
+      title: "Empezar de cero, sin miedo",
+      lead: "Un comienzo privado y de bajo impacto es justo lo que buscas.",
+    },
+    retomar: {
+      title: "Retomar a tu ritmo",
+      lead: "Volver después de una pausa se hace con calma y buena progresión.",
+    },
+    molestia: {
+      title: "Entrenar cuidando tu molestia",
+      lead: "Trabajamos con criterio y bajo impacto, adaptando cada ejercicio a ti.",
+    },
+    fuerza: {
+      title: "Ganar fuerza y equilibrio",
+      lead: "Buen momento para construir fuerza y estabilidad con progresión segura.",
+    },
+  };
+  const MOLESTIA_NOTE = {
+    rodilla: " Cuidamos especialmente tu rodilla en cada ejercicio.",
+    espalda: " Cuidamos especialmente tu espalda en cada ejercicio.",
+    principiante: " Partimos desde lo más básico, a tu ritmo.",
+    otra: " Ajustamos la sesión a lo que me cuentes.",
+  };
+
+  const titleEl = discovery.querySelector("[data-discovery-title]");
+  const leadEl = discovery.querySelector("[data-discovery-lead]");
+  const messageEl = discovery.querySelector("[data-discovery-message]");
 
   const finish = () => {
     const msg = buildMessage();
+    const profile = RESULT[value("objetivo")] || RESULT.empezar;
+    const note = MOLESTIA_NOTE[value("molestia")] || "";
+    if (titleEl) titleEl.textContent = profile.title;
+    if (leadEl) {
+      leadEl.textContent = `${profile.lead}${note} Preparé tu mensaje con tus respuestas; revísalo y envíalo cuando quieras.`;
+    }
+    if (messageEl) messageEl.textContent = msg;
     if (resultLink) {
       resultLink.href = waHref(msg);
       resultLink.setAttribute("data-wa-msg", msg);
