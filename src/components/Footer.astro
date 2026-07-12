@@ -1,23 +1,15 @@
 ---
 import { site } from "../data/site";
+import WhatsAppLink from "./WhatsAppLink.astro";
 ---
 
-<a
-  href={site.whatsappHref}
-  data-wa
-  target="_blank"
-  rel="noopener noreferrer"
-  class="btn-float-wa"
-  aria-label={site.whatsappLabel}
-  ><svg class="wa-icon" aria-hidden="true" focusable="false"><use href="#wa-symbol"></use></svg></a
->
+<WhatsAppLink href={site.getWhatsAppHref()} class="btn-float-wa" aria-label={site.whatsappLabel} />
 
 <footer id="footer" class="footer">
-  <h2>Tu primera clase es gratis, sin compromiso.</h2>
-  <a href={site.whatsappHref} data-wa target="_blank" rel="noopener noreferrer" class="btn btn-trx"
-    >Escríbeme por WhatsApp <svg class="wa-icon" aria-hidden="true" focusable="false"><use href="#wa-symbol"></use></svg
-    ></a
-  >
+  <h2>La evaluación inicial es gratis y sin compromiso.</h2>
+  <WhatsAppLink href={site.getWhatsAppHref(site.whatsappDefaultMessage)} class="btn btn--trx">
+    Agendar evaluación gratis
+  </WhatsAppLink>
   <p class="copyright">
     &copy; <span id="yr"></span> TRX Concept. Todos los derechos reservados.
   </p>

@@ -1,5 +1,6 @@
 ---
 import { site } from "../data/site";
+import WhatsAppLink from "./WhatsAppLink.astro";
 
 const normalizePath = (path: string) => path.replace(/\/+$/, "") || "/";
 const currentPath = normalizePath(Astro.url.pathname);
@@ -25,9 +26,9 @@ const currentPath = normalizePath(Astro.url.pathname);
         })
       }
     </ul>
-    <a href={site.whatsappHref} data-wa target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp"
-      >Escríbeme <svg class="wa-icon" aria-hidden="true" focusable="false"><use href="#wa-symbol"></use></svg></a
-    >
+    <WhatsAppLink href={site.getWhatsAppHref(site.whatsappDefaultMessage)} class="btn btn--whatsapp">
+      Evaluación gratis
+    </WhatsAppLink>
     <button class="nav-toggle-btn" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav-main">
       <span></span><span></span><span></span>
     </button>

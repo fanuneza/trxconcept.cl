@@ -2,13 +2,14 @@
 import CookieBanner from "../components/CookieBanner.astro";
 import Footer from "../components/Footer.astro";
 import Header from "../components/Header.astro";
+import MobileCtaBar from "../components/MobileCtaBar.astro";
 import Seo from "@jdevalk/astro-seo-graph/Seo.astro";
 import WaSymbol from "../components/WaSymbol.astro";
 import { site } from "../data/site";
 import type { SitePage } from "../data/pages";
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
-import { buildSchemaGraph } from "../utils/schema";
+import { buildSchemaGraph, mergeStructuredData } from "../utils/schema";
 import ogImage from "../assets/images/og-image.webp";
 
 type PreloadImage = {
@@ -17,26 +18,17 @@ type PreloadImage = {
   sizes?: string;
 };
 
-const { page, preloadImage } = Astro.props as { page: SitePage; preloadImage?: PreloadImage };
+interface Props {
+  page: SitePage;
+  preloadImage?: PreloadImage;
+}
+
+const { page, preloadImage } = Astro.props;
 const siteCss = readFileSync(join(process.cwd(), "public/assets/css/style.min.css"), "utf-8");
 
 const canonicalUrl = page.canonical || new URL(Astro.url.pathname, site.url).toString();
 const noindex = page.robots === "noindex";
 const defaultOgImage = new URL(ogImage.src, site.url).toString();
-const legacyOgImageUrl = "https://trxconcept.cl/assets/img/og-image.webp";
-
-const replaceImageUrls = (value: unknown): unknown => {
-  if (value === legacyOgImageUrl) return defaultOgImage;
-  if (Array.isArray(value)) return value.map(replaceImageUrls);
-
-  if (value && typeof value === "object") {
-    return Object.fromEntries(
-      Object.entries(value as Record<string, unknown>).map(([key, nestedValue]) => [key, replaceImageUrls(nestedValue)])
-    );
-  }
-
-  return value;
-};
 
 const baseGraph = buildSchemaGraph({
   pageType: page.isHome ? "website" : "webpage",
@@ -47,19 +39,18 @@ const baseGraph = buildSchemaGraph({
 });
 
 if (page.structuredData) {
-  const schema = replaceImageUrls(page.structuredData) as Record<string, unknown>;
-  if ("@graph" in schema && Array.isArray(schema["@graph"])) {
-    (baseGraph["@graph"] as Record<string, unknown>[]).push(...(schema["@graph"] as Record<string, unknown>[]));
-  } else {
-    const { "@context": _unusedCtx, ...node } = schema;
-    void _unusedCtx;
-    (baseGraph["@graph"] as Record<string, unknown>[]).push(node);
-  }
+  mergeStructuredData(baseGraph, page.structuredData);
 }
 ---
 
 <!doctype html>
-<html lang="es" data-ga4-id={site.ga4Id} data-consent-cookie={site.consentCookie}>
+<html
+  lang="es"
+  data-ga4-id={site.ga4Id}
+  data-consent-cookie={site.consentCookie}
+  data-wa-default-msg={site.whatsappDefaultMessage}
+  data-wa-number={site.whatsappNumber}
+>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -84,8 +75,12 @@ if (page.structuredData) {
         { rel: "sitemap", type: "application/xml", href: "/sitemap-index.xml" },
       ]}
     />
+    <slot name="head" />
+    {
+      /* anton-latin-ext is intentionally not preloaded: Chilean-Spanish copy only
+        uses the latin subset, and the extra font fetch delays the hero LCP. */
+    }
     <link rel="preload" href="/assets/fonts/anton-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
-    <link rel="preload" href="/assets/fonts/anton-latin-ext-400-normal.woff2" as="font" type="font/woff2" crossorigin />
     <link
       rel="preload"
       href="/assets/fonts/montserrat-latin-400-normal.woff2"
@@ -113,7 +108,7 @@ if (page.structuredData) {
       )
     }
     <style is:inline set:html={siteCss}></style>
-    <link rel="shortcut icon" href="/assets/img/favicon.png" type="image/x-icon" />
+    <link rel="icon" href="/assets/img/favicon.png" type="image/x-icon" />
     <link rel="apple-touch-icon" href="/assets/logos/trx-concept-logo-big.png" />
     <script is:inline defer src="/assets/js/main.js"></script>
   </head>
@@ -124,6 +119,7 @@ if (page.structuredData) {
       <slot />
     </main>
     <Footer />
+    <MobileCtaBar />
     <CookieBanner />
     <script is:inline src="/assets/js/cookie-consent.js" defer></script>
   </body>

@@ -1,0 +1,46 @@
+---
+import WhatsAppLink from "./WhatsAppLink.astro";
+
+interface Props {
+  title: string;
+  price: string;
+  description?: string;
+  per?: string;
+  perSession?: string;
+  features: string[];
+  cta: string;
+  ctaClass?: string;
+  ctaMessage?: string;
+  featured?: boolean;
+  badge?: string;
+}
+
+const {
+  title,
+  price,
+  description,
+  per,
+  perSession,
+  features,
+  cta,
+  ctaClass = "btn btn--whatsapp",
+  ctaMessage,
+  featured = false,
+  badge,
+} = Astro.props;
+---
+
+<div class:list={["pricing-card", { "pricing-card--featured": featured }]}>
+  {badge && <span class="pricing-badge">{badge}</span>}
+  <h3>{title}</h3>
+  <p class="pricing-price">{price}</p>
+  {per && <p class="pricing-per">{per}</p>}
+  {perSession && <p class="pricing-per-session">{perSession}</p>}
+  {description && <p class="pricing-desc">{description}</p>}
+  <ul class="pricing-list">
+    {features.map((feature) => <li>{feature}</li>)}
+  </ul>
+  <WhatsAppLink message={ctaMessage} class={ctaClass}>
+    {cta}
+  </WhatsAppLink>
+</div>

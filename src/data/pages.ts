@@ -1,3 +1,11 @@
+import ogImage from "../assets/images/og-image.webp";
+import nicoImage from "../assets/images/nico.webp";
+import { site } from "./site";
+
+const assetUrl = (src: string) => new URL(src, site.url).toString();
+const pageUrl = (path = "") => `${site.url}${path}`;
+const phoneNumber = `+${site.whatsappNumber}`;
+
 export type SitePage = {
   title: string;
   description: string;
@@ -21,7 +29,9 @@ const renderBreadcrumb = (breadcrumb?: { name: string; item: string }[]) => {
     .map((item, index) => {
       const isLast = index === breadcrumb.length - 1;
 
-      return `<li>${isLast ? `<span aria-current="page">${item.name}</span>` : `<a href="${item.item}">${item.name}</a>`}</li>`;
+      const href = item.item.startsWith(site.url) ? new URL(item.item).pathname : item.item;
+
+      return `<li>${isLast ? `<span aria-current="page">${item.name}</span>` : `<a href="${href}">${item.name}</a>`}</li>`;
     })
     .join("");
 
@@ -44,22 +54,251 @@ const renderPageHero = ({
     </div>
   </div>`;
 
+// ─────────────────────────────────────────────────────────────────────────────
+// FAQ: single source of truth for both JSON-LD and rendered <details>.
+// ─────────────────────────────────────────────────────────────────────────────
+
+type FaqItem = {
+  id: string;
+  question: string;
+  answer: string;
+};
+
+const faqItems: FaqItem[] = [
+  {
+    id: "experiencia-previa",
+    question: "¿Necesito experiencia previa para entrenar TRX?",
+    answer:
+      "No. El TRX es completamente adaptable a tu nivel, sea cual sea. Si nunca has hecho ejercicio, empezamos desde lo más básico y avanzamos a tu propio ritmo. Si ya tienes experiencia, podemos llevar la intensidad mucho más lejos. La primera sesión siempre empieza con una evaluación para conocer tu punto de partida.",
+  },
+  {
+    id: "que-necesito-en-casa",
+    question: "¿Qué necesito tener en casa para entrenar?",
+    answer:
+      "Solo necesitas espacio para moverte y una puerta estándar o barra donde fijar el equipo. El TRX y todos los implementos los llevo yo. Tú solo necesitas ropa cómoda y zapatillas.",
+  },
+  {
+    id: "lesion-o-dolor-cronico",
+    question: "¿Es seguro si tengo una lesión o dolor crónico?",
+    answer:
+      "El TRX es uno de los métodos más seguros que existen, precisamente porque es de bajo impacto y sin cargas externas. He trabajado con personas en recuperación de lesiones de rodilla, hombro y espalda. Eso sí, antes de empezar siempre conversamos sobre tu situación médica y, si es necesario, coordino con tu médico o kinesiólogo.",
+  },
+  {
+    id: "es-rehabilitacion",
+    question: "¿Esto es rehabilitación o tratamiento médico?",
+    answer:
+      "No. Esto es entrenamiento personal con criterio, adaptado a tu historial, pero no reemplaza a un tratamiento médico ni a la kinesiología. Si estás en rehabilitación o tienes un diagnóstico que requiere supervisión, entreno dentro del alcance que indique tu profesional de salud y en coordinación con él.",
+  },
+  {
+    id: "sectores-de-santiago",
+    question: "¿En qué sectores de Santiago entrenas?",
+    answer:
+      "Trabajo principalmente en sectores de Santiago oriente y centro. Escríbeme por WhatsApp con tu comuna y lo coordinamos; en la mayoría de los casos puedo llegar a ti.",
+  },
+  {
+    id: "horarios-disponibles",
+    question: "¿Cuáles son los horarios disponibles?",
+    answer:
+      "Tengo disponibilidad principalmente en las mañanas, desde las 6:00 AM. Los horarios exactos los coordinamos directamente según tu disponibilidad semanal. La flexibilidad es parte del servicio.",
+  },
+  {
+    id: "frecuencia-semanal",
+    question: "¿Cuántas veces a la semana debería entrenar?",
+    answer:
+      "Depende de tu objetivo y tu agenda. El mínimo recomendable para ver resultados es 2 veces por semana. El plan mensual incluye 3 sesiones semanales, que es la frecuencia ideal para progreso constante sin sobrecargar el cuerpo.",
+  },
+  {
+    id: "cancelacion-de-sesion",
+    question: "¿Qué pasa si tengo que cancelar una sesión?",
+    answer:
+      "Las cancelaciones con más de 24 horas de anticipación no tienen costo. Lo coordinamos directamente por WhatsApp y buscamos una alternativa en la misma semana cuando sea posible.",
+  },
+  {
+    id: "primera-clase",
+    question: "¿Cómo es la primera clase?",
+    answer:
+      "La primera clase es siempre gratis y sirve para conocernos. Conversamos sobre tus objetivos, hago una evaluación básica de tu nivel y coordinamos cómo seguir. Sin presión ni compromiso. Si después de la sesión sientes que encajamos, coordinamos el plan; si no, ningún problema.",
+  },
+  {
+    id: "precios",
+    question: "¿Cuánto cuestan las clases de TRX?",
+    answer:
+      "Las clases de TRX tienen dos opciones: la sesión individual tiene un valor de $15.000, y el plan mensual de 3 veces por semana (~12 sesiones) tiene un valor de $160.000, lo que equivale a aproximadamente $13.300 por sesión. La primera clase es siempre gratis.",
+  },
+  {
+    id: "bajar-de-peso",
+    question: "¿El TRX sirve para bajar de peso?",
+    answer:
+      "El entrenamiento con TRX ayuda a desarrollar masa muscular y mejorar el metabolismo, lo que contribuye a la pérdida de grasa. Para resultados de composición corporal, lo ideal es combinar el entrenamiento con buenos hábitos de alimentación, algo sobre lo que también podemos conversar.",
+  },
+  {
+    id: "donde-clases",
+    question: "¿Dónde das las clases de TRX?",
+    answer:
+      "A domicilio o al aire libre en Santiago, principalmente en sectores oriente y centro. Escríbeme con tu comuna y coordinamos el lugar que te acomode.",
+  },
+  {
+    id: "venden-equipos",
+    question: "¿Vendes equipos TRX?",
+    answer:
+      "No vendemos equipos. El TRX y todos los implementos los llevo yo a cada sesión. Tú solo necesitas espacio para moverte, ropa cómoda y zapatillas.",
+  },
+  {
+    id: "como-agendar",
+    question: "¿Cómo agendo una clase de TRX?",
+    answer:
+      "Escríbeme por WhatsApp, coordinamos día y hora según tu disponibilidad, y la primera clase es gratis. Sin compromiso ni pago por adelantado.",
+  },
+];
+
+const buildFaqStructuredData = () => ({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqItems.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.answer,
+    },
+  })),
+});
+
+const renderFaqDetails = (items: FaqItem[]) =>
+  items
+    .map(
+      (item) =>
+        `<details class="faq-item" id="${item.id}">
+            <summary>${item.question}</summary>
+            <p class="faq-answer">${item.answer}</p>
+          </details>`
+    )
+    .join("");
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Services: single source of truth for JSON-LD OfferCatalog and service cards.
+// ─────────────────────────────────────────────────────────────────────────────
+
+type ServicePlan = {
+  name: string;
+  description: string;
+  price: string;
+  priceCurrency: "CLP";
+  featured?: boolean;
+  badge?: string;
+  cardPrice?: string;
+};
+
+const servicePlans: ServicePlan[] = [
+  {
+    name: "Evaluación inicial TRX",
+    description: "Primera sesión para conocernos y ver tu punto de partida. Sin costo ni compromiso.",
+    price: "0",
+    priceCurrency: "CLP",
+  },
+  {
+    name: "Sesión individual TRX",
+    description: "1 hora de entrenamiento personalizado en casa o al aire libre.",
+    price: "15000",
+    priceCurrency: "CLP",
+    cardPrice: "$15.000",
+  },
+  {
+    name: "Plan mensual TRX",
+    description: "3 sesiones por semana, aproximadamente 12 sesiones al mes.",
+    price: "160000",
+    priceCurrency: "CLP",
+    featured: true,
+    badge: "Más elegido",
+    cardPrice: "$160.000",
+  },
+];
+
+const serviceCards = [
+  {
+    title: "Sesión individual",
+    price: "$15.000",
+    body: "Una hora de entrenamiento 1 a 1, adaptada a tu nivel y a lo que buscas. Sin compromiso de continuidad: sirve para probar o para complementar tu rutina.",
+  },
+  {
+    title: "Plan mensual",
+    price: "$160.000",
+    featured: true,
+    badge: "Más elegido",
+    body: "3 sesiones por semana, unas 12 al mes: queda en cerca de $13.300 por sesión. Voy siguiendo tu avance y ajusto el programa mes a mes.",
+  },
+  {
+    title: "TRX Suspension Trainer™",
+    body: "El sistema clásico de entrenamiento en suspensión: fuerza, core y movilidad usando solo el peso de tu cuerpo. El mismo ejercicio se ajusta a cualquier nivel cambiando el ángulo.",
+  },
+  {
+    title: "TRX Rip Trainer®",
+    body: "Una barra con resistencia elástica asimétrica para trabajar potencia, rotación y estabilidad del core. Pensado para deportistas y para quienes ya quieren un trabajo más explosivo.",
+  },
+];
+
+const buildServicesStructuredData = () => ({
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Clases de TRX en Santiago",
+  url: pageUrl("/servicios/"),
+  image: assetUrl(ogImage.src),
+  provider: {
+    "@type": "LocalBusiness",
+    name: "TRX Concept",
+    url: pageUrl("/"),
+  },
+  areaServed: {
+    "@type": "City",
+    name: "Santiago",
+    addressCountry: "CL",
+  },
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Planes de entrenamiento TRX",
+    itemListElement: servicePlans.map((plan) => ({
+      "@type": "Offer",
+      name: plan.name,
+      description: plan.description,
+      price: plan.price,
+      priceCurrency: plan.priceCurrency,
+    })),
+  },
+});
+
+const renderServiceCards = () =>
+  serviceCards
+    .map(
+      (card) =>
+        `<div class="service-card${card.featured ? " service-card--featured" : ""}">
+          ${card.badge ? `<span class="pricing-badge">${card.badge}</span>` : ""}
+          <h3>${card.title}</h3>
+          ${card.price ? `<p class="pricing-price">${card.price}</p>` : ""}
+          <p>${card.body}</p>
+        </div>`
+    )
+    .join("");
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Pages
+// ─────────────────────────────────────────────────────────────────────────────
+
 export const pages = {
   home: {
-    title: `Clases de TRX en Santiago | Entrenador`,
-    description: `Clases de TRX personalizadas en Santiago, a domicilio o al aire libre. Sin gimnasio, sin máquinas. Primera clase gratis. Reserva por WhatsApp.`,
-    canonical: `https://trxconcept.cl/`,
-    ogTitle: `Clases de TRX en Santiago | TRX Concept`,
+    title: `Clases de TRX en Santiago, a domicilio y 1 a 1`,
+    description: `Entrenamiento personal 1 a 1 con TRX en Santiago, a domicilio o al aire libre. Para empezar de a poco o retomar seguro. Evaluación inicial gratis por WhatsApp.`,
+    canonical: pageUrl("/"),
+    ogTitle: `Clases de TRX en Santiago, 1 a 1 a domicilio | TRX Concept`,
     structuredData: {
       "@context": "https://schema.org",
       "@type": ["LocalBusiness", "HealthAndBeautyBusiness"],
-      "@id": "https://trxconcept.cl/#business",
+      "@id": `${pageUrl("/")}#business`,
       name: "TRX Concept",
       description:
-        "Clases de TRX personalizadas en Santiago, Chile. Entrenador a domicilio o al aire libre. Primera clase gratis.",
-      url: "https://trxconcept.cl/",
-      telephone: "+56984402664",
-      image: "https://trxconcept.cl/assets/img/og-image.webp",
+        "Entrenamiento personal 1 a 1 con TRX en Santiago, Chile. A domicilio o al aire libre, para principiantes y para quienes retoman el ejercicio. Evaluación inicial gratis.",
+      url: pageUrl("/"),
+      telephone: phoneNumber,
+      image: assetUrl(ogImage.src),
       priceRange: "$$",
       address: {
         "@type": "PostalAddress",
@@ -106,353 +345,35 @@ export const pages = {
         },
       ],
     },
-    content: `<!-- HERO SECTION -->
-      <section id="hero" class="hero">
-        <picture class="hero-media" aria-hidden="true">
-          <source type="image/avif" srcset="/assets/img/hero-768.avif 768w, /assets/img/hero-960.avif 960w, /assets/img/hero-1080.avif 1080w, /assets/img/hero-1280.avif 1280w" sizes="100vw" />
-          <source type="image/webp" srcset="/assets/img/hero-768.webp 768w, /assets/img/hero-960.webp 960w, /assets/img/hero-1080.webp 1080w, /assets/img/hero-1280.webp 1280w" sizes="100vw" />
-          <img src="/assets/img/hero-960.webp" alt="" width="960" height="540" fetchpriority="high" decoding="async" loading="eager" />
-        </picture>
-        <div class="container">
-          <h1 class="hero-title">Entrena donde estés,<br>sin máquinas, sin excusas.</h1>
-          <p class="hero-lead"><a href="/servicios/">Clases de TRX personalizadas</a> en casa o al aire libre,<br>sin el estrés del gimnasio.</p>
-          <a
-            href="https://wa.me/56984402664?text=Hola%21%20Vi%20tu%20sitio%20web%20y%20me%20gustar%C3%ADa%20agendar%20una%20clase%20de%20TRX." data-wa
-            target="_blank"
-            rel="noopener noreferrer"
-            class="btn btn-trx"
-            >Escríbeme para tu clase gratis
-            <svg class="wa-icon" aria-hidden="true" focusable="false"><use href="#wa-symbol"/></svg></a>
-          <p class="hero-note"><span class="hero-badge">⚡ Respondo en 4 horas o menos</span></p>
-        </div>
-      </section>
-
-      <!-- TRUST ANCHOR -->
-      <section id="trust" class="trust">
-        <div class="container trust-inner">
-          <picture>
-            <source type="image/avif" srcset="/assets/img/nico-140.avif 140w, /assets/img/nico-320.avif 320w" sizes="(max-width: 767px) 140px, 140px" />
-            <source type="image/webp" srcset="/assets/img/nico-140.webp 140w, /assets/img/nico-384.webp 384w" sizes="(max-width: 767px) 140px, 140px" />
-            <img
-              src="/assets/img/nico-140.webp"
-              alt="Nicolás Echeverría, entrenador personal TRX"
-              class="profile-pic"
-              width="140"
-              height="140"
-              decoding="async"
-            />
-          </picture>
-          <div class="trust-content">
-            <h2 class="trust-name"><a href="/sobre-mi/">Nicolás Echeverría</a></h2>
-            <p>TRX Suspension Trainer™ y Rip Trainer® certificado para clases individuales y grupales.</p>
-            <div class="trust-stats">
-              <div class="trust-stat">
-                <span class="trust-stat-number">10+</span>
-                <span class="trust-stat-label">años de experiencia</span>
-              </div>
-              <div class="trust-stat">
-                <span class="trust-stat-number">1 a 1</span>
-                <span class="trust-stat-label">atención personalizada</span>
-              </div>
-              <div class="trust-stat">
-                <span class="trust-stat-number">Santiago</span>
-                <span class="trust-stat-label">Chile</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- BENEFITS SECTION -->
-      <section id="benefits" class="benefits">
-        <div class="benefits-grid container">
-          <div class="benefit">
-            <div class="benefit-icon-wrap">
-              <img class="benefit-icon-svg" src="/assets/img/icon-solo-para-ti.svg" alt="" aria-hidden="true" width="24" height="24" loading="lazy" />
-            </div>
-            <h3>Solo para ti</h3>
-            <p>Tu entrenamiento, a tu ritmo, con atención completa de principio a fin.</p>
-          </div>
-          <div class="benefit">
-            <div class="benefit-icon-wrap">
-              <img class="benefit-icon-svg" src="/assets/img/icon-donde-estes.svg" alt="" aria-hidden="true" width="24" height="24" loading="lazy" />
-            </div>
-            <h3>Donde estés</h3>
-            <p>En casa o al aire libre, sin máquinas, sin traslados.</p>
-          </div>
-          <div class="benefit">
-            <div class="benefit-icon-wrap">
-              <img class="benefit-icon-svg" src="/assets/img/icon-bajo-riesgo.svg" alt="" aria-hidden="true" width="24" height="24" loading="lazy" />
-            </div>
-            <h3>Bajo riesgo de lesiones</h3>
-            <p>Método de bajo impacto, ideal para volver al ejercicio o empezar desde cero.</p>
-          </div>
-        </div>
-      </section>
-
-      <!-- MID-PAGE CTA BAND -->
-      <section class="cta-band">
-        <div class="container text-center">
-          <p class="cta-band-text"><a href="/preguntas-frecuentes/">¿Dudas?</a> Tu primera clase es sin costo.</p>
-          <a
-            href="https://wa.me/56984402664?text=Hola%21%20Vi%20tu%20sitio%20web%20y%20me%20gustar%C3%ADa%20agendar%20una%20clase%20de%20TRX." data-wa
-            target="_blank"
-            rel="noopener noreferrer"
-            class="btn btn-trx"
-            >Escríbeme para tu clase gratis
-            <svg class="wa-icon" aria-hidden="true" focusable="false"><use href="#wa-symbol"/></svg></a>
-        </div>
-      </section>
-
-      <!-- TESTIMONIAL SECTION -->
-      <section
-        id="testimonios"
-        class="testimonial container"
-      >
-        <h2>Lo que dicen quienes entrenan con Nico</h2>
-        <div class="testimonial-grid">
-          <div class="testimonial-col">
-            <div class="testimonial-card">
-              <picture>
-                <source type="image/avif" srcset="/assets/img/testimonio-valentinarosenthal-320.avif 320w" sizes="100px" />
-                <source type="image/webp" srcset="/assets/img/testimonio-valentinarosenthal-320.webp 320w, /assets/img/testimonio-valentinarosenthal.webp 512w" sizes="100px" />
-                <img
-                  src="/assets/img/testimonio-valentinarosenthal-320.webp"
-                  alt="Valentina Rosenthal"
-                  class="testimonial-img"
-                  loading="lazy"
-                  decoding="async"
-                  width="512"
-                  height="512"
-                />
-              </picture>
-              <div class="testimonial-stars" aria-label="5 estrellas">★★★★★</div>
-              <blockquote class="testimonial-quote">
-                <p>
-                  Entreno con Nico desde 2021. Partimos dos veces a la semana y
-                  hoy entrenamos tres. Sin haber sido nunca buena para hacer
-                  deportes, Nico ha logrado que tenga una rutina y que lleve
-                  cuatro años entrenando, con todos los beneficios que esto trae.
-                </p>
-                <footer class="testimonial-author">– Valentina</footer>
-              </blockquote>
-            </div>
-          </div>
-
-          <div class="testimonial-col">
-            <div class="testimonial-card">
-              <picture>
-                <source type="image/avif" srcset="/assets/img/testimonio-marisagracia-320.avif 320w" sizes="100px" />
-                <source type="image/webp" srcset="/assets/img/testimonio-marisagracia-320.webp 320w, /assets/img/testimonio-marisagracia.webp 512w" sizes="100px" />
-                <img
-                  src="/assets/img/testimonio-marisagracia-320.webp"
-                  alt="Marisa Gracia"
-                  class="testimonial-img"
-                  loading="lazy"
-                  decoding="async"
-                  width="512"
-                  height="512"
-                />
-              </picture>
-              <div class="testimonial-stars" aria-label="5 estrellas">★★★★★</div>
-              <blockquote class="testimonial-quote">
-                <p>
-                  Entrenar con Nicolás fue una excelente experiencia. Gracias a su
-                  guía y el trabajo constante con TRX, mi cuerpo ganó fuerza,
-                  estabilidad y tono muscular. Noté mejoras en mi postura, control
-                  corporal y energía general.
-                </p>
-                <footer class="testimonial-author">– Marisa Gracia</footer>
-              </blockquote>
-            </div>
-          </div>
-
-          <div class="testimonial-col">
-            <div class="testimonial-card">
-              <picture>
-                <source type="image/avif" srcset="/assets/img/testimonio-mariaignacia-320.avif 320w" sizes="100px" />
-                <source type="image/webp" srcset="/assets/img/testimonio-mariaignacia-320.webp 320w, /assets/img/testimonio-mariaignacia.webp 792w" sizes="100px" />
-                <img
-                  src="/assets/img/testimonio-mariaignacia-320.webp"
-                  alt="María Ignacia Williamson"
-                  class="testimonial-img"
-                  loading="lazy"
-                  decoding="async"
-                  width="792"
-                  height="792"
-                />
-              </picture>
-              <div class="testimonial-stars" aria-label="5 estrellas">★★★★★</div>
-              <blockquote class="testimonial-quote">
-                <p>
-                  Entrenar con Nico fue una muy buena experiencia. Su enfoque
-                  personalizado y su profundo conocimiento del TRX hicieron que
-                  cada sesión fuera desafiante pero muy gratificante.
-                </p>
-                <footer class="testimonial-author">– María Ignacia</footer>
-              </blockquote>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- COMPARISON -->
-      <section id="comparison" class="comparison">
-        <h2>TRX Concept vs. el gimnasio tradicional</h2>
-        <div class="comparison-cards">
-          <div class="comp-card comp-card-others">
-            <h3>Gimnasio / CrossFit</h3>
-            <ul>
-              <li><span class="comp-x" aria-hidden="true">✗</span>Sin personalización 1 a 1</li>
-              <li><span class="comp-x" aria-hidden="true">✗</span>Solo en instalaciones fijas</li>
-              <li><span class="comp-x" aria-hidden="true">✗</span>No siempre adaptable a tu nivel</li>
-              <li><span class="comp-x" aria-hidden="true">✗</span>Mayor riesgo de lesiones</li>
-              <li><span class="comp-x" aria-hidden="true">✗</span>Horario rígido</li>
-              <li><span class="comp-x" aria-hidden="true">✗</span>Mensualidad fija obligatoria</li>
-            </ul>
-          </div>
-          <div class="comp-card comp-card-trx">
-            <span class="recommended-badge">Recomendado</span>
-            <h3>TRX Concept</h3>
-            <ul>
-              <li><span class="comp-check" aria-hidden="true">✓</span>Personalización 1 a 1</li>
-              <li><span class="comp-check" aria-hidden="true">✓</span>En casa o al aire libre</li>
-              <li><span class="comp-check" aria-hidden="true">✓</span>Adaptable a cualquier nivel</li>
-              <li><span class="comp-check" aria-hidden="true">✓</span>Bajo riesgo de lesiones</li>
-              <li><span class="comp-check" aria-hidden="true">✓</span>Horario flexible</li>
-              <li><span class="comp-check" aria-hidden="true">✓</span>Sin mensualidad fija</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <!-- PACKAGES / PRICING -->
-      <section id="pricing" class="pricing">
-        <h2>Planes y precios</h2>
-        <p class="pricing-subtitle">Sin mensualidad fija. Entrena cuando puedas.</p>
-        <div class="pricing-cards">
-          <div class="pricing-card">
-            <h3>Sesión Individual</h3>
-            <p class="pricing-price">$15.000</p>
-            <p class="pricing-desc">Ideal para probar o entrenar a tu propio ritmo.</p>
-            <ul class="pricing-list">
-              <li>1 hora de entrenamiento personalizado</li>
-              <li>En casa o al aire libre</li>
-              <li>Adaptado a tu nivel</li>
-              <li>Sin compromiso</li>
-            </ul>
-            <a
-              href="https://wa.me/56984402664?text=Hola%21%20Vi%20tu%20sitio%20web%20y%20me%20gustar%C3%ADa%20agendar%20una%20clase%20de%20TRX." data-wa
-              target="_blank"
-              rel="noopener noreferrer"
-              class="btn btn-whatsapp"
-              >Probar gratis por WhatsApp
-              <svg class="wa-icon" aria-hidden="true" focusable="false"><use href="#wa-symbol"/></svg></a>
-          </div>
-          <div class="pricing-card pricing-card-featured">
-            <span class="pricing-badge">Más popular</span>
-            <h3>Paquete Mensual</h3>
-            <p class="pricing-price">$160.000</p>
-            <p class="pricing-per">3 veces por semana · ~12 sesiones</p>
-            <p class="pricing-per-session">≈ $13.300 por sesión</p>
-            <ul class="pricing-list">
-              <li>Resultados constantes y medibles</li>
-              <li>Seguimiento personalizado continuo</li>
-              <li>Mejor precio por sesión</li>
-              <li>Horario flexible desde las 6 AM</li>
-            </ul>
-            <a
-              href="https://wa.me/56984402664?text=Hola%21%20Vi%20tu%20sitio%20web%20y%20me%20gustar%C3%ADa%20agendar%20una%20clase%20de%20TRX." data-wa
-              target="_blank"
-              rel="noopener noreferrer"
-              class="btn btn-trx"
-              >Consultar por WhatsApp
-              <svg class="wa-icon" aria-hidden="true" focusable="false"><use href="#wa-symbol"/></svg></a>
-          </div>
-        </div>
-        <p class="pricing-note">Disponible: Mañanas desde las 6:00 AM.</p>
-      </section>`,
+    content: "",
     isHome: true,
   },
   services: {
-    title: `Clases de TRX en Santiago: Precios y Paquetes`,
-    description: `Clases individuales y paquetes mensuales de TRX en Santiago. Desde $15.000 la sesión. Entrenamiento personalizado, a domicilio o al aire libre.`,
-    canonical: `https://trxconcept.cl/servicios/`,
+    title: `Clases de TRX a domicilio en Santiago: precios`,
+    description: `Clases de TRX 1 a 1 a domicilio o al aire libre en Santiago. Evaluación gratis, sesión $15.000, plan mensual $160.000. Para principiantes y quienes retoman.`,
+    canonical: pageUrl("/servicios/"),
     breadcrumb: [
-      { name: "Inicio", item: "https://trxconcept.cl/" },
-      { name: "Servicios", item: "https://trxconcept.cl/servicios/" },
+      { name: "Inicio", item: pageUrl("/") },
+      { name: "Servicios", item: pageUrl("/servicios/") },
     ],
-    structuredData: {
-      "@context": "https://schema.org",
-      "@type": "Service",
-      name: "Clases de TRX en Santiago",
-      url: "https://trxconcept.cl/servicios/",
-      image: "https://trxconcept.cl/assets/img/og-image.webp",
-      provider: {
-        "@type": "LocalBusiness",
-        name: "TRX Concept",
-        url: "https://trxconcept.cl/",
-      },
-      areaServed: {
-        "@type": "City",
-        name: "Santiago",
-        addressCountry: "CL",
-      },
-      hasOfferCatalog: {
-        "@type": "OfferCatalog",
-        name: "Planes de entrenamiento TRX",
-        itemListElement: [
-          {
-            "@type": "Offer",
-            name: "Sesión Individual TRX",
-            description: "1 hora de entrenamiento personalizado en casa o al aire libre.",
-            price: "15000",
-            priceCurrency: "CLP",
-          },
-          {
-            "@type": "Offer",
-            name: "Paquete Mensual TRX",
-            description: "3 sesiones por semana, aproximadamente 12 sesiones al mes.",
-            price: "160000",
-            priceCurrency: "CLP",
-          },
-        ],
-      },
-    },
+    structuredData: buildServicesStructuredData(),
     content: `${renderPageHero({
-      title: "Clases de TRX personalizadas en Santiago",
-      description: "Sesiones 1 a 1 o paquete mensual. Sin mensualidad fija, sin traslados, sin equipos que compres tú.",
+      title: "Clases de TRX a domicilio en Santiago",
+      description:
+        "Sesiones 1 a 1 o plan mensual, en tu casa o al aire libre. Sin mensualidad fija, sin traslados, sin equipos que compres tú.",
       breadcrumb: [
-        { name: "Inicio", item: "https://trxconcept.cl/" },
-        { name: "Servicios", item: "https://trxconcept.cl/servicios/" },
+        { name: "Inicio", item: pageUrl("/") },
+        { name: "Servicios", item: pageUrl("/servicios/") },
       ],
     })}
 
       <!-- SERVICES / PRICING -->
       <section class="section-alt">
         <div class="container text-center">
-          <h2>Nuestros servicios</h2>
-          <p class="section-intro">Flexibles, a tu ritmo y en tu lugar.</p>
+          <h2>Servicios y precios</h2>
+          <p class="section-intro">Sesiones 1 a 1 en tu casa o en un parque cercano. Tú eliges cómo partir.</p>
           <div class="services-grid">
-            <div class="service-card">
-              <h3>Sesión Individual</h3>
-              <p class="pricing-price">$15.000</p>
-              <p>Una hora de entrenamiento 1 a 1, adaptado completamente a tu nivel y objetivos. Sin compromiso de continuidad. Ideal para probar o complementar tu rutina.</p>
-            </div>
-            <div class="service-card service-card--featured">
-              <span class="pricing-badge">Más popular</span>
-              <h3>Paquete Mensual</h3>
-              <p class="pricing-price">$160.000</p>
-              <p>3 sesiones por semana (~12 al mes). La opción de mayor impacto para quienes buscan resultados consistentes. Incluye seguimiento personalizado y ajustes de programa.</p>
-            </div>
-            <div class="service-card">
-              <h3>TRX Suspension Trainer™</h3>
-              <p>El sistema clásico. Desarrolla fuerza funcional, core, movilidad y resistencia usando únicamente el peso de tu cuerpo. Efectivo para todos los niveles.</p>
-            </div>
-            <div class="service-card">
-              <h3>TRX Rip Trainer®</h3>
-              <p>Trabaja potencia, rotación y estabilidad del core con una barra elástica de resistencia asimétrica. Ideal para deportistas y quienes buscan trabajo explosivo.</p>
-            </div>
+            ${renderServiceCards()}
           </div>
         </div>
       </section>
@@ -462,25 +383,26 @@ export const pages = {
         <div class="container text-center">
           <h2>¿Cómo reservar una clase?</h2>
           <ol class="steps-list">
-            <li><strong>Escríbeme por WhatsApp</strong> y cuéntame qué buscas.</li>
-            <li><strong>Coordinamos día y hora</strong> según tu disponibilidad.</li>
-            <li><strong>Tu primera clase es gratis.</strong> Sin compromiso.</li>
+            <li><strong>Escríbeme por WhatsApp</strong> y cuéntame qué te gustaría lograr.</li>
+            <li><strong>Coordinamos día, hora y lugar</strong> según lo que te acomode.</li>
+            <li><strong>Tu primera clase es gratis.</strong> Sin compromiso: sirve para conocernos y ver tu punto de partida.</li>
           </ol>
-          <p>No vendemos equipos TRX: el equipo lo llevo yo a cada sesión.</p>
+          <p>No vendo equipos TRX ni necesitas comprar nada: el equipo lo llevo yo a cada sesión.</p>
         </div>
       </section>
 
       <!-- WHAT IS TRX -->
       <section class="section-alt">
-        <div class="container about-section text-center">
+        <div class="container about-section">
           <h2>¿Qué es el entrenamiento TRX?</h2>
           <p>
-            TRX (Total Resistance eXercise) es un sistema de suspensión que usa el peso de tu propio
-            cuerpo para entrenar fuerza, estabilidad, flexibilidad y equilibrio al mismo tiempo. Se
-            instala en segundos en una puerta, árbol o barra, y se adapta a cualquier nivel, desde
-            principiantes hasta atletas avanzados, ajustando simplemente el ángulo del cuerpo.
+            TRX (Total Resistance eXercise) es un sistema de entrenamiento en suspensión: usas el
+            peso de tu propio cuerpo para trabajar fuerza, estabilidad y equilibrio al mismo tiempo.
+            Se instala en minutos en una puerta, un árbol o una barra, y el mismo ejercicio se hace
+            más suave o más exigente con solo cambiar el ángulo del cuerpo. Por eso funciona igual
+            de bien si recién partes o si llevas años entrenando.
           </p>
-          <p>¿Tienes dudas? Revisa nuestras <a href="/preguntas-frecuentes/">preguntas frecuentes</a>.</p>
+          <p>¿Tienes dudas? Revisa las <a href="/preguntas-frecuentes/">preguntas frecuentes</a>.</p>
         </div>
       </section>
 
@@ -488,27 +410,27 @@ export const pages = {
       <section>
         <div class="container text-center">
           <h2>¿Para quién es?</h2>
-          <p class="section-intro">TRX Concept funciona para personas muy distintas. Aquí algunas:</p>
+          <p class="section-intro">Entreno a personas muy distintas. Quizás te reconoces en alguna de estas:</p>
           <div class="audience-grid">
             <div class="audience-item">
               <h3>Principiantes absolutos</h3>
-              <p>Nunca has hecho ejercicio o llevas mucho tiempo sin hacerlo. Empezamos desde cero, con calma.</p>
+              <p>Nunca has entrenado o llevas años sin hacerlo. Partimos desde donde estás, con calma y sin juicio.</p>
             </div>
             <div class="audience-item">
               <h3>Personas con lesiones</h3>
-              <p>El TRX es de bajo impacto y totalmente ajustable. Ideal para recuperación y fortalecimiento preventivo.</p>
+              <p>Si tienes una molestia de rodilla, espalda u hombro, adaptamos cada ejercicio con criterio. Esto es entrenamiento, no tratamiento médico.</p>
             </div>
             <div class="audience-item">
               <h3>Profesionales ocupados</h3>
-              <p>Sin traslado al gimnasio. Entrenas en casa o cerca, en el horario que te acomode, desde las 6 AM.</p>
+              <p>Sin traslados ni horarios de gimnasio. Entrenas en tu casa o en un parque cercano, con mañanas desde las 6:00.</p>
             </div>
             <div class="audience-item">
               <h3>Deportistas activos</h3>
-              <p>Complementa tu deporte con trabajo de core, fuerza funcional y movilidad dirigida.</p>
+              <p>Ya entrenas y quieres sumar core, fuerza funcional y movilidad que complementen tu deporte.</p>
             </div>
             <div class="audience-item">
               <h3>Quienes buscan un gimnasio TRX</h3>
-              <p>Si prefieres evitar el traslado y las clases grupales, las sesiones 1 a 1 son una alternativa personalizada y flexible.</p>
+              <p>Buscabas clases de TRX cerca de ti, pero sin traslados ni grupos. Las sesiones 1 a 1 van a donde tú estás.</p>
             </div>
           </div>
         </div>
@@ -519,17 +441,17 @@ export const pages = {
         <div class="container about-section">
           <h2>¿Cómo es una sesión?</h2>
           <p>
-            Cada sesión dura aproximadamente una hora. Comenzamos con un calentamiento adaptado a tu
-            condición del día, seguido del bloque principal de trabajo con TRX, y terminamos con
-            estiramiento y movilidad.
+            Cada sesión dura cerca de una hora. Partimos con un calentamiento según cómo llegas ese
+            día, seguimos con el bloque principal de trabajo con TRX y cerramos con estiramiento y
+            movilidad.
           </p>
           <p>
-            Antes de la primera sesión conversamos sobre tus objetivos, historial de lesiones y
-            disponibilidad. Eso me permite diseñar un programa que realmente tenga sentido para ti,
-            no una rutina genérica.
+            Antes de la primera sesión conversamos sobre tu objetivo, tu experiencia y cualquier
+            molestia relevante. Con eso armo un programa que tenga sentido para ti, no una rutina
+            genérica.
           </p>
           <p>
-            El equipo lo llevo yo. Tú solo necesitas ropa cómoda y ganas de trabajar.
+            El equipo lo llevo yo a cada sesión. Tú solo necesitas ropa cómoda.
           </p>
           <p>Conoce más <a href="/sobre-mi/">sobre Nicolás y su experiencia</a>.</p>
         </div>
@@ -537,317 +459,72 @@ export const pages = {
     isHome: false,
   },
   about: {
-    title: `Nicolás Echeverría | Entrenador TRX | Santiago`,
+    title: `Nico Echeverría, entrenador TRX en Santiago`,
     description: `Entrenador TRX certificado en Santiago. Más de 10 años de experiencia, clases 1 a 1 y método de bajo impacto. Conoce a Nico.`,
-    canonical: `https://trxconcept.cl/sobre-mi/`,
+    canonical: pageUrl("/sobre-mi/"),
     breadcrumb: [
-      { name: "Inicio", item: "https://trxconcept.cl/" },
-      { name: "Sobre mí", item: "https://trxconcept.cl/sobre-mi/" },
-    ],
-    content: `${renderPageHero({
-      title: "Conoce a tu entrenador",
-      description: "La persona detrás de cada sesión, cada ajuste y cada logro.",
-      breadcrumb: [
-        { name: "Inicio", item: "https://trxconcept.cl/" },
-        { name: "Sobre mí", item: "https://trxconcept.cl/sobre-mi/" },
-      ],
-    })}
-
-      <!-- BIO -->
-      <section>
-        <div class="container about-section">
-          <div class="trust-inner">
-            <picture>
-              <source type="image/avif" srcset="/assets/img/nico-320.avif 320w" sizes="160px" />
-              <source type="image/webp" srcset="/assets/img/nico-384.webp 384w, /assets/img/nico.webp 512w" sizes="160px" />
-              <img
-                src="/assets/img/nico-384.webp"
-                alt="Nicolás Echeverría, entrenador personal TRX"
-                class="profile-pic"
-                width="512"
-                height="512"
-                decoding="async"
-              />
-            </picture>
-            <div class="trust-content">
-              <h2>Nicolás Echeverría</h2>
-              <p>
-                Llevo más de 10 años trabajando como entrenador personal en Santiago,
-                especializándome en el <a href="/servicios/">método TRX</a>, un sistema de entrenamiento en suspensión
-                que usa el peso del propio cuerpo para desarrollar fuerza, equilibrio y resistencia
-                de forma segura y progresiva.
-              </p>
-              <p>
-                Mi enfoque es simple: cada persona es diferente, y cada entrenamiento debe
-                serlo también. No hay rutinas genéricas, no hay grupos masivos. Solo tú y yo,
-                trabajando al ritmo que corresponde.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- CERTIFICATIONS -->
-      <section class="section-alt">
-        <div class="container about-section text-center">
-          <h2>Certificaciones</h2>
-          <p class="section-subtitle">Formación oficial avalada por TRX Training.</p>
-          <ul class="cert-list">
-            <li>TRX Suspension Trainer™: Certificado Oficial</li>
-            <li>TRX Rip Trainer®: Certificado Oficial</li>
-            <li>Entrenamiento grupal e individual certificado</li>
-            <li>Más de 10 años de práctica continua en Santiago</li>
-          </ul>
-        </div>
-      </section>
-
-      <!-- PHILOSOPHY -->
-      <section>
-        <div class="container about-section">
-          <h2>Mi filosofía de entrenamiento</h2>
-          <p>
-            Creo que el ejercicio no debería ser una obligación intimidante, sino algo que genuinamente
-            mejore tu vida. Por eso trabajo con personas de todos los niveles, desde quienes nunca han
-            entrenado hasta deportistas que buscan complementar su actividad principal.
-          </p>
-          <p>
-            El TRX es ideal para esto porque es infinitamente ajustable: el mismo ejercicio puede ser
-            suave o extremadamente desafiante dependiendo del ángulo del cuerpo. Sin impacto en
-            articulaciones, sin riesgo de lesiones por máquinas mal calibradas, sin filas de espera.
-          </p>
-          <p>
-            Entreno a domicilio o al aire libre en parques de Santiago porque el ambiente importa.
-            El estrés del gimnasio no ayuda a nadie a rendir mejor.
-          </p>
-        </div>
-      </section>`,
-    isHome: false,
-  },
-  faq: {
-    title: `Preguntas frecuentes sobre clases TRX en Santiago`,
-    description: `Resolvemos tus dudas sobre clases de TRX en Santiago: experiencia previa, equipos, horarios, precios y cómo reservar. Primera clase gratis.`,
-    canonical: `https://trxconcept.cl/preguntas-frecuentes/`,
-    breadcrumb: [
-      { name: "Inicio", item: "https://trxconcept.cl/" },
-      { name: "Preguntas frecuentes", item: "https://trxconcept.cl/preguntas-frecuentes/" },
+      { name: "Inicio", item: pageUrl("/") },
+      { name: "Sobre mí", item: pageUrl("/sobre-mi/") },
     ],
     structuredData: {
       "@context": "https://schema.org",
-      "@type": "FAQPage",
-      mainEntity: [
+      "@type": "Person",
+      "@id": `${pageUrl("/sobre-mi/")}#person`,
+      name: "Nicolás Echeverría",
+      alternateName: "Nico Echeverría",
+      jobTitle: "Entrenador Personal TRX",
+      url: pageUrl("/sobre-mi/"),
+      image: assetUrl(nicoImage.src),
+      worksFor: {
+        "@type": "LocalBusiness",
+        name: "TRX Concept",
+        url: pageUrl("/"),
+      },
+      knowsAbout: ["Entrenamiento TRX", "Entrenamiento en suspensión", "Entrenamiento personal 1 a 1"],
+      hasCredential: [
         {
-          "@type": "Question",
-          name: "¿Necesito experiencia previa para entrenar TRX?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "No. El TRX es completamente adaptable a tu nivel, sea cual sea. Si nunca has hecho ejercicio, empezamos desde lo más básico y avanzamos a tu propio ritmo. Si ya tienes experiencia, podemos llevar la intensidad mucho más lejos. La primera sesión siempre empieza con una evaluación para conocer tu punto de partida.",
-          },
+          "@type": "EducationalOccupationalCredential",
+          name: "TRX Suspension Trainer™ — Certificado Oficial",
         },
         {
-          "@type": "Question",
-          name: "¿Qué necesito tener en casa para entrenar?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Solo necesitas espacio para moverte y una puerta estándar o barra donde fijar el equipo. El TRX y todos los implementos los llevo yo. Tú solo necesitas ropa cómoda y zapatillas.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "¿Es seguro si tengo una lesión o dolor crónico?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "El TRX es uno de los métodos más seguros que existen, precisamente porque es de bajo impacto y sin cargas externas. He trabajado con personas en recuperación de lesiones de rodilla, hombro y espalda. Eso sí, antes de empezar siempre conversamos sobre tu situación médica y, si es necesario, coordino con tu médico o kinesiólogo.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "¿En qué sectores de Santiago entrenas?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Trabajo principalmente en sectores de Santiago oriente y centro. Escríbeme por WhatsApp con tu comuna y lo coordinamos; en la mayoría de los casos puedo llegar a ti.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "¿Cuáles son los horarios disponibles?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Tengo disponibilidad principalmente en las mañanas, desde las 6:00 AM. Los horarios exactos los coordinamos directamente según tu disponibilidad semanal. La flexibilidad es parte del servicio.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "¿Cuántas veces a la semana debería entrenar?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Depende de tu objetivo y tu agenda. El mínimo recomendable para ver resultados es 2 veces por semana. El paquete mensual incluye 3 sesiones semanales, que es la frecuencia ideal para progreso constante sin sobrecargar el cuerpo.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "¿Qué pasa si tengo que cancelar una sesión?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Las cancelaciones con más de 24 horas de anticipación no tienen costo. Lo coordinamos directamente por WhatsApp y buscamos una alternativa en la misma semana cuando sea posible.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "¿Cómo es la primera clase?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "La primera sesión es siempre gratuita y sirve para conocernos. Conversamos sobre tus objetivos, hago una evaluación básica de tu nivel y coordinamos cómo seguir. Sin presión ni compromiso. Si después de la sesión sientes que encajamos, coordinamos el plan; si no, ningún problema.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "¿Cuánto cuestan las clases de TRX?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Las clases de TRX tienen dos opciones: la sesión individual tiene un valor de $15.000, y el paquete mensual de 3 veces por semana (~12 sesiones) tiene un valor de $160.000, lo que equivale a aproximadamente $13.300 por sesión. La primera clase es siempre gratis.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "¿El TRX sirve para bajar de peso?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "El entrenamiento con TRX ayuda a desarrollar masa muscular y mejorar el metabolismo, lo que contribuye a la pérdida de grasa. Para resultados de composición corporal, lo ideal es combinar el entrenamiento con buenos hábitos de alimentación, algo sobre lo que también podemos conversar.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "¿Dónde das las clases de TRX?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "A domicilio o al aire libre en Santiago, principalmente en sectores oriente y centro. Escríbeme con tu comuna y coordinamos el lugar que te acomode.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "¿Vendes equipos TRX?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "No vendemos equipos. El TRX y todos los implementos los llevo yo a cada sesión. Tú solo necesitas espacio para moverte, ropa cómoda y zapatillas.",
-          },
-        },
-        {
-          "@type": "Question",
-          name: "¿Cómo agendo una clase de TRX?",
-          acceptedAnswer: {
-            "@type": "Answer",
-            text: "Escríbeme por WhatsApp, coordinamos día y hora según tu disponibilidad, y la primera clase es gratis. Sin compromiso ni pago por adelantado.",
-          },
+          "@type": "EducationalOccupationalCredential",
+          name: "TRX Rip Trainer® — Certificado Oficial",
         },
       ],
+      sameAs: ["https://www.instagram.com/trxconcept"],
+      areaServed: {
+        "@type": "City",
+        name: "Santiago",
+        addressCountry: "CL",
+      },
     },
+    // Sobre mí renders through AboutContent.astro; content is intentionally empty
+    // (same pattern as home/HomeContent.astro).
+    content: "",
+    isHome: false,
+  },
+  faq: {
+    title: `Preguntas frecuentes sobre clases de TRX`,
+    description: `Resolvemos tus dudas sobre clases de TRX en Santiago: experiencia previa, equipos, horarios, precios y cómo reservar. Primera clase gratis.`,
+    canonical: pageUrl("/preguntas-frecuentes/"),
+    breadcrumb: [
+      { name: "Inicio", item: pageUrl("/") },
+      { name: "Preguntas frecuentes", item: pageUrl("/preguntas-frecuentes/") },
+    ],
+    structuredData: buildFaqStructuredData(),
     content: `${renderPageHero({
       title: "Preguntas frecuentes sobre clases de TRX",
       description:
         'Desde si necesitas experiencia hasta cómo reservar tu primera clase gratis. También puedes revisar nuestros <a href="/servicios/">servicios</a> o <a href="/sobre-mi/">conocer a tu entrenador</a>.',
       breadcrumb: [
-        { name: "Inicio", item: "https://trxconcept.cl/" },
-        { name: "Preguntas frecuentes", item: "https://trxconcept.cl/preguntas-frecuentes/" },
+        { name: "Inicio", item: pageUrl("/") },
+        { name: "Preguntas frecuentes", item: pageUrl("/preguntas-frecuentes/") },
       ],
     })}
 
       <section>
         <div class="container faq-list">
-
-          <details class="faq-item" id="experiencia-previa">
-            <summary>¿Necesito experiencia previa para entrenar TRX?</summary>
-            <p class="faq-answer">
-              No. El TRX es completamente adaptable a tu nivel, sea cual sea. Si nunca has hecho ejercicio, empezamos desde lo más básico y avanzamos a tu propio ritmo. Si ya tienes experiencia, podemos llevar la intensidad mucho más lejos. La primera sesión siempre empieza con una evaluación para conocer tu punto de partida.
-            </p>
-          </details>
-
-          <details class="faq-item" id="que-necesito-en-casa">
-            <summary>¿Qué necesito tener en casa para entrenar?</summary>
-            <p class="faq-answer">
-              Solo necesitas espacio para moverte y una puerta estándar o barra donde fijar el equipo. El TRX y todos los implementos los llevo yo. Tú solo necesitas ropa cómoda y zapatillas.
-            </p>
-          </details>
-
-          <details class="faq-item" id="lesion-o-dolor-cronico">
-            <summary>¿Es seguro si tengo una lesión o dolor crónico?</summary>
-            <p class="faq-answer">
-              El TRX es uno de los métodos más seguros que existen, precisamente porque es de bajo impacto y sin cargas externas. He trabajado con personas en recuperación de lesiones de rodilla, hombro y espalda. Eso sí, antes de empezar siempre conversamos sobre tu situación médica y, si es necesario, coordino con tu médico o kinesiólogo.
-            </p>
-          </details>
-
-          <details class="faq-item" id="sectores-de-santiago">
-            <summary>¿En qué sectores de Santiago entrenas?</summary>
-            <p class="faq-answer">
-              Trabajo principalmente en sectores de Santiago oriente y centro. Escríbeme por WhatsApp con tu comuna y lo coordinamos; en la mayoría de los casos puedo llegar a ti.
-            </p>
-          </details>
-
-          <details class="faq-item" id="horarios-disponibles">
-            <summary>¿Cuáles son los horarios disponibles?</summary>
-            <p class="faq-answer">
-              Tengo disponibilidad principalmente en las mañanas, desde las 6:00 AM. Los horarios exactos los coordinamos directamente según tu disponibilidad semanal. La flexibilidad es parte del servicio.
-            </p>
-          </details>
-
-          <details class="faq-item" id="frecuencia-semanal">
-            <summary>¿Cuántas veces a la semana debería entrenar?</summary>
-            <p class="faq-answer">
-              Depende de tu objetivo y tu agenda. El mínimo recomendable para ver resultados es 2 veces por semana. El paquete mensual incluye 3 sesiones semanales, que es la frecuencia ideal para progreso constante sin sobrecargar el cuerpo.
-            </p>
-          </details>
-
-          <details class="faq-item" id="cancelacion-de-sesion">
-            <summary>¿Qué pasa si tengo que cancelar una sesión?</summary>
-            <p class="faq-answer">
-              Las cancelaciones con más de 24 horas de anticipación no tienen costo. Lo coordinamos directamente por WhatsApp y buscamos una alternativa en la misma semana cuando sea posible.
-            </p>
-          </details>
-
-          <details class="faq-item" id="primera-clase">
-            <summary>¿Cómo es la primera clase?</summary>
-            <p class="faq-answer">
-              La primera sesión es siempre gratuita y sirve para conocernos. Conversamos sobre tus objetivos, hago una evaluación básica de tu nivel y coordinamos cómo seguir. Sin presión ni compromiso. Si después de la sesión sientes que encajamos, coordinamos el plan; si no, ningún problema.
-            </p>
-          </details>
-
-          <details class="faq-item" id="precios">
-            <summary>¿Cuánto cuestan las clases de TRX?</summary>
-            <p class="faq-answer">
-              Las clases de TRX tienen dos opciones: la sesión individual tiene un valor de $15.000, y el paquete mensual de 3 veces por semana (~12 sesiones) tiene un valor de $160.000, lo que equivale a aproximadamente $13.300 por sesión. La primera clase es siempre gratis.
-            </p>
-          </details>
-
-          <details class="faq-item" id="bajar-de-peso">
-            <summary>¿El TRX sirve para bajar de peso?</summary>
-            <p class="faq-answer">
-              El entrenamiento con TRX ayuda a desarrollar masa muscular y mejorar el metabolismo, lo que contribuye a la pérdida de grasa. Para resultados de composición corporal, lo ideal es combinar el entrenamiento con buenos hábitos de alimentación, algo sobre lo que también podemos conversar.
-            </p>
-          </details>
-
-          <details class="faq-item" id="donde-clases">
-            <summary>¿Dónde das las clases de TRX?</summary>
-            <p class="faq-answer">
-              A domicilio o al aire libre en Santiago, principalmente en sectores oriente y centro.
-              Escríbeme con tu comuna y coordinamos el lugar que te acomode.
-            </p>
-          </details>
-
-          <details class="faq-item" id="venden-equipos">
-            <summary>¿Vendes equipos TRX?</summary>
-            <p class="faq-answer">
-              No vendemos equipos. El TRX y todos los implementos los llevo yo a cada sesión.
-              Tú solo necesitas espacio para moverte, ropa cómoda y zapatillas.
-            </p>
-          </details>
-
-          <details class="faq-item" id="como-agendar">
-            <summary>¿Cómo agendo una clase de TRX?</summary>
-            <p class="faq-answer">
-              Escríbeme por WhatsApp, coordinamos día y hora según tu disponibilidad, y la primera clase es gratis.
-              Sin compromiso ni pago por adelantado.
-            </p>
-          </details>
-
+          ${renderFaqDetails(faqItems)}
         </div>
       </section>`,
     isHome: false,
@@ -855,18 +532,18 @@ export const pages = {
   cookies: {
     title: `Política de Cookies y Consentimiento`,
     description: `Información sobre las cookies que usa TRX Concept y cómo puedes gestionar tus preferencias.`,
-    canonical: `https://trxconcept.cl/politica-de-cookies/`,
+    canonical: pageUrl("/politica-de-cookies/"),
     robots: `noindex`,
     breadcrumb: [
-      { name: "Inicio", item: "https://trxconcept.cl/" },
-      { name: "Política de cookies", item: "https://trxconcept.cl/politica-de-cookies/" },
+      { name: "Inicio", item: pageUrl("/") },
+      { name: "Política de cookies", item: pageUrl("/politica-de-cookies/") },
     ],
     content: `${renderPageHero({
       title: "Política de cookies",
       description: "Información sobre las cookies que usamos y cómo gestionarlas.",
       breadcrumb: [
-        { name: "Inicio", item: "https://trxconcept.cl/" },
-        { name: "Política de cookies", item: "https://trxconcept.cl/politica-de-cookies/" },
+        { name: "Inicio", item: pageUrl("/") },
+        { name: "Política de cookies", item: pageUrl("/politica-de-cookies/") },
       ],
     })}
 

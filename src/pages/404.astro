@@ -15,16 +15,16 @@ const page = {
 
 <BaseLayout page={page}>
   <section class="page-hero">
-    <div class="container narrow">
-      <p class="eyebrow">404</p>
+    <div class="container page-hero-inner">
+      <p>404</p>
       <h1>Página no encontrada</h1>
       <p>La página que buscas no existe o fue movida. Puedes volver al inicio o revisar los servicios disponibles.</p>
       <div style="font-weight: bold; margin: 1.5rem 0;">
         <FuzzyRedirect />
       </div>
-      <div class="hero-actions">
-        <a class="btn btn-primary" href="/">Volver al inicio</a>
-        <a class="btn btn-outline" href="/servicios/">Ver servicios</a>
+      <div class="hero-cta">
+        <a class="btn btn--trx" href="/">Volver al inicio</a>
+        <a class="btn btn--outline-light" href="/servicios/">Ver servicios</a>
       </div>
     </div>
   </section>

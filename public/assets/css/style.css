@@ -42,6 +42,26 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+  /* The header is fixed: anchor jumps and programmatic focus scrolls must
+     land below it, not underneath. Sized to the unscrolled header. */
+  scroll-padding-top: 7.5rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 img {
   max-width: 100%;
   height: auto;
@@ -65,6 +85,10 @@ img {
   --fs-body: 1rem;
   --fs-small: 0.9rem;
   --space-section: clamp(2rem, 5vw, 4rem);
+  --radius-card: 1rem;
+  --radius-control: 0.6rem;
+  --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.06);
+  --shadow-raise: 0 6px 18px rgba(0, 0, 0, 0.18);
 }
 
 h1 {
@@ -81,7 +105,6 @@ p {
 }
 
 small,
-.hero-note,
 .pricing-note {
   font-size: var(--fs-small);
 }
@@ -209,6 +232,18 @@ main {
   font-weight: 700;
 }
 
+.nav-list a:focus-visible,
+.faq-item summary:focus-visible,
+.trainer-link:focus-visible,
+.faq-home-more a:focus-visible,
+.testimonial-more a:focus-visible,
+.discovery-fallback a:focus-visible,
+.discovery-restart:focus-visible {
+  outline: 2px solid var(--color-black);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
 /* ─── HAMBURGER BUTTON ─── */
 
 .nav-toggle-btn {
@@ -221,12 +256,12 @@ main {
   border: none;
   cursor: pointer;
   padding: 0.4rem;
-  width: 2.5rem;
-  height: 2.5rem;
+  width: 2.75rem;
+  height: 2.75rem;
   flex-shrink: 0;
 }
 
-.header-inner > .btn-whatsapp {
+.header-inner > .btn--whatsapp {
   flex-shrink: 0;
 }
 
@@ -267,38 +302,35 @@ main {
     box-shadow 0.18s ease;
 }
 
-.btn-trx {
+.btn--trx {
   background: var(--color-primary);
   color: var(--color-black);
 }
 
-.btn-whatsapp,
-.btn-invert {
+.btn--whatsapp {
   background: var(--color-black);
   color: var(--color-white);
 }
 
-.btn-whatsapp,
-.btn-trx {
+.btn--whatsapp,
+.btn--trx {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
 }
 
-.btn-trx:hover,
-.btn-trx:active {
+.btn--trx:hover,
+.btn--trx:active {
   background: color-mix(in srgb, var(--color-primary), #000 10%);
   transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+  box-shadow: var(--shadow-raise);
 }
 
-.btn-invert:hover,
-.btn-invert:active,
-.btn-whatsapp:hover,
-.btn-whatsapp:active {
+.btn--whatsapp:hover,
+.btn--whatsapp:active {
   background: #111;
   transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
+  box-shadow: var(--shadow-raise);
 }
 
 .btn:focus-visible {
@@ -306,18 +338,16 @@ main {
   outline-offset: 2px;
 }
 
-.btn.btn-whatsapp,
-.btn.btn-invert {
+.btn.btn--whatsapp {
   color: var(--color-white);
 }
 
-.btn.btn-whatsapp:hover,
-.btn.btn-invert:hover {
+.btn.btn--whatsapp:hover {
   color: var(--color-white);
 }
 
-.btn.btn-trx,
-.btn.btn-trx:hover {
+.btn.btn--trx,
+.btn.btn--trx:hover {
   color: var(--color-black);
 }
 
@@ -325,7 +355,6 @@ main {
 
 .hero-lead a,
 .trust-content a,
-.cta-band-text a,
 .about-section p a,
 .page-hero p a {
   color: inherit;
@@ -340,7 +369,6 @@ main {
 
 .hero-lead a:hover,
 .trust-content a:hover,
-.cta-band-text a:hover,
 .about-section p a:hover,
 .page-hero p a:hover {
   text-decoration-color: rgba(128, 128, 128, 0.7);
@@ -349,10 +377,16 @@ main {
 
 /* ─── HERO ─── */
 
-.hero * {
+/* Only the content wrapper needs to stack above the overlay; shadowed white
+   text is limited to the actual text elements instead of every descendant. */
+.hero .container {
   position: relative;
   z-index: 2;
   color: #fff;
+}
+
+.hero-title,
+.hero-lead {
   text-shadow:
     0 2px 4px rgba(0, 0, 0, 0.6),
     0 1px 1px rgba(0, 0, 0, 0.3);
@@ -404,52 +438,24 @@ main {
   opacity: 0.92;
 }
 
-.hero .btn {
-  margin-top: 0.5rem;
-  margin-bottom: 1rem;
-}
-
-.hero .btn-trx {
+.hero .btn--trx {
   color: var(--color-black);
   text-shadow: none;
 }
 
-.hero .btn-trx .wa-icon,
-.hero .btn-trx .wa-icon * {
+.hero .btn--trx .wa-icon,
+.hero .btn--trx .wa-icon * {
   color: var(--color-black);
   fill: currentColor;
   text-shadow: none;
 }
 
-.hero .btn-invert,
-.hero .btn-whatsapp {
+.hero .btn--whatsapp {
   color: var(--color-white);
   text-shadow: none;
 }
 
-.hero-note {
-  margin-top: 0.25rem;
-}
-
-/* Looks like an informational label, not a button */
-.hero-badge {
-  display: inline-block;
-  background: rgba(255, 255, 255, 0.12);
-  color: rgba(255, 255, 255, 0.88);
-  font-size: 0.8rem;
-  font-weight: 500;
-  text-shadow: none;
-  padding: 0.22rem 0.65rem;
-  border-radius: 0.2rem;
-}
-
 /* ─── TRUST ─── */
-
-.trust {
-  padding: 2.5rem 1.5rem;
-  background: var(--color-gray-light);
-  border-top: 3px solid var(--color-primary);
-}
 
 .trust-inner {
   display: flex;
@@ -469,33 +475,6 @@ main {
   margin-bottom: 0;
 }
 
-.trust-stats {
-  display: flex;
-  gap: 1.5rem;
-  margin-top: 1.25rem;
-  flex-wrap: wrap;
-}
-
-.trust-stat {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-
-.trust-stat-number {
-  font-family: var(--font-logo);
-  font-size: 1.5rem;
-  line-height: 1;
-  color: var(--color-black);
-}
-
-.trust-stat-label {
-  font-size: 0.75rem;
-  color: var(--color-gray-dark);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-}
-
 .profile-pic {
   display: block;
   width: 140px;
@@ -510,73 +489,11 @@ main {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
-/* ─── BENEFITS ─── */
-
-.benefits {
-  background: var(--color-white);
-}
-
-.benefits-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
-  justify-content: center;
-  margin: 0 auto;
-}
-
-.benefit {
-  flex: 1 1 220px;
-  max-width: 280px;
-  text-align: center;
-}
-
-.benefit-icon-wrap {
-  width: 3.5rem;
-  height: 3.5rem;
-  background: var(--color-primary);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 1rem;
-}
-
-.benefit-icon-svg {
-  width: 1.5rem;
-  height: 1.5rem;
-  object-fit: contain;
-}
-
-.benefit h3 {
-  margin-bottom: 0.5rem;
-}
-
-.benefit p {
-  color: var(--color-gray-dark);
-}
-
-/* ─── MID CTA BAND ─── */
-
-.cta-band {
-  background: var(--color-black);
-  padding: 3rem 1.5rem;
-  text-align: center;
-}
-
-.cta-band-text {
-  color: var(--color-white);
-  font-size: 1.2rem;
-  font-weight: 500;
-  margin-bottom: 1.25rem;
-}
-
 /* ─── TESTIMONIALS ─── */
 
 .testimonial {
   max-width: 960px;
   margin: 0 auto;
-  padding-top: 3rem;
-  padding-bottom: 0.5rem;
   text-align: center;
 }
 
@@ -599,7 +516,7 @@ main {
 
 .testimonial-card {
   background: var(--color-gray-light);
-  border-radius: 1rem;
+  border-radius: var(--radius-card);
   padding: 2rem 1.5rem;
   display: flex;
   flex-direction: column;
@@ -620,7 +537,8 @@ main {
 }
 
 .testimonial-stars {
-  color: var(--color-primary);
+  /* Darker gold: brand yellow on the light card is nearly invisible */
+  color: #c9a100;
   font-size: 1.1rem;
   letter-spacing: 0.1em;
   margin-bottom: 0.75rem;
@@ -658,129 +576,10 @@ main {
   font-style: normal;
 }
 
-/* ─── COMPARISON CARDS ─── */
-
-.comparison {
-  padding: 3rem 1.5rem;
-  text-align: center;
-  background: var(--color-white);
-}
-
-.comparison h2 {
-  margin-bottom: 0.5rem;
-}
-
-.comparison-cards {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  justify-content: center;
-  max-width: 680px;
-  margin: 2rem auto 0;
-}
-
-.comp-card {
-  flex: 1 1 260px;
-  max-width: 320px;
-  border-radius: 1rem;
-  padding: 1.75rem 1.5rem;
-  position: relative;
-  text-align: left;
-}
-
-.comp-card h3 {
-  font-size: 1.1rem;
-  margin-bottom: 1.25rem;
-}
-
-.comp-card ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.comp-card ul li {
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  padding: 0.45rem 0;
-  font-size: 0.95rem;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-}
-
-.comp-card ul li:last-child {
-  border-bottom: none;
-}
-
-.comp-card-others {
-  background: var(--color-gray-light);
-  border: 2px solid var(--color-gray);
-}
-
-.comp-card-others h3 {
-  color: var(--color-gray-dark);
-}
-
-.comp-card-others ul li {
-  color: var(--color-gray-dark);
-}
-
-.comp-card-trx {
-  background: var(--color-black);
-  border: 2px solid var(--color-primary);
-}
-
-.comp-card-trx h3 {
-  color: var(--color-primary);
-  margin-top: 0.75rem;
-}
-
-.comp-card-trx ul li {
-  color: var(--color-white);
-  border-bottom-color: rgba(255, 255, 255, 0.08);
-}
-
-.comp-x {
-  color: #d44;
-  font-weight: 700;
-  flex-shrink: 0;
-  width: 1.2rem;
-  text-align: center;
-}
-
-.comp-check {
-  color: var(--color-primary);
-  font-weight: 700;
-  flex-shrink: 0;
-  width: 1.2rem;
-  text-align: center;
-}
-
-.comp-card .recommended-badge {
-  position: absolute;
-  top: -0.75rem;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.recommended-badge {
-  display: inline-block;
-  font-family: var(--font-base);
-  font-size: 0.7rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--color-black);
-  background: var(--color-primary);
-  border-radius: 999px;
-  padding: 0.15rem 0.6rem;
-  white-space: nowrap;
-}
-
 /* ─── PRICING ─── */
 
 .pricing {
-  padding: 3rem 1.5rem;
+  padding: var(--space-section) 1.5rem;
   background: var(--color-gray-light);
   text-align: center;
 }
@@ -803,21 +602,26 @@ main {
   margin: 0 auto 1.5rem;
 }
 
+.pricing-card,
+.service-card {
+  flex: 1 1 250px;
+  background: var(--color-white);
+  border: 2px solid var(--color-gray);
+  border-radius: var(--radius-card);
+  padding: 2rem 1.5rem;
+  position: relative;
+}
+
 .pricing-card {
   flex: 1 1 280px;
   max-width: 340px;
-  background: var(--color-white);
-  border: 2px solid var(--color-gray);
-  border-radius: 1rem;
-  padding: 2rem 1.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  position: relative;
 }
 
-.pricing-card-featured {
+.pricing-card--featured {
   border-color: var(--color-primary);
   box-shadow: 0 8px 32px rgba(255, 215, 0, 0.2);
 }
@@ -925,10 +729,6 @@ main {
   color: rgba(255, 255, 255, 0.82);
 }
 
-.more-info {
-  border-bottom: 1px dotted;
-}
-
 .footer .site-credit {
   margin-top: 0.25rem;
   font-size: 0.9rem;
@@ -999,7 +799,7 @@ main {
 .page-breadcrumb li {
   display: inline-flex;
   align-items: center;
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.55);
   font-size: 0.85rem;
 }
 
@@ -1013,6 +813,10 @@ main {
 .page-breadcrumb span {
   color: inherit;
   text-decoration: none;
+}
+
+.page-breadcrumb a {
+  color: rgba(255, 255, 255, 0.75);
 }
 
 .page-breadcrumb a:hover,
@@ -1054,7 +858,6 @@ main {
 
 .faq-item {
   border-bottom: 1px solid var(--color-gray);
-  scroll-margin-top: 8rem;
 }
 
 .faq-item summary {
@@ -1134,13 +937,13 @@ main {
 
 .section-subtitle {
   color: var(--color-gray-dark);
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 .section-intro {
   color: var(--color-gray-dark);
   margin-top: 0.5rem;
-  margin-bottom: 2.5rem;
+  margin-bottom: 2rem;
 }
 
 .cert-list {
@@ -1177,13 +980,8 @@ main {
 }
 
 .service-card {
-  flex: 1 1 250px;
   max-width: 380px;
-  background: var(--color-white);
-  border: 2px solid var(--color-gray);
-  border-radius: 1rem;
-  padding: 2rem 1.5rem;
-  position: relative;
+  text-align: left;
 }
 
 .service-card h3 {
@@ -1207,6 +1005,48 @@ main {
   margin-top: 0.5rem;
 }
 
+/* Numbered booking steps on /servicios. Without this, the global padding
+   reset leaves the default ol markers hanging outside the container. */
+.steps-list {
+  list-style: none;
+  counter-reset: step;
+  max-width: 520px;
+  margin: 0 auto 1.5rem;
+  display: grid;
+  gap: 0.9rem;
+  text-align: left;
+}
+
+.steps-list li {
+  counter-increment: step;
+  position: relative;
+  padding-left: 3.1rem;
+  padding-block: 0.35rem;
+  color: var(--color-gray-dark);
+  min-height: 2.25rem;
+}
+
+.steps-list li::before {
+  content: counter(step);
+  position: absolute;
+  left: 0;
+  top: 0.2rem;
+  width: 2.25rem;
+  height: 2.25rem;
+  background: var(--color-primary);
+  color: var(--color-black);
+  font-family: var(--font-logo);
+  font-size: 1.15rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.steps-list strong {
+  color: var(--color-black);
+}
+
 .audience-grid {
   display: flex;
   flex-wrap: wrap;
@@ -1219,10 +1059,10 @@ main {
 .audience-item {
   flex: 1 1 200px;
   max-width: 260px;
-  text-align: center;
-  padding: 1.5rem 1rem;
+  text-align: left;
+  padding: 1.5rem 1.25rem;
   background: var(--color-gray-light);
-  border-radius: 1rem;
+  border-radius: var(--radius-card);
 }
 
 .audience-item h3 {
@@ -1233,44 +1073,6 @@ main {
 .audience-item p {
   font-size: 0.9rem;
   color: var(--color-gray-dark);
-}
-
-/* ─── GRACIAS ─── */
-
-.gracias-section {
-  min-height: 60vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 4rem 1.5rem;
-}
-
-.gracias-check {
-  width: 4.5rem;
-  height: 4.5rem;
-  background: var(--color-primary);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 1.5rem;
-  font-size: 2rem;
-}
-
-.gracias-title {
-  font-family: var(--font-logo);
-  font-size: clamp(2rem, 4vw, 2.75rem);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  margin-bottom: 0.75rem;
-}
-
-.gracias-lead {
-  max-width: 480px;
-  color: var(--color-gray-dark);
-  margin: 0 auto 2rem;
 }
 
 /* ─── WA ICON ─── */
@@ -1293,8 +1095,8 @@ header .wa-icon {
 
 .btn-float-wa {
   position: fixed;
-  bottom: calc(5rem + env(safe-area-inset-bottom));
-  right: 1rem;
+  bottom: calc(1.25rem + env(safe-area-inset-bottom));
+  right: 1.25rem;
   width: 3.5rem;
   height: 3.5rem;
   background: #25d366;
@@ -1329,23 +1131,33 @@ header .wa-icon {
   fill: currentColor;
 }
 
+/* While the cookie banner is on screen, lift the floating button above it
+   so it can't cover the Aceptar/Rechazar actions. */
+body:has(.cookie-banner.is-visible) .btn-float-wa {
+  bottom: calc(7rem + env(safe-area-inset-bottom));
+}
+
 /* ─── SCROLLED HEADER ─── */
 
-.site-header.scrolled {
+.site-header.is-scrolled {
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
 }
 
-.site-header.scrolled .header-inner {
+.site-header.is-scrolled .header-inner {
   padding-block: 0.4rem;
 }
 
-.site-header.scrolled .brand img {
+.site-header.is-scrolled .brand img {
   height: 3rem;
 }
 
 /* ─── RESPONSIVE: TABLET ─── */
 
 @media screen and (max-width: 991px) {
+  html {
+    scroll-padding-top: 6.5rem;
+  }
+
   main {
     padding-top: 6rem;
     background: linear-gradient(var(--color-primary) 6rem, var(--color-white) 6rem);
@@ -1368,7 +1180,7 @@ header .wa-icon {
     font-size: 0.98rem;
   }
 
-  .site-header .btn-whatsapp {
+  .site-header .btn--whatsapp {
     padding: 0.65rem 1.1rem;
     font-size: 0.9rem;
   }
@@ -1378,14 +1190,6 @@ header .wa-icon {
   .trust-inner {
     flex-direction: column;
     text-align: center;
-  }
-
-  .trust-stats {
-    justify-content: center;
-  }
-
-  .trust-stat {
-    align-items: center;
   }
 }
 
@@ -1407,7 +1211,7 @@ header .wa-icon {
     flex-wrap: nowrap;
   }
 
-  .nav-list.nav-open {
+  .nav-list.is-open {
     display: flex;
   }
 
@@ -1429,7 +1233,7 @@ header .wa-icon {
     display: flex;
   }
 
-  .header-inner > .btn-whatsapp {
+  .header-inner > .btn--whatsapp {
     margin-inline: auto;
   }
 }
@@ -1446,7 +1250,7 @@ header .wa-icon {
     gap: 0.5rem;
   }
 
-  .site-header .btn-whatsapp {
+  .site-header .btn--whatsapp {
     margin-inline: auto;
     font-size: 1rem;
     gap: 0.5rem;
@@ -1456,33 +1260,18 @@ header .wa-icon {
     border-radius: 999px;
   }
 
-  .site-header .btn-whatsapp .wa-icon {
+  .site-header .btn--whatsapp .wa-icon {
     width: 24px;
     height: 24px;
     flex-shrink: 0;
   }
 
-  .site-header.scrolled .brand img {
+  .site-header.is-scrolled .brand img {
     height: 2.5rem;
   }
 
   .logo {
     display: none;
-  }
-
-  .trust-stats {
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-
-  .comparison-cards {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .comp-card {
-    max-width: 100%;
-    width: 100%;
   }
 
   .pricing-cards {
@@ -1506,7 +1295,10 @@ header .wa-icon {
 
 /* ── Cookie banner ─────────────────────────────────────── */
 
+/* Hidden by default so it never flashes before cookie-consent.js decides;
+   the script adds .is-visible only when there is no stored consent. */
 .cookie-banner {
+  display: none;
   position: fixed;
   bottom: 0;
   left: 0;
@@ -1515,6 +1307,10 @@ header .wa-icon {
   background: var(--color-black);
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   padding: 1.25rem 1rem;
+}
+
+.cookie-banner.is-visible {
+  display: block;
 }
 
 .cookie-inner {
@@ -1553,6 +1349,7 @@ header .wa-icon {
 
 .cookie-btn {
   font-size: 13px;
+  min-height: 44px;
   padding: 0.625rem 1.25rem;
   border-radius: 999px;
   font-weight: 600;
@@ -1591,13 +1388,13 @@ header .wa-icon {
 
 .footer-legal a,
 .cookie-manage-btn {
-  font-size: 11px;
+  font-size: 13px;
   color: rgba(255, 255, 255, 0.68);
   text-decoration: none;
   background: transparent;
   border: none;
   cursor: pointer;
-  padding: 0;
+  padding: 0.6rem 0.25rem;
   font-family: var(--font-base);
   transition: color 0.15s;
 }
@@ -1632,4 +1429,657 @@ header .wa-icon {
 .cookie-table td {
   padding: 0.6rem 0.8rem;
   border-bottom: 1px solid var(--color-gray);
+}
+
+/* ─── HERO CHIPS + CTA ─── */
+
+.hero-chips {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto 1.75rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  max-width: 620px;
+}
+
+.hero-chips li {
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-shadow: none;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+}
+
+.hero-cta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.btn--outline-light {
+  background: transparent;
+  color: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  text-shadow: none;
+}
+
+.hero .btn--outline-light {
+  color: #fff;
+  text-shadow: none;
+}
+
+.btn--outline-light:hover,
+.btn--outline-light:active {
+  background: rgba(255, 255, 255, 0.14);
+  transform: translateY(-1px);
+}
+
+.btn--ghost {
+  background: transparent;
+  color: var(--color-black);
+  border: 2px solid var(--color-gray);
+}
+
+.btn--ghost:hover {
+  background: var(--color-gray-light);
+}
+
+/* ─── PROCESS ─── */
+
+.process {
+  background: var(--color-white);
+}
+
+.process-steps {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  max-width: 980px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+}
+
+.process-step {
+  background: var(--color-gray-light);
+  border-radius: var(--radius-card);
+  padding: 1.75rem 1.25rem;
+  text-align: left;
+}
+
+.process-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  background: var(--color-primary);
+  color: var(--color-black);
+  font-family: var(--font-logo);
+  font-size: 1.25rem;
+  border-radius: 50%;
+  margin-bottom: 0.9rem;
+}
+
+.process-step h3 {
+  font-size: 1.05rem;
+  margin-bottom: 0.4rem;
+}
+
+.process-step p {
+  color: var(--color-gray-dark);
+  font-size: 0.92rem;
+}
+
+/* ─── DISCOVERY FLOW ─── */
+
+.discovery-inner {
+  max-width: 640px;
+  text-align: center;
+}
+
+.discovery-sub {
+  color: var(--color-gray-dark);
+  margin: 0.5rem auto 1.75rem;
+  max-width: 480px;
+}
+
+.discovery-card {
+  background: var(--color-white);
+  border: 2px solid var(--color-gray);
+  border-radius: var(--radius-card);
+  padding: 1.75rem 1.5rem;
+  text-align: left;
+  box-shadow: var(--shadow-card);
+}
+
+.discovery-progress {
+  height: 6px;
+  background: var(--color-gray);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+
+.discovery-progress-bar {
+  display: block;
+  height: 100%;
+  width: 33%;
+  background: var(--color-primary);
+  border-radius: 999px;
+  transition: width 0.25s ease;
+}
+
+.discovery-step {
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+/* Enhanced: only the active step is shown. Without JS every step is visible.
+   Note: main.js puts .is-enhanced on the [data-discovery] card, not the section. */
+.discovery-card.is-enhanced .discovery-step {
+  display: none;
+}
+
+.discovery-card.is-enhanced .discovery-step.is-active {
+  display: block;
+}
+
+.discovery-step + .discovery-step {
+  margin-top: 1.5rem;
+}
+
+.discovery-q {
+  font-weight: 700;
+  font-size: 1.15rem;
+  padding: 0;
+  margin-bottom: 0.75rem;
+}
+
+.discovery-q:focus-visible {
+  outline: 2px solid var(--color-black);
+  outline-offset: 3px;
+}
+
+.discovery-hint {
+  color: var(--color-gray-note);
+  font-size: 0.85rem;
+  margin-bottom: 0.9rem;
+}
+
+.discovery-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.discovery-options--row {
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.discovery-opt {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.75rem 0.9rem;
+  border: 2px solid var(--color-gray);
+  border-radius: var(--radius-control);
+  cursor: pointer;
+  font-size: 0.95rem;
+  transition:
+    border-color 0.15s ease,
+    background-color 0.15s ease;
+}
+
+.discovery-opt:hover {
+  border-color: var(--color-primary);
+}
+
+.discovery-opt:has(input:checked) {
+  border-color: var(--color-primary);
+  background: color-mix(in srgb, var(--color-primary), #fff 82%);
+}
+
+.discovery-opt:focus-within {
+  outline: 2px solid var(--color-black);
+  outline-offset: 2px;
+}
+
+.discovery-opt input {
+  accent-color: var(--color-black);
+  width: 1.05rem;
+  height: 1.05rem;
+  flex-shrink: 0;
+}
+
+.discovery-field {
+  display: block;
+  margin-bottom: 1.25rem;
+}
+
+.discovery-label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 0.4rem;
+}
+
+.discovery-label small {
+  font-weight: 400;
+  color: var(--color-gray-note);
+}
+
+.discovery-field select {
+  width: 100%;
+  padding: 0.7rem 2.4rem 0.7rem 0.8rem;
+  border: 2px solid var(--color-gray);
+  border-radius: var(--radius-control);
+  font-family: var(--font-base);
+  font-size: 0.95rem;
+  appearance: none;
+  background: var(--color-white)
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%23444' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E")
+    no-repeat right 0.9rem center;
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+}
+
+.discovery-field select:hover {
+  border-color: var(--color-primary);
+}
+
+.discovery-field select:focus-visible {
+  outline: 2px solid var(--color-black);
+  outline-offset: 2px;
+}
+
+.discovery-inline {
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.discovery-error {
+  color: #c0392b;
+  font-size: 0.85rem;
+  margin-top: 0.6rem;
+  display: none;
+}
+
+.discovery-step.has-error .discovery-error {
+  display: block;
+}
+
+.discovery-nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.discovery-nav [data-discovery-next] {
+  margin-left: auto;
+}
+
+.discovery-result {
+  text-align: center;
+}
+
+.discovery-result-title {
+  margin-bottom: 0.5rem;
+}
+
+.discovery-result-title:focus-visible {
+  outline: 2px solid var(--color-black);
+  outline-offset: 3px;
+}
+
+.discovery-result p {
+  color: var(--color-gray-dark);
+  margin-bottom: 1.25rem;
+}
+
+.discovery-send {
+  margin-bottom: 0.75rem;
+}
+
+.discovery-restart {
+  display: block;
+  margin: 0 auto;
+  background: none;
+  border: none;
+  color: var(--color-gray-note);
+  font-family: var(--font-base);
+  font-size: 0.85rem;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.discovery-fallback {
+  margin-top: 1.25rem;
+  font-size: 0.9rem;
+  color: var(--color-gray-dark);
+}
+
+.discovery-fallback a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  font-weight: 600;
+}
+
+/* ─── FIT ─── */
+
+.fit-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.fit-item {
+  background: var(--color-gray-light);
+  border-radius: var(--radius-card);
+  padding: 1.5rem 1.25rem;
+  text-align: left;
+}
+
+.fit-item h3 {
+  font-size: 1.05rem;
+  margin-bottom: 0.4rem;
+}
+
+.fit-item p {
+  color: var(--color-gray-dark);
+  font-size: 0.92rem;
+}
+
+.fit-note {
+  max-width: 720px;
+  margin: 2rem auto 0;
+  padding: 1.1rem 1.25rem;
+  background: var(--color-gray-light);
+  border-left: 3px solid var(--color-primary);
+  border-radius: var(--radius-control);
+  text-align: left;
+  font-size: 0.92rem;
+  color: var(--color-gray-dark);
+}
+
+/* ─── METHOD ─── */
+
+.method-head {
+  margin-bottom: 2rem;
+}
+
+.method-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 auto;
+  max-width: 760px;
+  display: grid;
+  gap: 0.9rem;
+}
+
+.method-list li {
+  background: var(--color-white);
+  border-radius: var(--radius-control);
+  padding: 1rem 1.25rem 1rem 3rem;
+  position: relative;
+  color: var(--color-gray-dark);
+  font-size: 0.95rem;
+}
+
+.method-list li::before {
+  content: "✓";
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  color: var(--color-black);
+  background: var(--color-primary);
+  width: 1.4rem;
+  height: 1.4rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.method-list strong {
+  color: var(--color-black);
+}
+
+/* ─── SERVICE MODEL ─── */
+
+.model-grid {
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem auto 0;
+  max-width: 760px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+}
+
+.model-grid li {
+  background: var(--color-gray-light);
+  border-radius: var(--radius-control);
+  padding: 0.85rem 1rem 0.85rem 2.4rem;
+  position: relative;
+  text-align: left;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.model-grid li::before {
+  content: "→";
+  position: absolute;
+  left: 0.95rem;
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+/* ─── PRICING (3-up) ─── */
+
+.pricing-cards--three {
+  max-width: 1040px;
+}
+
+.pricing-cards--three .pricing-card {
+  flex: 1 1 280px;
+  max-width: 330px;
+}
+
+/* ─── TESTIMONIAL EXTRA ─── */
+
+.testimonial-more {
+  margin-top: 2rem;
+  color: var(--color-gray-dark);
+  font-size: 0.92rem;
+}
+
+.testimonial-more a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  font-weight: 600;
+}
+
+/* ─── TRAINER ─── */
+
+.trainer .trust-inner {
+  align-items: flex-start;
+}
+
+.trainer-attention {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  color: var(--color-black);
+}
+
+.trainer-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem;
+}
+
+.trainer-list li {
+  position: relative;
+  padding-left: 1.5rem;
+  color: var(--color-gray-dark);
+  font-size: 0.95rem;
+  padding-bottom: 0.35rem;
+}
+
+.trainer-list li::before {
+  content: "•";
+  position: absolute;
+  left: 0.4rem;
+  color: var(--color-primary);
+  font-weight: 700;
+}
+
+.trainer-link {
+  font-weight: 600;
+  color: var(--color-black);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-color: rgba(128, 128, 128, 0.4);
+}
+
+.trainer-link:hover {
+  text-decoration-color: rgba(128, 128, 128, 0.7);
+}
+
+/* ─── FAQ ON HOME ─── */
+
+.faq-home {
+  background: var(--color-white);
+}
+
+.faq-home h2 {
+  margin-bottom: 1.5rem;
+}
+
+.faq-home-more {
+  margin-top: 1.5rem;
+}
+
+.faq-home-more a {
+  font-weight: 600;
+  color: var(--color-black);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* ─── MOBILE STICKY CTA BAR ─── */
+
+.mobile-cta-bar {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 55;
+  gap: 0.6rem;
+  padding: 0.6rem 0.75rem calc(0.6rem + env(safe-area-inset-bottom));
+  background: var(--color-black);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.mobile-cta-bar-primary,
+.mobile-cta-bar-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  text-decoration: none;
+  padding: 0.7rem 1rem;
+}
+
+.mobile-cta-bar-primary {
+  flex: 1 1 60%;
+  background: var(--color-primary);
+  color: var(--color-black);
+}
+
+.mobile-cta-bar-primary .wa-icon {
+  width: 22px;
+  height: 22px;
+}
+
+.mobile-cta-bar-secondary {
+  flex: 1 1 40%;
+  background: transparent;
+  color: #fff;
+  border: 1.5px solid rgba(255, 255, 255, 0.5);
+}
+
+.mobile-cta-bar-primary:focus-visible,
+.mobile-cta-bar-secondary:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+@media screen and (max-width: 767px) {
+  .process-steps {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .fit-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media screen and (max-width: 679px) {
+  .mobile-cta-bar {
+    display: flex;
+  }
+
+  body {
+    padding-bottom: 4.5rem;
+  }
+
+  /* On mobile the sticky bar replaces the floating button */
+  .btn-float-wa {
+    display: none;
+  }
+
+  /* Stack the cookie banner above the sticky CTA bar instead of covering it:
+     the primary WhatsApp action stays reachable on first visit. */
+  .cookie-banner {
+    bottom: calc(4.4rem + env(safe-area-inset-bottom));
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .process-steps {
+    grid-template-columns: 1fr;
+  }
+
+  .fit-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .model-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .btn-float-wa {
+    display: none;
+  }
 }

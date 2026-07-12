@@ -4,7 +4,7 @@
 
 ## Secciones Principales
 
-- [Inicio](https://trxconcept.cl/): Información general, testimonios de alumnos, comparativas con gimnasios y reserva de clases gratuitas.
+- [Inicio](https://trxconcept.cl/): Cómo empezar paso a paso, para quién es, método y seguridad, precios (evaluación inicial gratis), testimonios y un breve cuestionario que arma un mensaje de WhatsApp para agendar.
 - [Servicios](https://trxconcept.cl/servicios/): Detalle de sesiones individuales, paquetes mensuales, diferencias entre TRX Suspension Trainer y Rip Trainer, y perfil de público.
 - [Sobre mí](https://trxconcept.cl/sobre-mi/): Historia, trayectoria de más de 10 años, certificaciones oficiales de TRX Training y filosofía de entrenamiento de Nicolás Echeverría.
 - [Preguntas frecuentes](https://trxconcept.cl/preguntas-frecuentes/): FAQ completa sobre requisitos de espacio en casa, lesiones, sectores de Santiago atendidos, horarios (desde 6:00 AM) y políticas de cancelación.

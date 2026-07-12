@@ -1,0 +1,32 @@
+---
+import { site } from "../data/site";
+
+interface Props extends astroHTML.JSX.AnchorHTMLAttributes {
+  /** WhatsApp prefilled message; falls back to the site default. */
+  message?: string;
+  /** Render the WhatsApp icon before the slotted content. */
+  iconFirst?: boolean;
+  /** Render the WhatsApp icon (default true). */
+  showIcon?: boolean;
+}
+
+const { message, iconFirst = false, showIcon = true, href = site.getWhatsAppHref(message), ...attrs } = Astro.props;
+---
+
+<a {...attrs} href={href} data-wa data-wa-msg={message} target="_blank" rel="noopener noreferrer">
+  {
+    showIcon && iconFirst && (
+      <svg class="wa-icon" aria-hidden="true" focusable="false">
+        <use href="#wa-symbol" />
+      </svg>
+    )
+  }
+  <slot />
+  {
+    showIcon && !iconFirst && (
+      <svg class="wa-icon" aria-hidden="true" focusable="false">
+        <use href="#wa-symbol" />
+      </svg>
+    )
+  }
+</a>

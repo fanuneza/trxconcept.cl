@@ -1,0 +1,33 @@
+---
+import { Picture } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+interface Props {
+  image: ImageMetadata;
+  name: string;
+  quote: string;
+  starsLabel?: string;
+}
+
+const { image, name, quote, starsLabel = "5 estrellas" } = Astro.props;
+---
+
+<div class="testimonial-card">
+  <Picture
+    src={image}
+    alt={name}
+    formats={["avif", "webp"]}
+    fallbackFormat="webp"
+    quality={60}
+    widths={[100, 200]}
+    sizes="100px"
+    class="testimonial-img"
+    loading="lazy"
+    decoding="async"
+  />
+  <div class="testimonial-stars" aria-label={starsLabel}>★★★★★</div>
+  <blockquote class="testimonial-quote">
+    <p>{quote}</p>
+    <footer class="testimonial-author">– {name}</footer>
+  </blockquote>
+</div>
