@@ -11,6 +11,7 @@
   if (btn && menu) {
     const setOpen = (open) => {
       btn.setAttribute("aria-expanded", String(open));
+      btn.setAttribute("aria-label", open ? "Cerrar menú" : "Abrir menú");
       menu.classList.toggle("is-open", open);
     };
     btn.addEventListener("click", () => setOpen(btn.getAttribute("aria-expanded") !== "true"));
@@ -116,6 +117,19 @@
 
   discovery.classList.add("is-enhanced");
   if (nav) nav.hidden = false;
+
+  // Clear a step's error state, both visually (class) and for assistive tech
+  // (aria-invalid / aria-describedby wired onto the offending control in the
+  // Next handler when validation fails).
+  const clearError = (index) => {
+    const step = steps[index];
+    if (!step) return;
+    step.classList.remove("has-error");
+    step.querySelectorAll("[aria-invalid]").forEach((el) => {
+      el.removeAttribute("aria-invalid");
+      el.removeAttribute("aria-describedby");
+    });
+  };
 
   const value = (name) => {
     const el = form.querySelector(`input[name="${name}"]:checked, select[name="${name}"]`);
@@ -244,10 +258,15 @@
       if (missing) {
         steps[current].classList.add("has-error");
         const invalid = steps[current].querySelector(`[name="${missing}"]`);
-        if (invalid) invalid.focus();
+        const errorEl = steps[current].querySelector(".discovery-error");
+        if (invalid) {
+          invalid.setAttribute("aria-invalid", "true");
+          if (errorEl && errorEl.id) invalid.setAttribute("aria-describedby", errorEl.id);
+          invalid.focus();
+        }
         return;
       }
-      steps[current].classList.remove("has-error");
+      clearError(current);
       if (current === steps.length - 1) {
         finish();
       } else {
@@ -271,7 +290,7 @@
   // Answering clears the step's validation error right away.
   form.addEventListener("change", (e) => {
     if (e.target && (e.target.type === "radio" || e.target.type === "checkbox")) {
-      steps[current].classList.remove("has-error");
+      clearError(current);
     }
   });
   form.addEventListener("submit", (e) => e.preventDefault());
