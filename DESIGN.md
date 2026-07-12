@@ -1,164 +1,271 @@
 ---
 name: TRX Concept
-description: Clases de TRX 1 a 1 en Santiago, a domicilio o al aire libre.
+description: Clases de TRX 1 a 1 en Santiago, a domicilio o al aire libre. Modo oscuro fijo.
 colors:
-  santiago-morning-sun: "#ffd700"
-  ink: "#000000"
-  paper: "#ffffff"
-  calm-gray: "#f5f5f5"
-  border-gray: "#ededed"
-  body-gray: "#444444"
-  note-gray: "#555555"
-  whatsapp-green: "#25d366"
-  error-red: "#c0392b"
+  bg: "#0a0a0a"
+  surface: "#111111"
+  surface-raised: "#181818"
+  surface-hover: "#202020"
+  accent: "#f9fe05"
+  accent-dim: "#d9e005"
+  text: "#f5f5f5"
+  text-muted: "rgba(245, 245, 245, 0.72)"
+  text-subtle: "rgba(245, 245, 245, 0.48)"
+  border: "rgba(255, 255, 255, 0.1)"
+  border-strong: "rgba(255, 255, 255, 0.18)"
+  error: "#ff6b6b"
+  success: "#51cf66"
 typography:
   display:
-    fontFamily: "Anton, Impact, Arial Black, sans-serif"
-    fontSize: "clamp(2.2rem, 5vw, 3.5rem)"
+    fontFamily: "Bebas Neue, Impact, Arial Black, sans-serif"
+    fontSize: "clamp(3rem, 9vw, 6rem)"
     fontWeight: 400
-    lineHeight: 1.1
-    letterSpacing: "0.02em"
+    lineHeight: 0.94
+    letterSpacing: "normal"
   headline:
-    fontFamily: "Anton, Impact, Arial Black, sans-serif"
-    fontSize: "clamp(2rem, 5vw, 3rem)"
+    fontFamily: "Bebas Neue, Impact, Arial Black, sans-serif"
+    fontSize: "clamp(2.5rem, 5vw, 4rem)"
     fontWeight: 400
-    lineHeight: 1.1
-    letterSpacing: "0.04em"
+    lineHeight: 0.96
+    letterSpacing: "normal"
   title:
-    fontFamily: "Montserrat, Helvetica Neue, Arial, sans-serif"
-    fontSize: "1.25rem"
+    fontFamily: "Source Sans 3, Helvetica Neue, Arial, sans-serif"
+    fontSize: "1.5rem"
+    fontWeight: 700
+    lineHeight: 1.3
+    letterSpacing: "normal"
+  body:
+    fontFamily: "Source Sans 3, Helvetica Neue, Arial, sans-serif"
+    fontSize: "1.125rem"
+    fontWeight: 400
+    lineHeight: 1.65
+    letterSpacing: "normal"
+  label:
+    fontFamily: "Source Sans 3, Helvetica Neue, Arial, sans-serif"
+    fontSize: "0.95rem"
     fontWeight: 700
     lineHeight: 1.4
     letterSpacing: "normal"
-  body:
-    fontFamily: "Montserrat, Helvetica Neue, Arial, sans-serif"
+  small:
+    fontFamily: "Source Sans 3, Helvetica Neue, Arial, sans-serif"
+    fontSize: "0.85rem"
+    fontWeight: 400
+    lineHeight: 1.5
+    letterSpacing: "normal"
+  caption:
+    fontFamily: "Source Sans 3, Helvetica Neue, Arial, sans-serif"
+    fontSize: "0.75rem"
+    fontWeight: 700
+    lineHeight: 1.4
+    letterSpacing: "normal"
+  body-sm:
+    fontFamily: "Source Sans 3, Helvetica Neue, Arial, sans-serif"
     fontSize: "1rem"
     fontWeight: 400
     lineHeight: 1.6
     letterSpacing: "normal"
-  label:
-    fontFamily: "Montserrat, Helvetica Neue, Arial, sans-serif"
-    fontSize: "0.9rem"
-    fontWeight: 600
+  lead:
+    fontFamily: "Source Sans 3, Helvetica Neue, Arial, sans-serif"
+    fontSize: "1.25rem"
+    fontWeight: 400
+    lineHeight: 1.5
+    letterSpacing: "normal"
+  h3:
+    fontFamily: "Source Sans 3, Helvetica Neue, Arial, sans-serif"
+    fontSize: "1.75rem"
+    fontWeight: 700
+    lineHeight: 1.25
+    letterSpacing: "normal"
+  price:
+    fontFamily: "Bebas Neue, Impact, Arial Black, sans-serif"
+    fontSize: "2.5rem"
+    fontWeight: 400
+    lineHeight: 1
+    letterSpacing: "normal"
+  hero-min:
+    fontFamily: "Bebas Neue, Impact, Arial Black, sans-serif"
+    fontSize: "3rem"
+    fontWeight: 400
+    lineHeight: 1
+    letterSpacing: "normal"
+  meta:
+    fontFamily: "Source Sans 3, Helvetica Neue, Arial, sans-serif"
+    fontSize: "0.8rem"
+    fontWeight: 400
     lineHeight: 1.4
     letterSpacing: "normal"
+  kicker:
+    fontFamily: "Source Sans 3, Helvetica Neue, Arial, sans-serif"
+    fontSize: "1.2rem"
+    fontWeight: 700
+    lineHeight: 1.3
+    letterSpacing: "normal"
+  body-lg:
+    fontFamily: "Source Sans 3, Helvetica Neue, Arial, sans-serif"
+    fontSize: "1.05rem"
+    fontWeight: 400
+    lineHeight: 1.6
+    letterSpacing: "normal"
+  footnote:
+    fontFamily: "Source Sans 3, Helvetica Neue, Arial, sans-serif"
+    fontSize: "0.9rem"
+    fontWeight: 400
+    lineHeight: 1.5
+    letterSpacing: "normal"
+  quote:
+    fontFamily: "Georgia, serif"
+    fontSize: "2.5rem"
+    fontWeight: 400
+    lineHeight: 1
+    letterSpacing: "normal"
+typeRamp:
+  - "clamp(3rem, 9vw, 6rem)"
+  - "clamp(2.5rem, 5vw, 4rem)"
+  - "clamp(2rem, 4vw, 3rem)"
+  - "2.5rem"
+  - "1.75rem"
+  - "1.5rem"
+  - "1.2rem"
+  - "1.15rem"
+  - "1.125rem"
+  - "1.1rem"
+  - "1.05rem"
+  - "1rem"
+  - "0.95rem"
+  - "0.9rem"
+  - "0.85rem"
+  - "0.8rem"
+  - "0.75rem"
 rounded:
   pill: "999px"
-  card: "1rem"
-  control: "0.6rem"
+  card: "0.75rem"
+  control: "0.5rem"
+  sm: "0.25rem"
 spacing:
-  section: "clamp(2rem, 5vw, 4rem)"
-  container: "1200px"
+  section: "clamp(4rem, 8vw, 8rem)"
+  container: "1180px"
 components:
   button-primary:
-    backgroundColor: "{colors.santiago-morning-sun}"
-    textColor: "{colors.ink}"
+    backgroundColor: "{colors.accent}"
+    textColor: "{colors.bg}"
     rounded: "{rounded.pill}"
-    padding: "0.75rem 1.5rem"
+    padding: "0.9rem 1.75rem"
   button-primary-hover:
-    backgroundColor: "#e6c200"
-    textColor: "{colors.ink}"
+    backgroundColor: "{colors.accent-dim}"
+    textColor: "{colors.bg}"
     rounded: "{rounded.pill}"
-    padding: "0.75rem 1.5rem"
-  button-whatsapp:
-    backgroundColor: "{colors.ink}"
-    textColor: "{colors.paper}"
-    rounded: "{rounded.pill}"
-    padding: "0.75rem 1.5rem"
-  button-whatsapp-hover:
-    backgroundColor: "#111111"
-    textColor: "{colors.paper}"
-    rounded: "{rounded.pill}"
-    padding: "0.75rem 1.5rem"
-  button-ghost:
+    padding: "0.9rem 1.75rem"
+  button-outline:
     backgroundColor: "transparent"
-    textColor: "{colors.ink}"
+    textColor: "{colors.text}"
+    borderColor: "{colors.border-strong}"
+    rounded: "{rounded.pill}"
+    padding: "0.9rem 1.75rem"
+  button-outline-light:
+    backgroundColor: "transparent"
+    textColor: "{colors.text}"
+    borderColor: "{colors.text}"
+    rounded: "{rounded.pill}"
+    padding: "0.9rem 1.75rem"
+  button-whatsapp:
+    backgroundColor: "transparent"
+    textColor: "{colors.text}"
+    borderColor: "{colors.accent}"
     rounded: "{rounded.pill}"
     padding: "0.75rem 1.5rem"
   pricing-card:
-    backgroundColor: "{colors.paper}"
-    textColor: "{colors.ink}"
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.text}"
+    borderColor: "{colors.border}"
     rounded: "{rounded.card}"
     padding: "2rem 1.5rem"
   testimonial-card:
-    backgroundColor: "{colors.calm-gray}"
-    textColor: "{colors.ink}"
+    backgroundColor: "{colors.surface-raised}"
+    textColor: "{colors.text}"
     rounded: "{rounded.card}"
-    padding: "2rem 1.5rem"
+    padding: "1.75rem 1.5rem"
   discovery-card:
-    backgroundColor: "{colors.paper}"
-    textColor: "{colors.ink}"
+    backgroundColor: "{colors.surface-raised}"
+    textColor: "{colors.text}"
+    borderColor: "{colors.border}"
     rounded: "{rounded.card}"
     padding: "1.75rem 1.5rem"
   input-field:
-    backgroundColor: "{colors.paper}"
-    textColor: "{colors.ink}"
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.text}"
+    borderColor: "{colors.border-strong}"
     rounded: "{rounded.control}"
-    padding: "0.7rem 0.8rem"
+    padding: "0.8rem 1rem"
 ---
 
 # Design System: TRX Concept
 
 ## 1. Overview
 
-**Creative North Star: "The Calm Gym Alternative"**
+**Creative North Star: "Entrenar con criterio, sin ruido"**
 
-TRX Concept is not a gym brand. The interface should feel like the opposite of hardcore fitness marketing: human, unpretentious, and local. Visual density is moderate — enough structure to guide a nervous visitor, never so much that it feels like a sales funnel. The system relies on a single high-energy accent (Santiago Morning Sun) against a near-neutral ground, so the brand reads as confident without shouting.
+TRX Concept is not a gym brand. The interface should feel like the opposite of hardcore fitness marketing: human, unpretentious, and local. The new dark mode puts the content and the conversion path front and center; the yellow accent works as a flashlight, not a spotlight.
 
 The aesthetic rejects luxury gloss, body-transformation framing, and SaaS landing-page conventions. There are no gradients, no glass cards, no hero metrics, and no tiny uppercase eyebrows above every section. Motion is restrained and always respects `prefers-reduced-motion`. Every surface is built to lower anxiety: clear type, generous whitespace, obvious CTAs, and honest limits.
 
 **Key Characteristics:**
 
-- One accent color does almost all the visual work.
+- Dark mode fixed. A single saturated yellow does almost all the accent work.
 - Display type is bold and uppercase; body type is warm and readable.
 - Buttons are pill-shaped; cards are softly rounded rectangles.
-- Surfaces rest flat; depth arrives through hover, not decoration.
+- Surfaces rest flat; depth arrives through hover and accent borders, not decoration.
 - Mobile-first conversion: sticky bottom bar replaces floating buttons on small screens.
 - Accessibility is a core feature, not an afterthought.
 
 ## 2. Colors
 
-The palette is intentionally small. A single saturated yellow carries the brand voice; everything else is neutral ink, paper, and a calm gray family.
+The palette is intentionally small. A single saturated yellow carries the brand voice; everything else is neutral ink, surface, and text.
 
 ### Primary
 
-- **Santiago Morning Sun** (`#ffd700`): The brand anchor. Used for the fixed header background, primary CTA buttons, featured-card borders, badges, process-number circles, and key emphasis. It should feel warm and optimistic, not aggressive or "sale" yellow.
+- **Accent** (`#f9fe05`): The brand anchor. Primary CTA buttons, featured-card borders, badges, focus rings, and key emphasis. It should feel energetic and optimistic, not aggressive or "sale" yellow.
+- **Accent Dim** (`#d9e005`): Hover state for accent surfaces.
 
 ### Neutral
 
-- **Ink** (`#000000`): Primary text on light backgrounds, footer background, WhatsApp-primary button background, and focus rings. Use at full weight for headings and UI chrome.
-- **Paper** (`#ffffff`): Page background, card backgrounds, and text on dark surfaces (footer, page hero, mobile sticky bar).
-- **Calm Gray** (`#f5f5f5`): Alternate section backgrounds, testimonial cards, and fit/method cards. The system relies on this tone to create rhythm without introducing new hues.
-- **Border Gray** (`#ededed`): Card borders, dividers, and subtle boundaries.
-- **Body Gray** (`#444444`): Secondary body text and descriptions where full ink would feel too heavy.
-- **Note Gray** (`#555555`): Captions, hints, and metadata.
-- **WhatsApp Green** (`#25d366`): Reserved exclusively for the floating WhatsApp button. Do not use it elsewhere.
-- **Error Red** (`#c0392b`): Form validation errors only.
+- **Background** (`#0a0a0a`): Page background. The near-black ground makes the accent and photography pop.
+- **Surface** (`#111111`): Card backgrounds, header bar, footer.
+- **Surface Raised** (`#181818`): Elevated cards and discovery form background.
+- **Surface Hover** (`#202020`): Hover states for surfaces.
+- **Text** (`#f5f5f5`): Primary text on dark backgrounds.
+- **Text Muted** (`rgba(245, 245, 245, 0.72)`): Secondary body text and descriptions.
+- **Text Subtle** (`rgba(245, 245, 245, 0.48)`): Captions, metadata, photo credits.
+- **Border** (`rgba(255, 255, 255, 0.1)`): Card borders, dividers, and subtle boundaries.
+- **Border Strong** (`rgba(255, 255, 255, 0.18)`): Input borders and outlined buttons.
+- **Error** (`#ff6b6b`): Form validation errors only.
+- **Success** (`#51cf66`): Success states only.
 
 ### Named Rules
 
-**The One Voice Rule.** Santiago Morning Sun is the only saturated accent. Do not introduce a second bright color (teal, orange, purple) anywhere in the UI. If you need emphasis, use weight, size, or ink — never a competing hue.
+**The One Voice Rule.** Accent yellow is the only saturated hue. Do not introduce a second bright color (teal, orange, purple) anywhere in the UI. If you need emphasis, use weight, size, or surface variation.
 
-**The Yellow-Is-Action Rule.** Use the primary yellow for actionable surfaces and wayfinding (header, primary buttons, badges, selected states). Do not use it for large passive backgrounds or decorative fills.
+**The Yellow-Is-Action Rule.** Use the accent for actionable surfaces and wayfinding (primary buttons, badges, selected states, focus rings). Do not use it for large passive backgrounds or decorative fills.
 
 ## 3. Typography
 
-**Display Font:** Anton, Impact, Arial Black, sans-serif  
-**Body Font:** Montserrat, Helvetica Neue, Arial, sans-serif
+**Display Font:** Bebas Neue, Impact, Arial Black, sans-serif  
+**Body Font:** Source Sans 3, Helvetica Neue, Arial, sans-serif
 
-**Character:** Anton supplies confident, uppercase display voice for the logo and page headlines; Montserrat provides the calm, readable body. The pairing is high contrast in weight and case, but both are sans-serifs chosen for clarity rather than editorial affectation.
+**Character:** Bebas Neue supplies confident, uppercase display voice for headlines; Source Sans 3 provides the calm, readable body. The pairing is high contrast in weight and case, chosen for clarity rather than editorial affectation.
 
 ### Hierarchy
 
-- **Display** (400, `clamp(2.2rem, 5vw, 3.5rem)`, line-height 1.1, letter-spacing `0.02em`): Hero headlines and major page H1s. Always uppercase. Used inside the hero and page hero only.
-- **Headline** (400, `clamp(2rem, 5vw, 3rem)`, line-height 1.1, letter-spacing `0.04em`): Section H1s on inner pages. Always uppercase. Use sparingly.
-- **Title** (700, `1.25rem`, line-height 1.4): Card titles, section H2s, FAQ summaries, and list headings.
-- **Body** (400, `1rem`, line-height 1.6): Paragraphs, descriptions, and answers. Keep line length at roughly 65–75ch for comfortable reading.
-- **Label** (600, `0.9rem`, line-height 1.4): Badges, chip text, pricing notes, captions, and button labels.
+- **Display** (400, `clamp(3rem, 9vw, 6rem)`, line-height 0.94): Hero headline. Always uppercase. Keep it under `20ch` and use `text-wrap: balance`.
+- **Headline** (400, `clamp(2.5rem, 5vw, 4rem)`, line-height 0.96): Major section headlines and page H1s. Always uppercase.
+- **Title** (700, `1.5rem`, line-height 1.3): Card titles, section H2s, FAQ summaries, and list headings.
+- **Body** (400, `1.125rem`, line-height 1.65): Paragraphs, descriptions, and answers. Keep line length at roughly 65–75ch for comfortable reading.
+- **Label** (700, `0.95rem`, line-height 1.4): Badges, chip text, pricing notes, captions, and button labels.
+- **Small** (400, `0.85rem`, line-height 1.5): Helper text and metadata.
+- **Caption** (700, `0.75rem`, line-height 1.4): Photo credits and microcopy.
 
 ### Named Rules
 
-**The Uppercase-Display-Only Rule.** Anton uppercase treatment is reserved for the logo and H1-level display text. Never set body copy, card titles, or navigation in all caps.
+**The Uppercase-Display-Only Rule.** Uppercase display treatment is reserved for Bebas Neue headlines. Never set body copy, card titles, or navigation in all caps.
 
 **The Short-Line Rule.** Headlines and hero text should stay under `25ch` and use `text-wrap: balance` to avoid ragged or overflowed lines on narrow viewports.
 
@@ -168,84 +275,45 @@ The system is flat by default. Depth is not used decoratively; it appears as a r
 
 ### Shadow Vocabulary
 
-- **Card shadow** (`box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06)`): Resting elevation for featured cards and discovery card. Subtle enough to read as a boundary, not a lift.
-- **Raise shadow** (`box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18)`): Hover/focus lift for primary buttons, WhatsApp buttons, and interactive cards.
+- **Card shadow** (`box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18)`): Resting elevation for featured cards and discovery card.
+- **Raise shadow** (`box-shadow: 0 6px 18px rgba(0, 0, 0, 0.24)`): Hover/focus lift for primary buttons and interactive cards.
+- **Accent glow** (`box-shadow: 0 4px 20px var(--accent-alpha-25)`): Focus glow for the featured pricing card.
 - **Floating button shadow** (`box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25)`): Desktop floating WhatsApp button only. Increases to `0 8px 24px rgba(0, 0, 0, 0.3)` on hover.
 
 ### Named Rules
 
 **The Flat-By-Default Rule.** Surfaces are flat at rest. Shadows appear only on hover, focus, or when a persistent floating action needs to sit above content.
 
-**The One-Pixel Border Rule.** When a card needs a boundary, use `1px` or `2px` solid Border Gray. Avoid heavy borders or colored side-stripes as accents.
+**The One-Pixel Border Rule.** When a card needs a boundary, use `1px` solid Border. Avoid heavy borders or colored side-stripes as accents.
 
 ## 5. Components
 
 ### Buttons
 
 - **Shape:** Pill (`border-radius: 999px`).
-- **Primary:** Santiago Morning Sun background, Ink text, `0.75rem 1.5rem` padding. Used for the main CTA ("Agendar evaluación gratis") and discovery-flow send action.
-- **Primary hover:** Darken the yellow toward `#e6c200`, translate `-1px` vertically, and add the raise shadow.
-- **WhatsApp:** Ink background, Paper text, pill shape. Used for header and inline CTAs.
-- **WhatsApp hover:** Slightly lighter ink (`#111111`), `-1px` lift, raise shadow.
-- **Ghost:** Transparent background, Ink text, `2px` Border Gray border. Used for secondary actions like "Atrás" in the discovery flow.
-- **Outline-light:** Transparent background, Paper text, `2px` Paper border. Used on the hero for the secondary discovery-flow entry.
+- **Primary:** Accent background, Background text, `0.9rem 1.75rem` padding. Used for the main CTA ("Agendar evaluación gratis") and discovery-flow send action.
+- **Primary hover:** Accent Dim background, translate `-2px` vertically, and add the raise shadow.
+- **Outline:** Transparent background, Text color, `1px` Border Strong border. Used for secondary pricing CTAs.
+- **Outline-light:** Transparent background, Text color, `1px` Text border. Used on the hero for the secondary discovery-flow entry.
+- **WhatsApp:** Transparent background, Text color, Accent border. Used for header and inline CTAs.
 
 ### Cards / Containers
 
-- **Corner style:** `1rem` radius.
-- **Pricing card:** Paper background, `2px` Border Gray border, optional featured state with Santiago Morning Sun border and card shadow. Internal padding `2rem 1.5rem`.
-- **Testimonial card:** Calm Gray background, no border, `2rem 1.5rem` padding.
-- **Discovery card:** Paper background, `2px` Border Gray border, card shadow, `1.75rem 1.5rem` padding.
-- **Fit / method / audience cards:** Calm Gray background, `1rem` radius, `1.5rem 1.25rem` padding.
+- **Corner style:** `0.75rem` radius.
+- **Pricing card:** Surface background, `1px` Border border, optional featured state with Accent border and accent glow.
+- **Testimonial card:** Surface Raised background, no border, `1.75rem 1.5rem` padding.
+- **Discovery card:** Surface Raised background, `1px` Border border, `1.75rem 1.5rem` padding.
+- **Fit / method cards:** Surface Raised background, `0.75rem` radius, `1.5rem` padding.
 
-### Inputs / Fields
+## 6. Responsive Behavior
 
-- **Style:** Paper background, `2px` Border Gray border, `0.6rem` radius, `0.7rem 0.8rem` padding.
-- **Focus:** `2px` Ink outline with `2px` offset.
-- **Select:** Custom chevron SVG, same border treatment.
-- **Radio / checkbox options:** Bordered pill-like rows that highlight with a light yellow tint when selected.
+- **Desktop (>= 1024px):** Full navigation, side-by-side method section, three-column pricing, floating WhatsApp button.
+- **Tablet (768px–1023px):** Stacked sections, two-column pricing or single column, hamburger navigation.
+- **Mobile (< 768px):** Single column, sticky bottom CTA bar replaces floating WhatsApp button, hero image uses a portrait crop focused on the subject.
 
-### Navigation
+## 7. Accessibility
 
-- **Header:** Fixed top bar with Santiago Morning Sun background. Logo (SVG + Anton wordmark) on the left, centered text nav, WhatsApp CTA on the right.
-- **Nav links:** Ink text, `0.95rem`, bold. Hover and current-page state use reduced opacity (`0.72`).
-- **Mobile:** Hamburger button reveals a dropdown panel that inherits the yellow background. The header WhatsApp CTA remains visible; the floating WhatsApp button is hidden and replaced by the sticky mobile CTA bar.
-
-### Discovery Flow (signature component)
-
-A three-step fieldset stepper that progressively enhances with JavaScript. Without JS, all steps stack with a permanent plain-WhatsApp fallback. With JS, only the active step is visible, with a progress bar and back/next navigation.
-
-- Step options render as bordered rows with radio/checkbox inputs.
-- Selected options get a Santiago Morning Sun border and a very light yellow background (`color-mix(in srgb, #ffd700, #fff 82%)`).
-- The result screen offers a pre-filled WhatsApp CTA and a restart button.
-
-### Cookie Banner
-
-- Fixed bottom bar with Ink background and Paper text.
-- Accept button uses Santiago Morning Sun; reject button is transparent with a Paper border.
-- On mobile, the banner sits above the sticky CTA bar so both actions remain reachable.
-
-## 6. Do's and Don'ts
-
-### Do:
-
-- **Do** use Santiago Morning Sun for the header, primary CTAs, badges, and selected states.
-- **Do** pair Anton display type with Montserrat body; keep Anton uppercase and headline-only.
-- **Do** keep body text in Ink or Body Gray on Paper or Calm Gray backgrounds.
-- **Do** use pill-shaped buttons for every CTA.
-- **Do** make every WhatsApp CTA say what happens next ("Agendar evaluación gratis", "Consultar el plan").
-- **Do** respect `prefers-reduced-motion` by disabling animations and smooth scrolling.
-- **Do** maintain a semantic z-index scale (header → dropdown → cookie banner → mobile sticky bar → floating button) instead of arbitrary values.
-
-### Don't:
-
-- **Don't** use `border-left` or `border-right` greater than `1px` as a colored accent on cards, callouts, list items, or alerts.
-- **Don't** introduce a second saturated accent color.
-- **Don't** use gradient text (`background-clip: text`), glassmorphism, or decorative blurs.
-- **Don't** use arbitrary z-index values like `999`.
-- **Don't** use the hero-metric template (big number + small label + supporting stats).
-- **Don't** add tiny uppercase tracked eyebrows above every section.
-- **Don't** use numbered section markers as default scaffolding across the site.
-- **Don't** use generic AI fitness copy, gym-bro motivation, or body-transformation framing.
-- **Don't** use WhatsApp Green anywhere except the floating WhatsApp button.
-- **Don't** set body copy, card titles, or navigation in all caps.
+- Body text must maintain ≥ 4.5:1 contrast against Background.
+- Large text (≥ 18px or bold ≥ 14px) must maintain ≥ 3:1 contrast.
+- Focus rings use `2px` solid Accent with `2px` offset.
+- All motion respects `prefers-reduced-motion`.

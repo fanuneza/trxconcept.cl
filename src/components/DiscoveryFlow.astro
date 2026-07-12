@@ -34,7 +34,7 @@
               <input type="radio" name="objetivo" value="fuerza" /><span>Ganar fuerza y mejorar la postura</span>
             </label>
           </div>
-          <p class="discovery-error">Elige una opción para seguir.</p>
+          <p class="discovery-error" id="discovery-error-1" role="alert">Elige una opción para seguir.</p>
         </fieldset>
 
         <fieldset class="discovery-step" data-step="2">
@@ -59,7 +59,7 @@
               <input type="radio" name="molestia" value="otra" /><span>Otra, te la cuento</span>
             </label>
           </div>
-          <p class="discovery-error">Elige una opción para seguir.</p>
+          <p class="discovery-error" id="discovery-error-2" role="alert">Elige una opción para seguir.</p>
         </fieldset>
 
         <fieldset class="discovery-step" data-step="3">
@@ -93,23 +93,31 @@
               </label>
             </div>
           </fieldset>
-          <p class="discovery-error">Marca al menos un horario para seguir.</p>
+          <p class="discovery-error" id="discovery-error-3" role="alert">Marca al menos un horario para seguir.</p>
         </fieldset>
 
         <div class="discovery-result" data-discovery-result hidden>
-          <h3 class="discovery-result-title" tabindex="-1">Listo. Un buen primer paso para ti</h3>
-          <p>
-            Un comienzo privado y de bajo impacto encaja contigo. Te preparé un mensaje con tus respuestas; solo
-            revísalo y envíalo.
+          <h3 class="discovery-result-title" tabindex="-1" data-discovery-title>Listo. Un buen primer paso para ti</h3>
+          <p class="discovery-result-lead" data-discovery-lead>
+            Preparé tu mensaje con tus respuestas; revísalo y envíalo cuando quieras.
           </p>
+
+          <figure class="discovery-message">
+            <figcaption class="discovery-message-label">
+              <svg class="wa-icon" aria-hidden="true" focusable="false"><use href="#wa-symbol"></use></svg>
+              Tu mensaje para Nico
+            </figcaption>
+            <p class="discovery-message-text" data-discovery-message></p>
+          </figure>
+
           <a
-            class="btn btn--trx discovery-send"
+            class="btn btn--primary discovery-send"
             data-discovery-link
             href="https://wa.me/56984402664"
             target="_blank"
             rel="noopener noreferrer"
           >
-            Enviar y agendar evaluación gratis
+            Enviar este mensaje
             <svg class="wa-icon" aria-hidden="true" focusable="false"><use href="#wa-symbol"></use></svg>
           </a>
           <button type="button" class="discovery-restart" data-discovery-restart>Volver a empezar</button>
@@ -118,12 +126,12 @@
 
       <div class="discovery-nav" hidden>
         <button type="button" class="btn btn--ghost" data-discovery-back hidden>Atrás</button>
-        <button type="button" class="btn btn--trx" data-discovery-next>Siguiente</button>
+        <button type="button" class="btn btn--primary" data-discovery-next>Siguiente</button>
       </div>
     </div>
 
     <p class="discovery-fallback">
-      ¿Prefieres escribir directo?
+      ¿Prefieres escribir directo? {" "}
       <a href="https://wa.me/56984402664" data-wa target="_blank" rel="noopener noreferrer">Preguntar por WhatsApp</a>
     </p>
   </div>

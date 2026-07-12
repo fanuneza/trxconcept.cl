@@ -54,7 +54,7 @@ if (page.structuredData) {
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#ffd700" />
+    <meta name="theme-color" content="#0a0a0a" />
     <Seo
       title={page.title}
       titleTemplate="%s | TRX Concept"
@@ -76,21 +76,23 @@ if (page.structuredData) {
       ]}
     />
     <slot name="head" />
-    {
-      /* anton-latin-ext is intentionally not preloaded: Chilean-Spanish copy only
-        uses the latin subset, and the extra font fetch delays the hero LCP. */
-    }
-    <link rel="preload" href="/assets/fonts/anton-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
     <link
       rel="preload"
-      href="/assets/fonts/montserrat-latin-400-normal.woff2"
+      href="/assets/fonts/bebas-neue-latin-400-normal.woff2"
       as="font"
       type="font/woff2"
       crossorigin
     />
     <link
       rel="preload"
-      href="/assets/fonts/montserrat-latin-700-normal.woff2"
+      href="/assets/fonts/source-sans-3-latin-400-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/assets/fonts/source-sans-3-latin-700-normal.woff2"
       as="font"
       type="font/woff2"
       crossorigin
@@ -113,9 +115,10 @@ if (page.structuredData) {
     <script is:inline defer src="/assets/js/main.js"></script>
   </head>
   <body>
+    <a class="skip-link" href="#main-content">Saltar al contenido</a>
     <WaSymbol />
     <Header />
-    <main>
+    <main id="main-content">
       <slot />
     </main>
     <Footer />

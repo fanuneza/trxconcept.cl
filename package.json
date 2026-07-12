@@ -27,6 +27,8 @@
   "dependencies": {
     "@astrojs/check": "^0.9.9",
     "@astrojs/sitemap": "^3.7.3",
+    "@fontsource/bebas-neue": "^5.2.7",
+    "@fontsource/source-sans-3": "^5.2.9",
     "@jdevalk/astro-seo-graph": "^2.0.0",
     "@jdevalk/seo-graph-core": "^0.6.2",
     "astro": "7.0.3",

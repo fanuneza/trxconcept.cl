@@ -1,6 +1,8 @@
 ---
-import { Picture } from "astro:assets";
-import heroImage from "../assets/images/hero.webp";
+import { Picture, getImage } from "astro:assets";
+import heroDesktop from "../assets/images/hero-desktop.jpg";
+import heroMobile from "../assets/images/hero-mobile.jpg";
+import methodImage from "../assets/images/hero.webp";
 import nicoImage from "../assets/images/nico.webp";
 import testimonialValentinaImage from "../assets/images/testimonio-valentinarosenthal.webp";
 import testimonialMarisaImage from "../assets/images/testimonio-marisagracia.webp";
@@ -10,247 +12,208 @@ import { site, WHATSAPP_MESSAGE_EVALUATION, WHATSAPP_MESSAGE_PLAN, WHATSAPP_MESS
 import WhatsAppLink from "./WhatsAppLink.astro";
 import TestimonialCard from "./TestimonialCard.astro";
 import PricingCard from "./PricingCard.astro";
+import Icon from "./Icon.astro";
 
 const waEval = WHATSAPP_MESSAGE_EVALUATION;
 const waPlan = WHATSAPP_MESSAGE_PLAN;
 const waSingle = WHATSAPP_MESSAGE_SINGLE;
+
+const desktopWidths = [768, 1024, 1440, 1920];
+const mobileWidths = [480, 640, 768, 960, 1200, 1440];
+
+const desktopVariants = await Promise.all(
+  desktopWidths.map((width) => getImage({ src: heroDesktop, width, format: "avif", quality: 60 }))
+);
+const mobileVariants = await Promise.all(
+  mobileWidths.map((width) => getImage({ src: heroMobile, width, format: "avif", quality: 60 }))
+);
+
+const desktopSrcset = desktopVariants.map((v, i) => `${v.src} ${desktopWidths[i]}w`).join(", ");
+const mobileSrcset = mobileVariants.map((v, i) => `${v.src} ${mobileWidths[i]}w`).join(", ");
 ---
 
 <!-- HERO -->
 <section id="hero" class="hero">
-  <Picture
-    src={heroImage}
-    alt="Entrenamiento personal con TRX al aire libre en Santiago"
-    formats={["avif", "webp"]}
-    fallbackFormat="webp"
-    quality={25}
-    widths={[480, 640, 768, 960, 1200, 1440]}
-    sizes="100vw"
-    pictureAttributes={{ class: "hero-media" }}
-    priority
-  />
+  <picture class="hero-media">
+    <source media="(min-width: 769px)" srcset={desktopSrcset} sizes="100vw" type="image/avif" />
+    <source media="(max-width: 768px)" srcset={mobileSrcset} sizes="100vw" type="image/avif" />
+    <img
+      src={mobileVariants[2].src}
+      alt="Entrenamiento personal al aire libre en Santiago"
+      width={heroMobile.width}
+      height={heroMobile.height}
+      loading="eager"
+      decoding="async"
+    />
+  </picture>
   <div class="container">
-    <h1 class="hero-title">Clases de TRX en Santiago, 1 a 1 en tu casa o al aire libre</h1>
-    <p class="hero-lead">
-      Entrenamiento personal para empezar con calma o retomar seguro, aunque nunca hayas entrenado o tengas alguna
-      molestia.
-    </p>
-    <ul class="hero-chips" aria-label="Por qué confiar">
-      <li>Entrenador certificado</li>
-      <li>10+ años</li>
-      <li>Evaluación inicial gratis</li>
-      <li>Respondo en 4 h</li>
-      <li>Santiago oriente y centro</li>
-    </ul>
-    <div class="hero-cta">
-      <WhatsAppLink message={waEval} class="btn btn--trx"> Agendar evaluación gratis </WhatsAppLink>
-      <a href="#descubre" class="btn btn--outline-light">Ver si esto es para mí</a>
+    <div class="hero-content">
+      <h1 class="hero-title">Clases de TRX en Santiago, 1 a 1 en tu casa o al aire libre</h1>
+      <p class="hero-lead">
+        Entrenamiento personal para empezar con calma o retomar seguro, aunque nunca hayas entrenado o tengas alguna
+        molestia.
+      </p>
+      <ul class="hero-signals" aria-label="Por qué confiar">
+        <li>Primera sesión gratis, sin compromiso</li>
+        <li>1 a 1 en tu casa o al aire libre</li>
+      </ul>
+      <div class="hero-cta">
+        <WhatsAppLink message={waEval} class="btn btn--primary">Agendar evaluación gratis</WhatsAppLink>
+        <a href="#descubre" class="btn btn--outline-light">Ver si esto es para mí</a>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- HOW IT STARTS -->
-<section id="como-empezamos" class="process">
-  <div class="container text-center">
-    <h2>Cómo empezamos</h2>
-    <p class="section-intro">Sin compromiso. Sabes exactamente qué pasa antes de decidir nada.</p>
-    <ol class="process-steps">
-      <li class="process-step">
-        <span class="process-num">1</span>
-        <h3>Cuéntame qué necesitas</h3>
-        <p>Me escribes por WhatsApp y me dices qué te gustaría lograr.</p>
-      </li>
-      <li class="process-step">
-        <span class="process-num">2</span>
-        <h3>Revisamos objetivo, horario y molestias</h3>
-        <p>Conversamos tu experiencia y cualquier dolor o lesión relevante.</p>
-      </li>
-      <li class="process-step">
-        <span class="process-num">3</span>
-        <h3>Haces una evaluación gratis</h3>
-        <p>Una sesión sin costo para conocernos y ver tu punto de partida.</p>
-      </li>
-      <li class="process-step">
-        <span class="process-num">4</span>
-        <h3>Si calza contigo, definimos un plan</h3>
-        <p>Sin presión. Si sientes que no es para ti, no pasa nada.</p>
-      </li>
-    </ol>
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="container">
+    <ul class="trust-list">
+      <li>Entrenador certificado TRX</li>
+      <li>10+ años entrenando en Santiago</li>
+      <li>Método seguro y de bajo impacto</li>
+    </ul>
   </div>
-</section>
+</div>
 
-<!-- DISCOVERY FLOW (secondary CTA) -->
-<DiscoveryFlow />
-
-<!-- FIT -->
+<!-- FIT — relevance: "this is for someone like me" -->
 <section id="para-quien" class="fit">
-  <div class="container text-center">
-    <h2>¿Para quién es?</h2>
-    <p class="section-intro">Estas sesiones funcionan bien si te reconoces en alguno de estos casos.</p>
-    <div class="fit-grid">
-      <div class="fit-item">
+  <div class="container">
+    <div class="section-head text-center">
+      <h2>¿Para quién es?</h2>
+      <p class="section-intro">Estas sesiones funcionan bien si te reconoces en alguno de estos casos.</p>
+    </div>
+    <ul class="fit-list">
+      <li class="fit-item">
+        <span class="fit-icon"><Icon name="sprout" /></span>
         <h3>Empiezas de cero</h3>
         <p>Nunca has entrenado o llevas años sin hacerlo. Partimos desde lo básico, con calma.</p>
-      </div>
-      <div class="fit-item">
+      </li>
+      <li class="fit-item">
+        <span class="fit-icon"><Icon name="refresh" /></span>
         <h3>Retomas el ejercicio</h3>
         <p>Quieres volver a moverte sin lesionarte ni desmotivarte en el intento.</p>
-      </div>
-      <div class="fit-item">
+      </li>
+      <li class="fit-item">
+        <span class="fit-icon"><Icon name="home" /></span>
         <h3>No te gusta el gimnasio</h3>
         <p>Prefieres un espacio privado y sin público, en casa o en un parque cercano.</p>
-      </div>
-      <div class="fit-item">
+      </li>
+      <li class="fit-item">
+        <span class="fit-icon"><Icon name="clock" /></span>
         <h3>Tienes poco tiempo</h3>
         <p>Profesionales ocupados: sin traslados, en tu horario, desde las 6 de la mañana.</p>
-      </div>
-      <div class="fit-item">
+      </li>
+      <li class="fit-item">
+        <span class="fit-icon"><Icon name="shield" /></span>
         <h3>Cuidas rodilla o espalda</h3>
         <p>Trabajo de bajo impacto y progresión gradual, adaptado a tu historial.</p>
-      </div>
-      <div class="fit-item">
+      </li>
+      <li class="fit-item">
+        <span class="fit-icon"><Icon name="activity" /></span>
         <h3>Buscas fuerza y equilibrio</h3>
         <p>Adultos mayores que quieren moverse con más seguridad y confianza.</p>
+      </li>
+    </ul>
+    <div class="fit-note">
+      <span class="fit-note-icon"><Icon name="shield" /></span>
+      <div class="fit-note-body">
+        <h3 class="fit-note-title">¿Cuándo conviene ver antes a un profesional de salud?</h3>
+        <p>
+          Si tienes una lesión aguda, una cirugía reciente o un diagnóstico que requiere supervisión médica, primero
+          consulta con tu médico o kinesiólogo. Con su visto bueno, coordinamos el entrenamiento dentro de su alcance.
+        </p>
       </div>
     </div>
-    <p class="fit-note">
-      <strong>¿Cuándo conviene ver antes a un profesional de salud?</strong> Si tienes una lesión aguda, una cirugía reciente
-      o un diagnóstico que requiere supervisión médica, primero consulta con tu médico o kinesiólogo. Con su visto bueno,
-      coordinamos el entrenamiento dentro de su alcance.
-    </p>
   </div>
 </section>
 
-<!-- SAFETY & METHOD -->
+<!-- METHOD — safety: "it's safe for me" -->
 <section id="seguridad" class="method section-alt">
   <div class="container">
-    <div class="method-head text-center">
+    <div class="section-head text-center">
       <h2>Cómo cuido tu seguridad</h2>
       <p class="section-intro">Nada de rutinas genéricas ni de forzar el cuerpo. El método hace el trabajo.</p>
     </div>
-    <ul class="method-list">
-      <li>
-        <strong>Empezamos con una conversación y un chequeo de movimiento.</strong> Veo cómo te mueves antes de cargar nada.
-      </li>
-      <li>
-        <strong>Adaptamos cada ejercicio a tu nivel y tu historial.</strong> El mismo movimiento puede ser suave o exigente
-        según el ángulo.
-      </li>
-      <li><strong>Progresamos de a poco.</strong> Subimos la intensidad cuando tu cuerpo está listo, no antes.</li>
-      <li><strong>Atención completa en cada repetición.</strong> Al ser 1 a 1, corrijo la técnica en el momento.</li>
-      <li>
-        <strong>Límites claros.</strong> Esto es entrenamiento con criterio, no tratamiento médico. Si algo se sale del alcance,
-        te lo digo.
-      </li>
-    </ul>
+    <div class="method-grid">
+      <ul class="method-list">
+        <li>
+          <strong>Empezamos con una conversación y un chequeo de movimiento.</strong>
+          <span>Veo cómo te mueves antes de cargar nada.</span>
+        </li>
+        <li>
+          <strong>Adaptamos cada ejercicio a tu nivel y tu historial.</strong>
+          <span>El mismo movimiento puede ser suave o exigente según el ángulo.</span>
+        </li>
+        <li>
+          <strong>Progresamos de a poco.</strong>
+          <span>Subimos la intensidad cuando tu cuerpo está listo, no antes.</span>
+        </li>
+        <li>
+          <strong>Atención completa en cada repetición.</strong>
+          <span>Al ser 1 a 1, corrijo la técnica en el momento.</span>
+        </li>
+        <li>
+          <strong>Límites claros.</strong>
+          <span>Esto es entrenamiento con criterio, no tratamiento médico. Si algo se sale del alcance, te lo digo.</span>
+        </li>
+      </ul>
+      <div class="method-visual">
+        <Picture
+          src={methodImage}
+          alt="Entrenamiento TRX y con kettlebell en un parque de Santiago"
+          formats={["avif", "webp"]}
+          fallbackFormat="webp"
+          quality={60}
+          widths={[480, 640, 768, 960, 1200]}
+          sizes="(max-width: 768px) 100vw, 50vw"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+    </div>
   </div>
 </section>
 
-<!-- SERVICE MODEL -->
+<!-- SERVICE MODEL — logistics: "here's how it works" -->
 <section id="como-funciona" class="service-model">
-  <div class="container text-center">
-    <h2>Cómo funciona el servicio</h2>
-    <ul class="model-grid">
-      <li>En tu casa o en parques cercanos</li>
-      <li>Siempre 1 a 1, nunca en grupo</li>
-      <li>Santiago oriente y centro</li>
-      <li>Sin máquinas: el equipo lo llevo yo</li>
-      <li>Sin mensualidad fija</li>
-      <li>Ritmo flexible, mañanas desde las 6 AM</li>
+  <div class="container">
+    <div class="section-head text-center">
+      <h2>Cómo funciona el servicio</h2>
+      <p class="section-intro">Claro de entrada, sin sorpresas.</p>
+    </div>
+    <ul class="model-list">
+      <li>
+        <span class="model-icon"><Icon name="home" /></span>
+        <span>En tu casa o en parques cercanos</span>
+      </li>
+      <li>
+        <span class="model-icon"><Icon name="user" /></span>
+        <span>Siempre 1 a 1, nunca en grupo</span>
+      </li>
+      <li>
+        <span class="model-icon"><Icon name="pin" /></span>
+        <span>Santiago oriente y centro</span>
+      </li>
+      <li>
+        <span class="model-icon"><Icon name="bag" /></span>
+        <span>Sin máquinas: el equipo lo llevo yo</span>
+      </li>
+      <li>
+        <span class="model-icon"><Icon name="wallet" /></span>
+        <span>Sin mensualidad fija</span>
+      </li>
+      <li>
+        <span class="model-icon"><Icon name="sunrise" /></span>
+        <span>Ritmo flexible, mañanas desde las 6 AM</span>
+      </li>
     </ul>
   </div>
 </section>
 
-<!-- PRICING -->
-<section id="pricing" class="pricing">
-  <h2>Planes y precios</h2>
-  <p class="pricing-subtitle">Precios claros y a la vista. Empiezas con una evaluación gratis.</p>
-  <div class="pricing-cards pricing-cards--three">
-    <PricingCard
-      title="Evaluación inicial"
-      price="Gratis"
-      description="Una sesión para conocernos y ver tu punto de partida."
-      features={[
-        "Conversamos tu objetivo y tus molestias",
-        "Chequeo básico de movimiento",
-        "Sin compromiso ni pago por adelantado",
-      ]}
-      cta="Agendar evaluación gratis"
-      ctaMessage={waEval}
-    />
-    <PricingCard
-      title="Plan mensual"
-      price="$160.000"
-      per="3 veces por semana · ~12 sesiones al mes"
-      perSession="≈ $13.300 por sesión"
-      features={[
-        "La forma más efectiva de avanzar",
-        "Seguimiento personalizado continuo",
-        "Mejor precio por sesión",
-        "Horario flexible desde las 6 AM",
-      ]}
-      cta="Consultar el plan"
-      ctaClass="btn btn--trx"
-      ctaMessage={waPlan}
-      featured={true}
-      badge="Más elegido"
-    />
-    <PricingCard
-      title="Sesión individual"
-      price="$15.000"
-      description="Para probar o entrenar a tu propio ritmo."
-      features={[
-        "1 hora de entrenamiento personalizado",
-        "En casa o al aire libre",
-        "Adaptado a tu nivel",
-        "Sin compromiso de continuidad",
-      ]}
-      cta="Consultar por WhatsApp"
-      ctaMessage={waSingle}
-    />
-  </div>
-  <p class="pricing-note">Cancelaciones sin costo avisando con más de 24 horas.</p>
-</section>
-
-<!-- SOCIAL PROOF -->
-<section id="testimonios" class="testimonial container">
-  <h2>Lo que dicen quienes entrenan con Nico</h2>
-  <p class="section-intro">Personas reales, avances reales: constancia, postura, energía y confianza para moverse.</p>
-  <div class="testimonial-grid">
-    <div class="testimonial-col">
-      <TestimonialCard
-        image={testimonialValentinaImage}
-        name="Valentina Rosenthal"
-        quote="Entreno con Nico desde 2021. Partimos dos veces a la semana y hoy entrenamos tres. Sin haber sido nunca buena para hacer deportes, Nico ha logrado que tenga una rutina y que lleve cuatro años entrenando, con todos los beneficios que esto trae."
-      />
-    </div>
-
-    <div class="testimonial-col">
-      <TestimonialCard
-        image={testimonialMarisaImage}
-        name="Marisa Gracia"
-        quote="Entrenar con Nicolás fue una excelente experiencia. Gracias a su guía y el trabajo constante con TRX, mi cuerpo ganó fuerza, estabilidad y tono muscular. Noté mejoras en mi postura, control corporal y energía general."
-      />
-    </div>
-
-    <div class="testimonial-col">
-      <TestimonialCard
-        image={testimonialMariaIgnaciaImage}
-        name="María Ignacia Williamson"
-        quote="Entrenar con Nico fue una muy buena experiencia. Su enfoque personalizado y su profundo conocimiento del TRX hicieron que cada sesión fuera desafiante pero muy gratificante."
-      />
-    </div>
-  </div>
-  <p class="testimonial-more">
-    Puedes ver más del día a día en <a href={site.instagram} target="_blank" rel="noopener noreferrer me"
-      >Instagram @trxconcept</a
-    >.
-  </p>
-</section>
-
-<!-- TRAINER -->
-<section id="entrenador" class="trainer section-alt">
-  <div class="container trust-inner">
+<!-- TRAINER — authority: "a real, certified person" -->
+<section id="entrenador" class="trainer">
+  <div class="container trainer-inner">
     <Picture
       src={nicoImage}
       alt="Nicolás Echeverría, entrenador personal TRX"
@@ -258,18 +221,18 @@ const waSingle = WHATSAPP_MESSAGE_SINGLE;
       fallbackFormat="webp"
       quality={60}
       widths={[140, 210, 280, 320]}
-      sizes="160px"
-      class="profile-pic"
+      sizes="240px"
+      pictureAttributes={{ class: "profile-pic" }}
       loading="lazy"
       decoding="async"
     />
-    <div class="trust-content">
-      <h2 class="trust-name"><a href="/sobre-mi/">Nicolás Echeverría</a></h2>
+    <div class="trainer-content">
+      <h2><a href="/sobre-mi/">Nicolás Echeverría</a></h2>
       <p>
         Entrenador personal en Santiago hace más de 10 años, certificado en TRX Suspension Trainer™ y Rip Trainer®.
         Trabajo con personas de todos los niveles, incluidas quienes vuelven al ejercicio o cuidan una molestia.
       </p>
-      <p class="trainer-attention"><strong>En qué me fijo en cada sesión:</strong></p>
+      <p><strong>En qué me fijo en cada sesión:</strong></p>
       <ul class="trainer-list">
         <li>Que la técnica esté bien antes de subir la intensidad</li>
         <li>Cómo responde tu cuerpo, día a día</li>
@@ -280,10 +243,108 @@ const waSingle = WHATSAPP_MESSAGE_SINGLE;
   </div>
 </section>
 
-<!-- FAQ (condensed) -->
-<section id="faq-home" class="faq-home">
+<!-- SOCIAL PROOF — "people like me got results" -->
+<section id="testimonios" class="testimonial container">
+  <div class="section-head text-center">
+    <h2>Lo que dicen quienes entrenan con Nico</h2>
+    <p class="section-intro">Personas reales, avances reales: constancia, postura, energía y confianza para moverse.</p>
+  </div>
+  <div class="testimonial-grid">
+    <TestimonialCard
+      image={testimonialValentinaImage}
+      name="Valentina Rosenthal"
+      outcome="4 años entrenando"
+      quote="Entreno con Nico desde 2021. Partimos dos veces a la semana y hoy entrenamos tres. Sin haber sido nunca buena para hacer deportes, Nico ha logrado que tenga una rutina y que lleve cuatro años entrenando, con todos los beneficios que esto trae."
+    />
+    <TestimonialCard
+      image={testimonialMarisaImage}
+      name="Marisa Gracia"
+      outcome="Mejor postura y energía"
+      quote="Entrenar con Nicolás fue una excelente experiencia. Gracias a su guía y el trabajo constante con TRX, mi cuerpo ganó fuerza, estabilidad y tono muscular. Noté mejoras en mi postura, control corporal y energía general."
+    />
+    <TestimonialCard
+      image={testimonialMariaIgnaciaImage}
+      name="María Ignacia Williamson"
+      outcome="Sesiones desafiantes pero gratificantes"
+      quote="Entrenar con Nico fue una muy buena experiencia. Su enfoque personalizado y su profundo conocimiento del TRX hicieron que cada sesión fuera desafiante pero muy gratificante."
+    />
+  </div>
+  <p class="testimonial-more">
+    Puedes ver más del día a día en <a href={site.instagram} target="_blank" rel="noopener noreferrer me"
+      >Instagram @trxconcept</a
+    >.
+  </p>
+</section>
+
+<!-- DISCOVERY FLOW — qualify + build intent, right before the ask -->
+<DiscoveryFlow />
+
+<!-- PRICING — low-risk price after they're convinced -->
+<section id="pricing" class="pricing">
+  <div class="container">
+    <div class="section-head text-center pricing-head">
+      <h2>Planes y precios</h2>
+      <p class="section-intro">Precios claros y a la vista. Empiezas con una evaluación gratis.</p>
+    </div>
+    <div class="pricing-cards">
+      <PricingCard
+        title="Evaluación inicial"
+        price="Gratis"
+        description="Una sesión para conocernos y ver tu punto de partida."
+        features={[
+          "Conversamos tu objetivo y tus molestias",
+          "Chequeo básico de movimiento",
+          "Sin compromiso ni pago por adelantado",
+        ]}
+        cta="Agendar evaluación gratis"
+        ctaClass="btn btn--outline"
+        ctaMessage={waEval}
+        featured={false}
+        entry={true}
+        badge="Empieza aquí"
+      />
+      <PricingCard
+        title="Plan mensual"
+        price="$160.000"
+        per="3 veces por semana · ~12 sesiones al mes"
+        perSession="≈ $13.300 por sesión"
+        features={[
+          "La forma más efectiva de avanzar",
+          "Seguimiento personalizado continuo",
+          "Mejor precio por sesión",
+          "Horario flexible desde las 6 AM",
+        ]}
+        cta="Consultar el plan"
+        ctaClass="btn btn--primary"
+        ctaMessage={waPlan}
+        featured={true}
+        badge="Más elegido"
+      />
+      <PricingCard
+        title="Sesión individual"
+        price="$15.000"
+        description="Para probar o entrenar a tu propio ritmo."
+        features={[
+          "1 hora de entrenamiento personalizado",
+          "En casa o al aire libre",
+          "Adaptado a tu nivel",
+          "Sin compromiso de continuidad",
+        ]}
+        cta="Consultar por WhatsApp"
+        ctaClass="btn btn--outline"
+        ctaMessage={waSingle}
+      />
+    </div>
+    <p class="pricing-note">Cancelaciones sin costo avisando con más de 24 horas.</p>
+  </div>
+</section>
+
+<!-- FAQ (condensed) — final objections -->
+<section id="faq-home" class="faq-home section-alt">
   <div class="container faq-list">
-    <h2 class="text-center">Preguntas frecuentes</h2>
+    <div class="section-head text-center">
+      <h2>Preguntas frecuentes</h2>
+    </div>
     <details class="faq-item">
       <summary>¿Necesito experiencia previa?</summary>
       <p class="faq-answer">

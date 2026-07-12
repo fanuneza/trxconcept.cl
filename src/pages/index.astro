@@ -1,11 +1,9 @@
 ---
-import { getImage } from "astro:assets";
-import { makeIds } from "@jdevalk/seo-graph-core";
-import heroImage from "../assets/images/hero.webp";
 import HomeContent from "../components/HomeContent.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { pages } from "../data/pages";
 import { site } from "../data/site";
+import { makeIds } from "@jdevalk/seo-graph-core";
 
 const page = pages.home;
 const siteUrl = site.url.endsWith("/") ? site.url : `${site.url}/`;
@@ -18,19 +16,9 @@ const websiteSchema = {
   alternateName: "trxconcept.cl",
   url: site.url,
 };
-const heroWidths = [480, 640, 768, 960, 1200, 1440];
-const heroQuality = 25;
-const heroVariants = await Promise.all(
-  heroWidths.map((width) => getImage({ src: heroImage, width, format: "avif", quality: heroQuality }))
-);
-const preloadImage = {
-  href: heroVariants[0].src,
-  srcset: heroVariants.map((variant, index) => `${variant.src} ${heroWidths[index]}w`).join(", "),
-  sizes: "100vw",
-};
 ---
 
-<BaseLayout page={page} preloadImage={preloadImage}>
+<BaseLayout page={page}>
   <Fragment slot="head">
     <script is:inline type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
   </Fragment>

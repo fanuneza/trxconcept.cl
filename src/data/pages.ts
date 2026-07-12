@@ -1,5 +1,9 @@
+import type { ImageMetadata } from "astro";
 import ogImage from "../assets/images/og-image.webp";
 import nicoImage from "../assets/images/nico.webp";
+import heroServicios from "../assets/images/hero-servicios.jpg";
+import heroFaq from "../assets/images/hero-faq.jpg";
+import heroNico from "../assets/images/hero-new.jpg";
 import { site } from "./site";
 
 const assetUrl = (src: string) => new URL(src, site.url).toString();
@@ -18,41 +22,18 @@ export type SitePage = {
   robots?: string;
   structuredData?: unknown;
   breadcrumb?: { name: string; item: string }[];
+  hero?: {
+    title: string;
+    /** May contain inline HTML (e.g. links). */
+    description?: string;
+    image?: ImageMetadata;
+    imageAlt?: string;
+    /** Photo credit HTML shown bottom-right on image heroes. */
+    credit?: string;
+  };
   content: string;
   isHome?: boolean;
 };
-
-const renderBreadcrumb = (breadcrumb?: { name: string; item: string }[]) => {
-  if (!breadcrumb?.length) return "";
-
-  const items = breadcrumb
-    .map((item, index) => {
-      const isLast = index === breadcrumb.length - 1;
-
-      const href = item.item.startsWith(site.url) ? new URL(item.item).pathname : item.item;
-
-      return `<li>${isLast ? `<span aria-current="page">${item.name}</span>` : `<a href="${href}">${item.name}</a>`}</li>`;
-    })
-    .join("");
-
-  return `<nav class="page-breadcrumb" aria-label="Breadcrumb"><ol>${items}</ol></nav>`;
-};
-
-const renderPageHero = ({
-  title,
-  description,
-  breadcrumb,
-}: {
-  title: string;
-  description: string;
-  breadcrumb?: { name: string; item: string }[];
-}) => `<div class="page-hero">
-    <div class="container page-hero-inner">
-      ${renderBreadcrumb(breadcrumb)}
-      <h1>${title}</h1>
-      <p>${description}</p>
-    </div>
-  </div>`;
 
 // ─────────────────────────────────────────────────────────────────────────────
 // FAQ: single source of truth for both JSON-LD and rendered <details>.
@@ -357,21 +338,22 @@ export const pages = {
       { name: "Servicios", item: pageUrl("/servicios/") },
     ],
     structuredData: buildServicesStructuredData(),
-    content: `${renderPageHero({
+    hero: {
       title: "Clases de TRX a domicilio en Santiago",
       description:
         "Sesiones 1 a 1 o plan mensual, en tu casa o al aire libre. Sin mensualidad fija, sin traslados, sin equipos que compres tú.",
-      breadcrumb: [
-        { name: "Inicio", item: pageUrl("/") },
-        { name: "Servicios", item: pageUrl("/servicios/") },
-      ],
-    })}
-
-      <!-- SERVICES / PRICING -->
+      image: heroServicios,
+      imageAlt: "Correas de suspensión TRX amarillas colgando, listas para una sesión al aire libre",
+      credit:
+        'Foto: <a href="https://unsplash.com/photos/29XohzkscAM" target="_blank" rel="noopener noreferrer">Deepi Goyal</a> / Unsplash',
+    },
+    content: `<!-- SERVICES / PRICING -->
       <section class="section-alt">
-        <div class="container text-center">
-          <h2>Servicios y precios</h2>
-          <p class="section-intro">Sesiones 1 a 1 en tu casa o en un parque cercano. Tú eliges cómo partir.</p>
+        <div class="container">
+          <div class="section-head text-center">
+            <h2>Servicios y precios</h2>
+            <p class="section-intro">Sesiones 1 a 1 en tu casa o en un parque cercano. Tú eliges cómo partir.</p>
+          </div>
           <div class="services-grid">
             ${renderServiceCards()}
           </div>
@@ -380,14 +362,16 @@ export const pages = {
 
       <!-- HOW TO BOOK -->
       <section>
-        <div class="container text-center">
-          <h2>¿Cómo reservar una clase?</h2>
+        <div class="container">
+          <div class="section-head text-center">
+            <h2>¿Cómo reservar una clase?</h2>
+          </div>
           <ol class="steps-list">
             <li><strong>Escríbeme por WhatsApp</strong> y cuéntame qué te gustaría lograr.</li>
             <li><strong>Coordinamos día, hora y lugar</strong> según lo que te acomode.</li>
             <li><strong>Tu primera clase es gratis.</strong> Sin compromiso: sirve para conocernos y ver tu punto de partida.</li>
           </ol>
-          <p>No vendo equipos TRX ni necesitas comprar nada: el equipo lo llevo yo a cada sesión.</p>
+          <p class="text-center">No vendo equipos TRX ni necesitas comprar nada: el equipo lo llevo yo a cada sesión.</p>
         </div>
       </section>
 
@@ -408,9 +392,11 @@ export const pages = {
 
       <!-- FOR WHOM -->
       <section>
-        <div class="container text-center">
-          <h2>¿Para quién es?</h2>
-          <p class="section-intro">Entreno a personas muy distintas. Quizás te reconoces en alguna de estas:</p>
+        <div class="container">
+          <div class="section-head text-center">
+            <h2>¿Para quién es?</h2>
+            <p class="section-intro">Entreno a personas muy distintas. Quizás te reconoces en alguna de estas:</p>
+          </div>
           <div class="audience-grid">
             <div class="audience-item">
               <h3>Principiantes absolutos</h3>
@@ -498,8 +484,15 @@ export const pages = {
         addressCountry: "CL",
       },
     },
-    // Sobre mí renders through AboutContent.astro; content is intentionally empty
-    // (same pattern as home/HomeContent.astro).
+    hero: {
+      title: "Tu entrenador TRX en Santiago",
+      description:
+        "Nicolás Echeverría: certificado en TRX Suspension Trainer™ y Rip Trainer®, con más de 10 años entrenando en Santiago.",
+      image: heroNico,
+      imageAlt: "Nicolás Echeverría entrenando calistenia en un parque de Santiago",
+    },
+    // Sobre mí renders its body through AboutContent.astro; content is empty
+    // (same pattern as home/HomeContent.astro). The hero is rendered from `hero`.
     content: "",
     isHome: false,
   },
@@ -512,17 +505,16 @@ export const pages = {
       { name: "Preguntas frecuentes", item: pageUrl("/preguntas-frecuentes/") },
     ],
     structuredData: buildFaqStructuredData(),
-    content: `${renderPageHero({
+    hero: {
       title: "Preguntas frecuentes sobre clases de TRX",
       description:
         'Desde si necesitas experiencia hasta cómo reservar tu primera clase gratis. También puedes revisar nuestros <a href="/servicios/">servicios</a> o <a href="/sobre-mi/">conocer a tu entrenador</a>.',
-      breadcrumb: [
-        { name: "Inicio", item: pageUrl("/") },
-        { name: "Preguntas frecuentes", item: pageUrl("/preguntas-frecuentes/") },
-      ],
-    })}
-
-      <section>
+      image: heroFaq,
+      imageAlt: "Parque abierto y despejado en Santiago, uno de los lugares donde entrenamos al aire libre",
+      credit:
+        'Foto: <a href="https://unsplash.com/photos/0iQunww9iWc" target="_blank" rel="noopener noreferrer">Yi</a> / Unsplash',
+    },
+    content: `<section>
         <div class="container faq-list">
           ${renderFaqDetails(faqItems)}
         </div>
@@ -538,16 +530,11 @@ export const pages = {
       { name: "Inicio", item: pageUrl("/") },
       { name: "Política de cookies", item: pageUrl("/politica-de-cookies/") },
     ],
-    content: `${renderPageHero({
+    hero: {
       title: "Política de cookies",
       description: "Información sobre las cookies que usamos y cómo gestionarlas.",
-      breadcrumb: [
-        { name: "Inicio", item: pageUrl("/") },
-        { name: "Política de cookies", item: pageUrl("/politica-de-cookies/") },
-      ],
-    })}
-
-      <section>
+    },
+    content: `<section>
         <div class="container about-section">
 
           <h2>¿Qué son las cookies?</h2>

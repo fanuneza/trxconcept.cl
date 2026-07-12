@@ -6,28 +6,32 @@ interface Props {
   image: ImageMetadata;
   name: string;
   quote: string;
-  starsLabel?: string;
+  outcome: string;
 }
 
-const { image, name, quote, starsLabel = "5 estrellas" } = Astro.props;
+const { image, name, quote, outcome } = Astro.props;
 ---
 
 <div class="testimonial-card">
-  <Picture
-    src={image}
-    alt={name}
-    formats={["avif", "webp"]}
-    fallbackFormat="webp"
-    quality={60}
-    widths={[100, 200]}
-    sizes="100px"
-    class="testimonial-img"
-    loading="lazy"
-    decoding="async"
-  />
-  <div class="testimonial-stars" aria-label={starsLabel}>★★★★★</div>
+  <div class="testimonial-header">
+    <Picture
+      src={image}
+      alt={name}
+      formats={["avif", "webp"]}
+      fallbackFormat="webp"
+      quality={60}
+      widths={[100, 200]}
+      sizes="56px"
+      pictureAttributes={{ class: "testimonial-img" }}
+      loading="lazy"
+      decoding="async"
+    />
+    <div class="testimonial-meta">
+      <span class="testimonial-author">{name}</span>
+      <span class="testimonial-outcome">{outcome}</span>
+    </div>
+  </div>
   <blockquote class="testimonial-quote">
     <p>{quote}</p>
-    <footer class="testimonial-author">– {name}</footer>
   </blockquote>
 </div>
