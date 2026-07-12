@@ -2,18 +2,19 @@
 import { site } from "../data/site";
 import WhatsAppLink from "./WhatsAppLink.astro";
 
-// Sticky bottom bar for mobile: primary WhatsApp action + softer discovery-flow
-// entry. Hidden on desktop, where the floating WhatsApp button takes over.
-const { discoveryHref = "/#descubre" } = Astro.props as { discoveryHref?: string };
+// Sticky bottom bar for mobile: a single, unambiguous WhatsApp action. Hidden on
+// desktop, where the floating WhatsApp button takes over. On the homepage main.js
+// arms it so it only reveals once the hero (with its own CTAs) has scrolled away,
+// avoiding a stacked, duplicated CTA on the first fold. Without JS it stays
+// visible, preserving the no-JS conversion path.
 ---
 
-<div class="mobile-cta-bar" role="group" aria-label="Acciones rápidas">
+<div class="mobile-cta-bar" role="group" aria-label="Acción rápida">
   <WhatsAppLink
     href={site.getWhatsAppHref(site.whatsappDefaultMessage)}
     class="mobile-cta-bar-primary"
     iconFirst={true}
   >
-    Evaluación gratis
+    Agendar evaluación gratis
   </WhatsAppLink>
-  <a href={discoveryHref} class="mobile-cta-bar-secondary">¿Es para mí?</a>
 </div>

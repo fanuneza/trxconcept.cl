@@ -63,6 +63,25 @@
     );
   }
 
+  // Mobile sticky CTA bar — reveal only after the hero scrolls out of view, so
+  // it never duplicates the hero's CTAs on the first fold. Progressive
+  // enhancement: the bar is visible by default; we "arm" it (hide until scroll)
+  // only when JS + IntersectionObserver are available and a hero exists.
+  const ctaBar = document.querySelector(".mobile-cta-bar");
+  const heroEl = document.getElementById("hero");
+  if (ctaBar && heroEl && "IntersectionObserver" in window) {
+    ctaBar.classList.add("is-armed");
+    const ctaObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          ctaBar.classList.toggle("is-visible", !entry.isIntersecting);
+        });
+      },
+      { rootMargin: "0px 0px -10% 0px" }
+    );
+    ctaObserver.observe(heroEl);
+  }
+
   // ── Discovery flow ──────────────────────────────────────────────
   // A 3-step qualifier that builds a prefilled WhatsApp message from the
   // visitor's answers. Progressive enhancement: without JS the form shows

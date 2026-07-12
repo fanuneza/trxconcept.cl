@@ -64,6 +64,13 @@ img {
   display: block;
 }
 
+/* The `hidden` attribute must win over component display rules (e.g. `.btn`
+   sets display:inline-flex, which otherwise defeats it — leaving JS-hidden
+   controls like the step-1 "Atrás" button visible). */
+[hidden] {
+  display: none !important;
+}
+
 :root {
   /* Color */
   --bg: #0a0a0a;
@@ -883,6 +890,13 @@ p {
   margin-left: auto;
 }
 
+/* Step 1: with no Back button yet, the lone Next spans the row instead of
+   floating right as an unbalanced single element. */
+.discovery-nav:not(:has([data-discovery-back]:not([hidden]))) [data-discovery-next] {
+  width: 100%;
+  margin-left: 0;
+}
+
 .discovery-result {
   text-align: center;
 }
@@ -1106,13 +1120,11 @@ p {
   border-color: var(--accent);
 }
 
-.pricing-card--entry {
-  border-style: dashed;
-  background: transparent;
-}
-
+/* The entry card shares the neutral resting treatment of the individual-session
+   card, so the featured plan is the row's single point of emphasis. Its "Empieza
+   aquí" badge and "Gratis" price carry the distinction, not a different surface. */
 .pricing-card--entry:hover {
-  border-color: var(--accent);
+  border-color: var(--border-strong);
 }
 
 .pricing-badge {
@@ -1560,15 +1572,31 @@ p {
   left: 0;
   right: 0;
   z-index: 55;
-  gap: 0.75rem;
   padding: 0.75rem;
+  padding-bottom: calc(0.75rem + env(safe-area-inset-bottom));
   background: var(--surface);
   border-top: 1px solid var(--border);
 }
 
-.mobile-cta-bar-primary,
-.mobile-cta-bar-secondary {
-  display: inline-flex;
+/* Armed by JS: hidden below the fold until the hero scrolls away. */
+.mobile-cta-bar.is-armed {
+  transform: translateY(120%);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    transform var(--transition-base),
+    opacity var(--transition-base);
+}
+
+.mobile-cta-bar.is-armed.is-visible {
+  transform: none;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mobile-cta-bar-primary {
+  display: flex;
+  flex: 1;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
@@ -1576,22 +1604,16 @@ p {
   font-weight: 700;
   font-size: 1rem;
   text-decoration: none;
-  padding: 0.75rem 1rem;
+  padding: 0.875rem 1rem;
   border: 2px solid transparent;
-}
-
-.mobile-cta-bar-primary {
-  flex: 1 1 65%;
   background: var(--accent);
   color: var(--bg);
 }
 
-.mobile-cta-bar-secondary {
-  flex: 1 1 35%;
-  background: transparent;
-  color: var(--text);
-  border-color: var(--border-strong);
-  font-size: 0.9rem;
+@media (prefers-reduced-motion: reduce) {
+  .mobile-cta-bar.is-armed {
+    transition: none;
+  }
 }
 
 /* ─── COOKIE BANNER ─── */
@@ -1900,17 +1922,28 @@ header .wa-icon {
   color: var(--text);
 }
 
+/* Centered wrapping cards: an odd item count (5) trails as a centered row
+   instead of orphaning against an empty grid cell. */
 .audience-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1px;
-  background: var(--border);
-  border: 1px solid var(--border);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-sm);
+  text-align: left;
 }
 
 .audience-item {
   background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
   padding: var(--space-md);
+  flex: 1 1 300px;
+  max-width: 360px;
+  transition: border-color var(--transition-fast);
+}
+
+.audience-item:hover {
+  border-color: var(--border-strong);
 }
 
 .audience-item h3 {
