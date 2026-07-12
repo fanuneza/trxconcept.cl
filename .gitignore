@@ -20,6 +20,7 @@
 /.codex/
 /.cursor/
 /.vscode/
+/.impeccable/
 
 # Environment and secrets
 .env
