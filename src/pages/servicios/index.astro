@@ -1,9 +1,11 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageHero from "../../components/PageHero.astro";
 import { pages } from "../../data/pages";
 const page = pages.services;
 ---
 
 <BaseLayout page={page}>
+  {page.hero && <PageHero hero={page.hero} breadcrumb={page.breadcrumb} />}
   <Fragment set:html={page.content} />
 </BaseLayout>
