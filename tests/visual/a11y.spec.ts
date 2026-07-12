@@ -7,7 +7,7 @@ const pages = [
   { name: "sobre-mi", path: "/sobre-mi/" },
   { name: "preguntas-frecuentes", path: "/preguntas-frecuentes/" },
   { name: "politica-de-cookies", path: "/politica-de-cookies/" },
-  { name: "404", path: "/404" },
+  { name: "404", path: "/404.html" },
 ];
 
 // Rules disabled due to pre-existing design/content choices that would require

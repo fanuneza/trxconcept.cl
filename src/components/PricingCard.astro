@@ -12,6 +12,7 @@ interface Props {
   ctaClass?: string;
   ctaMessage?: string;
   featured?: boolean;
+  entry?: boolean;
   badge?: string;
 }
 
@@ -26,11 +27,12 @@ const {
   ctaClass = "btn btn--primary",
   ctaMessage,
   featured = false,
+  entry = false,
   badge,
 } = Astro.props;
 ---
 
-<div class:list={["pricing-card", { "pricing-card--featured": featured }]}>
+<div class:list={["pricing-card", { "pricing-card--featured": featured, "pricing-card--entry": entry }]}>
   {badge && <span class="pricing-badge">{badge}</span>}
   <h3>{title}</h3>
   <p class="pricing-price">{price}</p>

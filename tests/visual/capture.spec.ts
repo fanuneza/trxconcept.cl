@@ -9,7 +9,7 @@ const pages = [
   { name: "sobre-mi", path: "/sobre-mi/", tag: "@sobre-mi" },
   { name: "preguntas-frecuentes", path: "/preguntas-frecuentes/", tag: "@faq" },
   { name: "politica-de-cookies", path: "/politica-de-cookies/", tag: "@legal" },
-  { name: "404", path: "/404", tag: "@404" },
+  { name: "404", path: "/404.html", tag: "@404" },
 ] as const;
 
 const viewports = [

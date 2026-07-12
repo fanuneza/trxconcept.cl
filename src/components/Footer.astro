@@ -1,18 +1,20 @@
 ---
 import { site } from "../data/site";
 import WhatsAppLink from "./WhatsAppLink.astro";
+
+const currentYear = new Date().getFullYear();
 ---
 
 <WhatsAppLink href={site.getWhatsAppHref()} class="btn-float-wa" aria-label={site.whatsappLabel} />
 
 <footer id="footer" class="footer">
   <h2>La evaluación inicial es gratis y sin compromiso.</h2>
-  <WhatsAppLink href={site.getWhatsAppHref(site.whatsappDefaultMessage)} class="btn btn--primary">
-    Agendar evaluación gratis
-  </WhatsAppLink>
-  <p class="copyright">
-    &copy; <span id="yr"></span> TRX Concept. Todos los derechos reservados.
-  </p>
+  <div class="footer-cta">
+    <WhatsAppLink href={site.getWhatsAppHref(site.whatsappDefaultMessage)} class="btn btn--primary">
+      Agendar evaluación gratis
+    </WhatsAppLink>
+  </div>
+  <p class="copyright">&copy; {currentYear} TRX Concept. Todos los derechos reservados.</p>
   <div class="site-credit">
     <div class="site-credit-line">
       <span>Sitio web desarrollado con</span>

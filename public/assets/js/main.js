@@ -144,8 +144,8 @@
   const showStep = (index, moveFocus) => {
     steps.forEach((step, i) => step.classList.toggle("is-active", i === index));
     current = index;
-    const pct = ((index + 1) / steps.length) * 100;
-    if (barFill) barFill.style.width = `${pct}%`;
+    const pct = (index + 1) / steps.length;
+    if (barFill) barFill.style.transform = `scaleX(${pct})`;
     if (backBtn) backBtn.hidden = index === 0;
     if (nextBtn) nextBtn.textContent = index === steps.length - 1 ? "Ver mi resultado" : "Siguiente";
     if (moveFocus) {
@@ -177,7 +177,7 @@
       if (heading) heading.focus({ preventScroll: true });
       scrollCardIntoView();
     }
-    if (barFill) barFill.style.width = "100%";
+    if (barFill) barFill.style.transform = "scaleX(1)";
   };
 
   if (nextBtn) {
