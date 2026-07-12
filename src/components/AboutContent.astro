@@ -22,7 +22,7 @@ import nicoImage from "../assets/images/nico.webp";
 <!-- BIO -->
 <section>
   <div class="container about-section">
-    <div class="trust-inner">
+    <div class="trainer-inner">
       <Picture
         src={nicoImage}
         alt="Nicolás Echeverría, entrenador personal TRX"
@@ -31,11 +31,11 @@ import nicoImage from "../assets/images/nico.webp";
         quality={60}
         widths={[160, 240, 320]}
         sizes="160px"
-        class="profile-pic"
-        loading="lazy"
+        pictureAttributes={{ class: "profile-pic" }}
+        loading="eager"
         decoding="async"
       />
-      <div class="trust-content">
+      <div class="trainer-content">
         <h2>Nicolás Echeverría</h2>
         <p>
           Llevo más de 10 años como entrenador personal en Santiago, especializado en el

@@ -21,8 +21,8 @@ const { image, name, quote, starsLabel = "5 estrellas" } = Astro.props;
     quality={60}
     widths={[100, 200]}
     sizes="100px"
-    class="testimonial-img"
-    loading="lazy"
+    pictureAttributes={{ class: "testimonial-img" }}
+    loading="eager"
     decoding="async"
   />
   <div class="testimonial-stars" aria-label={starsLabel}>★★★★★</div>

@@ -1,7 +1,7 @@
 ---
 import { getImage } from "astro:assets";
 import { makeIds } from "@jdevalk/seo-graph-core";
-import heroImage from "../assets/images/hero.webp";
+import heroImage from "../assets/images/hero-new.jpg";
 import HomeContent from "../components/HomeContent.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { pages } from "../data/pages";
@@ -19,7 +19,7 @@ const websiteSchema = {
   url: site.url,
 };
 const heroWidths = [480, 640, 768, 960, 1200, 1440];
-const heroQuality = 25;
+const heroQuality = 30;
 const heroVariants = await Promise.all(
   heroWidths.map((width) => getImage({ src: heroImage, width, format: "avif", quality: heroQuality }))
 );

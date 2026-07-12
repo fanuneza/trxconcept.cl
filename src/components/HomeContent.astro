@@ -1,6 +1,6 @@
 ---
 import { Picture } from "astro:assets";
-import heroImage from "../assets/images/hero.webp";
+import heroImage from "../assets/images/hero-new.jpg";
 import nicoImage from "../assets/images/nico.webp";
 import testimonialValentinaImage from "../assets/images/testimonio-valentinarosenthal.webp";
 import testimonialMarisaImage from "../assets/images/testimonio-marisagracia.webp";
@@ -23,7 +23,7 @@ const waSingle = WHATSAPP_MESSAGE_SINGLE;
     alt="Entrenamiento personal con TRX al aire libre en Santiago"
     formats={["avif", "webp"]}
     fallbackFormat="webp"
-    quality={25}
+    quality={30}
     widths={[480, 640, 768, 960, 1200, 1440]}
     sizes="100vw"
     pictureAttributes={{ class: "hero-media" }}
@@ -43,10 +43,13 @@ const waSingle = WHATSAPP_MESSAGE_SINGLE;
       <li>Santiago oriente y centro</li>
     </ul>
     <div class="hero-cta">
-      <WhatsAppLink message={waEval} class="btn btn--trx"> Agendar evaluación gratis </WhatsAppLink>
+      <WhatsAppLink message={waEval} class="btn btn--primary">Agendar evaluación gratis</WhatsAppLink>
       <a href="#descubre" class="btn btn--outline-light">Ver si esto es para mí</a>
     </div>
   </div>
+  <p class="hero-credit">
+    Foto: <a href="https://www.pexels.com/photo/13993542/" target="_blank" rel="noopener noreferrer">Pexels</a>
+  </p>
 </section>
 
 <!-- HOW IT STARTS -->
@@ -124,7 +127,7 @@ const waSingle = WHATSAPP_MESSAGE_SINGLE;
 <!-- SAFETY & METHOD -->
 <section id="seguridad" class="method section-alt">
   <div class="container">
-    <div class="method-head text-center">
+    <div class="section-head text-center">
       <h2>Cómo cuido tu seguridad</h2>
       <p class="section-intro">Nada de rutinas genéricas ni de forzar el cuerpo. El método hace el trabajo.</p>
     </div>
@@ -163,53 +166,57 @@ const waSingle = WHATSAPP_MESSAGE_SINGLE;
 
 <!-- PRICING -->
 <section id="pricing" class="pricing">
-  <h2>Planes y precios</h2>
-  <p class="pricing-subtitle">Precios claros y a la vista. Empiezas con una evaluación gratis.</p>
-  <div class="pricing-cards pricing-cards--three">
-    <PricingCard
-      title="Evaluación inicial"
-      price="Gratis"
-      description="Una sesión para conocernos y ver tu punto de partida."
-      features={[
-        "Conversamos tu objetivo y tus molestias",
-        "Chequeo básico de movimiento",
-        "Sin compromiso ni pago por adelantado",
-      ]}
-      cta="Agendar evaluación gratis"
-      ctaMessage={waEval}
-    />
-    <PricingCard
-      title="Plan mensual"
-      price="$160.000"
-      per="3 veces por semana · ~12 sesiones al mes"
-      perSession="≈ $13.300 por sesión"
-      features={[
-        "La forma más efectiva de avanzar",
-        "Seguimiento personalizado continuo",
-        "Mejor precio por sesión",
-        "Horario flexible desde las 6 AM",
-      ]}
-      cta="Consultar el plan"
-      ctaClass="btn btn--trx"
-      ctaMessage={waPlan}
-      featured={true}
-      badge="Más elegido"
-    />
-    <PricingCard
-      title="Sesión individual"
-      price="$15.000"
-      description="Para probar o entrenar a tu propio ritmo."
-      features={[
-        "1 hora de entrenamiento personalizado",
-        "En casa o al aire libre",
-        "Adaptado a tu nivel",
-        "Sin compromiso de continuidad",
-      ]}
-      cta="Consultar por WhatsApp"
-      ctaMessage={waSingle}
-    />
+  <div class="container">
+    <div class="pricing-head">
+      <h2>Planes y precios</h2>
+      <p class="pricing-subtitle">Precios claros y a la vista. Empiezas con una evaluación gratis.</p>
+    </div>
+    <div class="pricing-cards">
+      <PricingCard
+        title="Evaluación inicial"
+        price="Gratis"
+        description="Una sesión para conocernos y ver tu punto de partida."
+        features={[
+          "Conversamos tu objetivo y tus molestias",
+          "Chequeo básico de movimiento",
+          "Sin compromiso ni pago por adelantado",
+        ]}
+        cta="Agendar evaluación gratis"
+        ctaMessage={waEval}
+      />
+      <PricingCard
+        title="Plan mensual"
+        price="$160.000"
+        per="3 veces por semana · ~12 sesiones al mes"
+        perSession="≈ $13.300 por sesión"
+        features={[
+          "La forma más efectiva de avanzar",
+          "Seguimiento personalizado continuo",
+          "Mejor precio por sesión",
+          "Horario flexible desde las 6 AM",
+        ]}
+        cta="Consultar el plan"
+        ctaClass="btn btn--primary"
+        ctaMessage={waPlan}
+        featured={true}
+        badge="Más elegido"
+      />
+      <PricingCard
+        title="Sesión individual"
+        price="$15.000"
+        description="Para probar o entrenar a tu propio ritmo."
+        features={[
+          "1 hora de entrenamiento personalizado",
+          "En casa o al aire libre",
+          "Adaptado a tu nivel",
+          "Sin compromiso de continuidad",
+        ]}
+        cta="Consultar por WhatsApp"
+        ctaMessage={waSingle}
+      />
+    </div>
+    <p class="pricing-note">Cancelaciones sin costo avisando con más de 24 horas.</p>
   </div>
-  <p class="pricing-note">Cancelaciones sin costo avisando con más de 24 horas.</p>
 </section>
 
 <!-- SOCIAL PROOF -->
@@ -250,7 +257,7 @@ const waSingle = WHATSAPP_MESSAGE_SINGLE;
 
 <!-- TRAINER -->
 <section id="entrenador" class="trainer section-alt">
-  <div class="container trust-inner">
+  <div class="container trainer-inner">
     <Picture
       src={nicoImage}
       alt="Nicolás Echeverría, entrenador personal TRX"
@@ -259,17 +266,17 @@ const waSingle = WHATSAPP_MESSAGE_SINGLE;
       quality={60}
       widths={[140, 210, 280, 320]}
       sizes="160px"
-      class="profile-pic"
-      loading="lazy"
+      pictureAttributes={{ class: "profile-pic" }}
+      loading="eager"
       decoding="async"
     />
-    <div class="trust-content">
-      <h2 class="trust-name"><a href="/sobre-mi/">Nicolás Echeverría</a></h2>
+    <div class="trainer-content">
+      <h2><a href="/sobre-mi/">Nicolás Echeverría</a></h2>
       <p>
         Entrenador personal en Santiago hace más de 10 años, certificado en TRX Suspension Trainer™ y Rip Trainer®.
         Trabajo con personas de todos los niveles, incluidas quienes vuelven al ejercicio o cuidan una molestia.
       </p>
-      <p class="trainer-attention"><strong>En qué me fijo en cada sesión:</strong></p>
+      <p><strong>En qué me fijo en cada sesión:</strong></p>
       <ul class="trainer-list">
         <li>Que la técnica esté bien antes de subir la intensidad</li>
         <li>Cómo responde tu cuerpo, día a día</li>
