@@ -28,8 +28,6 @@ export type SitePage = {
     description?: string;
     image?: ImageMetadata;
     imageAlt?: string;
-    /** Photo credit HTML shown bottom-right on image heroes. */
-    credit?: string;
   };
   content: string;
   isHome?: boolean;
@@ -344,8 +342,6 @@ export const pages = {
         "Sesiones 1 a 1 o plan mensual, en tu casa o al aire libre. Sin mensualidad fija, sin traslados, sin equipos que compres tú.",
       image: heroServicios,
       imageAlt: "Correas de suspensión TRX amarillas colgando, listas para una sesión al aire libre",
-      credit:
-        'Foto: <a href="https://unsplash.com/photos/29XohzkscAM" target="_blank" rel="noopener noreferrer">Deepi Goyal</a> / Unsplash',
     },
     content: `<!-- SERVICES / PRICING -->
       <section class="section-alt">
@@ -510,9 +506,7 @@ export const pages = {
       description:
         'Desde si necesitas experiencia hasta cómo reservar tu primera clase gratis. También puedes revisar nuestros <a href="/servicios/">servicios</a> o <a href="/sobre-mi/">conocer a tu entrenador</a>.',
       image: heroFaq,
-      imageAlt: "Parque abierto y despejado en Santiago, uno de los lugares donde entrenamos al aire libre",
-      credit:
-        'Foto: <a href="https://unsplash.com/photos/0iQunww9iWc" target="_blank" rel="noopener noreferrer">Yi</a> / Unsplash',
+      imageAlt: "Parque al aire libre en Santiago con equipamiento para entrenar, uno de los lugares donde damos las clases",
     },
     content: `<section>
         <div class="container faq-list">

@@ -11,8 +11,6 @@ export type PageHeroData = {
   description?: string;
   image?: ImageMetadata;
   imageAlt?: string;
-  /** Photo credit HTML (attribution), shown bottom-right on image heroes. */
-  credit?: string;
 };
 
 interface Props {
@@ -21,7 +19,7 @@ interface Props {
 }
 
 const { hero, breadcrumb } = Astro.props;
-const { title, description, image, imageAlt, credit } = hero;
+const { title, description, image, imageAlt } = hero;
 
 // Breadcrumb items store absolute URLs (for JSON-LD); render them as local paths.
 const crumbHref = (item: string) => (item.startsWith(site.url) ? new URL(item).pathname : item);
@@ -67,5 +65,4 @@ const crumbHref = (item: string) => (item.startsWith(site.url) ? new URL(item).p
     <h1>{title}</h1>
     {description && <p set:html={description} />}
   </div>
-  {credit && <p class="hero-credit" set:html={credit} />}
 </header>
