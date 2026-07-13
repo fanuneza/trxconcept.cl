@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="base.css" />
+    <style>
+      /* No photograph. The type is the image. A single low radial wash of the
+         accent keeps the near-black from going dead flat — not a gradient-text
+         trick, just atmosphere behind solid type. */
+      .v3 {
+        background:
+          radial-gradient(120% 90% at 108% -10%, rgba(249, 254, 5, 0.16) 0%, rgba(249, 254, 5, 0) 42%), var(--bg);
+        padding: 60px 64px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      .v3 .top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .v3 .top .loc {
+        font-size: 22px;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .v3 h1 {
+        font-size: 158px;
+        color: var(--text);
+        letter-spacing: 0.01em;
+      }
+      .v3 h1 span {
+        color: var(--accent);
+      }
+      .v3 .lead {
+        margin-top: 8px;
+        font-size: 32px;
+        font-weight: 400;
+        color: var(--text);
+        max-width: 24ch;
+      }
+      .v3 .foot {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="canvas v3 bebas-none">
+      <div class="top">
+        <div class="brand"><img src="logo-yellow.png" alt="" /><span class="wm">TRX Concept</span></div>
+        <span class="loc">Santiago · Chile</span>
+      </div>
+      <div>
+        <h1 class="bebas">Clases de <span>TRX</span><br />1 a 1</h1>
+        <p class="lead">Empezar con calma, avanzar seguro. A domicilio o al aire libre.</p>
+      </div>
+      <div class="foot">
+        <span class="chip">Evaluación inicial gratis</span>
+        <span class="url">trxconcept.cl</span>
+      </div>
+    </div>
+  </body>
+</html>

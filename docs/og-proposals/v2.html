@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="base.css" />
+    <style>
+      .v2 {
+        display: grid;
+        grid-template-columns: 58% 42%;
+      }
+      .v2 .panel {
+        background: var(--bg);
+        padding: 58px 56px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        position: relative;
+        z-index: 2;
+      }
+      .v2 h1 {
+        font-size: 92px;
+        color: var(--text);
+        max-width: 13ch;
+        text-wrap: balance;
+      }
+      .v2 h1 span {
+        color: var(--accent);
+      }
+      .v2 .rule {
+        width: 96px;
+        height: 6px;
+        background: var(--accent);
+        margin: 26px 0 24px;
+        border-radius: 3px;
+      }
+      .v2 .ticks {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+      .v2 .foot {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+      }
+      .v2 .media {
+        position: relative;
+        overflow: hidden;
+      }
+      .v2 .media img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center 30%;
+        filter: saturate(0.82) contrast(1.03);
+      }
+      /* Yellow seam + a soft black feather so the photo reads as one object with
+         the panel rather than a pasted rectangle. */
+      .v2 .media::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        box-shadow: inset 6px 0 0 var(--accent);
+        background: linear-gradient(90deg, rgba(10, 10, 10, 0.55) 0%, rgba(10, 10, 10, 0) 22%);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="canvas v2">
+      <div class="panel">
+        <div class="brand"><img src="logo-yellow.png" alt="" /><span class="wm">TRX Concept</span></div>
+        <div>
+          <h1 class="bebas">Clases de TRX en <span>Santiago</span></h1>
+          <div class="rule"></div>
+          <div class="ticks">
+            <div class="tick"><b>✓</b> Entrenador certificado TRX</div>
+            <div class="tick"><b>✓</b> Más de 10 años en Santiago</div>
+          </div>
+        </div>
+        <div class="foot">
+          <span class="chip">Evaluación gratis</span>
+          <span class="url">trxconcept.cl</span>
+        </div>
+      </div>
+      <div class="media"><img src="photo-desktop.jpg" alt="" /></div>
+    </div>
+  </body>
+</html>

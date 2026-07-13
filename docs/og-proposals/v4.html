@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="base.css" />
+    <style>
+      /* Duotone: the photo is desaturated and multiplied over a flat accent
+         plate, collapsing it into the brand's single-hue world — black in the
+         shadows, acid-yellow in the highlights. Scrims then reclaim clean ink
+         at the top-left (brand) and bottom (headline) for legibility. */
+      .v4 {
+        background: var(--accent);
+      }
+      .v4 .duo {
+        position: absolute;
+        inset: 0;
+      }
+      .v4 .duo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: 62% 32%;
+        filter: grayscale(1) contrast(1.18) brightness(1.05);
+        mix-blend-mode: multiply;
+      }
+      .v4 .scrim {
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(0deg, #0a0a0a 3%, rgba(10, 10, 10, 0.92) 32%, rgba(10, 10, 10, 0.5) 52%, rgba(10, 10, 10, 0) 74%),
+          linear-gradient(102deg, rgba(10, 10, 10, 0.88) 0%, rgba(10, 10, 10, 0.3) 38%, rgba(10, 10, 10, 0) 60%);
+      }
+      /* Localized text veil: a near-opaque soft ellipse anchored to the
+         lower-left so the headline always sits on solid dark, while the bright
+         duotone straps stay untouched in the upper-right. */
+      .v4 .veil {
+        position: absolute;
+        left: -80px;
+        bottom: -80px;
+        width: 760px;
+        height: 470px;
+        background: radial-gradient(
+          ellipse 62% 60% at 32% 78%,
+          rgba(10, 10, 10, 0.98) 0%,
+          rgba(10, 10, 10, 0.9) 46%,
+          rgba(10, 10, 10, 0) 78%
+        );
+      }
+      .v4 .inner {
+        position: absolute;
+        inset: 0;
+        padding: 56px 64px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      .v4 h1 {
+        font-size: 116px;
+        color: var(--text);
+        max-width: 12ch;
+        text-wrap: balance;
+      }
+      .v4 .sub {
+        margin-top: 22px;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+      .v4 .sub .txt {
+        font-size: 26px;
+        font-weight: 700;
+        color: var(--text);
+        letter-spacing: 0.01em;
+      }
+      .v4 .sub .txt .url {
+        color: var(--accent);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="canvas v4">
+      <div class="duo"><img src="photo-training.jpg" alt="" /></div>
+      <div class="scrim"></div>
+      <div class="veil"></div>
+      <div class="inner">
+        <div class="brand"><img src="logo-yellow.png" alt="" /><span class="wm">TRX Concept</span></div>
+        <div>
+          <h1 class="bebas">Entrena con criterio, sin ruido</h1>
+          <div class="sub">
+            <span class="chip">Evaluación gratis</span>
+            <span class="txt">Santiago · 1 a 1 · <span class="url">trxconcept.cl</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
