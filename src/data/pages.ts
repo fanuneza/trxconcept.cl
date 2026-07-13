@@ -506,7 +506,8 @@ export const pages = {
       description:
         'Desde si necesitas experiencia hasta cómo reservar tu primera clase gratis. También puedes revisar nuestros <a href="/servicios/">servicios</a> o <a href="/sobre-mi/">conocer a tu entrenador</a>.',
       image: heroFaq,
-      imageAlt: "Parque al aire libre en Santiago con equipamiento para entrenar, uno de los lugares donde damos las clases",
+      imageAlt:
+        "Parque al aire libre en Santiago con equipamiento para entrenar, uno de los lugares donde damos las clases",
     },
     content: `<section>
         <div class="container faq-list">

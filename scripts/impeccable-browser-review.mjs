@@ -1,23 +1,16 @@
-import { chromium, devices } from 'playwright';
-import fs from 'fs';
+import { chromium, devices } from "playwright";
+import fs from "fs";
 
-const BASE_URL = 'http://localhost:8401';
-const TOKEN = '266af8d1-6d90-4d81-94e6-e6cc3853d5bf';
+const BASE_URL = "http://localhost:8401";
+const TOKEN = "266af8d1-6d90-4d81-94e6-e6cc3853d5bf";
 const DETECT_URL = `${BASE_URL}/detect.js?token=${TOKEN}`;
-const OUT_DIR = '/tmp/impeccable-review';
+const OUT_DIR = "/tmp/impeccable-review";
 
-const ROUTES = [
-  '/',
-  '/servicios/',
-  '/sobre-mi/',
-  '/preguntas-frecuentes/',
-  '/politica-de-cookies/',
-  '/404/',
-];
+const ROUTES = ["/", "/servicios/", "/sobre-mi/", "/preguntas-frecuentes/", "/politica-de-cookies/", "/404/"];
 
 const VIEWPORTS = [
-  { name: 'desktop', width: 1280, height: 900 },
-  { name: 'mobile', width: 390, height: 844 },
+  { name: "desktop", width: 1280, height: 900 },
+  { name: "mobile", width: 390, height: 844 },
 ];
 
 fs.mkdirSync(OUT_DIR, { recursive: true });
@@ -33,24 +26,24 @@ for (const route of ROUTES) {
     console.error(`Scanning ${url} @ ${vp.name}`);
 
     try {
-      await page.goto(url, { waitUntil: 'networkidle', timeout: 30000 });
+      await page.goto(url, { waitUntil: "networkidle", timeout: 30000 });
     } catch (e) {
       console.error(`  navigation issue: ${e.message}`);
     }
 
     const detectResponse = await page.evaluate(async (detectUrl) => {
       return new Promise((resolve) => {
-        const script = document.createElement('script');
+        const script = document.createElement("script");
         script.src = detectUrl;
-        script.onload = () => resolve('loaded');
-        script.onerror = () => resolve('error');
+        script.onload = () => resolve("loaded");
+        script.onerror = () => resolve("error");
         document.head.appendChild(script);
       });
     }, DETECT_URL);
 
     let findings = [];
     try {
-      await page.waitForFunction(() => typeof window.impeccableScan === 'function', { timeout: 10000 });
+      await page.waitForFunction(() => typeof window.impeccableScan === "function", { timeout: 10000 });
       findings = await page.evaluate(() => {
         const raw = window.impeccableScan({ serialize: true });
         return Array.isArray(raw) ? raw : [];
@@ -69,10 +62,10 @@ for (const route of ROUTES) {
 
       const waLinks = Array.from(document.querySelectorAll('a[href*="wa.me"], a[data-wa]'));
       const allButtons = Array.from(document.querySelectorAll('a.btn, button, [role="button"]'));
-      const ctaBar = document.querySelector('.mobile-cta-bar');
-      const ctaBarVisible = ctaBar ? !window.getComputedStyle(ctaBar).display.includes('none') : false;
+      const ctaBar = document.querySelector(".mobile-cta-bar");
+      const ctaBarVisible = ctaBar ? !window.getComputedStyle(ctaBar).display.includes("none") : false;
 
-      const headings = Array.from(document.querySelectorAll('h1, h2, h3, h4, h5, h6')).map(h => ({
+      const headings = Array.from(document.querySelectorAll("h1, h2, h3, h4, h5, h6")).map((h) => ({
         tag: h.tagName,
         text: h.textContent.trim().slice(0, 60),
       }));
@@ -82,7 +75,7 @@ for (const route of ROUTES) {
         scrollWidth: scrollW,
         overflowX,
         waLinkCount: waLinks.length,
-        waLinksVisible: waLinks.filter(a => {
+        waLinksVisible: waLinks.filter((a) => {
           const r = a.getBoundingClientRect();
           return r.width > 0 && r.height > 0;
         }).length,
@@ -92,7 +85,7 @@ for (const route of ROUTES) {
       };
     });
 
-    const screenshotPath = `${OUT_DIR}/${route.replace(/\//g, '_') || 'home'}_${vp.name}.png`;
+    const screenshotPath = `${OUT_DIR}/${route.replace(/\//g, "_") || "home"}_${vp.name}.png`;
     await page.screenshot({ path: screenshotPath, fullPage: true });
 
     results.push({ route, viewport: vp.name, url, detectStatus: detectResponse, findings, metrics, screenshotPath });
