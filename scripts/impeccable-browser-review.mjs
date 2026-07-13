@@ -1,4 +1,4 @@
-import { chromium, devices } from "playwright";
+import { chromium } from "playwright";
 import fs from "fs";
 
 const BASE_URL = "http://localhost:8401";
@@ -96,4 +96,4 @@ for (const route of ROUTES) {
 await browser.close();
 
 fs.writeFileSync(`${OUT_DIR}/results.json`, JSON.stringify(results, null, 2));
-console.log(JSON.stringify(results, null, 2));
+process.stdout.write(`${JSON.stringify(results, null, 2)}\n`);

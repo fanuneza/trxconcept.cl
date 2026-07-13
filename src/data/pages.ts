@@ -295,34 +295,10 @@ export const pages = {
         jobTitle: "Entrenador Personal",
       },
       sameAs: ["https://www.instagram.com/trxconcept"],
-      aggregateRating: {
-        "@type": "AggregateRating",
-        ratingValue: "5.0",
-        reviewCount: "3",
-      },
-      review: [
-        {
-          "@type": "Review",
-          author: { "@type": "Person", name: "Valentina Rosenthal" },
-          reviewRating: { "@type": "Rating", ratingValue: "5" },
-          reviewBody:
-            "Entreno con Nico desde 2021. Partimos dos veces a la semana y hoy entrenamos tres. Sin haber sido nunca buena para hacer deportes, Nico ha logrado que tenga una rutina y que lleve cuatro años entrenando, con todos los beneficios que esto trae.",
-        },
-        {
-          "@type": "Review",
-          author: { "@type": "Person", name: "Marisa Gracia" },
-          reviewRating: { "@type": "Rating", ratingValue: "5" },
-          reviewBody:
-            "Entrenar con Nicolás fue una excelente experiencia. Gracias a su guía y el trabajo constante con TRX, mi cuerpo ganó fuerza, estabilidad y tono muscular. Noté mejoras en mi postura, control corporal y energía general.",
-        },
-        {
-          "@type": "Review",
-          author: { "@type": "Person", name: "María Ignacia Williamson" },
-          reviewRating: { "@type": "Rating", ratingValue: "5" },
-          reviewBody:
-            "Entrenar con Nico fue una muy buena experiencia. Su enfoque personalizado y su profundo conocimiento del TRX hicieron que cada sesión fuera desafiante pero muy gratificante.",
-        },
-      ],
+      // No aggregateRating/review here: Google disallows self-serving review
+      // markup on an entity's own LocalBusiness/Organization node, so it can't
+      // earn a rich result and risks being flagged. The three real testimonials
+      // remain visible on the page (HomeContent.astro) — see docs/final-production-audit.md.
     },
     content: "",
     isHome: true,
