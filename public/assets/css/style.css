@@ -502,6 +502,10 @@ p {
   height: 100%;
   object-fit: cover;
   object-position: center 65%;
+  /* Hide the alt-text fallback while the eager image decodes, so it never
+     flashes as broken-looking text over the hero (alt stays for a11y/SEO). */
+  color: transparent;
+  font-size: 0;
 }
 
 @media (max-width: 768px) {
@@ -1347,11 +1351,12 @@ p.text-center {
 
 .testimonial-img {
   display: block;
-  width: 56px;
-  height: 56px;
+  width: 72px;
+  height: 72px;
   border-radius: 50%;
   overflow: hidden;
   border: 2px solid var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-alpha-8);
   flex-shrink: 0;
 }
 
@@ -1934,6 +1939,9 @@ header .wa-icon {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  /* Suppress the alt-text flash while the eager image decodes. */
+  color: transparent;
+  font-size: 0;
 }
 
 .page-hero--image::after {
@@ -2275,20 +2283,29 @@ code {
     display: none;
   }
 
-  /* Top-align the hero content on mobile so the CTAs sit in the upper fold,
-     clear of the fixed consent card that floats over the image below. */
+  /* Top-align and tighten the hero on mobile so the whole fold — headline,
+     lead, signals and both CTAs — fits above the fixed consent card that floats
+     over the image below. */
   .hero {
     align-items: flex-start;
     text-align: center;
-    padding-top: 7rem;
-    padding-bottom: var(--space-3xl);
+    padding-top: 5.5rem;
+    padding-bottom: var(--space-2xl);
   }
 
   .hero-content {
     margin-inline: auto;
   }
 
-  .hero-lead,
+  .hero-title {
+    font-size: clamp(2.5rem, 8vw, 3.5rem);
+    margin-bottom: var(--space-sm);
+  }
+
+  .hero-lead {
+    margin-bottom: var(--space-md);
+  }
+
   .hero-signals {
     margin-bottom: var(--space-md);
   }
@@ -2353,11 +2370,12 @@ code {
 
 @media screen and (max-width: 480px) {
   .hero-title {
-    font-size: clamp(2.75rem, 11vw, 4rem);
+    font-size: clamp(2.1rem, 8.5vw, 2.8rem);
   }
 
   .hero-lead {
-    font-size: 1.1rem;
+    font-size: 1rem;
+    line-height: 1.4;
   }
 
   .hero-signals {
