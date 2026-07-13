@@ -125,6 +125,11 @@
     const step = steps[index];
     if (!step) return;
     step.classList.remove("has-error");
+    // Empty the alert region so re-triggering the same error is a genuine
+    // content change into the live region (some screen readers won't announce
+    // a role="alert" that merely toggles from display:none with static text).
+    const errorEl = step.querySelector(".discovery-error");
+    if (errorEl) errorEl.textContent = "";
     step.querySelectorAll("[aria-invalid]").forEach((el) => {
       el.removeAttribute("aria-invalid");
       el.removeAttribute("aria-describedby");
@@ -259,6 +264,9 @@
         steps[current].classList.add("has-error");
         const invalid = steps[current].querySelector(`[name="${missing}"]`);
         const errorEl = steps[current].querySelector(".discovery-error");
+        // Inject the message now so it lands in the live region as fresh
+        // content, which role="alert" announces reliably.
+        if (errorEl) errorEl.textContent = errorEl.dataset.errorMsg || "";
         if (invalid) {
           invalid.setAttribute("aria-invalid", "true");
           if (errorEl && errorEl.id) invalid.setAttribute("aria-describedby", errorEl.id);

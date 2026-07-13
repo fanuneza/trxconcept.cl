@@ -194,6 +194,18 @@ a:focus-visible {
   border-radius: 2px;
 }
 
+/* Native interactive elements that are neither links nor `.btn` (details
+   summaries, the discovery restart, the cookie-manage button) don't match the
+   rules above, so they'd fall back to the UA default outline — near-invisible on
+   the near-black ground. Give them the same branded ring. */
+.faq-item summary:focus-visible,
+.discovery-restart:focus-visible,
+.cookie-manage-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
 /* ─── TYPOGRAPHY ─── */
 
 h1,
@@ -932,13 +944,16 @@ p.text-center {
 .discovery-restart {
   display: block;
   margin: 0 auto;
+  padding: 0.75rem 1rem;
   background: none;
   border: none;
   color: var(--text-muted);
   font-family: var(--font-body);
   font-size: 0.95rem;
   text-decoration: underline;
+  text-underline-offset: 2px;
   cursor: pointer;
+  border-radius: var(--radius-control);
   transition: color var(--transition-fast);
 }
 
