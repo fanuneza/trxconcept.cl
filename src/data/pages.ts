@@ -17,6 +17,7 @@ export type SitePage = {
   ogTitle?: string;
   ogDescription?: string;
   ogImage?: string;
+  ogImageAlt?: string;
   ogType?: string;
   twitterCard?: string;
   robots?: string;
@@ -28,6 +29,10 @@ export type SitePage = {
     description?: string;
     image?: ImageMetadata;
     imageAlt?: string;
+    cta?: {
+      label: string;
+      message: string;
+    };
   };
   content: string;
   isHome?: boolean;
@@ -48,7 +53,7 @@ const faqItems: FaqItem[] = [
     id: "experiencia-previa",
     question: "¿Necesito experiencia previa para entrenar TRX?",
     answer:
-      "No. El TRX es completamente adaptable a tu nivel, sea cual sea. Si nunca has hecho ejercicio, empezamos desde lo más básico y avanzamos a tu propio ritmo. Si ya tienes experiencia, podemos llevar la intensidad mucho más lejos. La primera sesión siempre empieza con una evaluación para conocer tu punto de partida.",
+      "No. El TRX se adapta a tu nivel. Si nunca has hecho ejercicio, empezamos desde lo más básico y avanzamos a tu ritmo. Si ya tienes experiencia, ajustamos la exigencia. La evaluación inicial gratis y sin compromiso sirve para conocer tu punto de partida.",
   },
   {
     id: "que-necesito-en-casa",
@@ -57,10 +62,10 @@ const faqItems: FaqItem[] = [
       "Solo necesitas espacio para moverte y una puerta estándar o barra donde fijar el equipo. El TRX y todos los implementos los llevo yo. Tú solo necesitas ropa cómoda y zapatillas.",
   },
   {
-    id: "lesion-o-dolor-cronico",
-    question: "¿Es seguro si tengo una lesión o dolor crónico?",
+    id: "molestia-o-dolor-cronico",
+    question: "¿Qué pasa si tengo una molestia o dolor crónico?",
     answer:
-      "El TRX es uno de los métodos más seguros que existen, precisamente porque es de bajo impacto y sin cargas externas. He trabajado con personas en recuperación de lesiones de rodilla, hombro y espalda. Eso sí, antes de empezar siempre conversamos sobre tu situación médica y, si es necesario, coordino con tu médico o kinesiólogo.",
+      "Antes de empezar conversamos sobre tu situación y adaptamos el entrenamiento a lo que sea pertinente. Esto es entrenamiento, no tratamiento médico. Si hay una lesión, diagnóstico o indicación clínica, lo revisamos con criterio y, si corresponde, lo coordinamos con tu médico o kinesiólogo.",
   },
   {
     id: "es-rehabilitacion",
@@ -84,7 +89,7 @@ const faqItems: FaqItem[] = [
     id: "frecuencia-semanal",
     question: "¿Cuántas veces a la semana debería entrenar?",
     answer:
-      "Depende de tu objetivo y tu agenda. El mínimo recomendable para ver resultados es 2 veces por semana. El plan mensual incluye 3 sesiones semanales, que es la frecuencia ideal para progreso constante sin sobrecargar el cuerpo.",
+      "Depende de tu objetivo, tu experiencia, tu agenda y cómo responda tu cuerpo. El plan mensual contempla 3 sesiones semanales, pero en la evaluación inicial revisamos qué frecuencia tiene sentido para ti.",
   },
   {
     id: "cancelacion-de-sesion",
@@ -94,21 +99,21 @@ const faqItems: FaqItem[] = [
   },
   {
     id: "primera-clase",
-    question: "¿Cómo es la primera clase?",
+    question: "¿Cómo es la evaluación inicial?",
     answer:
-      "La primera clase es siempre gratis y sirve para conocernos. Conversamos sobre tus objetivos, hago una evaluación básica de tu nivel y coordinamos cómo seguir. Sin presión ni compromiso. Si después de la sesión sientes que encajamos, coordinamos el plan; si no, ningún problema.",
+      "La evaluación inicial es gratis y sin compromiso. Conversamos sobre tus objetivos, revisamos tu nivel y cómo te mueves, y vemos cómo podría seguir el entrenamiento. Sin presión ni pago por adelantado. Si después te hace sentido, coordinamos un plan; si no, ningún problema.",
   },
   {
     id: "precios",
     question: "¿Cuánto cuestan las clases de TRX?",
     answer:
-      "Las clases de TRX tienen dos opciones: la sesión individual tiene un valor de $15.000, y el plan mensual de 3 veces por semana (~12 sesiones) tiene un valor de $160.000, lo que equivale a aproximadamente $13.300 por sesión. La primera clase es siempre gratis.",
+      "Las clases de TRX tienen dos opciones: la sesión individual tiene un valor de $15.000, y el plan mensual de 3 veces por semana (~12 sesiones) tiene un valor de $160.000, lo que equivale a aproximadamente $13.300 por sesión. Antes puedes hacer una evaluación inicial gratis y sin compromiso.",
   },
   {
     id: "bajar-de-peso",
     question: "¿El TRX sirve para bajar de peso?",
     answer:
-      "El entrenamiento con TRX ayuda a desarrollar masa muscular y mejorar el metabolismo, lo que contribuye a la pérdida de grasa. Para resultados de composición corporal, lo ideal es combinar el entrenamiento con buenos hábitos de alimentación, algo sobre lo que también podemos conversar.",
+      "El TRX puede ser parte de un plan para moverte más y ganar fuerza, pero no prometo cambios de peso ni de composición corporal. Si ese es tu objetivo, lo conversamos en la evaluación inicial y, para indicaciones de alimentación, corresponde apoyarte en un profesional de nutrición.",
   },
   {
     id: "donde-clases",
@@ -120,13 +125,13 @@ const faqItems: FaqItem[] = [
     id: "venden-equipos",
     question: "¿Vendes equipos TRX?",
     answer:
-      "No vendemos equipos. El TRX y todos los implementos los llevo yo a cada sesión. Tú solo necesitas espacio para moverte, ropa cómoda y zapatillas.",
+      "No vendo equipos. El TRX y todos los implementos los llevo yo a cada sesión. Tú solo necesitas espacio para moverte, ropa cómoda y zapatillas.",
   },
   {
     id: "como-agendar",
     question: "¿Cómo agendo una clase de TRX?",
     answer:
-      "Escríbeme por WhatsApp, coordinamos día y hora según tu disponibilidad, y la primera clase es gratis. Sin compromiso ni pago por adelantado.",
+      "Escríbeme por WhatsApp, coordinamos día y hora según tu disponibilidad, y partes con una evaluación inicial gratis y sin compromiso. Sin pago por adelantado.",
   },
 ];
 
@@ -171,7 +176,7 @@ type ServicePlan = {
 const servicePlans: ServicePlan[] = [
   {
     name: "Evaluación inicial TRX",
-    description: "Primera sesión para conocernos y ver tu punto de partida. Sin costo ni compromiso.",
+    description: "Evaluación inicial gratis y sin compromiso para conocernos y ver tu punto de partida.",
     price: "0",
     priceCurrency: "CLP",
   },
@@ -198,6 +203,8 @@ const serviceCards = [
     title: "Sesión individual",
     price: "$15.000",
     body: "Una hora de entrenamiento 1 a 1, adaptada a tu nivel y a lo que buscas. Sin compromiso de continuidad: sirve para probar o para complementar tu rutina.",
+    cta: "Consultar por una sesión individual",
+    ctaMessage: "Hola Nico, vi el sitio de TRX Concept. Me interesa una sesión individual para probar.",
   },
   {
     title: "Plan mensual",
@@ -205,14 +212,20 @@ const serviceCards = [
     featured: true,
     badge: "Más elegido",
     body: "3 sesiones por semana, unas 12 al mes: queda en cerca de $13.300 por sesión. Voy siguiendo tu avance y ajusto el programa mes a mes.",
+    cta: "Preguntar por el plan mensual",
+    ctaMessage: "Hola Nico, vi el sitio de TRX Concept. Quiero saber más sobre el plan mensual.",
   },
   {
     title: "TRX Suspension Trainer™",
     body: "El sistema clásico de entrenamiento en suspensión: fuerza, core y movilidad usando solo el peso de tu cuerpo. El mismo ejercicio se ajusta a cualquier nivel cambiando el ángulo.",
+    cta: "Preguntar por el método TRX",
+    ctaMessage: "Hola Nico, vi el sitio de TRX Concept. Quiero saber si el método TRX es adecuado para mí.",
   },
   {
     title: "TRX Rip Trainer®",
     body: "Una barra con resistencia elástica asimétrica para trabajar potencia, rotación y estabilidad del core. Pensado para deportistas y para quienes ya quieren un trabajo más explosivo.",
+    cta: "Preguntar por el Rip Trainer",
+    ctaMessage: "Hola Nico, vi el sitio de TRX Concept. Quiero saber más sobre el TRX Rip Trainer®.",
   },
 ];
 
@@ -254,6 +267,7 @@ const renderServiceCards = () =>
           <h3>${card.title}</h3>
           ${card.price ? `<p class="pricing-price">${card.price}</p>` : ""}
           <p>${card.body}</p>
+          <a class="btn btn--${card.featured ? "primary" : "outline"}" href="https://wa.me/56984402664" data-wa data-wa-msg="${card.ctaMessage}" target="_blank" rel="noopener noreferrer">${card.cta}</a>
         </div>`
     )
     .join("");
@@ -268,6 +282,7 @@ export const pages = {
     description: `Entrenamiento personal 1 a 1 con TRX en Santiago, a domicilio o al aire libre. Para empezar de a poco o retomar seguro. Evaluación inicial gratis por WhatsApp.`,
     canonical: pageUrl("/"),
     ogTitle: `Clases de TRX en Santiago, 1 a 1 a domicilio | TRX Concept`,
+    ogImageAlt: "Nicolás Echeverría junto al texto Entrena con Nico, entrenador certificado TRX en Santiago",
     structuredData: {
       "@context": "https://schema.org",
       "@type": ["LocalBusiness", "HealthAndBeautyBusiness"],
@@ -315,9 +330,14 @@ export const pages = {
     hero: {
       title: "Clases de TRX a domicilio en Santiago",
       description:
-        "Sesiones 1 a 1 o plan mensual, en tu casa o al aire libre. Sin mensualidad fija, sin traslados, sin equipos que compres tú.",
+        "Sesión individual o plan mensual, siempre 1 a 1, en tu casa o al aire libre. Sin membresía de gimnasio ni equipos que tengas que comprar.",
       image: heroServicios,
       imageAlt: "Correas de suspensión TRX amarillas colgando, listas para una sesión al aire libre",
+      cta: {
+        label: "Agendar evaluación inicial",
+        message:
+          "Hola Nico, vi los servicios de TRX Concept. Me gustaría agendar la evaluación inicial gratis y sin compromiso.",
+      },
     },
     content: `<!-- SERVICES / PRICING -->
       <section class="section-alt">
@@ -326,6 +346,7 @@ export const pages = {
             <h2>Servicios y precios</h2>
             <p class="section-intro">Sesiones 1 a 1 en tu casa o en un parque cercano. Tú eliges cómo partir.</p>
           </div>
+          <p class="text-center">La evaluación inicial es gratis y sin compromiso: conversamos, revisamos tu punto de partida y decides con calma si quieres seguir.</p>
           <div class="services-grid">
             ${renderServiceCards()}
           </div>
@@ -341,7 +362,7 @@ export const pages = {
           <ol class="steps-list">
             <li><strong>Escríbeme por WhatsApp</strong> y cuéntame qué te gustaría lograr.</li>
             <li><strong>Coordinamos día, hora y lugar</strong> según lo que te acomode.</li>
-            <li><strong>Tu primera clase es gratis.</strong> Sin compromiso: sirve para conocernos y ver tu punto de partida.</li>
+            <li><strong>Partes con una evaluación inicial gratis y sin compromiso.</strong> Sirve para conocernos, revisar tu punto de partida y decidir con calma si quieres seguir.</li>
           </ol>
           <p class="text-center">No vendo equipos TRX ni necesitas comprar nada: el equipo lo llevo yo a cada sesión.</p>
         </div>
@@ -375,8 +396,8 @@ export const pages = {
               <p>Nunca has entrenado o llevas años sin hacerlo. Partimos desde donde estás, con calma y sin juicio.</p>
             </div>
             <div class="audience-item">
-              <h3>Personas con lesiones</h3>
-              <p>Si tienes una molestia de rodilla, espalda u hombro, adaptamos cada ejercicio con criterio. Esto es entrenamiento, no tratamiento médico.</p>
+              <h3>Personas con molestias</h3>
+              <p>Si tienes una molestia de rodilla, espalda u hombro, conversamos cómo avanzar con criterio. Esto es entrenamiento, no tratamiento médico.</p>
             </div>
             <div class="audience-item">
               <h3>Profesionales ocupados</h3>
@@ -404,8 +425,8 @@ export const pages = {
             movilidad.
           </p>
           <p>
-            Antes de la primera sesión conversamos sobre tu objetivo, tu experiencia y cualquier
-            molestia relevante. Con eso armo un programa que tenga sentido para ti, no una rutina
+            La evaluación inicial gratis y sin compromiso parte conversando sobre tu objetivo, tu experiencia y
+            cualquier molestia relevante. Con eso armamos una forma de avanzar que tenga sentido para ti, no una rutina
             genérica.
           </p>
           <p>
@@ -470,7 +491,7 @@ export const pages = {
   },
   faq: {
     title: `Preguntas frecuentes sobre clases de TRX`,
-    description: `Resolvemos tus dudas sobre clases de TRX en Santiago: experiencia previa, equipos, horarios, precios y cómo reservar. Primera clase gratis.`,
+    description: `Resolvemos tus dudas sobre clases de TRX en Santiago: experiencia previa, equipos, horarios, precios y cómo reservar. Evaluación inicial gratis.`,
     canonical: pageUrl("/preguntas-frecuentes/"),
     breadcrumb: [
       { name: "Inicio", item: pageUrl("/") },
@@ -480,7 +501,7 @@ export const pages = {
     hero: {
       title: "Preguntas frecuentes sobre clases de TRX",
       description:
-        'Desde si necesitas experiencia hasta cómo reservar tu primera clase gratis. También puedes revisar nuestros <a href="/servicios/">servicios</a> o <a href="/sobre-mi/">conocer a tu entrenador</a>.',
+        'Desde si necesitas experiencia hasta cómo reservar tu evaluación inicial gratis. También puedes revisar nuestros <a href="/servicios/">servicios</a> o <a href="/sobre-mi/">conocer a tu entrenador</a>.',
       image: heroFaq,
       imageAlt:
         "Parque al aire libre en Santiago con equipamiento para entrenar, uno de los lugares donde damos las clases",
@@ -530,16 +551,16 @@ export const pages = {
               </thead>
               <tbody>
                 <tr>
-                  <td><code>site_consent</code></td>
-                  <td>Almacena tu preferencia de cookies (aceptar / rechazar)</td>
-                  <td>12 meses</td>
-                  <td>Necesaria / preferencias</td>
+                  <td data-label="Nombre"><code>site_consent</code></td>
+                  <td data-label="Propósito">Almacena tu preferencia de cookies (aceptar / rechazar)</td>
+                  <td data-label="Duración">12 meses</td>
+                  <td data-label="Tipo">Necesaria / preferencias</td>
                 </tr>
                 <tr>
-                  <td><code>_ga</code>, <code>_ga_*</code></td>
-                  <td>Google Analytics 4 — análisis de tráfico agregado y anónimo. Solo se activan si aceptas las cookies.</td>
-                  <td>Hasta 2 años</td>
-                  <td>Analítica (opcional)</td>
+                  <td data-label="Nombre"><code>_ga</code>, <code>_ga_*</code></td>
+                  <td data-label="Propósito">Google Analytics 4 — análisis de tráfico agregado y anónimo. Solo se activan si aceptas las cookies.</td>
+                  <td data-label="Duración">Hasta 2 años</td>
+                  <td data-label="Tipo">Analítica (opcional)</td>
                 </tr>
               </tbody>
             </table>

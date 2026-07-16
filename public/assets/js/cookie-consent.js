@@ -43,6 +43,10 @@ function hideBanner() {
   document.getElementById("cookie-banner")?.remove();
 }
 
+function announceConsentResolution() {
+  document.dispatchEvent(new CustomEvent("site:consent-resolved"));
+}
+
 const consent = getCookie(CONSENT_COOKIE);
 if (consent === "accepted") {
   loadGA4();
@@ -51,19 +55,52 @@ if (consent === "accepted") {
   hideBanner();
 } else {
   // The banner is display:none by default so it can't flash before this
-  // script runs; it only appears when no consent has been stored yet.
-  document.getElementById("cookie-banner")?.classList.add("is-visible");
+  // script runs. On mobile, let the first page introduction and its CTA have
+  // the viewport to themselves; consent appears as soon as that intro leaves.
+  const banner = document.getElementById("cookie-banner");
+  const mobileViewport = window.matchMedia("(max-width: 679px)");
+  const intro = document.querySelector(
+    "#main-content > .hero, #main-content > .page-hero, #main-content > header:first-child, #main-content > section:first-child"
+  );
+  const showBanner = () => banner?.classList.add("is-visible");
+
+  if (!mobileViewport.matches || !intro || !("IntersectionObserver" in window)) {
+    showBanner();
+  } else {
+    const introObserver = new IntersectionObserver((entries) => {
+      if (entries.some((entry) => !entry.isIntersecting)) {
+        showBanner();
+        introObserver.disconnect();
+      }
+    });
+    introObserver.observe(intro);
+
+    // A device rotation or desktop resize should never leave the consent
+    // control needlessly hidden.
+    mobileViewport.addEventListener(
+      "change",
+      (event) => {
+        if (!event.matches) {
+          showBanner();
+          introObserver.disconnect();
+        }
+      },
+      { once: true }
+    );
+  }
 }
 
 document.getElementById("cookie-accept")?.addEventListener("click", () => {
   setCookie(CONSENT_COOKIE, "accepted");
   loadGA4();
   hideBanner();
+  announceConsentResolution();
 });
 
 document.getElementById("cookie-reject")?.addEventListener("click", () => {
   setCookie(CONSENT_COOKIE, "rejected");
   hideBanner();
+  announceConsentResolution();
 });
 
 document.getElementById("cookie-manage-btn")?.addEventListener("click", () => {

@@ -16,7 +16,7 @@ const { image, name, quote, outcome } = Astro.props;
   <div class="testimonial-header">
     <Picture
       src={image}
-      alt={name}
+      alt={`Retrato de ${name}`}
       formats={["avif", "webp"]}
       fallbackFormat="webp"
       quality={60}

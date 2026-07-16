@@ -9,7 +9,8 @@
   <div class="container discovery-inner">
     <h2>¿Es para ti? Averigüémoslo en 30 segundos</h2>
     <p class="discovery-sub">
-      Tres preguntas y te dejo un mensaje de WhatsApp listo para enviar. Sin formularios largos, sin correo.
+      Tres preguntas y te dejo un mensaje de WhatsApp listo para enviar. La evaluación inicial es gratis y sin
+      compromiso.
     </p>
 
     <div class="discovery-card" data-discovery>
@@ -68,19 +69,19 @@
           <legend class="discovery-q" tabindex="-1">3. ¿Dónde y cuándo te acomoda?</legend>
           <label class="discovery-field">
             <span class="discovery-label">Tu comuna</span>
-            <select name="comuna">
-              <option value="Providencia">Providencia</option>
-              <option value="Las Condes">Las Condes</option>
-              <option value="Vitacura">Vitacura</option>
-              <option value="Ñuñoa">Ñuñoa</option>
-              <option value="La Reina">La Reina</option>
-              <option value="Lo Barnechea">Lo Barnechea</option>
-              <option value="Santiago Centro">Santiago Centro</option>
-              <option value="Macul">Macul</option>
-              <option value="Peñalolén">Peñalolén</option>
-              <option value="otra comuna">Otra comuna</option>
-            </select>
+            <input name="comuna" list="comunas-sugeridas" placeholder="Ej.: Ñuñoa" autocomplete="address-level3" />
           </label>
+          <datalist id="comunas-sugeridas">
+            <option value="Providencia"></option>
+            <option value="Las Condes"></option>
+            <option value="Vitacura"></option>
+            <option value="Ñuñoa"></option>
+            <option value="La Reina"></option>
+            <option value="Lo Barnechea"></option>
+            <option value="Santiago Centro"></option>
+            <option value="Macul"></option>
+            <option value="Peñalolén"></option>
+          </datalist>
           <fieldset class="discovery-inline">
             <legend class="discovery-label">Horarios que te acomodan <small>(puedes marcar más de uno)</small></legend>
             <div class="discovery-options discovery-options--row">
@@ -99,7 +100,7 @@
             class="discovery-error"
             id="discovery-error-3"
             role="alert"
-            data-error-msg="Marca al menos un horario para seguir."
+            data-error-msg="Completa ambos datos para seguir."
           >
           </p>
         </fieldset>
@@ -140,7 +141,13 @@
 
     <p class="discovery-fallback">
       ¿Prefieres escribir directo? {" "}
-      <a href="https://wa.me/56984402664" data-wa target="_blank" rel="noopener noreferrer">Preguntar por WhatsApp</a>
+      <a
+        href="https://wa.me/56984402664"
+        data-wa
+        data-wa-msg="Hola Nico, vi el sitio de TRX Concept. Quiero saber cómo funciona la evaluación inicial gratis y sin compromiso."
+        target="_blank"
+        rel="noopener noreferrer">Preguntar por WhatsApp</a
+      >
     </p>
   </div>
 </section>

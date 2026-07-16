@@ -138,7 +138,7 @@ a {
 }
 
 section {
-  padding-block: var(--space-3xl);
+  padding-block: clamp(var(--space-xl), 7vw, var(--space-3xl));
 }
 
 .container {
@@ -591,6 +591,16 @@ p {
   gap: var(--space-sm);
 }
 
+.hero-cta-note,
+.hero-price-note {
+  margin-top: var(--space-sm);
+}
+
+.hero-cta-note {
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+
 .hero-credit {
   position: absolute;
   bottom: var(--space-sm);
@@ -688,6 +698,12 @@ p.text-center {
 
 .section-alt {
   background: var(--surface);
+}
+
+.method .section-head,
+.service-model .section-head {
+  margin-left: 0;
+  text-align: left;
 }
 
 /* ─── DISCOVERY FLOW ─── */
@@ -821,7 +837,8 @@ p.text-center {
   color: var(--text-muted);
 }
 
-.discovery-field select {
+.discovery-field select,
+.discovery-field input {
   width: 100%;
   padding: 0.85rem 2.5rem 0.85rem 1rem;
   border: 1px solid var(--border);
@@ -838,11 +855,14 @@ p.text-center {
 }
 
 .discovery-field select:hover,
-.discovery-field select:focus {
+.discovery-field select:focus,
+.discovery-field input:hover,
+.discovery-field input:focus {
   border-color: var(--accent);
 }
 
-.discovery-field select:focus-visible {
+.discovery-field select:focus-visible,
+.discovery-field input:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
@@ -1193,6 +1213,18 @@ p.text-center {
 .model-icon .icon {
   width: 1.5rem;
   height: 1.5rem;
+}
+
+.service-model .model-list li {
+  padding-inline: 0;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--border);
+  border-radius: 0;
+}
+
+.service-model .model-list li:hover {
+  border-color: var(--border-strong);
 }
 
 /* ─── PRICING ─── */
@@ -1596,6 +1628,13 @@ p.text-center {
   margin-bottom: var(--space-xl);
 }
 
+.footer-reassurance {
+  max-width: 42rem;
+  margin: calc(var(--space-xl) * -0.5) auto var(--space-xl);
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+
 .copyright {
   color: var(--text-muted);
   font-size: 0.95rem;
@@ -1722,6 +1761,17 @@ p.text-center {
   pointer-events: auto;
 }
 
+/* Consent is intentionally resolved before another fixed action appears.
+   Keep this after the visible state so pending consent always wins. Without JS
+   this class is never added, preserving the no-JS CTA path. */
+.mobile-cta-bar.is-consent-pending,
+.mobile-cta-bar.is-armed.is-consent-pending,
+.mobile-cta-bar.is-contextual-cta-visible {
+  transform: translateY(120%);
+  opacity: 0;
+  pointer-events: none;
+}
+
 .mobile-cta-bar-primary {
   display: flex;
   flex: 1;
@@ -1746,8 +1796,8 @@ p.text-center {
 
 /* ─── COOKIE BANNER ─── */
 
-/* Compact consent card pinned to a corner, not a full-width bar, so it stays
-   clear of the hero CTAs on mobile and the floating WhatsApp button on desktop. */
+/* Consent stays fixed and easy to reach. On mobile JS waits until the opening
+   hero has left the viewport, so this card never competes with its H1 or CTA. */
 .cookie-banner {
   display: none;
   position: fixed;
@@ -1760,6 +1810,8 @@ p.text-center {
   border: 1px solid var(--border-strong);
   border-radius: var(--radius-card);
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+  max-height: calc(100dvh - 2 * var(--space-sm));
+  overflow-y: auto;
 }
 
 .cookie-banner.is-visible {
@@ -1931,6 +1983,12 @@ header .wa-icon {
   text-underline-offset: 2px;
 }
 
+.page-hero-cta {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--space-md);
+}
+
 /* Image-backed subpage hero: full-bleed photo behind a dark overlay so the
    white breadcrumb + headline stay legible. Falls back to the flat surface
    style above when a page has no hero image (e.g. legal pages). */
@@ -1987,6 +2045,11 @@ header .wa-icon {
   color: var(--text);
 }
 
+.not-found-suggestion {
+  margin-block: var(--space-md);
+  font-weight: 700;
+}
+
 /* ─── ABOUT SECTION ─── */
 
 .about-section {
@@ -2012,6 +2075,16 @@ header .wa-icon {
   color: var(--accent);
   text-decoration: underline;
   text-underline-offset: 2px;
+}
+
+.about-cta {
+  margin-top: var(--space-lg);
+  text-align: center;
+}
+
+.about-cta p {
+  margin-top: var(--space-sm);
+  font-size: 1rem;
 }
 
 .section-subtitle {
@@ -2056,6 +2129,9 @@ header .wa-icon {
   border-radius: var(--radius-card);
   padding: var(--space-lg) var(--space-md);
   transition: border-color var(--transition-fast);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .service-card:hover {
@@ -2077,6 +2153,11 @@ header .wa-icon {
   color: var(--text-muted);
   font-size: 1rem;
   line-height: 1.55;
+}
+
+.service-card .btn {
+  width: 100%;
+  margin-top: auto;
 }
 
 .service-card .pricing-price {
@@ -2193,6 +2274,48 @@ header .wa-icon {
   color: var(--text-muted);
 }
 
+@media screen and (max-width: 600px) {
+  .cookie-table-wrap {
+    overflow: visible;
+  }
+
+  .cookie-table,
+  .cookie-table tbody,
+  .cookie-table tr,
+  .cookie-table td {
+    display: block;
+    width: 100%;
+  }
+
+  .cookie-table thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+  }
+
+  .cookie-table tr {
+    padding-block: var(--space-sm);
+    border-bottom: 1px solid var(--border-strong);
+  }
+
+  .cookie-table td {
+    display: grid;
+    grid-template-columns: 6.5rem minmax(0, 1fr);
+    gap: var(--space-sm);
+    padding: var(--space-2xs) 0;
+    border: 0;
+  }
+
+  .cookie-table td::before {
+    content: attr(data-label);
+    color: var(--text);
+    font-weight: 700;
+  }
+}
+
 code {
   background: var(--surface);
   padding: 0.15rem 0.35rem;
@@ -2202,6 +2325,17 @@ code {
 }
 
 /* ─── RESPONSIVE ─── */
+
+@media screen and (min-width: 769px) and (max-height: 850px) {
+  .hero {
+    align-items: center;
+    padding-block: 8rem var(--space-xl);
+  }
+
+  .hero-title {
+    font-size: clamp(3.5rem, 7vw, 5rem);
+  }
+}
 
 @media screen and (max-width: 1024px) {
   .method-grid {
@@ -2250,7 +2384,7 @@ code {
   }
 
   section {
-    padding-block: var(--space-2xl);
+    padding-block: clamp(3.75rem, 12vw, 5rem);
   }
 
   .nav-list {
@@ -2298,9 +2432,7 @@ code {
     display: none;
   }
 
-  /* Top-align and tighten the hero on mobile so the whole fold — headline,
-     lead, signals and both CTAs — fits above the fixed consent card that floats
-     over the image below. */
+  /* Keep the first decision easy to scan on a narrow screen. */
   .hero {
     align-items: flex-start;
     text-align: center;
@@ -2368,35 +2500,66 @@ code {
   }
 
   body {
-    padding-bottom: 4.5rem;
+    padding-bottom: calc(4.5rem + env(safe-area-inset-bottom));
+  }
+
+  body:has(.cookie-banner.is-visible) {
+    padding-bottom: 0;
   }
 
   .btn-float-wa {
     display: none;
   }
 
-  /* While the sticky CTA bar is showing (past the hero) lift the card above it;
-     at the hero the bar is hidden, so the card rests low and clear of the hero
-     CTAs. */
-  body:has(.mobile-cta-bar.is-visible) .cookie-banner {
-    bottom: calc(4.75rem + env(safe-area-inset-bottom));
+  .cookie-banner.is-visible {
+    left: var(--space-sm);
+    right: var(--space-sm);
+    bottom: calc(var(--space-sm) + env(safe-area-inset-bottom));
+    padding: var(--space-sm);
   }
 }
 
 @media screen and (max-width: 480px) {
+  .hero {
+    padding-top: 4.75rem;
+  }
+
   .hero-title {
     font-size: clamp(2.1rem, 8.5vw, 2.8rem);
+    margin-bottom: 0.75rem;
+  }
+
+  .page-hero h1 {
+    max-width: 12ch;
+    margin-inline: auto;
+    font-size: clamp(2.4rem, 12vw, 3.25rem);
+    line-height: 0.98;
+  }
+
+  .footer {
+    padding-block: var(--space-xl) calc(var(--space-xl) + env(safe-area-inset-bottom));
+  }
+
+  .footer h2 {
+    font-size: clamp(2rem, 10vw, 2.75rem);
+  }
+
+  .footer-cta,
+  .footer-reassurance {
+    margin-bottom: var(--space-lg);
   }
 
   .hero-lead {
     font-size: 1rem;
     line-height: 1.4;
+    margin-bottom: var(--space-sm);
   }
 
   .hero-signals {
     flex-direction: column;
     align-items: center;
     gap: var(--space-2xs);
+    margin-bottom: 0.75rem;
   }
 
   .btn {
@@ -2406,6 +2569,8 @@ code {
   .hero-cta .btn {
     width: auto;
     min-width: 220px;
+    padding: 0.75rem 1rem;
+    font-size: 0.95rem;
   }
 
   .brand img {

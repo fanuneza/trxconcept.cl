@@ -58,9 +58,13 @@ const mobileSrcset = mobileVariants.map((v, i) => `${v.src} ${mobileWidths[i]}w`
         <li>10+ años entrenando en Santiago</li>
       </ul>
       <div class="hero-cta">
-        <WhatsAppLink message={waEval} class="btn btn--primary">Evaluación gratis</WhatsAppLink>
-        <a href="#descubre" class="btn btn--outline-light">Ver si esto es para mí</a>
+        <WhatsAppLink message={waEval} class="btn btn--primary">Agendar evaluación inicial gratis</WhatsAppLink>
+        <a href="#como-funciona" class="btn btn--outline-light">Ver cómo funciona y precios</a>
       </div>
+      <p class="hero-cta-note">Se abre WhatsApp con un mensaje listo. Nico coordina contigo personalmente.</p>
+      <p class="hero-price-note">
+        Sesión individual <a href="#pricing">$15.000</a> · plan mensual <a href="#pricing">$160.000</a>.
+      </p>
     </div>
   </div>
 </section>
@@ -69,8 +73,8 @@ const mobileSrcset = mobileVariants.map((v, i) => `${v.src} ${mobileWidths[i]}w`
 <div class="trust-bar">
   <div class="container">
     <ul class="trust-list">
-      <li>Método seguro y de bajo impacto</li>
-      <li>Sin mensualidad fija</li>
+      <li>Entrenamiento adaptado a tu nivel</li>
+      <li>Sin membresía de gimnasio</li>
       <li>El equipo TRX lo llevo yo</li>
     </ul>
   </div>
@@ -92,7 +96,7 @@ const mobileSrcset = mobileVariants.map((v, i) => `${v.src} ${mobileWidths[i]}w`
       <li class="fit-item">
         <span class="fit-icon"><Icon name="refresh" /></span>
         <h3>Retomas el ejercicio</h3>
-        <p>Quieres volver a moverte sin lesionarte ni desmotivarte en el intento.</p>
+        <p>Quieres volver a moverte con una progresión que se adapte a ti.</p>
       </li>
       <li class="fit-item">
         <span class="fit-icon"><Icon name="home" /></span>
@@ -106,8 +110,8 @@ const mobileSrcset = mobileVariants.map((v, i) => `${v.src} ${mobileWidths[i]}w`
       </li>
       <li class="fit-item">
         <span class="fit-icon"><Icon name="shield" /></span>
-        <h3>Cuidas rodilla o espalda</h3>
-        <p>Trabajo de bajo impacto y progresión gradual, adaptado a tu historial.</p>
+        <h3>Tienes una molestia</h3>
+        <p>Si hay molestia de rodilla o espalda, conversamos cómo avanzar con criterio y sin forzar.</p>
       </li>
       <li class="fit-item">
         <span class="fit-icon"><Icon name="activity" /></span>
@@ -120,8 +124,9 @@ const mobileSrcset = mobileVariants.map((v, i) => `${v.src} ${mobileWidths[i]}w`
       <div class="fit-note-body">
         <h3 class="fit-note-title">¿Cuándo conviene ver antes a un profesional de salud?</h3>
         <p>
-          Si tienes una lesión aguda, una cirugía reciente o un diagnóstico que requiere supervisión médica, primero
-          consulta con tu médico o kinesiólogo. Con su visto bueno, coordinamos el entrenamiento dentro de su alcance.
+          Si tienes una molestia reciente, una cirugía reciente o un diagnóstico que requiere supervisión médica,
+          primero consulta con tu médico o kinesiólogo. Con su visto bueno, coordinamos el entrenamiento dentro de su
+          alcance.
         </p>
       </div>
     </div>
@@ -138,8 +143,8 @@ const mobileSrcset = mobileVariants.map((v, i) => `${v.src} ${mobileWidths[i]}w`
     <div class="method-grid">
       <ul class="method-list">
         <li>
-          <strong>Empezamos con una conversación y un chequeo de movimiento.</strong>
-          <span>Veo cómo te mueves antes de cargar nada.</span>
+          <strong>Empezamos con una conversación y revisamos cómo te mueves.</strong>
+          <span>Primero entiendo tu punto de partida antes de subir la exigencia.</span>
         </li>
         <li>
           <strong>Adaptamos cada ejercicio a tu nivel y tu historial.</strong>
@@ -177,6 +182,28 @@ const mobileSrcset = mobileVariants.map((v, i) => `${v.src} ${mobileWidths[i]}w`
   </div>
 </section>
 
+<!-- EARLY ANSWERS — resolve the highest-anxiety questions before the practical decision -->
+<section class="faq-home quick-answers">
+  <div class="container faq-list">
+    <div class="section-head">
+      <h2>Lo importante antes de partir</h2>
+    </div>
+    <details class="faq-item">
+      <summary>¿Necesito experiencia previa?</summary>
+      <p class="faq-answer">
+        No. El TRX se adapta a tu nivel. Si nunca has entrenado, empezamos desde lo más básico y avanzamos a tu ritmo.
+      </p>
+    </details>
+    <details class="faq-item">
+      <summary>¿Qué pasa si tengo una molestia de rodilla o espalda?</summary>
+      <p class="faq-answer">
+        Antes de empezar conversamos tu situación. El entrenamiento se adapta dentro de su alcance; si hace falta, lo
+        coordinamos con tu médico o kinesiólogo.
+      </p>
+    </details>
+  </div>
+</section>
+
 <!-- SERVICE MODEL — logistics: "here's how it works" -->
 <section id="como-funciona" class="service-model">
   <div class="container">
@@ -203,13 +230,75 @@ const mobileSrcset = mobileVariants.map((v, i) => `${v.src} ${mobileWidths[i]}w`
       </li>
       <li>
         <span class="model-icon"><Icon name="wallet" /></span>
-        <span>Sin mensualidad fija</span>
+        <span>Sin membresía de gimnasio</span>
       </li>
       <li>
         <span class="model-icon"><Icon name="sunrise" /></span>
         <span>Ritmo flexible, mañanas desde las 6 AM</span>
       </li>
     </ul>
+  </div>
+</section>
+
+<!-- PRICING — make the practical decision visible before the longer proof sections -->
+<section id="pricing" class="pricing">
+  <div class="container">
+    <div class="section-head text-center pricing-head">
+      <h2>Planes y precios</h2>
+      <p class="section-intro">
+        Precios claros y a la vista. Empiezas con una evaluación inicial gratis y sin compromiso.
+      </p>
+    </div>
+    <div class="pricing-cards">
+      <PricingCard
+        title="Evaluación inicial"
+        price="Gratis"
+        description="Una sesión para conocernos y ver tu punto de partida."
+        features={[
+          "Conversamos tu objetivo y tus molestias",
+          "Revisamos tu nivel y cómo te mueves",
+          "Sin compromiso ni pago por adelantado",
+        ]}
+        cta="Agendar evaluación inicial gratis"
+        ctaClass="btn btn--outline"
+        ctaMessage={waEval}
+        featured={false}
+        entry={true}
+        badge="Empieza aquí"
+      />
+      <PricingCard
+        title="Plan mensual"
+        price="$160.000"
+        per="3 veces por semana · ~12 sesiones al mes"
+        perSession="≈ $13.300 por sesión"
+        features={[
+          "La forma más efectiva de avanzar",
+          "Seguimiento personalizado continuo",
+          "Mejor precio por sesión",
+          "Horario flexible desde las 6 AM",
+        ]}
+        cta="Consultar el plan"
+        ctaClass="btn btn--primary"
+        ctaMessage={waPlan}
+        featured={true}
+        badge="Más elegido"
+      />
+      <PricingCard
+        title="Sesión individual"
+        price="$15.000"
+        description="Para probar o entrenar a tu propio ritmo."
+        features={[
+          "1 hora de entrenamiento personalizado",
+          "En casa o al aire libre",
+          "Adaptado a tu nivel",
+          "Sin compromiso de continuidad",
+        ]}
+        cta="Consultar por WhatsApp"
+        ctaClass="btn btn--outline"
+        ctaMessage={waSingle}
+      />
+    </div>
+    <p class="pricing-note">Cancelaciones sin costo avisando con más de 24 horas.</p>
   </div>
 </section>
 
@@ -281,66 +370,6 @@ const mobileSrcset = mobileVariants.map((v, i) => `${v.src} ${mobileWidths[i]}w`
 <!-- DISCOVERY FLOW — qualify + build intent, right before the ask -->
 <DiscoveryFlow />
 
-<!-- PRICING — low-risk price after they're convinced -->
-<section id="pricing" class="pricing">
-  <div class="container">
-    <div class="section-head text-center pricing-head">
-      <h2>Planes y precios</h2>
-      <p class="section-intro">Precios claros y a la vista. Empiezas con una evaluación gratis.</p>
-    </div>
-    <div class="pricing-cards">
-      <PricingCard
-        title="Evaluación inicial"
-        price="Gratis"
-        description="Una sesión para conocernos y ver tu punto de partida."
-        features={[
-          "Conversamos tu objetivo y tus molestias",
-          "Chequeo básico de movimiento",
-          "Sin compromiso ni pago por adelantado",
-        ]}
-        cta="Agendar evaluación gratis"
-        ctaClass="btn btn--outline"
-        ctaMessage={waEval}
-        featured={false}
-        entry={true}
-        badge="Empieza aquí"
-      />
-      <PricingCard
-        title="Plan mensual"
-        price="$160.000"
-        per="3 veces por semana · ~12 sesiones al mes"
-        perSession="≈ $13.300 por sesión"
-        features={[
-          "La forma más efectiva de avanzar",
-          "Seguimiento personalizado continuo",
-          "Mejor precio por sesión",
-          "Horario flexible desde las 6 AM",
-        ]}
-        cta="Consultar el plan"
-        ctaClass="btn btn--primary"
-        ctaMessage={waPlan}
-        featured={true}
-        badge="Más elegido"
-      />
-      <PricingCard
-        title="Sesión individual"
-        price="$15.000"
-        description="Para probar o entrenar a tu propio ritmo."
-        features={[
-          "1 hora de entrenamiento personalizado",
-          "En casa o al aire libre",
-          "Adaptado a tu nivel",
-          "Sin compromiso de continuidad",
-        ]}
-        cta="Consultar por WhatsApp"
-        ctaClass="btn btn--outline"
-        ctaMessage={waSingle}
-      />
-    </div>
-    <p class="pricing-note">Cancelaciones sin costo avisando con más de 24 horas.</p>
-  </div>
-</section>
-
 <!-- FAQ (condensed) — final objections -->
 <section id="faq-home" class="faq-home section-alt">
   <div class="container faq-list">
@@ -348,29 +377,16 @@ const mobileSrcset = mobileVariants.map((v, i) => `${v.src} ${mobileWidths[i]}w`
       <h2>Preguntas frecuentes</h2>
     </div>
     <details class="faq-item">
-      <summary>¿Necesito experiencia previa?</summary>
-      <p class="faq-answer">
-        No. El TRX se adapta a tu nivel. Si nunca has entrenado, empezamos desde lo más básico y avanzamos a tu ritmo.
-      </p>
-    </details>
-    <details class="faq-item">
-      <summary>¿Es seguro si tengo una molestia de rodilla o espalda?</summary>
-      <p class="faq-answer">
-        Es un método de bajo impacto y ajustable. Antes de empezar conversamos tu situación y, si hace falta, coordino
-        con tu médico o kinesiólogo. Es entrenamiento con criterio, no tratamiento médico.
-      </p>
-    </details>
-    <details class="faq-item">
       <summary>¿Dónde son las clases?</summary>
       <p class="faq-answer">
         A domicilio o al aire libre en Santiago, principalmente oriente y centro. El equipo lo llevo yo.
       </p>
     </details>
     <details class="faq-item">
-      <summary>¿Qué incluye la evaluación gratis?</summary>
+      <summary>¿Qué incluye la evaluación inicial?</summary>
       <p class="faq-answer">
-        Una sesión para conocernos: conversamos tus objetivos, hago una evaluación básica de tu nivel y coordinamos cómo
-        seguir. Sin presión ni compromiso.
+        Una evaluación inicial gratis y sin compromiso: conversamos tus objetivos, revisamos tu nivel y vemos cómo
+        seguir. Sin presión ni pago por adelantado.
       </p>
     </details>
     <p class="faq-home-more text-center">

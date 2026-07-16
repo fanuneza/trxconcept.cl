@@ -1,6 +1,8 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import FuzzyRedirect from "@jdevalk/astro-seo-graph/FuzzyRedirect.astro";
+import WhatsAppLink from "../components/WhatsAppLink.astro";
+import { WHATSAPP_MESSAGE_EVALUATION } from "../data/site";
 
 const page = {
   title: "Página no encontrada",
@@ -18,13 +20,19 @@ const page = {
     <div class="container page-hero-inner">
       <p>404</p>
       <h1>Página no encontrada</h1>
-      <p>La página que buscas no existe o fue movida. Puedes volver al inicio o revisar los servicios disponibles.</p>
-      <div style="font-weight: bold; margin: 1.5rem 0;">
+      <p>
+        La página que buscas no existe o fue movida. Puedes volver al inicio, revisar los <a href="/servicios/"
+          >servicios</a
+        > o escribir si buscabas clases de TRX en Santiago.
+      </p>
+      <div class="not-found-suggestion">
         <FuzzyRedirect />
       </div>
       <div class="hero-cta">
         <a class="btn btn--primary" href="/">Volver al inicio</a>
-        <a class="btn btn--outline-light" href="/servicios/">Ver servicios</a>
+        <WhatsAppLink message={WHATSAPP_MESSAGE_EVALUATION} class="btn btn--outline-light">
+          Agendar evaluación inicial
+        </WhatsAppLink>
       </div>
     </div>
   </section>

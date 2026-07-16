@@ -33,7 +33,7 @@
   const WA_NUMBER = document.documentElement.dataset.waNumber || "56984402664";
   const WA_DEFAULT =
     document.documentElement.dataset.waDefaultMsg ||
-    "Hola Nico, vi el sitio de TRX Concept. Me gustaría agendar la evaluación gratis.";
+    "Hola Nico, vi el sitio de TRX Concept. Me gustaría agendar la evaluación inicial gratis y sin compromiso.";
   const waHref = (msg) => `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg || WA_DEFAULT)}`;
   document.querySelectorAll("[data-wa]").forEach((el) => {
     el.href = waHref(el.getAttribute("data-wa-msg"));
@@ -70,17 +70,49 @@
   // only when JS + IntersectionObserver are available and a hero exists.
   const ctaBar = document.querySelector(".mobile-cta-bar");
   const heroEl = document.getElementById("hero");
-  if (ctaBar && heroEl && "IntersectionObserver" in window) {
-    ctaBar.classList.add("is-armed");
-    const ctaObserver = new IntersectionObserver(
-      (entries) => {
+  if (ctaBar) {
+    const consentCookie = document.documentElement.dataset.consentCookie || "site_consent";
+    const savedConsent = document.cookie
+      .split("; ")
+      .find((row) => row.startsWith(`${consentCookie}=`))
+      ?.split("=")[1];
+
+    // Consent is a decision of its own, not a layer on top of a conversion
+    // action. Keep the mobile CTA out of the way until the visitor answers;
+    // cookie-consent.js emits the event after it has stored that answer.
+    if (savedConsent !== "accepted" && savedConsent !== "rejected") {
+      ctaBar.classList.add("is-consent-pending");
+      document.addEventListener("site:consent-resolved", () => ctaBar.classList.remove("is-consent-pending"), {
+        once: true,
+      });
+    }
+
+    if (heroEl && "IntersectionObserver" in window) {
+      ctaBar.classList.add("is-armed");
+      const ctaObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            ctaBar.classList.toggle("is-visible", !entry.isIntersecting);
+          });
+        },
+        { rootMargin: "0px 0px -10% 0px" }
+      );
+      ctaObserver.observe(heroEl);
+    }
+
+    // Inline primary actions and the footer should never compete with the
+    // persistent bar. Track all visible conversion contexts as one state.
+    if ("IntersectionObserver" in window) {
+      const visibleContexts = new Set();
+      const contextObserver = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
-          ctaBar.classList.toggle("is-visible", !entry.isIntersecting);
+          if (entry.isIntersecting) visibleContexts.add(entry.target);
+          else visibleContexts.delete(entry.target);
         });
-      },
-      { rootMargin: "0px 0px -10% 0px" }
-    );
-    ctaObserver.observe(heroEl);
+        ctaBar.classList.toggle("is-contextual-cta-visible", visibleContexts.size > 0);
+      });
+      document.querySelectorAll("main .btn--primary, #footer").forEach((element) => contextObserver.observe(element));
+    }
   }
 
   // ── Discovery flow ──────────────────────────────────────────────
@@ -137,7 +169,9 @@
   };
 
   const value = (name) => {
-    const el = form.querySelector(`input[name="${name}"]:checked, select[name="${name}"]`);
+    const el = form.querySelector(
+      `input[name="${name}"]:checked, input[name="${name}"]:not([type="radio"]):not([type="checkbox"]), select[name="${name}"]`
+    );
     return el ? el.value : "";
   };
 
@@ -152,6 +186,11 @@
     return vals[0] || "";
   };
 
+  const FIELD_ERROR = {
+    comuna: "Escribe tu comuna para seguir.",
+    horario: "Marca al menos un horario para seguir.",
+  };
+
   // Every named control group in the step must have a value (e.g. step 3
   // has both a comuna <select> and a horario radio group).
   const unansweredName = (index) => {
@@ -161,7 +200,8 @@
       const name = control.getAttribute("name");
       if (!name || seen.has(name)) continue;
       seen.add(name);
-      if (!value(name)) return name;
+      const answered = control.type === "checkbox" ? checkedList(name) : value(name);
+      if (!answered) return name;
     }
     return null;
   };
@@ -198,7 +238,7 @@
     const horario = checkedList("horario") || "cuando se pueda";
     let objetivo = OBJETIVO[value("objetivo")] || "quiero empezar a entrenar";
     objetivo = objetivo.charAt(0).toUpperCase() + objetivo.slice(1);
-    return `Hola Nico, vi el sitio de TRX Concept. ${objetivo}, ${MOLESTIA[value("molestia")] || "sin lesiones"} y entreno en ${comuna} (${horario}). Me interesa la evaluación gratis.`;
+    return `Hola Nico, vi el sitio de TRX Concept. ${objetivo}, ${MOLESTIA[value("molestia")] || "sin lesiones"} y entreno en ${comuna} (${horario}). Me interesa la evaluación inicial gratis y sin compromiso.`;
   };
 
   // Personalized closing screen: the headline + lead adapt to the visitor's
@@ -266,7 +306,7 @@
         const errorEl = steps[current].querySelector(".discovery-error");
         // Inject the message now so it lands in the live region as fresh
         // content, which role="alert" announces reliably.
-        if (errorEl) errorEl.textContent = errorEl.dataset.errorMsg || "";
+        if (errorEl) errorEl.textContent = FIELD_ERROR[missing] || errorEl.dataset.errorMsg || "";
         if (invalid) {
           invalid.setAttribute("aria-invalid", "true");
           if (errorEl && errorEl.id) invalid.setAttribute("aria-describedby", errorEl.id);
@@ -295,12 +335,9 @@
       showStep(0, true);
     });
   }
-  // Answering clears the step's validation error right away.
-  form.addEventListener("change", (e) => {
-    if (e.target && (e.target.type === "radio" || e.target.type === "checkbox")) {
-      clearError(current);
-    }
-  });
+  // Answering or editing a field clears the step's validation error right away.
+  form.addEventListener("input", () => clearError(current));
+  form.addEventListener("change", () => clearError(current));
   form.addEventListener("submit", (e) => e.preventDefault());
 
   showStep(0, false);

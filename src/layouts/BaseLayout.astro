@@ -63,7 +63,9 @@ if (page.structuredData) {
       noindex={noindex}
       ogType={page.ogType ?? "website"}
       ogImage={page.ogImage ?? defaultOgImage}
-      ogImageAlt={page.title}
+      ogTitle={page.ogTitle ?? page.title}
+      ogDescription={page.ogDescription ?? page.description}
+      ogImageAlt={page.ogImageAlt ?? "Nicolás Echeverría, entrenador certificado TRX en Santiago"}
       ogImageWidth={1200}
       ogImageHeight={630}
       siteName="TRX Concept"
@@ -121,8 +123,8 @@ if (page.structuredData) {
     <main id="main-content">
       <slot />
     </main>
-    <Footer />
-    <MobileCtaBar />
+    <Footer showCta={!noindex} />
+    {!noindex && <MobileCtaBar />}
     <CookieBanner />
     <script is:inline src="/assets/js/cookie-consent.js" defer></script>
   </body>

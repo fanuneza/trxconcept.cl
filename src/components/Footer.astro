@@ -3,17 +3,37 @@ import { site } from "../data/site";
 import WhatsAppLink from "./WhatsAppLink.astro";
 
 const currentYear = new Date().getFullYear();
+
+interface Props {
+  showCta?: boolean;
+}
+
+const { showCta = true } = Astro.props;
 ---
 
-<WhatsAppLink href={site.getWhatsAppHref()} class="btn-float-wa" aria-label={site.whatsappLabel} />
+{showCta && <WhatsAppLink href={site.getWhatsAppHref()} class="btn-float-wa" aria-label={site.whatsappLabel} />}
 
-<footer id="footer" class="footer">
-  <h2>La evaluación inicial es gratis y sin compromiso.</h2>
-  <div class="footer-cta">
-    <WhatsAppLink href={site.getWhatsAppHref(site.whatsappDefaultMessage)} class="btn btn--primary">
-      Agendar evaluación gratis
-    </WhatsAppLink>
-  </div>
+<footer id="footer" class:list={["footer", { "footer--compact": !showCta }]}>
+  {
+    showCta && (
+      <>
+        <h2>La evaluación inicial es gratis y sin compromiso.</h2>
+        <div class="footer-cta">
+          <WhatsAppLink href={site.getWhatsAppHref(site.whatsappDefaultMessage)} class="btn btn--primary">
+            Agendar evaluación inicial
+          </WhatsAppLink>
+        </div>
+        <p class="footer-reassurance">
+          Nico te responde personalmente para coordinar la evaluación inicial. Si prefieres no usar WhatsApp, puedes
+          escribirle por
+          <a href={site.instagram} target="_blank" rel="noopener noreferrer me">
+            Instagram
+          </a>
+          .
+        </p>
+      </>
+    )
+  }
   <p class="copyright">&copy; {currentYear} TRX Concept. Todos los derechos reservados.</p>
   <p class="site-credit">
     <span>Sitio web desarrollado con</span>

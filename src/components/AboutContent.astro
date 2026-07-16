@@ -1,6 +1,8 @@
 ---
 import { Picture } from "astro:assets";
 import nicoImage from "../assets/images/nico.webp";
+import WhatsAppLink from "./WhatsAppLink.astro";
+import { WHATSAPP_MESSAGE_EVALUATION } from "../data/site";
 ---
 
 <!-- BIO -->
@@ -31,6 +33,28 @@ import nicoImage from "../assets/images/nico.webp";
           genéricas ni grupos masivos. Solo tú y yo, avanzando al ritmo que a ti te sirve.
         </p>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- FIRST SESSION -->
+<section>
+  <div class="container about-section">
+    <h2>Así es la evaluación inicial</h2>
+    <p>
+      Antes de decidir si seguimos, nos conocemos en una evaluación inicial gratis y sin compromiso. Conversamos sobre
+      lo que te gustaría lograr, tu experiencia y cualquier molestia relevante. Después vemos cómo te mueves y probamos
+      ejercicios simples, a tu ritmo.
+    </p>
+    <p>
+      No tienes que llegar en forma ni saber usar TRX. La idea es que puedas hacer preguntas, entender cómo trabajo y
+      decidir con calma si te hace sentido continuar.
+    </p>
+    <div class="about-cta">
+      <WhatsAppLink message={WHATSAPP_MESSAGE_EVALUATION} class="btn btn--primary">
+        Agendar evaluación inicial
+      </WhatsAppLink>
+      <p>Se abre WhatsApp con un mensaje listo. Nico coordina contigo personalmente.</p>
     </div>
   </div>
 </section>
@@ -66,7 +90,7 @@ import nicoImage from "../assets/images/nico.webp";
     </p>
     <p>
       El TRX se presta muy bien para esto: el mismo ejercicio puede ser suave o exigente con solo cambiar el ángulo del
-      cuerpo. Es de bajo impacto para las articulaciones, y si hay una molestia o un diagnóstico, trabajamos con
+      cuerpo. Ajustamos la carga y el rango de cada movimiento; si hay una molestia o un diagnóstico, trabajamos con
       criterio y dentro del alcance del entrenamiento.
     </p>
     <p>

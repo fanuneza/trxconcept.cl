@@ -2,9 +2,9 @@ export const WHATSAPP_NUMBER = "56984402664";
 
 export const WHATSAPP_MESSAGE_BASE = "Hola Nico, vi el sitio de TRX Concept.";
 
-export const WHATSAPP_DEFAULT_MESSAGE = `${WHATSAPP_MESSAGE_BASE} Me gustaría agendar la evaluación gratis.`;
+export const WHATSAPP_DEFAULT_MESSAGE = `${WHATSAPP_MESSAGE_BASE} Me gustaría agendar la evaluación inicial gratis y sin compromiso.`;
 
-export const WHATSAPP_MESSAGE_EVALUATION = `${WHATSAPP_MESSAGE_BASE} Me gustaría agendar la evaluación gratis para ver si esto es para mí.`;
+export const WHATSAPP_MESSAGE_EVALUATION = `${WHATSAPP_MESSAGE_BASE} Me gustaría agendar la evaluación inicial gratis y sin compromiso para ver si esto es para mí.`;
 
 export const WHATSAPP_MESSAGE_PLAN = `${WHATSAPP_MESSAGE_BASE} Quiero saber más sobre el plan mensual.`;
 
@@ -22,7 +22,7 @@ export const site = {
   whatsappNumber: WHATSAPP_NUMBER,
   whatsappDefaultMessage: WHATSAPP_DEFAULT_MESSAGE,
   getWhatsAppHref,
-  whatsappLabel: "Agendar evaluación gratis por WhatsApp",
+  whatsappLabel: "Agendar evaluación inicial gratis por WhatsApp",
   nav: [
     { href: "/servicios/", label: "Servicios" },
     { href: "/sobre-mi/", label: "Sobre mí" },
